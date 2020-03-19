@@ -7,6 +7,7 @@ Quickstart
 ------------
 1. Read deps and install the dependent compilers and packages
 2. Type
+     sudo apt install libboost-dev libboost-all-dev 
      ./configure
      make
      make install

@@ -573,7 +573,7 @@ PACKAGE_NAME='RNAalihishapes'
 PACKAGE_TARNAME='RNAalihishapes'
 PACKAGE_VERSION='1.2'
 PACKAGE_STRING='RNAalihishapes 1.2'
-PACKAGE_BUGREPORT='Jiabin Huang and Bjoern Voss <jiabin.huang, bjoern.voss@biologie.uni-freiburg.de>'
+PACKAGE_BUGREPORT='Jiabin Huang and Bjoern Voss <j.huang@uke.de, bjoern.voss@ibvt.uni-stuttgart.de>'
 PACKAGE_URL=''
 
 # Factoring default headers for most tests.
@@ -15803,7 +15803,7 @@ echo "o--------------------------------------------"
 echo "| Checking for C++ Libraries BOOST"
 echo "o--------------------------------------------"
 # minimal reqired version of the BOOST library
-#BOOST_REQUIRED_VERSION=1.36.1
+BOOST_REQUIRED_VERSION=1.36.1
 
 ##==== method 3 ====##
 echo "$as_me: this is boost.m4 serial 16" >&5
@@ -15955,8 +15955,10 @@ else
 #include <boost/version.hpp>
 boost-lib-version = BOOST_LIB_VERSION
 _ACEOF
-if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
-  tr -d '\r' |
+#if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
+#  tr -d '\r' |
+if (eval "$ac_cpp conftest.$ac_ext") 2>&5 | sed '/^#/d' | sed -e 's/^[ ]+//' |
+  tr -d '\n' |
   $SED -n -e "/^boost-lib-version = /{s///;s/\"//g;p;q;}" >conftest.i 2>&1; then :
   boost_cv_lib_version=`cat conftest.i`
 fi
@@ -15967,11 +15969,12 @@ fi
 $as_echo "$boost_cv_lib_version" >&6; }
     # e.g. "134" for 1_34_1 or "135" for 1_35
     boost_major_version=`echo "$boost_cv_lib_version" | sed 's/_//;s/_.*//'`
-    case $boost_major_version in #(
-      '' | *[!0-9]*)
-        as_fn_error $? "invalid value: boost_major_version=$boost_major_version" "$LINENO" 5
-        ;;
-    esac
+    echo $boost_major_version
+    #case $boost_major_version in #(
+    #    '' | *[!0-9]*)
+    #    as_fn_error $? "invalid value: boost_major_version=$boost_major_version" "$LINENO" 5
+    #    ;;
+    #esac
 fi
 CPPFLAGS=$boost_save_CPPFLAGS
 
