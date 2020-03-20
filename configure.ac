@@ -1,11 +1,11 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([RNAalihishapes], [1.2],
-        [Jiabin Huang and Bjoern Voss <jiabin.huang, bjoern.voss@biologie.uni-freiburg.de>],
+AC_INIT([RNAalihishapes], [1.2.1],
+        [Jiabin Huang and Bjoern Voss <j.huang@uke.de, bjoern.voss@ibvt.uni-stuttgart.de>],
         [RNAalihishapes])
 AC_PREREQ([2.59])
-AC_DEFINE(RELEASE_DATE, ["June 04, 2013"], [Release date of current version])
+AC_DEFINE(RELEASE_DATE, ["March 20, 2020"], [Release date of current version])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR(config)    #AC_CONFIG_AUX_DIR([.])
