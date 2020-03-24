@@ -1,13 +1,13 @@
-RNAlihishapes
-Copyright (C) 2011-20 Jiabin Huang, Bjoern Voss.
-Send comments/bug reports to: J. Huang <j.huang@uke.de>.
+RNAHeliCes
+Copyright (C) 2011-12 Jiabin Huang, Bjoern Voss.
+Send comments/bug reports to: J.Huang <jiabin.huang@biologie.uni-freiburg.de>.
+Updates: http://www.cyanolab.de/software/RNAHeliCes.htm
 
 
 Quickstart
 ------------
 1. Read deps and install the dependent compilers and packages
 2. Type
-     sudo apt install libboost-dev libboost-all-dev 
      ./configure
      make
      make install
@@ -26,6 +26,27 @@ Quickstart
    Type 'cd ./modified_Softwares/RNAEAPath/' and './HiEAPath SL.faa' to run an example
 7. kinetic analysis based on HiEAPath is implemented as an option --method=H in ./modified_Softwares/Treekin-0.3.1
 
+
+Compile and run programs using docker
+---------------------------------------
+1. Pull base image
+sudo apt install docker.io
+sudo docker pull ubuntu:14.04
+
+2. Create Dockerfile
+mkdir build-autotools-image
+cat <<EOF >build-autotools-image/Dockerfile
+FROM ubuntu:14.04
+RUN apt-get update -y && apt-get -y install libboost-all-dev git make gcc g++ autoconf nasm yasm pkg-config
+EOF
+
+3. Build custom image with the necessary libraries
+sudo docker build -t custom_ubuntu build-autotools-image
+
+4. Compile and run the tool using custom_ubuntu
+sudo docker run -it --rm -v $(pwd)/RNAlihishapes:/RNAlihishapes custom_ubuntu bash -c "cd /RNAalihishapes && ./configure && make"
+sudo docker run -it --rm -v $(pwd)/RNAlihishapes:/RNAlihishapes custom_ubuntu bash -c "cd /RNAalihishapes/src && ./RNAalihishapes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0"
+sudo docker run -it --rm -v $(pwd)/RNAlihishapes:/RNAlihishapes custom_ubuntu bash -c "cd /RNAalihishapes/src && ./RNAalihipath -f ../examples/test2.aln -k 10 -F ../examples/test2.ss"
 
 
 See 

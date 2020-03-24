@@ -1,11 +1,11 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([RNAalihishapes], [1.2.1],
-        [Jiabin Huang and Bjoern Voss <j.huang@uke.de, bjoern.voss@ibvt.uni-stuttgart.de>],
+AC_INIT([RNAalihishapes], [1.2],
+        [Jiabin Huang and Bjoern Voss <jiabin.huang, bjoern.voss@biologie.uni-freiburg.de>],
         [RNAalihishapes])
 AC_PREREQ([2.59])
-AC_DEFINE(RELEASE_DATE, ["March 20, 2020"], [Release date of current version])
+AC_DEFINE(RELEASE_DATE, ["June 04, 2013"], [Release date of current version])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR(config)    #AC_CONFIG_AUX_DIR([.])
@@ -147,51 +147,37 @@ echo "o--------------------------------------------"
 echo "| Checking for C++ Libraries BOOST"
 echo "o--------------------------------------------"
 # minimal reqired version of the BOOST library
-#BOOST_REQUIRED_VERSION=1.36.1
+BOOST_REQUIRED_VERSION=1.36.1
 
-##==== method 3 ====##
-BOOST_REQUIRE([1.36])
-
-BOOST_DEFUN([Bind],[BOOST_FIND_HEADER([boost/accumulators/accumulators.hpp])])  #BOOST_ACCUMULATORS
-BOOST_FORMAT
-BOOST_DEFUN([Integer],[BOOST_FIND_HEADER([boost/cstdint.hpp])])                 #BOOST_INTEGER
-BOOST_DEFUN([Lexical_Cast],[BOOST_FIND_HEADER([boost/lexical_cast.hpp])])       #BOOST_LEXICAL_CAST
-BOOST_DEFUN([Pool],[BOOST_FIND_HEADER([boost/pool/pool.hpp])])                  #BOOST_POOL
-BOOST_DEFUN([Smart_Ptr],[BOOST_FIND_HEADER([boost/intrusive_ptr.hpp])])         #BOOST_SMARTPTR
-
-# ([mt-d])
-BOOST_DATE_TIME
-BOOST_PROGRAM_OPTIONS
-
-## TODO: if it fails above, it will be added with the option --with-boost 
+## TODO: if directly using "BOOST_REQUIRE([1.36])" fails in method3, it will be added with the option --with-boost 
 
 ##==== method 1 ====##
 #### two methods to check libraries
-#### Most modern libraries use pkg-config to provide includes and linker information
-#### if pkg has not been installed, (ac_arg_with) will be used. 
+## Most modern libraries use pkg-config to provide includes and linker information
+## if pkg has not been installed, (ac_arg_with) will be used. 
 #echo "o--------------------------------------------------------------"
 #echo "| Checking whether pkg-config has been installed or not"
 #echo "o--------------------------------------------------------------"
 #AC_CHECK_PROG([HAVE_PKG_CONFIG], [pkg-config], [yes],[no])
-#### check for library version using pkg-config if present
+### check for library version using pkg-config if present
 #if test "x$HAVE_PKG_CONFIG" = "xyes"; then    
 #    PKG_PROG_PKG_CONFIG
 #    AC_MSG_NOTICE(check if BOOST version >= $BOOST_REQUIRED_VERSION)
 #    PKG_CHECK_MODULES([BOOST], [boost >= $BOOST_REQUIRED_VERSION])
 #else
-  #### Get Boost library and include locations
-#  AC_ARG_WITH([boost-include-path],
-#    [AS_HELP_STRING([--with-boost-include-path],
-#      [location of the Boost headers, defaults to /usr/include])],
-#    [BOOST_CFLAGS="-I$withval"],
-#    [BOOST_CFLAGS='-I/usr/include'])
-#  AC_SUBST([BOOST_CFLAGS])
+## Get Boost library and include locations
+  AC_ARG_WITH([boost-include-path],
+    [AS_HELP_STRING([--with-boost-include-path],
+      [location of the Boost headers, defaults to /usr/include])],
+    [BOOST_CFLAGS="-I$withval"],
+    [BOOST_CFLAGS='-I/usr/include/boost'])
+  AC_SUBST([BOOST_CFLAGS])
 
-#  AC_ARG_WITH([boost-lib-path],
-#    [AS_HELP_STRING([--with-boost-lib-path], [location of the Boost libraries])],
-#    [BOOST_LIBS="-L$withval -l/usr/lib64 -l/usr/lib"],
-#    [BOOST_LIBS='-l/usr/lib64 -l/usr/lib'])
-#  AC_SUBST([BOOST_LIBS])
+  AC_ARG_WITH([boost-lib-path],
+    [AS_HELP_STRING([--with-boost-lib-path], [location of the Boost libraries])],
+    [BOOST_LIBS="-L$withval -l/usr/lib/x86_64-linux-gnu"],
+    [BOOST_LIBS='-l/usr/lib/x86_64-linux-gnu'])
+  AC_SUBST([BOOST_LIBS])
 #fi
 
 ##==== method 2 ====##
@@ -203,6 +189,22 @@ BOOST_PROGRAM_OPTIONS
 #this package.] )] )
 #### ==> corresponding point in Makefile.am: #RNABarrier_LDFLAGS = @LDFLAGS@
 #### reference page: http://www.velocityreviews.com/forums/t441986-autoconf-and-shared-library.html
+
+##==== method 3 ====##
+#BOOST_REQUIRE([1.36])
+
+#BOOST_DEFUN([Bind],[BOOST_FIND_HEADER([boost/accumulators/accumulators.hpp])])  #BOOST_ACCUMULATORS
+#BOOST_FORMAT
+#BOOST_DEFUN([Integer],[BOOST_FIND_HEADER([boost/cstdint.hpp])])                 #BOOST_INTEGER
+#BOOST_DEFUN([Lexical_Cast],[BOOST_FIND_HEADER([boost/lexical_cast.hpp])])       #BOOST_LEXICAL_CAST
+#BOOST_DEFUN([Pool],[BOOST_FIND_HEADER([boost/pool/pool.hpp])])                  #BOOST_POOL
+#BOOST_DEFUN([Smart_Ptr],[BOOST_FIND_HEADER([boost/intrusive_ptr.hpp])])         #BOOST_SMARTPTR
+
+### ([mt-d])
+#BOOST_DATE_TIME
+#BOOST_PROGRAM_OPTIONS
+
+
 
 # error ABORT if on of the libraries was not found
 if test "$DEPENDENCYNOTFOUND" = "1"; then
@@ -223,8 +225,8 @@ echo "| CXX:                            $CXX"
 echo "| CXXFLAGS:                       $CXXFLAGS"
 echo "| LDFLAGS:                        $LDFLAGS"
 ##==== method 1 ====##
-#echo "| BOOST_CFLAGS:                   $BOOST_CFLAGS"
-#echo "| BOOST_LIBS:                     $BOOST_LIBS"
+echo "| BOOST_CFLAGS:                   $BOOST_CFLAGS"
+echo "| BOOST_LIBS:                     $BOOST_LIBS"
 ##==== method 3 ====##
 echo "| BOOST_CPPFLAGS:                 $BOOST_CPPFLAGS"
 echo "| BOOST_DATE_TIME_LDFLAGS:        $BOOST_DATE_TIME_LDFLAGS"

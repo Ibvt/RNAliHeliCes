@@ -9,18 +9,6 @@
 /* Define to 1 if you have the <algo.h> header file. */
 #undef HAVE_ALGO_H
 
-/* Defined if the requested minimum BOOST version is satisfied */
-#undef HAVE_BOOST
-
-/* Define to 1 if you have <boost/date_time/posix_time/posix_time.hpp> */
-#undef HAVE_BOOST_DATE_TIME_POSIX_TIME_POSIX_TIME_HPP
-
-/* Define to 1 if you have <boost/format.hpp> */
-#undef HAVE_BOOST_FORMAT_HPP
-
-/* Define to 1 if you have <boost/program_options.hpp> */
-#undef HAVE_BOOST_PROGRAM_OPTIONS_HPP
-
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 

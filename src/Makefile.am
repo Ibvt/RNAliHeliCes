@@ -15,9 +15,10 @@ RNAalihishapes_SOURCES = rnaalihishapes.cc \
                      probs_m_microstate.cc probs_m_microstate.hh \
                      probs_a_microstate.cc probs_a_microstate.hh \
                      rtlib/string.cc rtlib/string.hh
-RNAalihishapes_CPPFLAGS = $(BOOST_CPPFLAGS) $(AM_CPPFLAGS)
-RNAalihishapes_LDFLAGS = $(BOOST_DATE_TIME_LDFLAGS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS)
-RNAalihishapes_LDADD = $(BOOST_DATE_TIME_LIBS) $(BOOST_PROGRAM_OPTIONS_LIBS) $(srcdir)/lib/libRNA.a librna/librna.la 
+# line1: CFLAGS for includes, line2: LDFLAGS shared library, line3: LIBS static library
+RNAalihishapes_CPPFLAGS = $(BOOST_CFLAGS) $(AM_CPPFLAGS)
+RNAalihishapes_LDFLAGS = #$(BOOST_LIBS)
+RNAalihishapes_LDADD = -lboost_date_time -lboost_program_options $(srcdir)/lib/libRNA.a librna/librna.la 
 
 
 # RNAHeliCes_SOURCES = main.cc filter_add.hh \
@@ -46,9 +47,9 @@ RNAalihipath_SOURCES = rnaalihipath.cc \
                      probs_a_microstate.cc probs_a_microstate.hh \
                      rtlib/string.cc rtlib/string.hh
 #-I$(srcdir)/rtlib -I$(srcdir)/librna
-RNAalihipath_CPPFLAGS = $(BOOST_CPPFLAGS) $(AM_CPPFLAGS) -DWITH_RNAOPTIONS
-RNAalihipath_LDFLAGS = $(BOOST_DATE_TIME_LDFLAGS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS)
-RNAalihipath_LDADD = $(BOOST_DATE_TIME_LIBS) $(BOOST_PROGRAM_OPTIONS_LIBS) $(srcdir)/lib/libRNA.a librna/librna.la -lm
+RNAalihipath_CPPFLAGS = $(BOOST_CFLAGS) $(AM_CPPFLAGS) -DWITH_RNAOPTIONS
+RNAalihipath_LDFLAGS = #$(BOOST_LIBS)
+RNAalihipath_LDADD = -lboost_date_time -lboost_program_options $(srcdir)/lib/libRNA.a librna/librna.la -lm
 
 
 # eval_microstate_SOURCES = eval_microstate_main.cc \
