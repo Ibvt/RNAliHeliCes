@@ -1,52 +1,22 @@
-RNAHeliCes
-Copyright (C) 2011-12 Jiabin Huang, Bjoern Voss.
-Send comments/bug reports to: J.Huang <jiabin.huang@biologie.uni-freiburg.de>.
-Updates: http://www.cyanolab.de/software/RNAHeliCes.htm
+RNAlihishapes and RNAlihipath
+Copyright (C) 2012-20 Jiabin Huang, Bjoern Voss.
+Send comments/bug reports to: J.Huang <j.huang@uke.de>.
+Updates: https://github.com/Ibvt/RNAlihishapes
 
 
 Quickstart
 ------------
 1. Read deps and install the dependent compilers and packages
 2. Type
-     ./configure
+     ./configure CFLAGS='-g -O2 -fno-stack-protector'
      make
      make install
-   to configure, make and install RNAHeliCes, HiPath and HiTed
+   to configure, make and install RNAlihishapes and RNAlihipath
    Notes:
      - If there are any linking problems after installing, please check if /usr/local/lib is contained in the environmental variable LD_LIBRARY_PATH. 
      - src/libs/libRNA.a contains all Vienna package routines, this may be system dependent. If so, please reload this from Vienna RNA Package.
-3. Type './src/RNAHeliCes ./examples/collosoma_slrna.seq' to calculate hishapes of the example described on the paper.
-4. Type './src/HiPath -h' to get help for calculating energy barriers of an energy landscape.
-   For example, type './src/HiPath -f ./examples/switches_4.faa -k 40' and 
-                     './src/HiPath -f ./examples/riboswitches.faa -k 20' to run the examples benchmarked on our paper.
-                type './src/HiPath -f ./examples/collosoma_slrna.fa -a' to calculate folding pathways from all hishapes to all hishapes.
-5. Type './src/HiTed -h' to get help for calculating minimum Hishape based Tree edit distance.
-   For example, type './src/HiTed ./examples/riboswitches.fas -t 1 -r 1' to run an example.
-6. HiEAPath is under ./modified_Softwares/RNAEAPath/
-   Type 'cd ./modified_Softwares/RNAEAPath/' and './HiEAPath SL.faa' to run an example
-7. kinetic analysis based on HiEAPath is implemented as an option --method=H in ./modified_Softwares/Treekin-0.3.1
-
-
-Compile and run programs using docker
----------------------------------------
-1. Pull base image
-sudo apt install docker.io
-sudo docker pull ubuntu:14.04
-
-2. Create Dockerfile
-mkdir build-autotools-image
-cat <<EOF >build-autotools-image/Dockerfile
-FROM ubuntu:14.04
-RUN apt-get update -y && apt-get -y install libboost-all-dev git make gcc g++ autoconf nasm yasm pkg-config
-EOF
-
-3. Build custom image with the necessary libraries
-sudo docker build -t custom_ubuntu build-autotools-image
-
-4. Compile and run the tool using custom_ubuntu
-sudo docker run -it --rm -v $(pwd)/RNAlihishapes:/RNAlihishapes custom_ubuntu bash -c "cd /RNAalihishapes && ./configure && make"
-sudo docker run -it --rm -v $(pwd)/RNAlihishapes:/RNAlihishapes custom_ubuntu bash -c "cd /RNAalihishapes/src && ./RNAalihishapes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0"
-sudo docker run -it --rm -v $(pwd)/RNAlihishapes:/RNAlihishapes custom_ubuntu bash -c "cd /RNAalihishapes/src && ./RNAalihipath -f ../examples/test2.aln -k 10 -F ../examples/test2.ss"
+3. Type "./RNAalihishapes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0" and
+        "./RNAalihipath -f ../examples/test2.aln -k 10 -F ../examples/test2.ss" to run examples
 
 
 See 
