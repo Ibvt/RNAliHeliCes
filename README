@@ -16,8 +16,8 @@ Quickstart
      - If automake-1.14 not found in your computer, please replace the automake-1.14 with the version you have with sed. For example: sed -i -e 's/automake-1.14/automake-1.15/g' Makefile
      - If there are any linking problems after installing, please check if /usr/local/lib is contained in the environmental variable LD_LIBRARY_PATH. 
      - src/libs/libRNA.a contains all Vienna package routines, this may be system dependent. If so, please reload this from Vienna RNA Package.
-3. Type "./RNAalihishapes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0" and
-        "./RNAalihipath -f ../examples/test2.aln -k 10 -F ../examples/test2.ss" to run examples
+3. Type "./RNAlihishapes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0" and
+        "./RNAlihipath -f ../examples/test2.aln -k 10 -F ../examples/test2.ss" to run examples
 
 
 See 
