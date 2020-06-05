@@ -292,18 +292,18 @@ int main(int argc, char **argv)
 
 	
         if (vm.count("help") || vm.size()==2) {
-            std::cout << "Usage: RNAalihishapes (-s INPUT|-f INPUT-file) [options]\n";  // [<sequence>|<first hishape>] [<second hishape>]
+            std::cout << "Usage: RNAlihishapes (-s INPUT|-f INPUT-file) [options]\n";  // [<sequence>|<first hishape>] [<second hishape>]
 	    std::cout << "Examples:" << std::endl;
 	    //SEQ std::cout << "  ./RNAalihishapes -s GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGCGUGGCAUUUC#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGGCCC_UCGGGC______GUUGAUAACC#GAGGGUAGCUCUGACUCUGCCCG_____AUGAC___ACCAACCUGCCCUGUGACCUAUCGUGUUGAAUUCC# -k 10" << std::endl;
-	    std::cout << "  ./RNAalihishapes ../examples/test2.aln -P ./librna/vienna/rna_turner1999.par" << std::endl;
-	    std::cout << "  ./RNAalihishapes ../examples/test2.aln -R 27,38 -k 20" << std::endl;
-	    std::cout << "  ./RNAalihishapes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0" << std::endl;
+	    std::cout << "  ./RNAlihishapes ../examples/test2.aln -P ./librna/vienna/rna_turner1999.par" << std::endl;
+	    std::cout << "  ./RNAlihishapes ../examples/test2.aln -R 27,38 -k 20" << std::endl;
+	    std::cout << "  ./RNAlihishapes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0" << std::endl;
             std::cout << desc;
             return 0;
         }
 
         if (vm.count("version")) {
-            std::cout << "RNAalihishapes 1.2 (June 04, 2013)\n";  // TODO: use the C++ buildin date function 
+            std::cout << "RNAlihishapes 1.2.1 (June 04, 2020)\n";  // TODO: use the C++ buildin date function 
             return 0;
         }
         

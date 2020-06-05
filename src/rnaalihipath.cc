@@ -370,13 +370,13 @@ int main(int argc, char *argv[]) {
 	
         //std::cout << "vm.size()=" << vm.size() << std::endl;
         if (vm.count("help") || vm.size()==1) {
-            std::cout << "Usage: RNAalihipath -f INPUT-file [options]\n";  // (-s INPUT|)
+            std::cout << "Usage: RNAlihipath -f INPUT-file [options]\n";  // (-s INPUT|)
 	    std::cout << "Examples:" << std::endl;
-	    //std::cout << "  ./RNAalihipath -f ../examples/riboswitches.faa" << std::endl;
-	    //std::cout << "  ./RNAalihipath -f ../examples/switches_4.faa -k 10" << std::endl;
-	    //std::cout << "  ./RNAalihipath -f ../examples/test4.aln -F ../examples/test4.ss -P ./librna/vienna/rna_turner1999.par -t 2" << std::endl;
-	    std::cout << "  ./RNAalihipath -f ../examples/test2.aln -k 10 -F ../examples/test2.ss" << std::endl;
-	    //SEQ std::cout << "  ./RNAalihipath -s GGGUAACCACUAAAAUCCCGAAAGGGUGGGCU_GUGGGGACCCUCC#GGGUAACCACUAAAAUCCCGAAAGGGUGGGCU_GUGGUGACCUUCC#GGGUAACCACUAAAAUCCCGAAAGGGUGGGCU_GUGGUGACCUUCC#GGGUAACCACUAAAAUCCCGAAAGGGUGGGCUAGUGGCGACCCUCC#GGGUAACCACUAAAAUCCCGAAAGGGUGGGCU_GUGGUGACCUUCC# -k 10 -F ../examples/test2.ss" << std::endl;
+	    //std::cout << "  ./RNAlihipath -f ../examples/riboswitches.faa" << std::endl;
+	    //std::cout << "  ./RNAlihipath -f ../examples/switches_4.faa -k 10" << std::endl;
+	    //std::cout << "  ./RNAlihipath -f ../examples/test4.aln -F ../examples/test4.ss -P ./librna/vienna/rna_turner1999.par -t 2" << std::endl;
+	    std::cout << "  ./RNAlihipath -f ../examples/test2.aln -k 10 -F ../examples/test2.ss" << std::endl;
+	    //SEQ std::cout << "  ./RNAlihipath -s GGGUAACCACUAAAAUCCCGAAAGGGUGGGCU_GUGGGGACCCUCC#GGGUAACCACUAAAAUCCCGAAAGGGUGGGCU_GUGGUGACCUUCC#GGGUAACCACUAAAAUCCCGAAAGGGUGGGCU_GUGGUGACCUUCC#GGGUAACCACUAAAAUCCCGAAAGGGUGGGCUAGUGGCGACCCUCC#GGGUAACCACUAAAAUCCCGAAAGGGUGGGCU_GUGGUGACCUUCC# -k 10 -F ../examples/test2.ss" << std::endl;
             std::cout << desc; //<< '\n';
             //std::cout << "input files are: " << vm["file"].as< std::vector<std::string> >() << '\n';
             //std::cout << "input sequences are: " << vm["sequence"].as< std::vector<std::string> >() << '\n';
@@ -385,7 +385,7 @@ int main(int argc, char *argv[]) {
         }
 
         if (vm.count("version")) {
-            std::cout << "RNAalihipath 1.2 (June 04, 2013)\n";  // TODO: use the C++ buildin date function 
+            std::cout << "RNAlihipath 1.2.1 (June 04, 2020)\n";  // TODO: use the C++ buildin date function 
             return 0;
         }
 
