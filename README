@@ -8,7 +8,7 @@ Quickstart
 ------------
 1. Read deps and install the dependent compilers and packages
 2. Type
-     ./configure CFLAGS='-g -O2 -fno-stack-protector'
+     ./configure CFLAGS='-g -O2 -fno-stack-protector' CPPFLAGS='-DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /home/jhuang/anaconda3/include -std=c++11'
      make
      make install
    to configure, make and install RNAlihishapes and RNAlihipath
