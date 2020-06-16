@@ -2,10 +2,10 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_INIT([RNAalihishapes], [1.2],
-        [Jiabin Huang and Bjoern Voss <jiabin.huang, bjoern.voss@biologie.uni-freiburg.de>],
+        [Jiabin Huang and Bjoern Voss <j.huang@uke.de, bjoern.voss@biologie.uni-freiburg.de>],
         [RNAalihishapes])
 AC_PREREQ([2.59])
-AC_DEFINE(RELEASE_DATE, ["June 04, 2013"], [Release date of current version])
+AC_DEFINE(RELEASE_DATE, ["June 04, 2020"], [Release date of current version])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR(config)    #AC_CONFIG_AUX_DIR([.])
@@ -170,7 +170,7 @@ BOOST_REQUIRED_VERSION=1.36.1
     [AS_HELP_STRING([--with-boost-include-path],
       [location of the Boost headers, defaults to /usr/include])],
     [BOOST_CFLAGS="-I$withval"],
-    [BOOST_CFLAGS='-I/usr/include/boost'])
+    [BOOST_CFLAGS='-I/usr/include'])
   AC_SUBST([BOOST_CFLAGS])
 
   AC_ARG_WITH([boost-lib-path],
