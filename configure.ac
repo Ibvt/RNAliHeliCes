@@ -175,8 +175,8 @@ BOOST_REQUIRED_VERSION=1.36.1
 
   AC_ARG_WITH([boost-lib-path],
     [AS_HELP_STRING([--with-boost-lib-path], [location of the Boost libraries])],
-    [BOOST_LIBS="-L$withval -l/usr/lib/x86_64-linux-gnu"],
-    [BOOST_LIBS='-l/usr/lib/x86_64-linux-gnu'])
+    [BOOST_LIBS="-L$withval"],
+    [BOOST_LIBS='-L/usr/lib/x86_64-linux-gnu'])
   AC_SUBST([BOOST_LIBS])
 #fi
 
