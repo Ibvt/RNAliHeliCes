@@ -6,9 +6,14 @@ Updates: https://github.com/Ibvt/RNAliHeliCes
 
 Quickstart
 ------------
-1. Read deps and install the dependent compilers and packages
+1. Read deps and install the dependent compilers and packages including libboost
+    tar xzf boost_1_58_0.tar.gz
+    #under python2
+    ./bootstrap.sh --prefix=/home/jhuang/Tools/boost_1_58_installed/
+    ./b2 install
+
 2. Type
-     ./configure --with-boost-include-path="/home/jhuang/anaconda3/envs/cc_env/include" --with-boost-lib-path="/home/jhuang/anaconda3/envs/cc_env/lib" CFLAGS='-g -O2 -fno-stack-protector'
+     ./configure --with-boost-include-path=/home/jhuang/Tools/boost_1_58_installed/include --with-boost-lib-path=/home/jhuang/Tools/boost_1_58_installed/lib CFLAGS="-g -O2 -fno-stack-protector" CPPFLAGS="-std=c++98 -I/home/jhuang/Tools/boost_1_58_installed/include -DNDEBUG -D_FORTIFY_SOURCE=2 -O2" CXXFLAGS="-std=c++98 -g -O2 -w -fno-stack-protector"
      make
      make install
    to configure, make and install RNAliHeliCes and RNAliHiPath
