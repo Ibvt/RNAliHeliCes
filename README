@@ -1,5 +1,5 @@
 RNAliHeliCes and RNAliHiPath 
-Copyright (C) 2012-20 Jiabin Huang, Bjoern Voss.
+Copyright (C) 2012-21 Jiabin Huang, Bjoern Voss.
 Send comments/bug reports to: J.Huang <j.huang@uke.de>.
 Updates: https://github.com/Ibvt/RNAliHeliCes
 
@@ -11,7 +11,7 @@ Quickstart
      ./configure --with-boost-include-path="/home/jhuang/anaconda3/envs/cc_env/include" --with-boost-lib-path="/home/jhuang/anaconda3/envs/cc_env/lib" CFLAGS='-g -O2 -fno-stack-protector'
      make
      make install
-   to configure, make and install RNAlihishapes and RNAlihipath
+   to configure, make and install RNAliHeliCes and RNAliHiPath
    Notes:
      - If automake-1.14 not found in your computer, please replace the automake-1.14 with the version you have with sed. For example: sed -i -e 's/automake-1.14/automake-1.15/g' Makefile
      - If there are any linking problems after installing, please check if /usr/local/lib is contained in the environmental variable LD_LIBRARY_PATH. 
