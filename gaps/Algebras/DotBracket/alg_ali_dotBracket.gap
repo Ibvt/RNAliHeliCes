@@ -1,4 +1,4 @@
-algebra alg_dotBracket implements sig_foldrna(alphabet = char, answer = string) {
+algebra alg_ali_dotBracket implements sig_foldrna(alphabet = M_Char, answer = string) {
   string sadd(Subsequence lb,string e) {
     string res;
     append(res, '.');
@@ -249,6 +249,7 @@ algebra alg_dotBracket implements sig_foldrna(alphabet = char, answer = string) 
 
   choice [string] h([string] i) {
     //~ return list(minimum(i));
-    return i;
+    //~ return i;
+	  return unique(i);
   }
 }
