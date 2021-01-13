@@ -1,5 +1,5 @@
-algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer = string) {
-  string sadd(<Subsequence lb, char lbDB>,string e) {
+algebra alg_dotBracket implements sig_foldrna(alphabet = char, answer = string) {
+  string sadd(Subsequence lb,string e) {
     string res;
     append(res, '.');
     append(res, e);
@@ -34,7 +34,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string ambd(string le,<Subsequence b, char bDB>,string re) {
+  string ambd(string le,Subsequence b,string re) {
     string res;
     append(res, le);
     append(res, '.');
@@ -42,7 +42,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string ambd_Pr(string le,<Subsequence b, char bDB>,string re) {
+  string ambd_Pr(string le,Subsequence b,string re) {
     string res;
     append(res, le);
     append(res, '.');
@@ -50,26 +50,26 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string nil(<Subsequence loc, Subsequence locDB>) {
+  string nil(Subsequence loc) {
     string r;
     return r;
   }
 
-  string edl(<Subsequence lb, char lbDB>,string e, <Subsequence loc, Subsequence locDB>) {
+  string edl(Subsequence lb,string e, Subsequence loc) {
     string res;
     append(res, '.');
     append(res, e);
     return res;
   }
 
-  string edr(<Subsequence loc, Subsequence locDB>, string e,<Subsequence rb, char rbDB>) {
+  string edr(Subsequence loc, string e,Subsequence rb) {
     string res;
     append(res, e);
     append(res, '.');
     return res;
   }
 
-  string edlr(<Subsequence lb, char lbDB>,string e,<Subsequence rb, char rbDB>) {
+  string edlr(Subsequence lb,string e,Subsequence rb) {
     string res;
     append(res, '.');
     append(res, e);
@@ -77,11 +77,11 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string drem(<Subsequence lloc, Subsequence llocDB>, string e, <Subsequence rloc, Subsequence rlocDB>) {
+  string drem(Subsequence lloc, string e, Subsequence rloc) {
     return e;
   }
 
-  string sr(<Subsequence lb, char lbDB>,string e,<Subsequence rb, char rbDB>) {
+  string sr(Subsequence lb,string e,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, e);
@@ -89,7 +89,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string hl(<Subsequence lb, char lbDB>,<Subsequence region, Rope regionDB>,<Subsequence rb, char rbDB>) {
+  string hl(Subsequence lb,Subsequence region,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, '.', size(region));
@@ -98,7 +98,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
   }
 
 
-  string bl(<Subsequence lb, char lbDB>,<Subsequence lregion, Rope lregionDB>,string e,<Subsequence rb, char rbDB>) {
+  string bl(Subsequence lb,Subsequence lregion,string e,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, '.', size(lregion));
@@ -107,7 +107,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string br(<Subsequence lb, char lbDB>,string e,<Subsequence rregion, Rope rregionDB>,<Subsequence rb, char rbDB>) {
+  string br(Subsequence lb,string e,Subsequence rregion,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, e);
@@ -116,7 +116,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string il(<Subsequence lb, char lbDB>,<Subsequence lregion, Rope lregionDB>,string e,<Subsequence rregion, Rope rregionDB>,<Subsequence rb, char rbDB>) {
+  string il(Subsequence lb,Subsequence lregion,string e,Subsequence rregion,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, '.', size(lregion));
@@ -126,7 +126,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string ml(<Subsequence lb, char lbDB>,string e,<Subsequence rb, char rbDB>) {
+  string ml(Subsequence lb,string e,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, e);
@@ -134,16 +134,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string mldr(<Subsequence lb, char lbDB>,string e,<Subsequence dr, char drDB>,<Subsequence rb, char rbDB>) {
-    string res;
-    append(res, '(');
-    append(res, e);
-    append(res, '.');
-    append(res, ')');
-    return res;
-  }
-
-  string mladr(<Subsequence lb, char lbDB>,string e,<Subsequence dr, char drDB>,<Subsequence rb, char rbDB>) {
+  string mldr(Subsequence lb,string e,Subsequence dr,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, e);
@@ -152,17 +143,16 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string mldlr(<Subsequence lb, char lbDB>,<Subsequence dl, char dlDB>,string e,<Subsequence dr, char drDB>,<Subsequence rb, char rbDB>) {
+  string mladr(Subsequence lb,string e,Subsequence dr,Subsequence rb) {
     string res;
     append(res, '(');
-    append(res, '.');
     append(res, e);
     append(res, '.');
     append(res, ')');
     return res;
   }
 
-  string mladlr(<Subsequence lb, char lbDB>,<Subsequence dl, char dlDB>,string e,<Subsequence dr, char drDB>,<Subsequence rb, char rbDB>) {
+  string mldlr(Subsequence lb,Subsequence dl,string e,Subsequence dr,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, '.');
@@ -172,7 +162,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string mldladr(<Subsequence lb, char lbDB>,<Subsequence dl, char dlDB>,string e,<Subsequence dr, char drDB>,<Subsequence rb, char rbDB>) {
+  string mladlr(Subsequence lb,Subsequence dl,string e,Subsequence dr,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, '.');
@@ -182,7 +172,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string mladldr(<Subsequence lb, char lbDB>,<Subsequence dl, char dlDB>,string e,<Subsequence dr, char drDB>,<Subsequence rb, char rbDB>) {
+  string mldladr(Subsequence lb,Subsequence dl,string e,Subsequence dr,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, '.');
@@ -192,7 +182,17 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string mldl(<Subsequence lb, char lbDB>,<Subsequence dl, char dlDB>,string e,<Subsequence rb, char rbDB>) {
+  string mladldr(Subsequence lb,Subsequence dl,string e,Subsequence dr,Subsequence rb) {
+    string res;
+    append(res, '(');
+    append(res, '.');
+    append(res, e);
+    append(res, '.');
+    append(res, ')');
+    return res;
+  }
+
+  string mldl(Subsequence lb,Subsequence dl,string e,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, '.');
@@ -201,7 +201,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string mladl(<Subsequence lb, char lbDB>,<Subsequence dl, char dlDB>,string e,<Subsequence rb, char rbDB>) {
+  string mladl(Subsequence lb,Subsequence dl,string e,Subsequence rb) {
     string res;
     append(res, '(');
     append(res, '.');
@@ -210,14 +210,14 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string addss(string e,<Subsequence rb, Rope rbDB>) {
+  string addss(string e,Subsequence rb) {
     string res;
     append(res, e);
     append(res, '.', size(rb));
     return res;
   }
 
-  string ssadd(<Subsequence lb, Rope lbDB>,string e) {
+  string ssadd(Subsequence lb,string e) {
     string res;
     append(res, '.', size(lb));
     append(res, e);
@@ -239,7 +239,7 @@ algebra alg_eval_dotBracket implements sig_eval_foldrna(alphabet = char, answer 
     return res;
   }
 
-  string acomb(string le,<Subsequence b, char bDB>,string re) {
+  string acomb(string le,Subsequence b,string re) {
     string res;
     append(res, le);
     append(res, '.');
