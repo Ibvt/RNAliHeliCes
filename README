@@ -15,7 +15,7 @@ Quickstart
 2. Type
      ./configure --with-boost-include-path=/home/jhuang/Tools/boost_1_58_installed/include --with-boost-lib-path=/home/jhuang/Tools/boost_1_58_installed/lib CFLAGS="-g -O2 -fno-stack-protector" CPPFLAGS="-std=c++98 -I/home/jhuang/Tools/boost_1_58_installed/include -DNDEBUG -D_FORTIFY_SOURCE=2 -O2" CXXFLAGS="-std=c++98 -g -O2 -w -fno-stack-protector"
      make
-     make install
+     sudo make install
    to configure, make and install RNAliHeliCes and RNAliHiPath
    Notes:
      - If automake-1.14 not found in your computer, please replace the automake-1.14 with the version you have with sed. For example: sed -i -e 's/1.14/1.15/g' Makefile
