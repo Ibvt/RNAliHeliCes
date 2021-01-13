@@ -1,4 +1,4 @@
-algebra alg_shapeX implements sig_foldrna(alphabet = char, answer = shape_t) {
+algebra alg_shapeX implements sig_foldrna(alphabet = M_Char, answer = shape_t) {
   shape_t sadd(Subsequence b, shape_t x) {
     shape_t emptyShape;
     
@@ -267,7 +267,7 @@ algebra alg_shapeX implements sig_foldrna(alphabet = char, answer = shape_t) {
   }
 }
 
-algebra alg_shape5 implements sig_foldrna(alphabet = char, answer = shape_t) {
+algebra alg_ali_shape5 implements sig_foldrna(alphabet = M_Char, answer = shape_t) {
   shape_t sadd(Subsequence b, shape_t e) {
     shape_t emptyShape;
     
@@ -417,13 +417,13 @@ algebra alg_shape5 implements sig_foldrna(alphabet = char, answer = shape_t) {
   }
 }
 
-algebra alg_shape4 extends alg_shape5 {
+algebra alg_ali_shape4 extends alg_ali_shape5 {
   shape_t il(Subsequence lb,Subsequence lregion,shape_t e,Subsequence rregion,Subsequence rb) {
     return shape_t('[') + e + ']';
   }
 }
 
-algebra alg_shape3 extends alg_shape5 {
+algebra alg_ali_shape3 extends alg_ali_shape5 {
   shape_t bl(Subsequence lb,Subsequence lregion,shape_t e,Subsequence rb) {
     return shape_t('[') + e + ']';
   }
@@ -437,7 +437,7 @@ algebra alg_shape3 extends alg_shape5 {
   }
 }
 
-algebra alg_shape2 extends alg_shape5 {
+algebra alg_ali_shape2 extends alg_ali_shape5 {
   shape_t bl(Subsequence lb,Subsequence lregion,shape_t e,Subsequence rb) {
     return shape_t('[') + '_' + e + ']';
   }
@@ -451,7 +451,7 @@ algebra alg_shape2 extends alg_shape5 {
   }
 }
 
-algebra alg_shape1 extends alg_shape5 {
+algebra alg_ali_shape1 extends alg_ali_shape5 {
   shape_t sadd(Subsequence b, shape_t e) {
     if (front(e) == '_') {
       return e;
@@ -571,5 +571,6 @@ algebra alg_shape1 extends alg_shape5 {
       return x + shape_t('_'); //cannot happen in macrostates, because we know that x has at least one unpaired base and thus we already have the '_'
     }
   }
+
 }
 
