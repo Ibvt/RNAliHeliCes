@@ -2,12 +2,12 @@
 SUBDIRS = H lib librna
 
 #   eval_microstate_orig eval_microstate
-bin_PROGRAMS = RNAlihishapes RNAlihipath 
+bin_PROGRAMS = RNAliHeliCes RNAliHiPath 
 AM_CPPFLAGS = -I$(srcdir)/rtlib -I$(srcdir)/librna
 
 
 #filter_add.hh mfe_answer_v4.hh hishape_filter.hh
-RNAlihishapes_SOURCES = rnaalihishapes.cc \
+RNAliHeliCes_SOURCES = rnaalihishapes.cc \
                      pfall_microstate.cc pfall_microstate.hh \
                      rep_consensus.cc rep_consensus.hh \
                      probs_h_microstate.cc probs_h_microstate.hh \
@@ -16,9 +16,9 @@ RNAlihishapes_SOURCES = rnaalihishapes.cc \
                      probs_a_microstate.cc probs_a_microstate.hh \
                      rtlib/string.cc rtlib/string.hh
 # line1: CFLAGS for includes, line2: LDFLAGS shared library, line3: LIBS static library
-RNAlihishapes_CPPFLAGS = $(BOOST_CFLAGS) $(AM_CPPFLAGS)
-RNAlihishapes_LDFLAGS = #$(BOOST_LIBS)
-RNAlihishapes_LDADD = -lboost_date_time -lboost_program_options $(srcdir)/lib/libRNA.a librna/librna.la 
+RNAliHeliCes_CPPFLAGS = $(BOOST_CFLAGS) $(AM_CPPFLAGS)
+RNAliHeliCes_LDFLAGS = #$(BOOST_LIBS)
+RNAliHeliCes_LDADD = -lboost_date_time -lboost_program_options $(srcdir)/lib/libRNA.a librna/librna.la 
 
 
 # RNAHeliCes_SOURCES = main.cc filter_add.hh \
@@ -39,7 +39,7 @@ RNAlihishapes_LDADD = -lboost_date_time -lboost_program_options $(srcdir)/lib/li
 # 
 
 #hited_util.hh hited_util.cc mfe_answer.hh
-RNAlihipath_SOURCES = rnaalihipath.cc \
+RNAliHiPath_SOURCES = rnaalihipath.cc \
                      eval_microstate.cc eval_microstate.hh \
                      probs_h_microstate.cc probs_h_microstate.hh \
                      probs_hplus_microstate.cc probs_hplus_microstate.hh \
@@ -47,9 +47,9 @@ RNAlihipath_SOURCES = rnaalihipath.cc \
                      probs_a_microstate.cc probs_a_microstate.hh \
                      rtlib/string.cc rtlib/string.hh
 #-I$(srcdir)/rtlib -I$(srcdir)/librna
-RNAlihipath_CPPFLAGS = $(BOOST_CFLAGS) $(AM_CPPFLAGS) -DWITH_RNAOPTIONS
-RNAlihipath_LDFLAGS = #$(BOOST_LIBS)
-RNAlihipath_LDADD = -lboost_date_time -lboost_program_options $(srcdir)/lib/libRNA.a librna/librna.la -lm
+RNAliHiPath_CPPFLAGS = $(BOOST_CFLAGS) $(AM_CPPFLAGS) -DWITH_RNAOPTIONS
+RNAliHiPath_LDFLAGS = #$(BOOST_LIBS)
+RNAliHiPath_LDADD = -lboost_date_time -lboost_program_options $(srcdir)/lib/libRNA.a librna/librna.la -lm
 
 
 # eval_microstate_SOURCES = eval_microstate_main.cc \
