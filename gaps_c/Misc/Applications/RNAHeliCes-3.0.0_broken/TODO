@@ -1,0 +1,46 @@
+1. the BFS energy calculation can only use the Turner1999 parameters, extend it to different parameters
+2. ==18330== 208,848 bytes in 1 blocks are still reachable in loss record 1 of 1
+   ==18330==    at 0x4C279F2: calloc (vg_replace_malloc.c:467)
+   ==18330==    by 0x5099421: space (utils.c:45)
+   ==18330==    by 0x509F40C: get_scaled_parameters (params.c:50)
+   ==18330==    by 0x5097CD5: librna_read_param_file (rnalib.c:56)
+   ==18330==    by 0x40CBFF: main (main.cc:1457)
+3. the result list with -p is different from the one without -p (microstate and macrostate grammars yield different energy results)
+4. ./RNAHeliCes ../examples/ires_picornaviridae.fa -u -k 2 -t 2 -r 2 ==> Segmentation fault 
+5. integrate hienergy barrier tree function into hipath.cc
+6. Write new hishape data structure for gap-file 
+
+7. consider for rule 2, replace the map with hash_map
+8. check if the record search used hash_map in rule 2 --> potential runtime improvement
+9. ./RNAHeliCes: error while loading shared libraries: comp.so: cannot open shared object file: No such file or directory
+
+10.     
+     - src/libs/liblapack.a and src/libs/libblas.a are from Linear Algebra routines, these may be system dependent. If so, please reload them from Linear Algebra PACKage.
+
+FF = g77
+FLAG = -c
+
+testeof.exe: deofcovcor.o deofpcs.o deoftotvar.o deof.o testeof.o
+               $(FF) deofcovcor.o deofpcs.o deoftotvar.o deof.o testeof.o /usr/lib64/liblapack.a /usr/lib64/libblas.a 
+
+sudo yum install libgfortran libf2c blas lapack
+
+11. add option for rule1 in RNALocMin: -x [ --thresh ] [=arg(=10000)]   Specifiy a threshold value for initstem
+
+12. NOTE current HiEAPath is dependant on RNAeval, so it causes problem. bind the program directly with library RNAeval
+
+13.
+The flag -std=c++0x gives you access to whatever c++11 functionality is implemented in your version of gcc. For random number distributions, c++11 has the header random. You do not need the tr1 namespace when using c++11.
+
+The tr1 version of random is in include tr1/random, and everything there is under the std::tr1 namespace. To access this you do not need the c++0x flag.
+
+To be clear:
+
+For TR1 random numbers: #include <tr1/random> and use std::tr1::normal_distribution.
+
+For c++11 random numbers: compile with flag c++0x, then #include <random> and use std::normal_distribution.
+
+
+
+14. IMPORTANT TODO: using --minh doesn't work out of ./src directory
+15. delete src/HiKinetics, since new version of HiKinetics exists under modified_software_and_scripts

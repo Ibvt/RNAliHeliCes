@@ -1,0 +1,75 @@
+
+gapc ali_microstate.gap -i shape5mfepp -o rnalishapes.cc -t --kbacktrace
+gapc ali_microstate.gap -i shape5mfepp -o rnalishapes.cc -t --kbest --kbacktrace
+gapc ali_microstate.gap -i shape5mfepp -o rnalifold.cc -t --kbacktrace
+make -f rnalifold.mf
+./rnalifold GAGGGUGCCUCUGACCGUGCCCG_____AUGAC___ACCAACCUGCCCAAUGAAGCACGGGCGACCGUGGGGA___GGGUGUU_______________________________________CCCUGUGGGAACCCUCGCCAUUCACGGCGAGGAGGAGGUCAGCUCCUCCACGUUC#GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGGCGACGGUAGGGAGAAGGGUGUU_______________________________________CCCCGUGGGAACCUCCGAGCUUUAGCUCGGAGAGGAGGUCAGCUUUUAACAUUUC#GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGGCGACGGUAGGGAGAAGGGUGUU_______________________________________CCCCGUGGGAACCUCCGAGCUUUAGCUCGGAGAGGAGGUCAGCUUUUAACAUUUC#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGGCCC_UCGGGC______CGAAC___CGAAACC_GGUG__ACGGGAGUAGGUGGAUGAGAGCCCGCAAACCUCUCCCCGCCC_GUUGAAAGCCUCGCCCUUCAAGGCGGGGAGGAGGUCAGGAGG_AGAUAACC#GAGGGUAGCUCUGACUCUGCCCG_____AUGAC___ACCAACCUGCCCUGUGACCUAUCGGCGACGAUAAGUAGCAGGGUGUU_______________________________________CCGUGUUGGAACCUCCACCCUUUAGGU_GGAGAGAAGAUCAG___UUAAAAUUCC#
+
+
+
+
+
+
+
+RNAalifold -p -r -d2 --noLP --color --aln < 3.aln > 3.out
+RNAalifold -p -d2 -noLP -color -aln < 3.aln > 3.out
+
+
+
+instance shape5mfepp = gra_microstate ((alg_ali_shape5 * alg_ali_mfe) * alg_ali_dotBracket); // compile with --kbacktrace if you also choose kbest!
+
+alg_ali_shape5: Algebras/Shapes$ vim alg_ali_hishapes.gap
+
+
+
+
+./aliHishapes GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUG#GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUG#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGG#
+GAGGGCUGUCUGACCCAGCCCGAUGAGCUGAACCUG  -112
+..((((((.......))))))...............
+GAGGGCUGUCUGACCCAGCCCGAUGAGCUGAACCUG  -112
+..((((((.......)))))).......................
+GUGGUCUUUACGCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGG
+..((((((.......)))))).......................
+GUGGUCUUUACGCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGG
+..((((((.......)))))).......................
+length = 44
+WARNING: bases 3 and 21 (GA) can't pair!
+WARNING: bases 4 and 20 (GG) can't pair!
+GUGGUCUUUACGCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGG
+..((((((.......)))))).......................
+ energy =   1.80
+====> 不对，还是要看论文。
+
+( ( 12.5, , ( -708.889 = -686.667 + -22.2222 ) ) , ..((((((........))))))....................... )
+( ( 12.5,30, , ( -315.556 = -343.333 + 27.7778 ) ) , ..((((((........)))))).(((.......)))......... )
+( ( 12.5,38, , ( -278.889 = -323.333 + 44.4444 ) ) , ..((((((........)))))).........((.........)). )
+
+
+jhuang@swimming-pool:~/hg.cebitec.uni-bielefeld.de/fold-grammars$ ./aliHishapes GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUG#GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUG#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGG#
+Answer: 
+( ( 12.5, , ( -708.889 = -686.667 + -22.2222 ) ) , ..((((((........))))))....................... )
+( ( 12.5,30, , ( -315.556 = -343.333 + 27.7778 ) ) , ..((((((........)))))).(((.......)))......... )
+( ( 12.5,29.5, , ( -278.889 = -290 + 11.1111 ) ) , ..((((((........)))))).((........)).......... )
+( ( 12.5,38, , ( -278.889 = -323.333 + 44.4444 ) ) , ..((((((........)))))).........((.........)). )
+
+RNAeval default energy parameter is 1999
+./aliHishapes GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGCGUGGCAUUUC#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGGCCC_UCGGGC______GUUGAUAACC#GAGGGUAGCUCUGACUCUGCCCG_____AUGAC___ACCAACCUGCCCUGUGACCUAUCGUGUUGAAUUCC#
+./aliHishapes GAGGGUGCCUCUGACCGUGCCCG_____AUGAC___ACCAACCUGCCCAAUGAAGCACGGGCGACCGUGGGGA___GGGUGUU_______________________________________CCCUGUGGGAACCCUCGCCAUUCACGGCGAGGAGGAGGUCAGCUCCUCCACGUUC#GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGGCGACGGUAGGGAGAAGGGUGUU_______________________________________CCCCGUGGGAACCUCCGAGCUUUAGCUCGGAGAGGAGGUCAGCUUUUAACAUUUC#GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGGCGACGGUAGGGAGAAGGGUGUU_______________________________________CCCCGUGGGAACCUCCGAGCUUUAGCUCGGAGAGGAGGUCAGCUUUUAACAUUUC#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGGCCC_UCGGGC______CGAAC___CGAAACC_GGUG__ACGGGAGUAGGUGGAUGAGAGCCCGCAAACCUCUCCCCGCCC_GUUGAAAGCCUCGCCCUUCAAGGCGGGGAGGAGGUCAGGAGG_AGAUAACC#GAGGGUAGCUCUGACUCUGCCCG_____AUGAC___ACCAACCUGCCCUGUGACCUAUCGGCGACGAUAAGUAGCAGGGUGUU_______________________________________CCGUGUUGGAACCUCCACCCUUUAGGU_GGAGAGAAGAUCAG___UUAAAAUUCC#
+
+GAGGGUGCCUCUGACCGUGCCCG_____AUGAC___ACCAACCUG
+GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUG
+GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUG
+GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGG
+
+./RNAHeliCes ../examples/collosoma_slrna.seq -P ./librna/vienna/rna_turner2004.par
+
+TODO: 
+1. kbacktrace does not work.
+2. make sure what is the former and latter meaings of the equation 1828.89 = 1706.67 + 122.222
+
+~/hg.cebitec.uni-bielefeld.de/fold-grammars/aliHishapes_main.cc ./
+alifold.hh
+rnaoptions_defaults.hhiPath 2.0.12 (Feb. 09, 2012)
+
+
+http://bibiwsserv.cebitec.uni-bielefeld.de/fold-grammars/

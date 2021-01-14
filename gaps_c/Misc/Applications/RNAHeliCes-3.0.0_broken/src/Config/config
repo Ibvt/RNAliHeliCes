@@ -1,0 +1,20 @@
+#ALLOWGU     - allow GU wobble pair or not, TRUE or FALSE, default value is TRUE.
+#MINSTACKLEN - the minimum number of base pairs in a stack, default value is 4.
+#MINLOOPLEN  - the minimum number of unpaired nucleotides in a hairpin loop, default value is 4.
+#MINHYDROGEN - the minimum hydrogen bonding score of a stack (GC=3, AU=2, GU=1), default value is 8.
+#MAXSEQLEN   - the maximum length of a sequence, default value is 400.
+#MAXMATRIXSZ - the maximum number of stable and local optimal structures considered (RNASLOpt uses a n*n/2 matrix to represent pairwise energy barrier among stable local optimal structures, MAXMATRIXSZ is the maximal number of rows for the matrix).
+#BARRIERCUTOFF - RNASLOpt removes unstable local optimal structures, of which the minimal energy barrier between the structure and any stable local optimal structure is less than BARRIERCUTOFF.
+#BARRIERCUTOFFDELTA - if the number of stable local optimal structures to consider is greater than MAXMATRIXSZ, increase DISTANCECUTOFF by DISTANCECUTOFFDELTA, in order to reduce the size of the pairwise enerby barrier matrix.
+#MAXINWARDOVERLAP - if the overlapping region of two putative stacks is less than or equal to MAXINWARDOVERLAP of both of their lengths, RNASLOpt will combine them to form a large stack with a bulge.
+
+MAXSEQLEN   = 400
+ALLOWGU     = TRUE
+MINSTACKLEN = 4
+MINLOOPLEN  = 3
+MINHYDROGEN = 8
+MAXMATRIXSZ = 2000
+BARRIERCUTOFF = 12
+BARRIERCUTOFFDELTA = 1
+MAXINWARDOVERLAP = 0.20
+

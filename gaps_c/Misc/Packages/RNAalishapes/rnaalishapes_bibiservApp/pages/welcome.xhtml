@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted 2010 iBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de"
+
+Contributor(s):
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bibiserv.cebitec.uni-bielefeld.de/facelets"
+                template="/WEB-INF/templates/toolTpl.xhtml">
+
+    <ui:define name="headContentTitle">
+      #{messages.property('rnaalishapes_name')}
+    </ui:define>
+
+    <ui:define name="app_title">
+        <h:outputText escape="false" class="title" value="#{messages.property('rnaalishapes_name')}"/>
+        <div class="separator app_separator"/>
+    </ui:define>
+    
+    <ui:define name="app_content">
+        <p>
+            <b>RNAalishapes</b> is a tool for secondary structure prediction, using shape abstraction. Input is a multiple sequence alignment. Pseudoknots are not considered at all.<br/>
+            The image below shows the analysis of tRNA sequences.
+            <center>
+                <img src="/applications/rnaalishapes/resources/images/tRNA_example_figure.png" border="0" />
+            </center>
+        </p>
+        <p>A previous version from the original author Björn Voß can be found <a href="http://pina-colada.biologie.uni-freiburg.de/RNAlishapes/index.html">here</a>.</p>
+        <p>
+            <b:authors toolid="rnaalishapes"/>
+        </p>
+        <!--
+	<br/>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_description')}"/>
+        <br/>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_customContent')}"/>
+        <br/> -->
+        <b:primarypublication 
+            toolid="rnaalishapes" 
+            toolname="#{messages.property('rnaalishapes_name')}" 
+            introduction="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.REFERENCES_INTRODUCTION',messages.property('rnaalishapes_name'))}"/>
+    </ui:define>
+
+</ui:composition>

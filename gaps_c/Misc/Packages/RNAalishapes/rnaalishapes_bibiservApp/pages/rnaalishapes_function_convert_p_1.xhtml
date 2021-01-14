@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010-2012 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted 2010-2012 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de"
+
+Contributor(s): Jan Krueger , jkrueger(at)cebitec.uni-bielefeld.de
+
+-->
+
+<!-- belongs to de.unibi.techfak.bibiserv.util.codegen.CodeGen_WebSubmissionInput
+
+    uses for_each_input from CodeGen_WebSubmissionInput
+
+    uses getFunctionId from CodeGen_Implementation
+    uses getToolId from CodeGen_WebSubmission
+
+    uses more_than_one_function, one_function from Abstract_CodeGen
+
+    Jan Krueger , jkrueger(at)cebitec.uni-bielefeld.de -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:b="http://bibiserv.cebitec.uni-bielefeld.de/facelets"
+                template="/WEB-INF/templates/toolsubmissionTpl.xhtml">
+
+
+    <ui:define name="scripts">
+        <script type="text/javascript">
+            function handlePollComplete(xhr, status, args){
+                var valid = args.validated;
+                var redirect=args.redirection;
+                var loc=args.location;
+                if(valid) {
+                    dlg.hide();
+                    poll.stop(); 
+                }
+                if(redirect){
+                    if(loc) {
+                        window.location="/rnaalishapes?viewType=submission&amp;subType=rnaalishapes_function_convert_p_"+loc;
+                    }
+                }
+             }
+        </script>
+        <script type="text/javascript"  src="/resources/scripts/submission.js"/> 
+
+    </ui:define>
+    
+    
+    <ui:define name="app_page_counter">
+        2/4
+    </ui:define>
+    
+    <!-- for each start :: input create a file upload and a textarea box -->
+    <ui:define name="app_title">
+        <h:outputText styleClass="title"
+                      escape="false"
+                      value="#{messages.property('rnaalishapes_name')}[rnaalishapes_function_convert]"/>
+        <div class="separator app_separator"/>
+    </ui:define>
+    <ui:define name="app_content"> 
+        <h:form id="rnaalishapes_function_convert_input_form" enctype="multipart/form-data" prependId="false">
+            <h:panelGroup style="margin-top: 10px" id="submissioninput">
+                
+                <h:outputText class="formblock_title" value="#{messages.property('rnaalishapes_function_convert_name')}: " />
+                <h:outputText value="#{messages.property('rnaalishapes_function_convert_shortDescription')}"/>
+                <br/><br/>
+                
+                
+                    <b:cloudinput bean="#{rnaalishapes_input_rna_secondary_structure}" mainFormat="#{rnaalishapes_function_convert_controller.getToolMainFormat()}" supportedFormats="#{rnaalishapes_function_convert_controller.getSupportedFormats()}" supportedStreamFormats="#{rnaalishapes_function_convert_controller.getSupportedFormatsStream()}"/>
+                
+
+            </h:panelGroup>
+            <br/>
+            
+            
+             <!-- Submission Navigation -->
+            <table id="toolnavi" class="tool_navi">
+                <tr>
+                    
+                    <!-- back navigation (only available if tool contains more than one function) -->
+                    
+                    <td id="toolback" class="tool_back" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.BACK_TITLE','function selection')}"
+                        onclick="window.location='/rnaalishapes?viewType=submission'"
+                        onmouseover="setCSSclass('toolback','tool_back tool_back_highlighted')" 
+                        onmouseout="setCSSclass('toolback','tool_back')">
+                        &#x25C4; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.BACK')}
+                    </td>
+                    
+                    
+                    
+                    
+                    <!-- example button, differs with count of examples; examples can be added after tool generation, so must do that during runtime -->
+                    
+                    <c:if test="#{rnaalishapes_function_convert_controller.exampleCount == 0}">
+                        <td  id="toolexample" class="tool_example">#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.EXAMPLE_NO')}</td>    
+                    </c:if>
+                
+                    <c:if test="#{rnaalishapes_function_convert_controller.exampleCount == 1}">
+                        <td id="toolexample" class="tool_example" title=" #{rnaalishapes_function_convert_controller.exampleName(0)}"
+                        onclick="toolexample()" 
+                        onmouseover="setCSSclass('toolexample','tool_example tool_example_highlighted')" 
+                        onmouseout="setCSSclass('toolexample','tool_example')">
+                        #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.EXAMPLE')}
+                        <p:remoteCommand name="toolexample" 
+                                         actionListener="#{rnaalishapes_function_convert_controller.example(0)}" 
+                                         update="submissioninput"/>
+  
+                        </td>
+                    </c:if>    
+                    <c:if test="#{rnaalishapes_function_convert_controller.exampleCount > 1}">
+                        <td id="toolexample" class="tool_example" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.EXAMPLE_CHOOSE')}"
+                        onmouseover="setCSSclass('toolexample','tool_example tool_example_highlighted');show('toolexamples')" 
+                        onmouseout="setCSSclass('toolexample','tool_example');hide('toolexamples')">
+                            #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.EXAMPLES')} 
+                            <div id="toolexamples" class="tool_example_submenu" style="position:absolute; visibility: hidden">
+                                <c:forEach var="i" begin="0" end="#{rnaalishapes_function_convert_controller.exampleCount-1}">
+                                   <div id="toolexample#{i}" class="tool_example tool_example_submenu_entry" 
+                                        onmouseover="setCSSclass('toolexample#{i}','tool_example tool_example_submenu_entry tool_example_highlighted')" 
+                                        onmouseout="setCSSclass('toolexample#{i}','tool_example tool_example_submenu_entry')"
+                                        onclick="toolexample#{i}()" >
+                          
+                                        &#8627; #{rnaalishapes_function_convert_controller.exampleName(i)}
+                                       <p:remoteCommand name="toolexample#{i}" 
+                                         actionListener="#{rnaalishapes_function_convert_controller.example(i)}" 
+                                         update="submissioninput"/>
+                                   </div>
+                                 </c:forEach>
+                                                                    
+                            </div>
+                        </td>
+                      
+                    </c:if>        
+                
+                    <!-- reset button -->
+                    
+                    <td id="toolreset" class="tool_reset" onclick="toolreset()" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.RESET_TITLE','input')}"
+                        onmouseover="setCSSclass('toolreset','tool_reset tool_reset_highlighted')" 
+                        onmouseout="setCSSclass('toolreset','tool_reset')">
+                        #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.RESET')}
+                        <p:remoteCommand name="toolreset" actionListener="#{rnaalishapes_function_convert_controller.resetInput}" 
+                                         update="submissioninput"/>
+                    </td>
+                    
+                    <!-- next (validation) button -->   
+                    <td id="toolnext" class="tool_next" onclick="toolnext()" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.NEXT_TITLE')}"
+                        onmouseover="setCSSclass('toolnext','tool_next tool_next_highlighted')" 
+                        onmouseout="setCSSclass('toolnext','tool_next')">
+                        #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.NEXT')} &#x25BA;
+                        <p:remoteCommand name="toolnext" actionListener="#{rnaalishapes_function_convert_controller.validate}" onstart="dlg.show();poll.start()"/>
+                    </td> 
+                </tr>
+            </table>
+
+     
+            <p:dialog header="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.WAIT')}" id="validation_dialog" height="100" 
+                      closable="false" modal="true" widgetVar="dlg">   
+                <h:outputText value="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.WAIT_VALIDATION')}" />  
+            </p:dialog> 
+     
+             <p:poll interval="1" listener="#{rnaalishapes_function_convert_controller.callback}" update="submissioninput" oncomplete="handlePollComplete(xhr, status, args)"  widgetVar="poll" autoStart="false"/>  
+        </h:form>
+    </ui:define>
+    <!-- for each end -->
+
+
+</ui:composition>

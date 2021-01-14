@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    ANT build configuration file for rnaalishapes BiBiServ project
+    
+    Author: Jan Krueger <jkrueger@techfak.uni-bielefeld.de>
+    Date : April, 20th, 2009, add ivy support (30.7.2009)
+    
+    Open Problems : ivy.jar (containing all ivy taks), antcontrib must be available via ant/lib path
+    				build.xml contains shell scripting as fast hack, must be reimplemted using ant .
+    	
+-->
+
+<project name="rnaalishapes" basedir="." default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+
+	<!-- include ant-contrib tasks -->
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
+
+	<!-- dirs -->
+	<property name="lib.dir" value="lib"/>
+	<property name="lib.default.dir" value="${lib.dir}/default"/>
+	<property name="lib.compile.dir" value="${lib.dir}/compile"/>
+	<property name="lib.runtime.dir" value="${lib.dir}/runtime"/>
+	<property name="lib.build.dir" value="${lib.dir}/build"/>
+	<property name="dest.dir" value="classes"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="src.dir" value="src"/>
+	<property name="pages.dir" value="pages"/>
+	<property name="config.dir" value="config"/>
+	<property name="gen.config.dir" value=".config"/>
+	<property name="resources.dir" value="resources"/>
+	
+	<property name="gen.dest.dir" value=".classes"/>
+	<property name="gen.src.dir" value=".src"/>
+	
+	<!-- tooldescription -->
+	<property name="tooldescription" value="${config.dir}/runnableitem.xml"/>
+
+	<!-- generate a nearly dynamic classpath for the netbeans project ... -->
+	<target name="project_classpath" depends="resolve, _build"
+		description="generate the project classpath for this project!">
+		<exec command="bash -c 'ls lib/compile/*.jar lib/build/*.jar'" dir="."
+			output="nbproject/lib.txt"/>
+		<replaceregexp file="nbproject/lib.txt" flags="gs">
+			<regexp pattern="\n(.)"/>
+			<substitution expression=":\1"/>
+		</replaceregexp>
+		<replaceregexp file="nbproject/lib.txt" flags="gs">
+			<regexp pattern="\n"/>
+			<substitution expression=""/>
+		</replaceregexp>
+		<loadresource property="jar.files">
+			<file file="nbproject/lib.txt" basedir="."/>
+		</loadresource>
+		<replaceregexp file="nbproject/project.xml" flags="gs">
+			<regexp pattern="(&lt;classpath.*&gt;).*(&lt;/classpath&gt;)"/>
+			<substitution expression="\1${jar.files}\2"/>
+		</replaceregexp>
+	</target>
+
+	<!-- compile the src package and generate webservice -->
+	<target name="compile" depends="resolve,_build" description="Compile project">
+		<mkdir dir="${dest.dir}"/>
+		<path id="compile.path">
+			<fileset dir="${lib.compile.dir}">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${lib.build.dir}">
+				<include name="*.jar"/>
+			</fileset>
+		</path>
+		<javac destdir="${dest.dir}" srcdir="${src.dir}" classpathref="compile.path" fork="true"
+			debug="true"/>
+
+
+	</target>
+
+
+	<target name="build" depends="compile,validate" description="Build project">
+		<!-- check if the download resources fits the downloadable items in the tool description -->
+		<taskdef name="verifydownload" classpathref="compile.path"
+			classname="de.unibi.techfak.bibiserv.deploy.tools.VerifyDownload"/>
+		<verifydownload downloaddir="${resources.dir}/downloads"
+			runnableitemfile="${config.dir}/runnableitem.xml"/>
+		<!-- pack all together -->
+		<mkdir dir="${dist.dir}"/>
+		<zip file="${dist.dir}/${ant.project.name}.bar">
+			<!-- java classes -->
+			<zipfileset dir="${dest.dir}" prefix="classes"/>
+			<!-- config dir(s) -->
+			<zipfileset dir="${config.dir}" prefix="config">
+				<exclude name="runnableitem.xml"/>
+			</zipfileset>
+			<zipfileset dir="${gen.config.dir}" prefix="config"/>
+			<!-- resources HINT: JK resources must also be part of the bibimainapp - classloader -->
+			<zipfileset dir="${resources.dir}" prefix="resources"/>
+			<!-- lib HINT: JK lib must also be part of the bibimainapp - classloader -->
+			<zipfileset dir="${pages.dir}" prefix="pages"/>
+			<zipfileset dir="${lib.runtime.dir}" prefix="lib"/>
+			<zipfileset dir="${lib.build.dir}" prefix="lib"/>
+
+		</zip>
+	</target>
+	
+	<target name="validate" description="Validate tooldescription against Schema" depends="compile">
+		<xmlvalidate file="${tooldescription}">
+			<attribute name="http://apache.org/xml/features/validation/schema" value="true"/>
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+			<property name="http://apache.org/xml/properties/schema/external-schemaLocation" value="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/BiBiServAbstraction.xsd"/>
+		</xmlvalidate>
+		<!-- check if the download resources fits the downloadable items in the tool description -->
+		<taskdef name="verifydownload" classpathref="compile.path"
+			classname="de.unibi.techfak.bibiserv.deploy.tools.VerifyDownload"/>
+		<verifydownload downloaddir="${resources.dir}/downloads"
+			runnableitemfile="${config.dir}/runnableitem.xml"/>
+		<!-- check if the image resources fits the image tags in the tool description -->
+		<mkdir dir="${gen.config.dir}"/>
+		<taskdef name="verifylinks" classpathref="compile.path"
+			classname="de.unibi.techfak.bibiserv.deploy.tools.VerifyLinks"/>
+		<verifylinks resourcedir="${resources.dir}"
+			runnableitemfile="${config.dir}/runnableitem.xml" ignorepattern="^(http|file|\/|#|${ant.project.name}\?).*$"
+			out="${gen.config.dir}/runnableitem.xml"/>
+                 <!-- check if functions parameter, input and output refs are considered by
+                      ParamAndInputOutputOrder tags -->
+                 <taskdef name="verifyfunction" classpathref="compile.path"
+                        classname="de.unibi.techfak.bibiserv.deploy.tools.VerifyFunction"/>
+                 <verifyfunction runnableitemfile="${config.dir}/runnableitem.xml"/>
+	</target>
+
+	<target name="clean" description="clean project">
+		<delete dir="${dist.dir}"/>
+		<delete dir="${dest.dir}"/>
+	</target>
+
+	<target name="clean-all" depends="clean"
+		description="clean everything (including local ivy-rep and autogenerated classes)">
+		<delete dir="${gen.dest.dir}"/>
+		<delete dir="${gen.config.dir}"/>
+		<delete dir="${lib.dir}"/>
+	</target>
+
+	<target name="deploy" depends="build"
+		description="Deploy BiBiServ Archive on ApplicationServer ...">
+		<!-- Since using a whole working day to find a solutio for managerclienttask classloader problem, I use the non-elegant
+			but working approach to call ManagerClient directly ...
+			
+			<taskdef classname="de.unibi.cebitec.bibiserv.client.manager.ManagerClientTask" name="ManagerClient"/>
+			<ManagerClient action="deploy" file="${dist.dir}/${ant.project.name}.bar"/>		
+			
+		-->
+		<java classname="de.unibi.cebitec.bibiserv.client.manager.ManagerClient" fork="true">
+			<classpath>
+				<fileset dir="${lib.compile.dir}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+			<arg value="deploy"/>
+			<arg value="${dist.dir}/${ant.project.name}.bar"/>
+		</java>
+
+	</target>
+
+	<target name="undeploy" depends="resolve"
+		description="Undeploy application from ApplicationServer ...">
+		<!-- Since using a whole working day to find a solutio for managerclienttask classloader problem, I use the non-elegant
+			but working approach to call ManagerClient directly ...
+			
+			<taskdef classname="de.unibi.cebitec.bibiserv.client.manager.ManagerClientTask" name="ManagerClient"/>
+			<ManagerClient action="deploy" file="${dist.dir}/${ant.project.name}.bar"/>		
+			
+		-->
+		<java classname="de.unibi.cebitec.bibiserv.client.manager.ManagerClient" fork="true">
+			<classpath>
+				<fileset dir="${lib.compile.dir}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+			<arg value="undeploy"/>
+			<arg value="${ant.project.name}"/>
+		</java>
+	</target>
+
+	<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+	<!-- %%    internal targets, do NOT modify unless you know what you do !!! ?     %% -->
+
+	<target name="_build" depends="_compile"
+		description="build all autogenerated JAXB/XMLSchema data types">
+		<mkdir dir="${lib.build.dir}"/>
+		<jar destfile="${lib.build.dir}/JAXBO.jar" basedir="${gen.dest.dir}">
+			<fileset dir="${gen.dest.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="_compile" depends="resolve"
+		description="compile all autogenerated JAXB/XMLSchema data types">
+		<mkdir dir="${gen.dest.dir}"/>
+		<path id="compile.path">
+			<fileset dir="${lib.compile.dir}">
+				<include name="*.jar"/>
+			</fileset>
+
+		</path>
+		<javac fork="true" srcdir="${gen.src.dir}" destdir="${gen.dest.dir}"
+			classpathref="compile.path"/>
+
+	</target>
+
+	<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+	<!-- %%                                 ivy targets                              %% -->
+
+	<!-- set ivy.settings.file property -->
+	<if>
+		<http url="http://bibiserv.techfak.uni-bielefeld.de/ivy-rep/ivysettings.xml"
+			errorsbeginat="300"/>
+		<then>
+			<echo>Loading Ivy Settings from BiBiServ ... </echo>
+			<ivy:settings url="http://bibiserv.techfak.uni-bielefeld.de/ivy-rep/ivysettings.xml"/>
+		</then>
+		<else>
+			<echo>BiBiserv not available, load Ivy settings from
+				${user.home}/ivy-rep/ivy-settings.xml or if this file does not exist load default
+				settings file</echo>
+			<ivy:settings file="${user.home}/ivy-rep/ivysettings.xml"/>
+		</else>
+	</if>
+
+	<!-- load ivy settings from ${ivy.settings.file}, and if this file does not exist, it uses a default settings file -->
+	<ivy:settings/>
+
+	<!-- use ivy to resolve library dependencies -->
+	<target name="resolve" description="--> retreive dependencies with ivy">
+		<ivy:retrieve pattern="${ivy.lib.dir}/[conf]/[artifact]-[revision](-[classifier]).[ext]"/>
+	</target>
+
+	<!--clean ivy-cache -->
+	<target name="clean-cache" description="clear ivy cache">
+		<ivy:cleancache/>
+	</target>
+
+
+	<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+</project>

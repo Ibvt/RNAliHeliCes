@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de"
+
+Contributor(s):
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                template="/WEB-INF/templates/toolTpl.xhtml">
+
+    <ui:define name="headContentTitle">
+      #{messages.property('rnaalishapes_name')}
+    </ui:define>
+
+    <ui:define name="app_title">
+        <h:outputText escape="false" class="title" value="#{messages.property('rnaalishapes_name')}"/>
+        <div class="separator app_separator"/>    
+    </ui:define>
+
+    <ui:define name="app_content">
+        We currently provide <b>RNAalishapes</b> in two ways
+        <ol>
+            <li><b>As a pre-compiled <a href="https://launchpad.net/~bibi-help/+archive/bibitools">Debian package</a> via Ubuntus launchpad system, a <quot>Ubuntu Personal Package Archive (PPA)</quot></b><br/>
+                On your command line, execute the three following commands<pre>sudo add-apt-repository ppa:bibi-help/bibitools
+sudo apt-get update
+sudo apt-get install rnaalishapes
+                </pre>
+                <!--<br/>
+                <span style="font-size: smaller;">
+                You might encounter an "trying to overwrite ... which is also in package" error, if you already have installed another <strong>bibitools</strong> package. This is because we have not managed to put common Perl libraries into a separate package, yet. Please use the following command as a workaround:<pre>sudo apt-get install rnaalishapes -o Dpkg::Options::="- -force-overwrite"</pre>
+                </span>-->
+            </li>
+            <li><b>As Bellman's GAP sources.</b>
+                <ul>
+                    <li>Make sure you have installed a running version of <a href="http://bibiserv.cebitec.uni-bielefeld.de/gapc/compiler.html">Bellman's GAP</a> compiler.</li>
+                    <li>Download the <a href="http://bibiwsserv.cebitec.uni-bielefeld.de/fold-grammars/">Fold-Grammars repository</a>, a broad collection of RNA folding algorithms, written in Bellman's GAP also containing sources for <b>RNAalishapes</b>.</li>
+                    <li>Un-tar the repository, change into the Misc/Applications/RNAalishapes directory and execute the make file via the three following commands:<pre>tar xzvf fold-grammars.tgz
+cd fold-grammars/Misc/Applications/RNAalishapes
+make all</pre> </li>
+                </ul>
+            </li>
+            <li>We will provide a MacPorts package for <b>RNAalishapes</b>, in a few months.</li>
+        </ol>
+        
+    <!-- Download Instruction -->
+    <!--    <h:outputText class="content" escape="false" value="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.DOWNLOAD_INTRODUCTION')}"/>-->
+    <!-- Generate Download Table-->
+    <!--    <h:form>
+            <h:dataTable value="#{toolBean_rnaalishapes_download.downloadItems}" var="downloaditem" headerClass="param_table_header"
+                        rowClasses="param_table_data" styleClass="param_table">
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <a href="#{downloaditem.filename}"><h:outputText class="view_normal" value="#{downloaditem.name}"/></a>
+                </h:column>
+                <h:column>
+                   <f:facet name="header">Description</f:facet>
+                   <h:outputText class="view_normal" escape="false" value="#{downloaditem.description}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>-->
+
+    <!-- Display download footer text -->
+    <p>
+       <h:outputText escape="false" class="content" value="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.DOWNLOAD_FOOTER')}"/>
+    </p>
+
+    <!-- Custom Content -->
+     <p>
+        <h:outputText escape="false" class="content" value="#{messages.property('guugle_download_customContent')}"/>
+     </p>
+ </ui:define>
+
+
+</ui:composition>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted [year] [name of copyright owner]"
+
+Contributor(s):
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:b="http://bibiserv.cebitec.uni-bielefeld.de/facelets"
+                template="/WEB-INF/templates/toolsubmissionTpl.xhtml">
+
+
+    <!-- for each start :: input create a file upload and a textarea box -->
+    <ui:define name="app_title">
+        <h:outputText styleClass="title"
+                      escape="false"
+                      value="#{messages.property('rnaalishapes_name')}[rnaalishapes_function_eval]"/>
+        <div class="separator app_separator"/>
+    </ui:define>
+    
+     <ui:define name="scripts">
+         <script type="text/javascript"  src="/resources/scripts/submission.js"/> 
+    </ui:define>
+    
+    <ui:define name="app_page_counter">
+        4/4
+    </ui:define>
+    
+    <ui:define name="app_content">
+       
+        <h:form>
+        <h:panelGroup id="resulthandler" styleClass="paramBox" layout="block">
+            
+                <b:toolresulthandling bean="#{rnaalishapes_function_eval_resulthandler}" />
+                
+       </h:panelGroup>
+
+            <br/>
+            
+                
+            <!-- Submission Navigation -->
+            <table id="toolnavi" class="tool_navi">
+                <tr>
+                    <!-- back navigation -->
+                    <td id="toolback" class="tool_back" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.BACK_TITLE','input')}"
+                        onclick="window.location='/rnaalishapes?viewType=submission&amp;subType=rnaalishapes_function_eval_p_2'"
+                        onmouseover="setCSSclass('toolback','tool_back tool_back_highlighted')" 
+                        onmouseout="setCSSclass('toolback','tool_back')">
+                        
+                        &#x25C4; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.BACK')}
+                      
+                    </td>
+                    
+                    <!-- example button  -->
+                    <td  id="toolexample" class="tool_example tool_example_inactive">#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.EXAMPLE_NO')}</td>      
+                  
+                
+                    <!-- reset button -->
+                    <td id="toolreset" class="tool_reset" onclick="toolreset()" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.RESET_TITLE','param')}"
+                        onmouseover="setCSSclass('toolreset','tool_reset tool_reset_highlighted')" 
+                        onmouseout="setCSSclass('toolreset','tool_reset')">
+                        #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.RESET')}
+                        <p:remoteCommand name="toolreset" actionListener="#{rnaalishapes_function_eval_resulthandler.reset}" 
+                                         update="resulthandler"/>
+                    </td>
+                    
+                    <!-- next (calculate) button -->
+                    <td id="toolnext" class="tool_next" onclick="toolnext()" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.CALCULATE_TITLE')}"
+                        onmouseover="setCSSclass('toolnext','tool_next tool_next_highlighted')" 
+                        onmouseout="setCSSclass('toolnext','tool_next')">
+                        #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.CALCULATE')}
+                        <p:remoteCommand name="toolnext" actionListener="#{rnaalishapes_function_eval_controller.calculate}" update="resulthandler"/>
+                    </td> 
+                </tr>
+            </table>
+
+            
+               
+            </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de"
+
+Contributor(s):
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                template="/WEB-INF/templates/toolTpl.xhtml">
+
+    <ui:define name="headContentTitle">
+      #{messages.property('rnaalishapes_name')}
+    </ui:define>
+
+    <ui:define name="app_title">
+        <h:outputText escape="false" class="title" value="#{messages.property('rnaalishapes_name')}"/>
+        <div class="separator"/>
+    </ui:define>
+
+    <!-- Display manual introductory text -->
+    <ui:define name="app_content">
+      
+    <!--<h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_manual_manual_introductoryText')}"/>-->
+     <i><strong>RNAalishapes</strong></i> comes with the following different modes of predictions:
+
+    
+
+    <!-- Generate Function Description -->
+    
+    <h:panelGroup>
+        <h4>#{messages.property('rnaalishapes_function_mfe_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_function_mfe_description')}"/>
+    </h:panelGroup>
+    
+    <h:panelGroup>
+        <h4>#{messages.property('rnaalishapes_function_subopt_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_function_subopt_description')}"/>
+    </h:panelGroup>
+    
+    <h:panelGroup>
+        <h4>#{messages.property('rnaalishapes_function_shapes_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_function_shapes_description')}"/>
+    </h:panelGroup>
+    
+    <h:panelGroup>
+        <h4>#{messages.property('rnaalishapes_function_probs_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_function_probs_description')}"/>
+    </h:panelGroup>
+    
+    <h:panelGroup>
+        <h4>#{messages.property('rnaalishapes_function_sample_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_function_sample_description')}"/>
+    </h:panelGroup>
+    
+    <h:panelGroup>
+        <h4>#{messages.property('rnaalishapes_function_eval_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_function_eval_description')}"/>
+    </h:panelGroup>
+    
+    <h:panelGroup>
+        <h4>#{messages.property('rnaalishapes_function_convert_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_function_convert_description')}"/>
+    </h:panelGroup>
+
+    <h:panelGroup>
+        <h4>#{messages.property('rnaalishapes_function_outside_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_function_outside_description')}"/>
+    </h:panelGroup>
+    
+
+    <!-- Generate Input/Output data type description -->
+    <h4>#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.IO')}</h4>
+
+    
+    <h:panelGroup>
+        <h4>INPUT :: #{messages.property('rnaalishapes_input_rna_sequence_alignment_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_input_rna_sequence_alignment_description')}"/>
+    </h:panelGroup>
+    
+    <h:panelGroup>
+        <h4>INPUT :: #{messages.property('rnaalishapes_input_rna_secondary_structure_name')}</h4>
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_input_rna_secondary_structure_description')}"/>
+    </h:panelGroup>
+    
+
+    
+    <h:panelGroup>
+        <h4>OUTPUT :: #{messages.property('rnaalishapes_output_output_name')}</h4>
+        <table class="param_table">
+            <tr>
+				<th class="param_table_header" colspan="2">Example output</th>
+			</tr>
+			<tr class="param_tablerow_even">
+                <td colspan="2">
+                    The following image shows the output of the example call <br/><span style="font-family: monospace;">RNAalishapes --mode probs --shape 5 --sci 1 --windowSi 50 --windowInc 14 --con mis --structureProbs 1 &lt; tRNA.aln</span><br/>Colored elements are not part of the output.
+                    <p><img src="/applications/rnaalishapes/resources/images/outputExample.png" style="margin-left: 0px; margin-right: 0px; max-width: 650px;"/></p>
+                    Computation was done in window style, thus you see three different &quot;<em>result blocks</em>&quot;, separated by newlines and sorted by &quot;<em>start position</em>&quot; Each <em>result blocks</em> has one &quot;<em>window info line</em>&quot; (green) and one or more &quot;<em>result lines</em>&quot; (blue). Lines are further divided into &quot;<em>fields</em>&quot;, by two white space characters (red vertical lines). Contents of the <em>fields</em> are:
+					<ul>
+						<li>
+							<em>window info line</em>
+							<ol>
+								<li><em>start position</em>. Due to lengthy <em>scores</em> in <em>result</em> lines, <em>start position</em> has often leading white space characters.</li>
+								<li>&quot;<em>representative</em>&quot; for the (sub-)alignment that have been computed in this window. The <em>representative</em> can either be a &quot;<em>consensus</em>&quot; or a &quot;<em>most informative</em>&quot; sequence, depending on your choice of option <a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_consensus">consensus</a>. In the example, we asked for <em>most informative</em> sequences.</li>
+								<li>&quot;<em>stop position</em>&quot;</li>
+							</ol>
+						</li>
+						<li>
+							<em>result line</em>
+							<ol>
+								<li>&quot;<em>score</em>&quot; of prediction, which is composed of an energy and a covariance part. Written as a Perl style <a href="http://en.wikipedia.org/wiki/Regular_expression">RegEx</a>, the format is <pre>\($1\s=\s+$2\s\+\s+$3\)</pre>, with $1 = combined score, $2 energy and $3 covariance. Should the <em>start position</em> consists of very many digits, it might happen that <em>score</em> has leading white space characters.</li>
+                                                                <li><em>individual &quot;structure probability&quot;</em> only if switched on via parameter <a  href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_structureprobs">structure probabilities</a></li>
+                                                                <li>Vienna-Dot-Bracket representation of the secondary &quot;<em>structure</em>&quot;.</li>
+								<li>structure conservation index (&quot;<em>sci</em>&quot;) of the <em>structure</em>. This field only shows up, if <a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_structure_conservation_index">structure conservation index</a> is switched on. Format is: <pre>\(sci:\s+$1\)</pre></li>
+								<li>&quot;<em>shape probability</em>&quot; for the shape class, that is represented by the <em>structure</em></li>
+								<li>&quot;<em>shape string</em>&quot; of the <em>structure</em></li>
+							</ol>
+						</li>
+					</ul>
+                </td>
+            </tr>
+			<tr>
+				<th class="param_table_header">Name</th>
+				<th class="param_table_header">Description</th>
+			</tr>
+			<tr class="param_tablerow_odd">
+				<td class="param_table_data">mfe</td>
+				<td class="param_table_data">Each <em>result block</em> contains only one <em>result line</em>, showing minimal free energy structure. Co-optimal results and <em>shape probabilities</em> are not computed for the sake of speed and thus not displayed.</td>
+			</tr>
+			<tr class="param_tablerow_even">
+				<td class="param_table_data">subopt</td>
+				<td class="param_table_data">Similar to <strong>mfe</strong> output, but each block can hold several <em>result lines</em> for sub-optimal structures. They are ascendingly sorted by their <em>score.</em></td>
+			</tr>
+			<tr class="param_tablerow_odd">
+				<td class="param_table_data">shapes</td>
+				<td class="param_table_data">Similar to <strong>subopt</strong> output, but structures with same <em>shape strings</em> are grouped. <em>Result lines</em> show the best member of a shape class (called &quot;shrep&quot;), which is determined by its <em>score</em>.</td>
+			</tr>
+			<tr class="param_tablerow_even">
+				<td class="param_table_data">probs</td>
+				<td class="param_table_data">Output as in the above example, <em>result lines</em> are descendingly sorted by <em>shape probabilities</em></td>
+			</tr>
+			<tr class="param_tablerow_odd">
+				<td class="param_table_data">sample</td>
+				<td class="param_table_data">
+					<p>Identical to <strong>probs</strong> output, since it computes the same information, but in a heuristic fashion.</p>
+					<p>Should you be interested in the concrete sampled structures, you can report them via option <a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_showSamples">show samples</a>. Output will have normal <em>window info line</em>, followed by the line <pre>$1 samples, drawn by stochastic backtrace to estimate shape frequencies:</pre>, where $1 is the value of <a href="rnaalishapes?viewType=manual#rnaalishapes_parameter_numSamples">numSamples</a>. Traditional <em>result lines</em> begin after the line <pre>Sampling results:</pre>, which is surrounded by empty lines.</p></td>
+			</tr>
+			<tr class="param_tablerow_even">
+				<td class="param_table_data">eval</td>
+				<td class="param_table_data">Similar to <strong>mfe</strong> output, but should your grammar be semantically ambiguous (as &quot;microstate&quot; is) regarding Vienna-Dot-Bracket strings, you will get several <em>result lines</em>.</td>
+			</tr>
+			<tr class="param_tablerow_odd">
+				<td class="param_table_data">convert</td>
+				<td class="param_table_data">Output is just one line, holding the <em>shape string</em> for the given secondary structure.</td>
+			</tr>
+            		<tr class="param_tablerow_even">
+				<td class="param_table_data">outside</td>
+				<td class="param_table_data">Outside mode produces a PostScript file, holding the probabilities of the base-pairs. Additionally, we convert this PostScript file into a PNG file, which is directly displayed on the website for your convenience. The actual output is just an artifact from the underlying programming framework and is not useful at all. On the result page, look for the following button to download the "dot plot": <br/><br/> <div style="text-align: center;"><a id="sampleDotPlot" href="#" onmouseout="setCSSclass(this.id,'tool_result_button')" onmouseover="setCSSclass(this.id,'tool_result_button tool_result_button_highlighted')" onclick="" class="tool_result_button">base-pair dot plot as PostScript file</a></div><br/>The "dot plot" shows a matrix of squares with area proportional to the base pair probabilities in the upper right half. For each pair (i,j) with probability above <a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_bppmthreshold">bppmThreshold</a> there is a line of the form
+                <div style="text-align: center;"><pre>i j sqrt(p) ubox</pre></div>
+               in the PostScript file, so that they can be easily extracted.</td>
+			</tr>
+            
+        </table>
+        <!--<h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_output_output_description')}"/>-->
+    </h:panelGroup>
+    
+    
+
+    <!-- Generate Parameter description -->
+    <h4>#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.PARAMETER')}</h4>
+    <table class="param_table">
+        <tr>
+            <th class="param_table_header">Name</th>
+            <th class="param_table_header">Description</th>
+        </tr>
+        <tr>
+            <th class="param_table_header" colspan="2">Energy Deviation</th>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_relative_deviation">#{messages.property('rnaalishapes_parameter_relative_deviation_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_relative_deviation_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_even">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_absolute_deviation">#{messages.property('rnaalishapes_parameter_absolute_deviation_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_absolute_deviation_description')}"/></td>
+        </tr>
+        
+        <tr>
+            <th class="param_table_header" colspan="2">Stochastic Options</th>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_numsamples">#{messages.property('rnaalishapes_parameter_numsamples_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_numsamples_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_even">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_show_samples">#{messages.property('rnaalishapes_parameter_show_samples_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_show_samples_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_low_probability_filter">#{messages.property('rnaalishapes_parameter_low_probability_filter_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_low_probability_filter_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_even">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_output_probability_filter">#{messages.property('rnaalishapes_parameter_output_probability_filter_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_output_probability_filter_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_decimals_for_probabilities">#{messages.property('rnaalishapes_parameter_decimals_for_probabilities_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_decimals_for_probabilities_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_even">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_structureprobs">#{messages.property('rnaalishapes_parameter_structureprobs_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_structureprobs_description')}"/></td>
+        </tr>
+        
+        <tr>
+            <th class="param_table_header" colspan="2">Outside Options</th>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_bppmthreshold">#{messages.property('rnaalishapes_parameter_bppmthreshold_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_bppmthreshold_description')}"/></td>
+        </tr>
+        
+        <tr>
+            <th class="param_table_header" colspan="2">Alignment Options</th>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_structure_conservation_index">#{messages.property('rnaalishapes_parameter_structure_conservation_index_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_structure_conservation_index_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_even">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_consensus">#{messages.property('rnaalishapes_parameter_consensus_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_consensus_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_pairing_fraction">#{messages.property('rnaalishapes_parameter_pairing_fraction_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_pairing_fraction_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_even">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_cfactor">#{messages.property('rnaalishapes_parameter_cfactor_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_cfactor_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_nfactor">#{messages.property('rnaalishapes_parameter_nfactor_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_nfactor_description')}"/></td>
+        </tr>
+        
+        <tr>
+            <th class="param_table_header" colspan="2">Folding Options</th>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_grammar">#{messages.property('rnaalishapes_parameter_grammar_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_grammar_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_even">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_shape_level">#{messages.property('rnaalishapes_parameter_shape_level_name')}</a></td>
+            <!--<td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_shape_level_description')}"/></td>-->
+            <td class="param_table_data">
+                <!-- <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_shape_level_description')}"/> -->
+                <p><strong>shape level</strong> is the level of abstraction or dissimilarity which defines a different shape. In general, helical regions are depicted by a pair of opening and closing brackets and unpaired regions are represented as a single underscore. The differences of the shape types are due to whether a structural element (bulge loop, internal loop, multiloop, hairpin loop, stacking region and external loop) contributes to the shape representation: Five types are implemented. Their differences are shown in the following example:
+                <!--<div style="text-align:center; margin-left:30px; margin-right:30px;">-->
+                <center>
+<pre>
+CGUCUUAAACUCAUCACCGUGUGGAGCUGCGACCCUUCCCUAGAUUCGAAGACGAG 
+((((((...(((..(((...))))))...(((..((.....))..))))))))).. 
+</pre>
+                    <table style="text-align:center">
+                        <tr>
+                            <th class="param_table_header">Type</th>
+                            <th class="param_table_header">Description</th>
+                            <th class="param_table_header">Result</th>
+                        </tr>
+                        <tr class="param_tablerow_odd">
+                            <td>1</td>
+                            <td>Most accurate - all loops and all unpaired</td>
+                            <td><pre>[_[_[]]_[_[]_]]_</pre></td>
+                        </tr>
+                        <tr class="param_tablerow_even">
+                            <td>2</td>
+                            <td>Nesting pattern for all loop types and unpaired regions in external loop and multiloop</td>
+                            <td><pre>[[_[]][_[]_]]</pre></td>
+                        </tr>
+                        <tr class="param_tablerow_odd">
+                            <td>3</td>
+                            <td>Nesting pattern for all loop types but no unpaired regions</td>
+                            <td><pre>[[[]][[]]]</pre></td>
+                        </tr>
+                        <tr class="param_tablerow_even">
+                            <td>4</td>
+                            <td>Helix nesting pattern in external loop and multiloop</td>
+                            <td><pre>[[][[]]]</pre></td>
+                        </tr>
+                        <tr class="param_tablerow_odd">
+                            <td>5</td>
+                            <td>Most abstract - helix nesting pattern and no unpaired regions</td>
+                            <td><pre>[[][]]</pre></td>
+                        </tr>
+                    </table>
+                </center>
+                </p>
+                <p>
+                The following image also describes the differences between shape types:
+                <center>
+                    <img src="/applications/rnaalishapes/resources/images/shapetypes.png" />
+                </center>
+                </p>
+            </td>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_temperature">#{messages.property('rnaalishapes_parameter_temperature_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_temperature_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_even">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_thermodynamic_model_parameters">#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_lonely_base_pairs">#{messages.property('rnaalishapes_parameter_lonely_base_pairs_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_lonely_base_pairs_description')}"/></td>
+        </tr>
+                
+        <tr>
+            <th class="param_table_header" colspan="2">Input Style</th>
+        </tr>
+        <tr class="param_tablerow_odd">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_window_size">#{messages.property('rnaalishapes_parameter_window_size_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_window_size_description')}"/></td>
+        </tr>
+        <tr class="param_tablerow_even">
+            <td class="param_table_data"><a name="rnaalishapes_parameter_window_increment">#{messages.property('rnaalishapes_parameter_window_increment_name')}</a></td>
+            <td class="param_table_data"><h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_parameter_window_increment_description')}"/></td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    <!-- Custom Content -->
+    <!-- <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_manual_manual_customContent')}"/>-->
+ </ui:define>
+ 
+</ui:composition>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module  version="2.0">
+    
+    <!-- The info tag is mandantory and set the modul name, the revision number (optional, but recommend and 
+         necessary if published on bibiserv repository) and the name of the providing organisation -->
+    <info organisation="de.unibi.techfak.bibiserv" module="rnaalishapes" revision="0.1" />
+    
+    <!-- The publication tab can contain 0 or more artifacts  tags :
+         see http://ant.apache.org/ivy/history/2.1.0-rc1/ivyfile/publications.html 
+         for detailed description -->
+    <!-- 
+         Since we do not publish anything, we can comment out the following ...
+        
+    <publications>
+        <artifact name="[NAME OF ARTIFACT]" ext="[NAME OF EXTENSION]"/>
+    </publications> 
+    
+    -->
+    
+    <configurations>
+        
+        <conf name="runtime" description="all artifacts/dependencies needed at runtime"/>
+        <conf name="compile" description="all artifacts/dependencies needed for compilation"/>
+    </configurations>
+    
+    <!-- The dependencies tag can contain 0 or more dependency tags :
+        see http://ant.apache.org/ivy/history/2.1.0-rc1/ivyfile/dependencies.html
+        for detailed description -->
+    <dependencies>
+        <!-- conf-mapping *->@ means every config depends on an equally named config in this modul -->
+        <dependency org="de.unibi.techfak.bibiserv" name="validator" rev="" revConstraint="latest.integration" conf="runtime->runtime;compile->runtime"/>
+        <dependency org="de.unibi.techfak.bibiserv" name="converter" rev="" revConstraint="latest.integration" conf="runtime->runtime;compile->runtime"/>
+        <dependency org="de.unibi.techfak.bibiserv" name="bibitools" rev="" revConstraint="latest.integration" conf="compile->compile"/>
+        <dependency org="de.unibi.techfak.bibiserv" name="bibimaininterfaces" rev="" revConstraint="latest.integration" conf="compile->*"/>
+        <dependency org="de.unibi.techfak.bibiserv" name="dependencyparser" rev="" revConstraint="1.1+" conf="compile->*"/>
+        <dependency org="de.unibi.techfak.bibiserv" name="ManagerClient" rev="" revConstraint="latest.integration" conf="compile->*"/>
+	<dependency org="de.unibi.cebitec.bibiserv" name="bibiserv_sswap" rev="" revConstraint="0.2+" conf="compile->*"/>
+	<dependency org="de.unibi.techfak.bibiserv" name="metahobit" rev="" revConstraint="1.+" conf="compile->*"/>
+        <dependency org="org.apache" name="commons-codec" rev="" revConstraint="latest.integration" conf="compile->*"/>
+        <dependency org="org.primefaces" name="primefaces" rev="" revConstraint="latest.integration" conf="compile->*"/>     
+        <dependency org="com.sun.java" name="glassfish" rev="" revConstraint="latest.integration" conf="compile->*"/>
+        <dependency org="de.unibi.techfak.bibiserv" name="bibiserv_deploytools" rev="" revConstraint="latest.integration" conf="compile->*"/>
+        <!-- appserver (and Java 6 > update 9) already contains an jaxb library  > 2.1 -->
+        <exclude org="com.sun.java" module="jaxb"/>
+    </dependencies>
+    
+</ivy-module>

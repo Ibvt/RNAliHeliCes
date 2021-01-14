@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de"
+
+Contributor(s):
+
+-->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bibiserv.cebitec.uni-bielefeld.de/facelets"
+                template="/WEB-INF/templates/toolsubmissionTpl.xhtml">
+
+
+    <ui:define name="app_title">
+         <h:outputText styleClass="title"
+                      escape="false"
+                      value="#{messages.property('rnaalishapes_name')}[rnaalishapes_function_outside] - Result"/> 
+        <div class="separator app_separator"/>
+    </ui:define>
+
+    <ui:define name="app_content">
+        <h:form >
+
+            <!-- if calculation isn't finished (600 > statuscode < 700) -->
+
+            <b:progressbar/>
+
+
+            <h:panelGroup id="run">
+                <h:panelGroup rendered="#{rnaalishapes_function_outside_result.running}" layout="block" >
+                    <table class="result_table" style="width:800px" >
+                        <tr>
+                            <th class="result_header">code</th> <th class="result_header">description</th>
+                        </tr>
+                        <tr>
+                            <td class="result_body">#{rnaalishapes_function_outside_result.statuscode}</td>
+                            <td class="result_body">#{rnaalishapes_function_outside_result.statusdescription}</td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <b:loadprogress bean="#{rnaalishapes_function_outside_result}"/>
+                    <br/>
+                    <br/>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- if calculation finished successful show list of results-->
+            <h:panelGroup id="result" >
+                <h:panelGrid columns="1" cellspacing="15px" rendered="#{rnaalishapes_function_outside_result.finishedOk}">
+                   
+                    
+                    <h:panelGrid columns="1"  cellspacing="15px" rendered="#{!rnaalishapes_function_outside_result.showMessage}">
+                      <!--<b:redirect instant="false" url="/applications/rnaalishapes/pages/yourpage.xhtml" message="View Result:" buttonMessage="Show" id="redirect"/>-->
+                      <b:toolresults bean="#{rnaalishapes_function_outside_result}"/>
+                      <b:tooloutputfiles bean="#{rnaalishapes_function_outside_result}"/>
+                      
+                      <a target="_blank" href="/spool?user=#{user.id}&amp;id=#{rnaalishapes_function_outside_result.bibiservid}&amp;name=dotPlot.png&amp;tool=rnaalishapes&amp;contenttype=image/png"><img src="/spool?user=#{user.id}&amp;id=#{rnaalishapes_function_outside_result.bibiservid}&amp;name=dotPlot.png&amp;tool=rnaalishapes&amp;contenttype=image/png" /></a>
+                    </h:panelGrid> 
+                    <h:panelGrid columns="1"  cellspacing="15px" rendered="#{rnaalishapes_function_outside_result.showMessage}">
+                        <h:outputText value="#{rnaalishapes_function_outside_result.calculateMessage}" />
+                    </h:panelGrid> 
+                    
+                    <!-- stop & hide progressbar -->
+                    <script type="text/javascript">
+                          stop_bibiservprogress();
+                          hide_bibiservprogress();                 
+                    </script>
+                </h:panelGrid>
+
+            </h:panelGroup>            
+
+
+            <!-- otherwise show error code + description -->
+            <h:panelGroup id="error">
+                <h:panelGroup rendered="#{rnaalishapes_function_outside_result.finishedError}" layout="block" >
+                    <p style="formblock_errorbox">
+                        <img src="#{conf.getProperty('icon.error')}" alt="error"/> &#160; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.result.errortable.header',rnaalishapes_function_outside_result.bibiservid.isEmpty()?"unknown":rnaalishapes_function_outside_result.bibiservid)}
+                    </p>
+                    <table class="result_table" style="width:100%">
+                        <tr>
+                            <th class="result_header">#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.result.errortable.code')}</th> 
+                            <th class="result_header">#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.result.errortable.description')}</th>
+                        </tr>
+                        <tr>
+                            <td class="result_body">#{rnaalishapes_function_outside_result.statuscode}</td>
+                            <td class="result_body">#{rnaalishapes_function_outside_result.statusdescription}</td>
+                        </tr>
+                    </table>
+                    <p>
+                    <h:outputText escape="false" value="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.result.errorfooter')}"/>
+                    </p>
+                    <!-- stop & hide progressbar -->
+                    <script type="text/javascript">
+                          stop_bibiservprogress();
+                          hide_bibiservprogress();                 
+                    </script>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- update page until status can changed (app is running) -->
+            <p:poll update="run result error" stop="#{!rnaalishapes_function_outside_result.running}"/>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

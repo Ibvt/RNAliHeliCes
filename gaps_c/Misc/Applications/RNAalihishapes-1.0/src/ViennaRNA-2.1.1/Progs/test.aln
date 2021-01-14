@@ -1,0 +1,12 @@
+CLUSTAL 2.1 multiple sequence alignment
+
+
+record_1        GAGGGCUG-UCUGACCCAGCCCGAUGAGCUGAACCUGCC-CUGUGACCUACCGCGUGGCA
+record_3        GAGGGUAGCUCUGACUCUGCCCGAUGACACCAACCUGCC-CUGUGACCUAUCGUGUUGAA
+record_2        -GUGGUCUUUACGCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGGCCCUCGGGCGUUGAU
+                   **    *  * *   *   *  *       ****   * * * ***   * ** *  
+
+record_1        UUUC
+record_3        UUCC
+record_2        AACC
+                   *

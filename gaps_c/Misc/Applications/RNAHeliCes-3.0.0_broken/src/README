@@ -1,0 +1,43 @@
+RNASLOpt is a program for predicting stable local optimal secondary structures (represented by stack configurations) for RNAs.  RNASLOpt can be used to predict alternate structures for riboswitches.
+
+NOTE:
+	The folder TurnerModel/ contains all the tabulated parameters of Turner model and is vitally important for executing RNASLOpt properly. 
+	Please copy the folder TurnerModel/ to where RNASLOpt will be executed. Failing to do so will lead to incorrect results.
+
+
+PLATFORM:
+	Fedora 14 or other Linux OS
+
+COMPILER:
+	GCC 4.5.1
+
+INSTALLATION:
+	make
+
+USAGE: RNASLOpt -i [infile] -o [outfile] -c [configfile] -d delta -p delta_p -k knum -t barrier_cutoff
+	infile : an input file, each line of which is an RNA sequence.
+	outfile: an output file, representing all possible local optimal stack configurations and stable local optimal stack configurations ranked according to both free energy and the associated minimal energy barrier.
+	configfile: optional, the configuration file, by default: Config/config.
+	delta  : optional, only suboptimal structures that within delta kcal/mol of the mfe will be enumerated. Default is 1.
+	delta_p: optional, only suboptimal structures that within (1-delta_p%) of the mfe will be enumerated. Default is 20%.
+	knum   : optional, the top knum stable local optimal structures will be shown. Default is 5.
+	barrier_cutoff: optional, the energy barrier cutoff for determining stability of local optimal structures. Default is 12 kcal/mol.
+
+
+Examples:
+	Input file : Input/Adenine.Bsub.ydhl.seq
+	Output file: Ouptut/Adenine.Bsub.ydhl.out
+	Example (1): You can use the following command to enumerate all possible stable local optimal stack configurations that are within 55% of the minimum free energy of the sequence in the inputfile. 
+		./RNASLOpt -i Input/Adenine.Bsub.ydhl.seq  -o Output/Adenine.Bsub.ydhl.out -p 55 
+		
+	Example (2): If you want to set the energy range as 10 kcal/mol
+		./RNASLOpt -i Input/Adenine.Bsub.ydhl.seq  -o Output/Adenine.Bsub.ydhl.out -d 10
+
+	Example (3): If you want to try a user-defined configuration Config/config_3_8
+		./RNASLOpt -i Input/Adenine.Bsub.ydhl.seq  -o Output/Adenine.Bsub.ydhl.out -c Config/config_3_8
+	
+	Example (4): If you want to increase the barrier_cutoff from 12 kcal/mol to 15 kcal/mol
+		./RNASLOpt -i Input/Adenine.Bsub.ydhl.seq  -o Output/Adenine.Bsub.ydhl.out -t 15
+
+
+

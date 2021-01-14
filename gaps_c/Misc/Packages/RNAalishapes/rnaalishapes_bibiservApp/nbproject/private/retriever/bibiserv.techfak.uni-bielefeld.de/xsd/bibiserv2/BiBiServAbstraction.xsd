@@ -1,0 +1,2078 @@
+<!--
+    This work is licensed under a
+    Creative Commons Attribution-Share Alike 3.0 Unported License
+    (see http://creativecommons.org/licenses/by-sa/3.0/ for the full license text.)
+-->
+<xs:schema xmlns="bibiserv:de.unibi.techfak.bibiserv.cms"
+    xmlns:jsp="http://java.sun.com/xml/ns/javaee"
+    xmlns:microhtml="bibiserv:de.unibi.techfak.bibiserv.cms.microhtml"
+    xmlns:minihtml="bibiserv:de.unibi.techfak.bibiserv.cms.minihtml"
+    xmlns:sawsdl="http://www.w3.org/ns/sawsdl" 
+    xmlns:jnlp="http://java.sun.com/dtd/jnlp-6.0.dtd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    attributeFormDefault="unqualified" elementFormDefault="qualified"
+    targetNamespace="bibiserv:de.unibi.techfak.bibiserv.cms">
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This Schema defines the structure of the XML description of
+            all content parts of the BiBiServ tool server and others servers using the same
+            framework. It allows definition of static content and dynamic tool descriptions. The
+            tools are specified in great detail, allowing the BiBiServ Framework to automagically
+            create a number of different access interfaces to the tools, including HTML/JSP web
+            pages, SOAP WebServices, BioMoby WebServices etc. 
+        
+            This work is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License
+            (see http://creativecommons.org/licenses/by-sa/3.0/ for the full license text.)
+        </xs:documentation>
+    </xs:annotation>
+
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+        schemaLocation="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/xml.xsd"/>
+    <!-- for reasons of GPL licensing, we can not use bibtexml here 
+        xmlns:bibtex="http://bibtexml.sf.net/" <- was in Top-level schema element
+        <xs:import namespace="http://bibtexml.sf.net/" schemaLocation="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/bibtexml.xsd"/>
+    -->
+    <xs:import namespace="bibiserv:de.unibi.techfak.bibiserv.cms.microhtml"
+        schemaLocation="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/microhtml.xsd"/>
+    <xs:import namespace="bibiserv:de.unibi.techfak.bibiserv.cms.minihtml"
+        schemaLocation="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/minihtml.xsd"/>
+    <xs:import namespace="http://java.sun.com/dtd/jnlp-6.0.dtd" 
+        schemaLocation="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/jnlp-6.0.xsd"/>
+
+    <xs:element name="category" type="Tcategory" xml:lang="en">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> "Category" is "the" top level / root tag of the
+                BiBiServAbstraction Schema. The complete BiBiServ including static and dynamic
+                websites, tool description for ws, biomoby and browser usage can desribed with the
+            recursivly build element. </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="runnableItem" type="TrunnableItem">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> "RunnableItem" can also be a top level element of
+                BiBiServAbstraction. It is used within each dynamic tool desription (Each tool is a
+                runnable item whether it is a webservice or biomoby service or download or html
+                page!). Each BAR deployed on bibiservmain application contains such a description.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="item" type="Titem">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> "Item" can also be a top level element of BiBiServAbstraction.
+                It is used to describe and validate basis information (which can be static html content) without
+                having the complete server description.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="linkedItem" type="TlinkedItem">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">"LinkedItem" can also be a top level element of BiBiServAbstraction.
+                It is used to describe a linked resource (like tools or projects on another server).
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:group name="itemGroup">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> The 'itemGroup' is a group type defined to encompass
+            the 'item' and 'runnableItem' class of elements </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="itemRef" type="xs:NCName" maxOccurs="unbounded" minOccurs="0"/>
+            <!--        JK/SH/DH - 16.12.2009
+            item/runnableitems werden separat in einer eigenen Datei/Datenbanktabelle gehalten, d.h.
+            von der Struktur referenzieren wir auf items. Der Typ xs:IDREF ist an dieser Stelle ungeeignet,
+            da die referenzierten Item's nicht in der gleichen Datei (im gleichen DOM) enthalten sind.
+
+            <xs:element name="item" type="Titem" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="runnableItem" type="TrunnableItem" maxOccurs="unbounded" minOccurs="0"/>-->
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="Tcategory" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">Categories are used to create the structure of the
+                server. Categories can also contain other (sub-)categories or all kinds of
+                items(runnable and ordinary). This leads to a tree structure with the functional
+                elements at the leaves. The ID of categories and items is used for (URL-)navigation.
+                It should be written in small letters. The name is used as screen name.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'name' element(s) of a category are used as
+                        user-visible screen name(s) of this category, possibly localized to a
+                    specfic language by using the "lang" attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'id' attribute of
+                                        categories and items is used for URL-navigation and other
+                                        reference purposes to uniquely identify this category. It
+                                    should be written in small letters. </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="categoryDescription" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'categoryDescription' element is used in
+                        the HTML view of the parent category page for the description of this
+                    category. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'id' attribute of
+                                        categories and items is used for URL-navigation and other
+                                        reference purposes to uniquely identify this category. It
+                                    should be written in small letters. </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="categoryRepresentation" type="Tpage" maxOccurs="1" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'categoryRepresentation' element contains
+                        XHTML content describing this category in documentation-quality text and/or
+                    illustrations. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:choice>
+                <xs:element name="category" type="Tcategory" maxOccurs="unbounded" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en"> The'category' element is used to define
+                        sub-categories of the enclosing category element. </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:group ref="itemGroup">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en"> The 'itemGroup' is used to define subitems
+                            (includeing runnableItems) of the enclosing category element.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:group>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute of categories and items is used
+                    for URL-navigation and other reference purposes to uniquely identify this
+                category. It should be written in small letters. </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="Titem" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> Items are the basic classes for providing
+                functionality. They should be used to create simple HTML pages leading to courses
+                and other informative web content. keywords and shortDescription are used for
+                representating this item in the parent category The description is meant to be at
+                the top of the tool welcome page. The itemRepresentation can be any html content .
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'name' element of an Item is used as
+                        user-visible screen name(s) of this Item, possibly localized to a specific
+                    language by using the "lang" attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="shortDescription" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'short description' element contains human
+                        readable, but short description(s) of this item for e.g. tooltips
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'description' element contains human
+                        readable, documentation-quality descriptive text(s) for this item, possibly
+                        localized to a specific language by using the 'lang' attribute.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="toolTipText" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'toolTipText' element contains
+                        informational text (possibly localized to a specific language by using the
+                        'lang' attribute) which will be displayed when a user hovers over a link to
+                    this item. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="keywords" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'keywords' element contains a short list of
+                        descriptive keywords (possibly localized to a specific language by using the
+                    'lang' attribute)  related to this item. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="TstringList">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="responsibleAuthor" type="Tperson">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'responsibleAuthor' element contains
+                        information about the person responsibly for the described item. This person
+                        should be able to answer questions about the item in detail.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="author" type="Tperson" maxOccurs="unbounded" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'author' element contains
+                        information about additional persons associated with the described item
+                    (co-authors). </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="support" type="Tperson" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'support' element contains contact
+                        information of a person able to address technical questions about the item.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+
+            <xs:element name="references" type="Treferences" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The optional 'references' element contains
+                        literature reference entries</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+
+            <!-- <xs:element name="itemRepresentation" type="Tpage" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation> ACHTUNG! Die itemRepresentation vom Typ Tpage macht hier
+                        wahrscheinlich keinen Sinn. Man braucht 'customContent' und evtl. einen
+                        'ToolTipText' auf der Ebene der Description, shortDescription, ...
+                    </xs:documentation>
+                    </xs:annotation>
+                    </xs:element>
+            -->
+            <xs:element name="customContent" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'customContent' element contains additional
+                        content for this item located on the 'welcome' page, possibly localized to a
+                    specific language by using the 'lang' attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="minihtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+
+
+            <xs:element name="linkedFile" type="Tpath" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> A linkedFile Element was defined to keep the path to a static
+                    component on the server like a course etc. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <!--  DH  linkedResources were ment to be special links to files  (in my opinion linkedFile element is sufficient for all purposes...)
+              <xs:element name="linkedResources" type="Tpath" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        A linkedResource Element was defined to keep the path to a static component on the server like a course etc.
+                    </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            -->
+
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en">The 'id' attribute is used for reference purposes to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+
+
+    <xs:complexType name="TlinkedItem" mixed="false">
+        <xs:sequence>
+            <xs:element name="name" maxOccurs="unbounded" type="xs:string"/>
+            <xs:element name="shortDescription" maxOccurs="unbounded" type="xs:string"/>
+            <xs:element name="description" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'description' element contains human
+                        readable, documentation-quality descriptive text(s) for this item, possibly
+                        localized to a specific language by using the 'lang' attribute.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="url" type="xs:anyURI"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="Tpath" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> Path to an external file, which might be e.g. an
+                HTML-Page etc. The name is used as linkName. The name should be unique inside the
+            corresponding item. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="shortDescription" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="location" type="xs:anyURI"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="TexecPath" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> This type defines an executable resource on the server,
+                usually a binary executable, but other types (like Java Classes or interpreted
+                scripts in Perl or other languages) are possible. The information in this type has
+            to be sufficient to call the executable resource. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="executableType" type="TexecutableTypes">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'executableType' element specifies which
+                    kind of supported executable type is described here. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="path" type="xs:anyURI">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'path' element contains the absolute
+                        filesystem path of an executable file. This has to be given in order for the
+                        server to be able to call the external executable program.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="callingInformation" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'callingInformation' element contains the
+                        basic commandline that is required for tool execution. This can (and in most
+                        cases, will) be extended with function-specific parameters later on. The
+                        'callingInformation' string for a standard binary executable starts with the
+                        executable files name, followed (if necessary) by always used basic
+                        parameter settings. Example: "MyBinary -setting_A=34 -X -bla"
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+   
+    <xs:complexType name="Treferences" mixed="false">
+        <xs:sequence>
+            <xs:element name="reference" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Bibliographical Information as String in BibTeX format
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Tperson" mixed="false">
+        <xs:sequence>
+            <xs:element name="firstname" type="xs:string"/>
+            <xs:element name="lastname" type="xs:string"/>
+            <xs:element name="organisation" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="phone" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="adress" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TrunnableItem" mixed="false">
+        <xs:complexContent>
+            <xs:extension base="Titem">
+                <xs:sequence>
+                    <xs:element name="executable" type="Texecutable" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="downloadable" type="Tfile" maxOccurs="unbounded" minOccurs="0"/>
+                    <xs:element name="view" type="TrunnableItemView" maxOccurs="unbounded" minOccurs="0"/>
+                    <xs:element name="webstart" type="Twebstart" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="manual" type="Tmanual"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Texecutable" mixed="false">
+        <xs:sequence>
+            <xs:element name="version" type="xs:string"/>
+            <xs:element name="execInfo" type="TexecPath"/>
+            <xs:element name="input" type="TinputOutput" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="output" type="TinputOutput" maxOccurs="unbounded" minOccurs="1"/>
+	    <xs:element name="outputfile" type="ToutputFile" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="param" type="Tparam" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="enumParam" type="TenumParam" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="paramGroup" type="TparamGroup" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="dependency" type="Tdependency" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="function" type="Tfunction" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TinputOutput" mixed="false">
+        <xs:sequence>
+            <xs:element name="name" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'name' element of an Item is used as
+                        user-visible screen name(s) of this Input/Output Type, possibly localized to
+                    a specific language by using the "lang" attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="shortDescription" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'short description' element contains human
+                        readable, but short description(s) of this Input/Output Type for e.g.
+                    tooltips</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" maxOccurs="unbounded">
+
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'description' element contains human
+                        readable, documentation-quality descriptive text(s) for this Input/Output
+                        Type, possibly localized to a specific language by using the 'lang'
+                    attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="type" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de"> This element contains the key-name/id/thing to
+                        identify the correct kind of input for this tool, which can then be mapped
+                        to it's concrete file format and higher-level semantic descriptions. DICKES
+                        @TODO: Diskrepanz zwischen konkret vom CLI-Programm verstandenem Dateiformat
+                        und (im Wizard dargestellter, in sonstigen Beschreibungen verwendeter)
+                        tatsächlich gemeinter Bedeutung des Datentyps klären! (e.g. "Fasta" vs.
+                        "Multiple Sequenzdaten" oder gar "Multiple RNA-Sequenzen") Erste Ideen:
+                        Massenweise Mappings, Hierarchie von Datentypen (Eingabe: Tree/Liste plus
+                        Unterwizards mit nachfragen?), handling per festen Translator-Modulen,
+                    etc... </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="handling" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'handling' element defines the way this
+                        IO-Element should be handled: as a file, as direct string, STDIN/STDOUT
+                        @TODO: Which handling ways do we have???? What, if anything, is default?
+                        @TODO: What do we do with Tools which specify filenames for Input/ output?
+                        I: Simple, we can generate the name O: not so simply, may be auto-created
+                        _INSIDE_ the tool! Proposal: FILENAME, AUTO-FILENAME (plus attribute
+                        'autoinfo' with rules? Or just as marker for manual code generation?)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="option" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'option' element defines the CLI program
+                        character/String. This element is optional. If it is omitted, the value
+                    itself is used as the option character/string. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="example" type="xs:base64Binary" minOccurs="0" >
+                <xs:annotation>
+                    <xs:documentation xml:lang="de"> veraltet - benutze tfunction/example stattdessen. </xs:documentation>
+                    <xs:documentation xml:lang="en">deprecated - use tfunction/example instead </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+	    <xs:element minOccurs="0" maxOccurs="1" type="xs:boolean" name="streamsSupported" default="false">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">If the Executeable supports the use of named pipes (streams) set to yes!</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+     <xs:complexType name="ToutputFile" mixed="false">
+        <xs:sequence>
+	    <xs:element name="name" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'name' element of an Item is used as
+                        user-visible screen name(s) of this output file, possibly localized to
+                    a specific language by using the "lang" attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+	    <xs:element name="folder" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The folder located in the spool directory the file has to be located in.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="filename" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The full filename as generated by the tool and located in the spool directory.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contenttype" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">MIME type for the file.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:group name="primitiveInputOutput">
+        <xs:sequence>
+            <xs:element name="primitive" type="Tprimitive"/>
+
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="documentInputOutput">
+        <xs:sequence>
+            <xs:element name="document" type="Tdocument"/>
+
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="TparamGroup" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> The type paramgroup groups parameter enumerated
+                Parameters and previously defined paramgroups together. DH 07/23/08: Added
+                shortDescription element making it possible to enter a purpose of the defined
+                paramgroup SH/JK 08/13/08: enforced at least one reference as choice
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>The 'name' element is an optional element for specifying this
+                        parameter group's name(s), possibly localized to a specific language by
+                    using the 'lang' attribute.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="shortDescription" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'short description' element contains human
+                        readable, but short description(s) of this parameter group for e.g.
+                    tooltips</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" minOccurs="0" maxOccurs="unbounded">
+
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'description' element contains
+                        human readable, documentation-quality descriptive text(s) for this parameter
+                        group, possibly localized to a specific language by using the 'lang'
+                    attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:choice>
+                    <xs:element name="paramref">
+                        <xs:complexType mixed="false">
+                            <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="paramGroupref">
+                        <xs:complexType mixed="false">
+                            <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+            </xs:sequence>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="Tparam" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> required=is the parameter required then true else false
+            for optional. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+
+            <xs:element name="name" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'name' element of an Item is used as
+                        user-visible screen name(s) of this parameter, possibly localized to a
+                    specific language by using the "lang" attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="shortDescription" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'short description' element contains human
+                        readable, but short description(s) of this parameter for e.g.
+                    tooltips</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" maxOccurs="unbounded">
+
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'description' element contains human
+                        readable, documentation-quality descriptive text(s) for this parameter,
+                        possibly localized to a specific language by using the 'lang' attribute.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="type" type="Tprimitive"/>
+            <xs:element name="option" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'option' element defines the CLI program
+                        character/String. This element is optional. If it is omitted, the value
+                    itself is used as the option character/string. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="defaultValue" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'defaultValue' element contains the default
+                    value for this parameter. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="min" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'min' and 'max' elements contain
+                        minimum and maximum values for float and integer typed parameters.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType mixed="false">
+                    <xs:simpleContent>
+                        <xs:extension base="xs:float">
+                            <!--Is the value to be included(<=0) or excluded(<0)   -->
+                            <xs:attribute name="included" type="xs:boolean" use="required">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'included' attribute
+                                        defines if the 'min' value is meant inclusively (&gt;=)
+                                        or exclusively (&gt;) for the allowed range.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="max" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'min' and 'max' elements contain
+                        minimum and maximum values for float and integer typed parameters.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType mixed="false">
+                    <xs:simpleContent>
+                        <xs:extension base="xs:float">
+                            <!--Is the value to be included(<=0) or excluded(<0)   -->
+                            <xs:attribute name="included" type="xs:boolean" use="required">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'included' attribute
+                                        defines if the 'max' value is meant inclusively (&lt;=)
+                                        or exclusively (&lt;) for the allowed range.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="minLength" type="xs:int" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'minLength' and 'maxLength'
+                        elements contain minimum and maximum allowed lengths of submitted text and
+                    symbol chains. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="maxLength" type="xs:int" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'minLength' and 'maxLength'
+                        elements contain minimum and maximum allowed lengths of submitted text and
+                    symbol chains. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="regexp" type="xs:string" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'regexp' element contains a
+                        description of allowed valid parameter values in Java Regular Expression
+                        syntax. TODO: SH, 20080815: There is a potential problem with the xjc /
+                        xerces regular expression parser! See
+                        http://wiki.dotsero.techfak.uni-bielefeld.de/BiBiServWiki/JAXB
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="guiElement" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'guiElement' element allows declaration of
+                        a preferred element for screen representation of this parameter, easing GUI
+                        construction. Currently one of the following values are allowed :
+                        INPUTTEXT,
+                        INPUTTEXTAREA,
+                        SELECTBOOLEANCHECKBOX</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="Tfunction" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> The complex type Tfunction represents a single unique
+                functionality of the tool. The information stored within this complex type is the
+                base for all functionality used by the different views. Each function has to have
+                one output, an arbitrary number of inputs and one master paramGroup for this
+                functionality, encapsulating an arbitrary number of parameters. The parameters may
+                have dependencies, which are defined using a referenc to a dependency
+            element.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'name' element(s) can be used to
+                        give symbolic name(s) (possibly localized to a specific language by using
+                        the "lang" attribute) to a function definition to make it easier for humans
+                    to identify it. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="shortDescription" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'short description' element contains human
+                        readable, but short description(s) of this function for e.g. tooltips
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" minOccurs="0" maxOccurs="unbounded">
+
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'description' element contains
+                        human readable, documentation-quality descriptive text(s) for this function,
+                        possibly localized to a specific language by using the 'lang' attribute.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="inputref">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> Reference to a previously defined input. Occurs
+                    0 or unbounded times. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType mixed="false">
+                    <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="outputref">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> Reference to a previously defined output. Must
+                    occur 1 time. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType mixed="false">
+                    <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="outputfileref">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> Reference to a previously defined outputfile. Occurs
+                    0 or unbounded times. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType mixed="false">
+                    <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="paramGroup" type="TparamGroup" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="depref" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> Reference to a previously defined dependency.
+                        Occurs 0 or unbounded times. If more than one dependency is given to one
+                        function, the dependencies are linked with a logical 'and'.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType mixed="false">
+                    <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="paramAndInputOutputOrder">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'paramAndInputOutputOrder' element is used
+                        to store the concrete order of Input, Output and Parameter options for the
+                        command line of the program for this function. It contains an ordered list
+                        of References (to each of these things) and Strings (which may have to be
+                        entered into the command line options order in order to achieve this
+                    functions desired effects. @TODO: DISCUSS THIS IN M3-115 </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="reference" type="xs:IDREF"/>
+                        <xs:element name="additionalString" type="xs:string"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="example" type="Texample" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="TenumParam" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> TenumParam contains a parameterlist of a defined type.
+                The definition gives various possibilities to map a typical cli  enumeration.
+                Example: -S[a,b,c] can be mapped as 
+                <enumParam id="no_id" minOccurs="3" maxOccurs="3">
+                    <shortDescription xml:lang="en">...</shortDescription>
+                    <description>...</description>
+                    <type>string</type>
+                    <option>-S</option>
+                    <prefix>[</prefix>
+                    <separator>,</separator>
+                    <suffix>]</suffix>
+                    <values>
+                        <key>alpha</key>
+                        <value>a</value>
+                        <name xml:lang="en">alpha enum param</name>
+                    </values>
+                    <values>
+                        <key>beta</key>
+                        <value>b</value>
+                        <name xml:lang="en">beta enum param</name>
+                    </values>
+                    <values>
+                        <key>gamma</key>
+                        <value>c</value>
+                        <name xml:lang="en">gamma enum param</name>
+                    </values>
+                    ...
+                </enumParam> 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+
+            <xs:element name="name" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'name' element(s) are used as user-visible
+                        screen name(s) of this enum parameter, possibly localized to a specific
+                    language by using the "lang" attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="shortDescription" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'short description' element contains human
+                        readable, but short description(s) of this enum parameter for e.g.
+                    tooltips</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'description' element contains human
+                        readable, documentation-quality descriptive text(s) for this enum parameter,
+                        possibly localized to a specific language by using the 'lang' attribute.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="type" type="Tprimitive">
+                <xs:annotation>
+                    <xs:documentation>In principle the type information is obsolete (because this is a 'real' enumeration), but
+                    for the (Java) implemention it is necessary ... </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="option" type="xs:string" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'option' element defines the CLI program
+                        character/String for this parameter. This element is optional. If it is
+                        omitted, the value itself is used as the option character/string.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="prefix" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'prefix' element defines a string that is placed after (the optional)
+                        option and the values defined by this enumeration parameter. This element is optional. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" type="xs:string" name="suffix">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'suffix' element defines a string that is placed after the values defined by this 
+                        enumeration parameter. This element is optional.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" type="xs:string" name="separator" default=",">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'separator' element defines a separator string between two or 
+                        more values. This element is required!</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="values" minOccurs="1" maxOccurs="unbounded" type="TenumValue"/>
+            <xs:element name="guiElement" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'guiElement' element allows declaration of
+                        a preferred element for screen representation of this parameter, easing GUI
+                        construction. Currently one of the following values are allowed :
+                        SELECTONEMENU,
+                        SELECTONERADIO,
+                        SELECTONELISTBOX,
+                        SELECTMANYMENU,
+                        SELECTMANYLISTBOX,
+                        SELECTMANYCHECKBOX</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="minoccurs" type="xs:int" default="1">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The attributes 'minoccurs' and 'maxoccurs' define
+                    how many of the values have to be selected by the tool user, and if there is the
+                    possibility of giving NO value [minoccurs=0] (important [not only] for GUI generation).
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="maxoccurs" type="xs:int" default="1">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The attributes 'minoccurs' and 'maxoccurs' define
+                    how many of the values have to be selected by the tool user, and if there is the
+                    possibility of giving NO value [minoccurs=0] (important [not only] for GUI generation).
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="Tdependency" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> This type defines a dependency between parameters.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'name' element(s) can be used to
+                        give symbolic name(s) (possibly localized to a specific language by using
+                        the "lang" attribute) to a constraint definition to make it easier for
+                    humans to identify it. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="shortDescription" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'short description' element contains human
+                        readable, but short description(s) of this dependency for e.g.
+                    tooltips</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" minOccurs="0" maxOccurs="unbounded">
+
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The optional 'description' element contains
+                        human readable, documentation-quality descriptive text(s) for this
+                        dependency, possibly localized to a specific language by using the 'lang'
+                    attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="dependencyDefinition" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'dependencyDefinition' element contains the
+                        string representation of the boolean constraint definition in XXX syntax
+                        (see wiki). The participating parameters, parameterGroups and dependecies
+                    are identified in this string by their 'id' attributes. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="Tvalue" mixed="false">
+        <xs:sequence>
+            <xs:element name="value"/>
+            <xs:element name="type"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="defaultValue" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="TenumValue" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">The TPair type is used for enum params to combine a key
+                and several localized names (used for human interfaces) with a value for the tool
+            execution...</xs:documentation>
+        </xs:annotation>
+        <xs:sequence minOccurs="1">
+            <xs:element name="key" type="xs:string"/>
+            <xs:element name="value" type="xs:string"/>
+            <xs:element name="name" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'name' elements of a key/value pair are
+                        used as user-visible screen name(s), possibly localized to a specific
+                    language by using the "lang" attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+
+        </xs:sequence>
+        <xs:attribute name="defaultValue" type="xs:boolean" default="false"/>
+    </xs:complexType>
+
+
+
+    <!-- Validation took from page  http://jsf-comp.sourceforge.net/components/clientvalidators/index.html  there you can find meaning of the parameters  /  Oriented at JSF client side validation-->
+    <!--  <xs:complexType name="Tvalidation">
+        <xs:sequence>
+        <xs:element name="requiredFieldValidator" type="TbaseValidator" minOccurs="0"/>
+        <xs:element name="rangeValidator" type="TrangeValidator" minOccurs="0"/>
+        <xs:element name="compareValidator" type="TcompareValidator" minOccurs="0"/>
+        <xs:element name="regularExpressionValidator" type="TregularExpressionValidator" minOccurs="0"/>
+        <xs:element name="lengthValidator" type="TlengthValidator" minOccurs="0"/>
+        <xs:element name="customValidator" type="TcustomValidator" minOccurs="0"/>
+        </xs:sequence>
+        </xs:complexType>-->
+    <!--
+        <xs:complexType name="TbaseValidator">
+        <xs:sequence>
+        <xs:element name="errorMessage" type="xs:string"/>
+        <xs:element name="highlight" type="xs:boolean"/>
+        <xs:element name="display" type="Tdisplay"/>
+        <xs:element name="style"/>
+        </xs:sequence>
+        </xs:complexType>
+
+        <xs:complexType name="TrangeValidator">
+        <xs:complexContent>
+        <xs:extension base="TbaseValidator">
+        <xs:sequence>
+        <xs:element name="minValue" />
+        <xs:element name="maxValue"/>
+        </xs:sequence>
+        </xs:extension>
+        </xs:complexContent>
+        </xs:complexType>
+
+        <xs:complexType name="TcompareValidator">
+        <xs:complexContent>
+        <xs:extension base="TbaseValidator">
+        <xs:sequence>
+        <xs:element name="componentToCompare" />
+        <xs:element name="operator" type="Toperator"/>
+        </xs:sequence>
+        </xs:extension>
+        </xs:complexContent>
+        </xs:complexType>
+
+        <xs:complexType name="TregularExpressionValidator">
+        <xs:complexContent>
+        <xs:extension base="TbaseValidator">
+        <xs:sequence>
+        <xs:element name="pattern" type="xs:string"/>
+        </xs:sequence>
+        </xs:extension>
+        </xs:complexContent>
+        </xs:complexType>
+
+        <xs:complexType name="TlengthValidator">
+        <xs:complexContent>
+        <xs:extension base="TbaseValidator">
+        <xs:sequence>
+        <xs:element name="exactly"/>
+        <xs:element name="min"/>
+        <xs:element name="max"/>
+        </xs:sequence>
+        </xs:extension>
+        </xs:complexContent>
+        </xs:complexType>
+
+        <xs:complexType name="TcustomValidator">
+        <xs:complexContent>
+        <xs:extension base="TbaseValidator">
+        <xs:sequence>
+        <xs:element name="function" type="xs:string"/>
+        <xs:element name="params" type="xs:string"/>
+        </xs:sequence>
+        </xs:extension>
+        </xs:complexContent>
+        </xs:complexType>    -->
+    <xs:complexType name="Tpage" mixed="false">
+        <xs:sequence>
+            <xs:element name="title" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'name' element of an Item is used as
+                        user-visible screen name(s) of this Item, possibly localized to a specific
+                    language by using the "lang" attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="customContent" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'customContent' sub-element(s) of a page
+                        element contains marked-up text, possibly localized to a specific language
+                    by using the "lang" attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="minihtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <!--DH<xs:element name="title" type="xs:string" minOccurs="0" maxOccurs="1"/> -->
+            <!--DH Uncommented
+                <xs:element name="keywords" type="TstringList" />
+            <xs:element name="toolTipText" type="xs:string" />-->
+            <!-- HIER NOCHMAL UEBERLEGEN !!!!! -->
+            <!--
+            <xs:element name="customContent" type="TpageContent" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> customContent is ment to be filled with xhtml that will be
+                        displayed on the page of the item, runnableIterm or category that is related
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            -->
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en"> The 'id' attribute is used for reference purposes
+                    to uniquely identify this element. It should be written in small letters.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="Tmanual">
+        <xs:annotation>
+            <xs:documentation>Special type for Manuals. Contains ADDITIONAL information about the
+                tool which can not be auto-generated. Manuals REQUIRES an ID to allow direct
+                navigation.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="introductoryText" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'introductoryText' sub-element(s) of a
+                        manual element contain an introductin to this tool, ideally stating its
+                        purpose and applicability to certain problems etc. jadajadajada... (of
+                        course possibly localized to a specific language by using the "lang"
+                        attribute). This will generally appear above the auto-generated manual
+                    content. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="minihtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="customContent" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'customContent' sub-element(s) of a manual
+                        element contain marked-up manual quality user information text, possibly
+                        localized to a specific language by using the "lang" attribute. This will
+                        generally appear below the auto-generated manual content.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="minihtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation> Manuals REQUIRE an ID to allow direct navigation. Convention for
+                the id is: ToolID+ "_" + "manual" </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+
+    </xs:complexType>
+    <!-- <xs:complexType name="TpageContent" mixed="false">
+        <xs:sequence>
+            <xs:element ref="xhtml:body"/>
+        </xs:sequence>
+        </xs:complexType> -->
+    <xs:complexType name="TrunnableItemView">
+        <xs:complexContent>
+            <xs:extension base="Tpage">
+                <xs:attribute name="type" type="TviewType" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Tfile" mixed="false">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> The 'Tfile' type defines the elements of a file
+                resource. It contains all necessary information about a file which is needed to
+            identify and access it. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'name' element contains file resources
+                    name. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="version" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'version' element contains the version
+                        string of this file resource, used to discriminate between different
+                    versions of this file. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="filename" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'filename' element contains the name of the file
+                        resource, accessing is handled by the service itself.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="shortDescription" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'short description' element contains human
+                        readable, but short description(s) of this file for e.g.
+                    tooltips</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> The 'description' element contains human
+                        readable, documentation-quality descriptive text(s) for this file, possibly
+                        localized to a specific language by using the 'lang' attribute.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="microhtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="platform" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"> 
+            <xs:annotation>
+                <xs:documentation xml:lang="en">The 'id' attribute is used for reference purposes to uniquely identify this element. It should be written in small letters.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="Tdocument" mixed="false">
+        <xs:attribute name="namespace" type="xs:string" use="required"/>
+        <xs:attribute name="schemaLocation" type="xs:anyURI" use="required"/>
+        <xs:attribute name="element" type="xs:QName" use="required"/>
+    </xs:complexType>
+    <xs:simpleType name="TstringList">
+        <xs:list itemType="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="TintList">
+        <xs:list itemType="xs:int"/>
+    </xs:simpleType>
+    <xs:simpleType name="TviewType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> The 'TviewType' type contains the names of all
+                currently implemented views on the BiBiServ. If a new view is be needed, it has to
+                be added here and handling code has to be implemented in server code.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="submission"/>
+            <xs:enumeration value="download"/>
+            <xs:enumeration value="applet"/>
+            <!-- <xs:enumeration value="webstart"/> - replaced by type Twebstart -->
+            <xs:enumeration value="webservice"/> 
+            <xs:enumeration value="mobyservice"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TcategoryName">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> OBSOLETE! THIS INFO NEEDS TO BE PRESENT IN THE MAN
+                SYSTEM, AS CHECKING HAS TO BE DONE FOR WHICH LEVEL THE CATEGORY IS ON! The
+                'TcategoryName' type contains all tool/content categorie names which can be used on
+                the BiBiServ. If a new category should be needed, it has to be added here.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BiBiServ"/>
+            <xs:enumeration value="Tools"/>
+            <xs:enumeration value="Education"/>
+            <xs:enumeration value="Administration"/>
+            <xs:enumeration value="Alignment"/>
+            <xs:enumeration value="RNA"/>
+            <xs:enumeration value="Genome Comparison"/>
+            <xs:enumeration value="Primer Design"/>
+            <xs:enumeration value="Evolutionary Relationships"/>
+            <xs:enumeration value="Proteomics"/>
+            <xs:enumeration value="Metabolomics"/>
+            <xs:enumeration value="Others"/>
+            <xs:enumeration value="Dynamic Programming"/>
+            <xs:enumeration value="Basic Sequences Analysis"/>
+            <xs:enumeration value="Advanced Sequence Analysis"/>
+            <xs:enumeration value="Current Teaching Activities"/>
+            <xs:enumeration value="History"/>
+            <xs:enumeration value="BiBiServ_Team"/>
+            <xs:enumeration value="Collaborators"/>
+            <xs:enumeration value="Supporters"/>
+            <xs:enumeration value="Statistics"/>
+            <xs:enumeration value="Contact"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Tprimitive">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> These are the allowed types of tool Parameters. They
+                have been chosen because they are a least common denominator of data types in
+                different programming paradigms and languages, and are directly equivalent to the
+                BioMOBY primitive data types. There has to be some rather clever parsing code to
+                match these strings against the REAL types of values of parameters which are defined
+            by this! </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="boolean">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">A Boolean (truth) value
+                    (true/false)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="int">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">An Integer value</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="float">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">A floating point number value
+                    (true/false)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">A string of characters</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="datetime">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">A datetime string according to ISO
+                    8601</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <!--
+        <xs:simpleType name="Tdisplay">
+        <xs:restriction base="xs:string">
+        <xs:enumeration value="static"/>
+        <xs:enumeration value="dynamic"/>
+        <xs:enumeration value="none"/>
+        </xs:restriction>
+        </xs:simpleType>
+
+        <xs:simpleType name="TenumSelection">
+        <xs:restriction base="xs:string">
+        <xs:enumeration value="selectOne"/>
+        <xs:enumeration value="selectMany"/>
+        </xs:restriction>
+        </xs:simpleType>
+
+        <xs:simpleType name="Toperator">
+        <xs:restriction base="xs:string">
+        <xs:enumeration value="eq"/>
+        <xs:enumeration value="not"/>
+        </xs:restriction>
+        </xs:simpleType>
+    -->
+    <xs:simpleType name="TexecutableTypes">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> The 'TexecutableTypes' type contains all currently
+                supported kinds of executable server resources, which might have to be treated
+            differently in call generation. </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="javaclass"/>
+            <xs:enumeration value="binary"/>
+            <xs:enumeration value="perlScript"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:complexType name="Texample">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Texample contains an example input/parameter set. The description is mandatory. 
+                An example is set using the prop tag, the attributes points to the corresponding 
+                input/param/enumparam and text content the value. Each function can have more 
+                than one example.
+            </xs:documentation>
+        </xs:annotation>  
+        <xs:sequence>
+            <xs:element name="name" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Name of example. At least one name must be given.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="description" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Description of example.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="prop" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Defines an example value that binds to an input or (enum)param using attribute idref. 
+                        Values for input must be a base64 encoded string, values for (enum)param  are strings.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent >
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="idref" type="xs:string" use="required">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en">
+                                        Must be a valid reference to an id of the corresponding 
+                                        input/param/enumparam.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>                  
+                    </xs:simpleContent>                
+                </xs:complexType>
+            </xs:element>     
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- @TODO:  This is not used anymore, but we need this information for the
+    wizard. Delete LATER!
+    -->
+    <xs:simpleType name="TjsfElement">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> TjsfElement contain all usefull elements to create an
+            .autogenerated tool submission page. </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="selectOneRadio"/>
+            <xs:enumeration value="selectOneMenu"/>
+            <xs:enumeration value="selectManyMenu"/>
+            <xs:enumeration value="selectOneListbox"/>
+            <xs:enumeration value="selectManyListbox"/>
+            <xs:enumeration value="selectManyCheckbox"/>
+            <xs:enumeration value="selectBooleanCheckbox"/>
+            <xs:enumeration value="inputText"/>
+            <xs:enumeration value="inputTextarea"/>
+            <xs:enumeration value="inputHidden"/>
+            <xs:enumeration value="inputSecret"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    <xs:complexType name="Twebstart">
+        <xs:annotation>
+            <xs:documentation>Twebstart is a special view for webstart application. In addition to all
+                elements a normal "view" contains it provides some required elements to describe the webstart
+                application. These "informations" are used by BiBiServWebstartServlet to generate a  suitable
+                jnlp file.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="title" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'title' element is used as user-visible screen name(s) 
+                        for this webstart element, possibly localized to a specific language by using the "lang" 
+                        attribute. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="introductoryText" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'introductoryText' sub-element(s) of a
+                        webstart element contains an introducton to the webstart page (of
+                        course possibly localized to a specific language by using the "lang"
+                        attribute) and is placed BEFORE the auto-generated webstart link. 
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="minihtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="customContent" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">The 'customContent' sub-element(s) of a webstart
+                        element contain marked-up manual quality user information text, possibly
+                        localized to a specific language by using the "lang" attribute. This will
+                        generally appear AFTTER the auto-generated webstart link.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="minihtml:Flow">
+                            <xs:attribute ref="xml:lang" use="optional" default="en">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en"> The 'lang' attribute defines
+                                        the natural language name of the content of this element.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="jnlp:jnlp"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required">
+            <xs:annotation>
+                <xs:documentation> Manuals REQUIRE an ID to allow direct navigation. Convention for
+                    the id is: ToolID+ "_" + "manual" </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    
+</xs:schema>

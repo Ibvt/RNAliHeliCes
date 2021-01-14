@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted [year] [name of copyright owner]"
+
+Contributor(s):
+
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+
+       <!-- Backing Bean for the download page -->
+       <bean id="toolBean_rnaalishapes_download" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.DownloadList" scope="session"  lazy-init="true">
+            <property name="messages" ref="messages"/>
+            <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+       </bean>
+       
+       <!-- Backing Bean for the reset page -->
+       <bean id="toolBean_rnaalishapes_reset" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_reset" scope="session"  lazy-init="true"/>
+
+       <!-- Backing Bean for tooldescription -->
+       <bean id="toolBean_rnaalishapes_tooldescription" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.Tooldescription"  lazy-init="true"/>
+
+        <!-- Backing Bean for parameterdependecies -->
+       <bean id="toolBean_rnaalishapes_parameterdependencies" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.ParameterDependencies" lazy-init="true">
+           <property name="tooldesription" ref="toolBean_rnaalishapes_tooldescription"/>
+       </bean>
+
+       <!-- Backing Bean for the webservice page -->
+       <bean id="toolBean_rnaalishapes_webservice" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.WebServiceMethod"  lazy-init="true">
+           <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+       </bean>
+
+   <!-- Backing Beans for the submission page -->
+
+    
+    <bean id="rnaalishapes_input_rna_sequence_alignment" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_input_rna_sequence_alignment" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+    
+    
+    <bean id="rnaalishapes_input_rna_secondary_structure" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_input_rna_secondary_structure" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+    
+    
+
+    
+    <bean id="rnaalishapes_function" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function" scope="session"/>
+    
+    
+    
+    
+
+    <bean id="rnaalishapes_function_mfe_param" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_mfe_param" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+
+    <bean id="rnaalishapes_function_mfe_result" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_mfe_result" scope="session">
+        <property name="execfunction" ref="rnaalishapes_function_mfe_execfunction"/>
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+    
+    <bean id="rnaalishapes_function_mfe_resulthandler" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_mfe_resulthandler" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+
+
+    <bean id="rnaalishapes_function_mfe_threadworker" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_mfe_threadworker" lazy-init="true"/>
+
+    <bean id="rnaalishapes_function_mfe_execfunction" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_mfe" scope="session">
+        <property name="threadworker" ref="rnaalishapes_function_mfe_threadworker"/> 
+    </bean>
+
+    <bean id="rnaalishapes_function_mfe_controller" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_mfe_controller" scope="session">
+        <property name="function" ref="rnaalishapes_function"/>
+        <property name="input" ref="rnaalishapes_input_rna_sequence_alignment"/>
+
+        <property name="param" ref="rnaalishapes_function_mfe_param"/>
+        <property name="result" ref="rnaalishapes_function_mfe_result"/>
+        <property name="resulthandler" ref="rnaalishapes_function_mfe_resulthandler"/>
+        <property name="execfunction" ref="rnaalishapes_function_mfe_execfunction"/>
+        <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+        <property name="messages" ref="messages"/>              <!-- defined in bibimainapp context -->
+        <property name="statsLogger" ref="statsLogger"/>        <!-- defined in bibimainapp context -->
+        <property name="parameterDependencies" ref="toolBean_rnaalishapes_parameterdependencies"/>
+       
+    </bean>
+    
+    
+    
+
+    <bean id="rnaalishapes_function_subopt_param" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_subopt_param" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+
+    <bean id="rnaalishapes_function_subopt_result" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_subopt_result" scope="session">
+        <property name="execfunction" ref="rnaalishapes_function_subopt_execfunction"/>
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+    
+    <bean id="rnaalishapes_function_subopt_resulthandler" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_subopt_resulthandler" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+
+
+    <bean id="rnaalishapes_function_subopt_threadworker" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_subopt_threadworker" lazy-init="true"/>
+
+    <bean id="rnaalishapes_function_subopt_execfunction" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_subopt" scope="session">
+        <property name="threadworker" ref="rnaalishapes_function_subopt_threadworker"/> 
+    </bean>
+
+    <bean id="rnaalishapes_function_subopt_controller" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_subopt_controller" scope="session">
+        <property name="function" ref="rnaalishapes_function"/>
+        <property name="input" ref="rnaalishapes_input_rna_sequence_alignment"/>
+
+        <property name="param" ref="rnaalishapes_function_subopt_param"/>
+        <property name="result" ref="rnaalishapes_function_subopt_result"/>
+        <property name="resulthandler" ref="rnaalishapes_function_subopt_resulthandler"/>
+        <property name="execfunction" ref="rnaalishapes_function_subopt_execfunction"/>
+        <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+        <property name="messages" ref="messages"/>              <!-- defined in bibimainapp context -->
+        <property name="statsLogger" ref="statsLogger"/>        <!-- defined in bibimainapp context -->
+        <property name="parameterDependencies" ref="toolBean_rnaalishapes_parameterdependencies"/>
+       
+    </bean>
+    
+    
+    
+
+    <bean id="rnaalishapes_function_shapes_param" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_shapes_param" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+
+    <bean id="rnaalishapes_function_shapes_result" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_shapes_result" scope="session">
+        <property name="execfunction" ref="rnaalishapes_function_shapes_execfunction"/>
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+    
+    <bean id="rnaalishapes_function_shapes_resulthandler" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_shapes_resulthandler" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+
+
+    <bean id="rnaalishapes_function_shapes_threadworker" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_shapes_threadworker" lazy-init="true"/>
+
+    <bean id="rnaalishapes_function_shapes_execfunction" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_shapes" scope="session">
+        <property name="threadworker" ref="rnaalishapes_function_shapes_threadworker"/> 
+    </bean>
+
+    <bean id="rnaalishapes_function_shapes_controller" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_shapes_controller" scope="session">
+        <property name="function" ref="rnaalishapes_function"/>
+        <property name="input" ref="rnaalishapes_input_rna_sequence_alignment"/>
+
+        <property name="param" ref="rnaalishapes_function_shapes_param"/>
+        <property name="result" ref="rnaalishapes_function_shapes_result"/>
+        <property name="resulthandler" ref="rnaalishapes_function_shapes_resulthandler"/>
+        <property name="execfunction" ref="rnaalishapes_function_shapes_execfunction"/>
+        <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+        <property name="messages" ref="messages"/>              <!-- defined in bibimainapp context -->
+        <property name="statsLogger" ref="statsLogger"/>        <!-- defined in bibimainapp context -->
+        <property name="parameterDependencies" ref="toolBean_rnaalishapes_parameterdependencies"/>
+       
+    </bean>
+    
+    
+    
+
+    <bean id="rnaalishapes_function_probs_param" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_probs_param" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+
+    <bean id="rnaalishapes_function_probs_result" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_probs_result" scope="session">
+        <property name="execfunction" ref="rnaalishapes_function_probs_execfunction"/>
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+    
+    <bean id="rnaalishapes_function_probs_resulthandler" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_probs_resulthandler" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+
+
+    <bean id="rnaalishapes_function_probs_threadworker" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_probs_threadworker" lazy-init="true"/>
+
+    <bean id="rnaalishapes_function_probs_execfunction" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_probs" scope="session">
+        <property name="threadworker" ref="rnaalishapes_function_probs_threadworker"/> 
+    </bean>
+
+    <bean id="rnaalishapes_function_probs_controller" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_probs_controller" scope="session">
+        <property name="function" ref="rnaalishapes_function"/>
+        <property name="input" ref="rnaalishapes_input_rna_sequence_alignment"/>
+
+        <property name="param" ref="rnaalishapes_function_probs_param"/>
+        <property name="result" ref="rnaalishapes_function_probs_result"/>
+        <property name="resulthandler" ref="rnaalishapes_function_probs_resulthandler"/>
+        <property name="execfunction" ref="rnaalishapes_function_probs_execfunction"/>
+        <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+        <property name="messages" ref="messages"/>              <!-- defined in bibimainapp context -->
+        <property name="statsLogger" ref="statsLogger"/>        <!-- defined in bibimainapp context -->
+        <property name="parameterDependencies" ref="toolBean_rnaalishapes_parameterdependencies"/>
+       
+    </bean>
+    
+    
+    
+
+    <bean id="rnaalishapes_function_sample_param" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_sample_param" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+
+    <bean id="rnaalishapes_function_sample_result" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_sample_result" scope="session">
+        <property name="execfunction" ref="rnaalishapes_function_sample_execfunction"/>
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+    
+    <bean id="rnaalishapes_function_sample_resulthandler" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_sample_resulthandler" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+
+
+    <bean id="rnaalishapes_function_sample_threadworker" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_sample_threadworker" lazy-init="true"/>
+
+    <bean id="rnaalishapes_function_sample_execfunction" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_sample" scope="session">
+        <property name="threadworker" ref="rnaalishapes_function_sample_threadworker"/> 
+    </bean>
+
+    <bean id="rnaalishapes_function_sample_controller" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_sample_controller" scope="session">
+        <property name="function" ref="rnaalishapes_function"/>
+        <property name="input" ref="rnaalishapes_input_rna_sequence_alignment"/>
+
+        <property name="param" ref="rnaalishapes_function_sample_param"/>
+        <property name="result" ref="rnaalishapes_function_sample_result"/>
+        <property name="resulthandler" ref="rnaalishapes_function_sample_resulthandler"/>
+        <property name="execfunction" ref="rnaalishapes_function_sample_execfunction"/>
+        <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+        <property name="messages" ref="messages"/>              <!-- defined in bibimainapp context -->
+        <property name="statsLogger" ref="statsLogger"/>        <!-- defined in bibimainapp context -->
+        <property name="parameterDependencies" ref="toolBean_rnaalishapes_parameterdependencies"/>
+       
+    </bean>
+    
+    
+    
+
+    <bean id="rnaalishapes_function_eval_param" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_eval_param" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+
+    <bean id="rnaalishapes_function_eval_result" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_eval_result" scope="session">
+        <property name="execfunction" ref="rnaalishapes_function_eval_execfunction"/>
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+    
+    <bean id="rnaalishapes_function_eval_resulthandler" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_eval_resulthandler" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+
+
+    <bean id="rnaalishapes_function_eval_threadworker" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_eval_threadworker" lazy-init="true"/>
+
+    <bean id="rnaalishapes_function_eval_execfunction" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_eval" scope="session">
+        <property name="threadworker" ref="rnaalishapes_function_eval_threadworker"/> 
+    </bean>
+
+    <bean id="rnaalishapes_function_eval_controller" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_eval_controller" scope="session">
+        <property name="function" ref="rnaalishapes_function"/>
+        <property name="input0" ref="rnaalishapes_input_rna_sequence_alignment"/>
+<property name="input1" ref="rnaalishapes_input_rna_secondary_structure"/>
+
+        <property name="param" ref="rnaalishapes_function_eval_param"/>
+        <property name="result" ref="rnaalishapes_function_eval_result"/>
+        <property name="resulthandler" ref="rnaalishapes_function_eval_resulthandler"/>
+        <property name="execfunction" ref="rnaalishapes_function_eval_execfunction"/>
+        <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+        <property name="messages" ref="messages"/>              <!-- defined in bibimainapp context -->
+        <property name="statsLogger" ref="statsLogger"/>        <!-- defined in bibimainapp context -->
+        <property name="parameterDependencies" ref="toolBean_rnaalishapes_parameterdependencies"/>
+       
+    </bean>
+    
+    
+    
+
+    <bean id="rnaalishapes_function_convert_param" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_convert_param" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+
+    <bean id="rnaalishapes_function_convert_result" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_convert_result" scope="session">
+        <property name="execfunction" ref="rnaalishapes_function_convert_execfunction"/>
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+    
+    <bean id="rnaalishapes_function_convert_resulthandler" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_convert_resulthandler" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+
+
+    <bean id="rnaalishapes_function_convert_threadworker" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_convert_threadworker" lazy-init="true"/>
+
+    <bean id="rnaalishapes_function_convert_execfunction" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_convert" scope="session">
+        <property name="threadworker" ref="rnaalishapes_function_convert_threadworker"/> 
+    </bean>
+
+    <bean id="rnaalishapes_function_convert_controller" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_convert_controller" scope="session">
+        <property name="function" ref="rnaalishapes_function"/>
+        <property name="input" ref="rnaalishapes_input_rna_secondary_structure"/>
+
+        <property name="param" ref="rnaalishapes_function_convert_param"/>
+        <property name="result" ref="rnaalishapes_function_convert_result"/>
+        <property name="resulthandler" ref="rnaalishapes_function_convert_resulthandler"/>
+        <property name="execfunction" ref="rnaalishapes_function_convert_execfunction"/>
+        <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+        <property name="messages" ref="messages"/>              <!-- defined in bibimainapp context -->
+        <property name="statsLogger" ref="statsLogger"/>        <!-- defined in bibimainapp context -->
+        <property name="parameterDependencies" ref="toolBean_rnaalishapes_parameterdependencies"/>
+       
+    </bean>
+    
+    
+    
+
+    <bean id="rnaalishapes_function_outside_param" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_outside_param" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+
+    <bean id="rnaalishapes_function_outside_result" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_outside_result" scope="session">
+        <property name="execfunction" ref="rnaalishapes_function_outside_execfunction"/>
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+    </bean>
+    
+    <bean id="rnaalishapes_function_outside_resulthandler" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_outside_resulthandler" scope="session">
+        <property name="messages" ref="messages"/> <!-- defined in bibimainapp context -->
+        <property name="awsbean" ref="awsBean"/>   <!-- defined in bibimainapp context -->
+    </bean>
+
+
+    <bean id="rnaalishapes_function_outside_threadworker" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_outside_threadworker" lazy-init="true"/>
+
+    <bean id="rnaalishapes_function_outside_execfunction" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.rnaalishapes_function_outside" scope="session">
+        <property name="threadworker" ref="rnaalishapes_function_outside_threadworker"/> 
+    </bean>
+
+    <bean id="rnaalishapes_function_outside_controller" class="de.unibi.techfak.bibiserv.tools.rnaalishapes.web.rnaalishapes_function_outside_controller" scope="session">
+        <property name="function" ref="rnaalishapes_function"/>
+        <property name="input" ref="rnaalishapes_input_rna_sequence_alignment"/>
+
+        <property name="param" ref="rnaalishapes_function_outside_param"/>
+        <property name="result" ref="rnaalishapes_function_outside_result"/>
+        <property name="resulthandler" ref="rnaalishapes_function_outside_resulthandler"/>
+        <property name="execfunction" ref="rnaalishapes_function_outside_execfunction"/>
+        <property name="tooldescription" ref="toolBean_rnaalishapes_tooldescription"/>
+        <property name="messages" ref="messages"/>              <!-- defined in bibimainapp context -->
+        <property name="statsLogger" ref="statsLogger"/>        <!-- defined in bibimainapp context -->
+        <property name="parameterDependencies" ref="toolBean_rnaalishapes_parameterdependencies"/>
+       
+    </bean>
+    
+
+</beans>

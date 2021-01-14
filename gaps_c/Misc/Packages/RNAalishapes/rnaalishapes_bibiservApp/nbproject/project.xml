@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1" >
+    <type>org.netbeans.modules.ant.freeform</type>
+    <configuration>
+        <general-data xmlns="http://www.netbeans.org/ns/freeform-project/1">
+            <name>rnaalishapes</name>
+        </general-data>
+        <general-data   xmlns="http://www.netbeans.org/ns/freeform-project/2">
+            <!-- Do not use Project Properties customizer when editing this file manually. -->
+            <name>rnaalishapes</name>
+            <properties/>
+            <folders>
+                <source-folder>
+                    <label>src</label>
+                    <type>java</type>
+                    <location>src</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
+                <source-folder>
+                    <label>pages</label>
+                    <type>java</type>
+                    <location>pages</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
+                <source-folder>
+                    <label>config</label>
+                    <type>java</type>
+                    <location>config</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
+                <source-folder>
+                    <label>rnaalishapes</label>
+                    <location>.</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
+            </folders>
+            <ide-actions>
+                <action name="build">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>build</target>
+                </action>
+                <action name="clean">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>clean</target>
+                </action>
+                <action name="run">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>run</target>
+                </action>
+                <action name="rebuild">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>clean</target>
+                    <target>build</target>
+                </action>
+            </ide-actions>
+            <view>
+                <items>
+                    <source-folder style="packages">
+                        <label>src</label>
+                        <location>src</location>
+                    </source-folder>
+                     <source-folder style="packages">
+                        <label>pages</label>
+                        <location>pages</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>config</label>
+                        <location>config</location>
+                    </source-folder>              
+                    <source-file>
+                        <location>build.xml</location>
+                    </source-file>
+                </items>
+                <context-menu>
+                    <ide-action name="build"/>
+                    <ide-action name="rebuild"/>
+                    <ide-action name="clean"/>
+                    <ide-action name="run"/>
+                </context-menu>
+            </view>
+            <subprojects/>
+        </general-data>
+        <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/1">
+            <compilation-unit>
+                <package-root>src</package-root>
+                <classpath mode="compile">WEB-INF/lib/bibiwss2.0B2.jar:WEB-INF/lib/Validator_20090217.jar:WEB-INF/lib/Validator_impl_20090217.jar:WEB-INF/lib/Converter_20090423.jar:WEB-INF/lib/Converter_impl_20090423.jar:WEB-INF/lib/sequenceML.jar:WEB-INF/lib/rnastructML.jar:WEB-INF/lib/JAXBO.jar</classpath>
+                
+                <!-- <source-level>1.6</source-level> -->
+            </compilation-unit>
+        </java-data>
+    </configuration>
+</project>

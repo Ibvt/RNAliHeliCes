@@ -1,0 +1,8 @@
+File extension explanation:
+
+seq	sequence
+ss	secondary structures
+sss     sequence + secondary structures                              
+fa	fasta
+fas	fasta + a secondary structure
+faa	fasta + two secondary structures

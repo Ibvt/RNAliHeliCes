@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2011-2013 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted 2011-2013 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+
+Contributor(s): Thomas Gatter - tgatter(at)techfak.uni-bielefeld.de
+                Jan Krueger - jkrueger(at)cebitec.uni-bielefeld.de
+
+-->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bibiserv.cebitec.uni-bielefeld.de/facelets"
+                template="/WEB-INF/templates/toolresult.xhtml">
+   
+    <ui:define name="title">
+            BiBiServ2 - #{messages.property('rnaalishapes_name')}[rnaalishapes_function_probs] - Result
+    </ui:define>
+        
+       
+    <ui:define name="content">
+         <h:outputText escape="false" value="#{rnaalishapes_function_probs_result.visualization}"/>
+    </ui:define>
+        
+</ui:composition>
+
+

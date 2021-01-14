@@ -1,0 +1,922 @@
+modify Extensions/evalfold.h function names:
+    basepair -> basepair_eval
+    regionpair -> regionpair_eval
+    unpaired -> unpaired_eval
+replace them in eval_microstate.cc[hh] ==> 10+0+17[0+0+0]
+  
+
+
+
+std::cerr << "===="<<t_0_i<<"===="<<t_0_j<<"====================" << std::endl;
+  std::cerr << "--hairpin_table--" << std::endl;
+  std::cerr << hairpin_table.get(t_0_i, t_0_j) << std::endl;
+  std::cerr << "--iloop_table--" << std::endl;
+  std::cerr << iloop_table.get(t_0_i, t_0_j) << std::endl;
+  std::cerr << "--leftB_table--" << std::endl;
+  std::cerr << leftB_table.get(t_0_i, t_0_j) << std::endl;
+  std::cerr << "--rightB_table--" << std::endl;
+  std::cerr << rightB_table.get(t_0_i, t_0_j) << std::endl;
+  std::cerr << "--stack_table--" << std::endl;
+  std::cerr << stack_table.get(t_0_i, t_0_j) << std::endl;  
+
+
+  std::cerr << "===="<<t_0_i<<"===="<<t_0_j<<"====================" << std::endl;
+  std::cerr << closed_table.get(t_0_i, t_0_j) << std::endl;
+  std::cerr << "----" << std::endl;
+  std::cerr << answers << std::endl;
+
+
+
+
+////// local minima with lonely pair //////
+//if (hl_energy(a_1)<=0) {
+TUSubsequence innerstem = REGION(t_0_seq, (t_0_i + 1), (t_0_j - 1));
+if ((t_0_j - t_0_i) >= 7) {
+  if ((basepairing(t_0_seq,t_0_i+1, t_0_j-1)) && ((hl_energy(innerstem)+sr_energy(a_1,a_1))>hl_energy(a_1))) {
+                ret_0 = hl(a_0, a_1, a_2);
+  }
+  else
+  {
+    empty( ret_0);
+  }
+}
+else  // (t_0_j - t_0_i) between 5 and 7
+{
+  ret_0 = hl(a_0, a_1, a_2);
+  //empty( ret_0);
+}
+// TODO: think if it is to check the 
+//}
+//else
+//{
+//  empty( ret_0);
+//}
+
+
+
+/////////////////////////////////////////////////////
+////////////////// in ::nt_iloop /////////////////////////
+
+	      //%%
+	      bool partialPairing = true;
+	      if ((t_0_k_0 - (t_0_i + 1)) == ((t_0_j - 1) - t_0_k_1)) {
+		partialPairing = regionpairing(t_0_seq, (t_0_i + 1), (t_0_j - 1), t_0_k_0 - t_0_i);
+	      } else if ((t_0_k_0 - (t_0_i + 1)) > ((t_0_j - 1) - t_0_k_1)) {
+		partialPairing = regionpairing(t_0_seq, (t_0_i + 1), (t_0_j - 1), (t_0_j - t_0_k_1)) || \
+		                 regionpairing(t_0_seq, (t_0_k_0 - ((t_0_j - 1) - t_0_k_1)), (t_0_j - 1), (t_0_j - t_0_k_1));  // 101-99
+				 // example, t_i=1, t_k0=5, t_k1=99, t_j=101  => (t_0_k_0 - ((t_0_j - 1) - t_0_k_1)) = (5-((101-1)-99)) = 4
+				 // the second item (t_0_k_0 - ((t_0_j - 1) - t_0_k_1)) above should be 4, 4<-->100 and 5<-->99 (seq,4,100,2)
+				 
+	      } else if ((t_0_k_0 - (t_0_i + 1)) < ((t_0_j - 1) - t_0_k_1)) {
+		partialPairing = regionpairing(t_0_seq, (t_0_i + 1), (t_0_j - 1), (t_0_k_0 - t_0_i)) || \
+		                 regionpairing(t_0_seq, (t_0_i + 1), (t_0_k_1 + (t_0_k_0 - (t_0_i + 1))), (t_0_k_0 - t_0_i));
+				 // example i=1,j=101, k0=3, k1=80 => (t_0_k_1 + (t_0_k_0 - (t_0_i + 1))) = 80+(3-(1+1))=81 => (seq,2,81,2)
+	      }
+	      
+// + 64:........(((....(((((.((((...)))).))))))))...............  25b,27i,27
+// -   :........((.....(((((.((((...)))).))))).))...............  25i,27i,27
+	      if (!partialPairing) {
+                ...
+              } 
+
+
+	      //%%
+	      bool regionPairing = true;
+	      if ((t_0_k_0 - (t_0_i + 1)) == ((t_0_j - 1) - t_0_k_1)) {
+
+		for (unsigned int idx_i_k0 = (t_0_i + 1), idx_j_k1 = (t_0_j - 1); idx_i_k0 <= t_0_k_0; idx_i_k0++, idx_j_k1--) {
+		  regionPairing = regionPairing && (basepairing(t_0_seq, idx_i_k0, idx_j_k1));
+		}
+		//if (regionPairing) {
+		//  // shouldn't push anything into answers, since the bases are all pairing, it should not be a internal loop
+		//  continue;
+		//}
+	      } else {
+		regionPairing = false;
+	      }
+
+
+	      
+	      //%%
+	      if ((t_0_k_0 - (t_0_i + 1)) == ((t_0_j - 1) - t_0_k_1)) {
+		bool regionPairing = true;
+		for (unsigned int idx_i_k0 = (t_0_i + 1), idx_j_k1 = (t_0_j - 1); idx_i_k0 <= t_0_k_0; idx_i_k0++, idx_j_k1--) {
+		  regionPairing = regionPairing && (basepairing(t_0_seq, idx_i_k0, idx_j_k1));
+		}
+		if (regionPairing) {
+		  // shouldn't push anything into answers, since the bases are all pairing, it should not be a internal loop
+		  continue;
+		}
+	      } else {
+                ...
+              }
+
+
+in gap and cc
+append(neighborHelixPair, ans.first.neighborHelixI);
+
+====
+
+  std::multimap<std::pair<Rope,String>,std::pair<Rope,String> > neighborHelixPair;             // added
+
+void printNeighborList(std::ostream &o) {
+  std::multimap<std::pair<Rope,String>,std::pair<Rope,String> >::iterator it;  
+  o << neighborHelixPair.size() << '\n';
+  for (it=neighborHelixPair.begin() ; it != neighborHelixPair.end(); it++ ) {
+    o << (*it).first.first << "(" << (*it).first.second << ") => " << (*it).second.first << "(" << (*it).second.second << ")" << '\n';
+  } 
+}
+====
+
+  obj.printNeighborList(std::cout);
+
+
+////////////////////////////////////////////////
+in gap and cc
+append(neighborHelixPair, ans.first.neighborHelixI);
+
+====
+  // http://www.sgi.com/tech/stl/Multimap.html
+//http://stackoverflow.com/questions/7792682/skip-same-multimap-values-when-iterating
+struct ltstr
+{
+  bool operator()(const Rope& r1, const Rope& r2) const
+  {
+    return r1.first;
+  }
+};
+
+
+  std::multimap<Rope, Rope, ltstr> neighborHelixPair;             // added
+ // std::multimap<Rope, Rope>::iterator neighborHelixPairIt;  // added
+  
+
+void printNeighborList(std::ostream &o) {
+  std::multimap<Rope,Rope>::iterator it;  
+  o << neighborHelixPair.size() << '\n';
+  for (it=neighborHelixPair.begin() ; it != neighborHelixPair.end(); it++ ) {
+    o << (*it).first << " => " << (*it).second << '\n';
+  } 
+}
+====
+
+  obj.printNeighborList(std::cout);
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////// generate Hiki related files ////////////////////////
+
+change #include <rtlib/generic_opts.hh> to #include "./generic_opts.hh"
+in hishapem_pp_2.hh and hishapem_pp_2.cc
+
+commented //#include "rtlib/generic_opts.hh" in hishapem_pp_2_main.cc 
+
+
+=========
+    std::vector<std::string> tokens;      
+    const std::string delimiters = ",";   
+    // Skip delimiters at beginning.
+    std::string::size_type lastPos = opts.matchStr.find_first_not_of(delimiters, 0);
+    // Find first "non-delimiter".
+    std::string::size_type pos     = opts.matchStr.find_first_of(delimiters, lastPos);
+    while (std::string::npos != pos || std::string::npos != lastPos)
+    {
+        // Found a token, add it to the vector.
+        tokens.push_back(opts.matchStr.substr(lastPos, pos - lastPos));
+        // Skip delimiters.  Note the "not_of"
+        lastPos = opts.matchStr.find_first_not_of(delimiters, pos);
+        // Find next "non-delimiter"
+        pos = opts.matchStr.find_first_of(delimiters, lastPos);
+    }
+
+    
+    std::vector<std::string>::iterator it;
+    for ( it=tokens.begin() ; it < tokens.end(); it++ ) {
+      std::string tmp = *it;
+      if (tmp[tmp.length()-1] == 'm') {
+        tmp.erase(tmp.length()-1);
+        _match_tokens_m.push_back(tmp);
+      } else if (tmp[tmp.length()-1] == 'i') {
+        tmp.erase(tmp.length()-1);
+        _match_tokens_i.push_back(tmp);
+      } else if (tmp[tmp.length()-1] == 'b') {
+        tmp.erase(tmp.length()-1);
+        _match_tokens_b.push_back(tmp);
+      } else {
+        _match_tokens_h.push_back(tmp);
+      }
+    }
+}
+
+  private:
+    std::vector<std::string> _match_tokens_h, _match_tokens_m, _match_tokens_i, _match_tokens_b;
+=========================================================================
+
+      if (basepairing(t_0_seq, t_0_i, t_0_j))
+      {
+      ==>
+  if (((t_0_j - t_0_i) >= 7))
+    {
+      if (pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h))  // added
+      {                                                               // added
+      
+==> in hishapem_mfe_pp.cc
+  ::nt_multiloop    1 (from hairpin) + 1 time in it) = 2 times
+      if (pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m))  // added
+      {                                                               // added
+
+
+======================================================================================
+I set up a mercurial repository for RNAHelices. You should be able to clone it using:
+
+    hg clone ssh://whiskey-sour.biologie.uni-freiburg.de/srv/repos/hg/RNAHeliCes
+
+    cp -r RNAHeliCes-1.0.17/* RNAHeliCes/
+
+    hg add *
+    hg commit -m '...'
+
+To update the files on the server you then have to use:
+
+    hg push
+
+If you want to look for changes use.
+
+    hg incoming
+
+and if you want to get the changes to your local copy:
+
+    hg pull
+
+
+
+
+jhuang@swimming-pool:~/RNAHeliCes-distribution$ cp -r RNAHeliCes-1.0.17/* RNAHeliCes/
+
+========================= update the gapc ====================================
+1. copy config/example_local_config.mf to ../config.mf
+2. PREFIX ?= $(HOME)/gapc
+3. make
+4. make install
+
+
+== add code in algebra.hh (line 64 - 79 ) ============================================================================
+template <typename Iterator>
+inline
+typename std::iterator_traits<Iterator>::value_type
+nonnegativeminimum(std::pair<Iterator, Iterator> &p)
+{
+  typedef typename std::iterator_traits< Iterator >::value_type value_t;
+  value_t m = minimum(p.first, p.second);
+  if (m < 0)
+  {
+     return m;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
+
+template <typename Iterator>
+inline
+typename std::iterator_traits<Iterator>::value_type
+nonnegativeminimum(std::pair<Iterator, Iterator> &p)
+{
+  typedef typename std::iterator_traits< Iterator >::value_type value_t;
+  value_t m = minimum(p.first, p.second);
+  if (m.energy < 0)
+  {
+     return m;
+  }
+  else
+  {
+     m.energy = 0;
+     return m;
+  }
+  //return m;
+}
+==============================================================================
+
+
+
+--
+/home/jhuang/gapc/bin/gapc hishapes.gap -i p_func -o p_func.cc -t
+/home/jhuang/gapc/bin/gapc hishapes.gap -i p_func -o p_func_04.cc -t --turner 2004
+for p_func.cc only needs step 1.
+
+//void init(const gapc::Opts &opts)
+void init(const std::vector<std::pair<const char *, unsigned> > &inp)
+{
+//const std::vector<std::pair<const char *, unsigned> > &inp = opts.inputs;
+
+
+replace:  rm -rf  ~/RNAHeliCes-distribution/src/rtlib  
+          cp -r ~/gapc/include/rtlib ~/RNAHeliCes-distribution/src/
+                                 -- delete generic_main.cc from the rtlib directory
+replace:  rm -rf ~/RNAHeliCes-distribution/src/librna1999
+          cp -r ~/gapc/share/gapc/librna1999    ~/RNAHeliCes-distribution/src/
+replace:  rm -rf ~/RNAHeliCes-distribution/src/librna2004
+          cp -r ~/gapc/share/gapc/librna2004    ~/RNAHeliCes-distribution/src/
+               cp ~/RNAHeliCes-distribution/RNAHeliCes-1.0.17/src/librna1999/Makefile.in ~/RNAHeliCes-distribution/src/librna1999/ 
+               cp ~/RNAHeliCes-distribution/RNAHeliCes-1.0.17/src/librna1999/Makefile.am ~/RNAHeliCes-distribution/src/librna1999/ 
+               cp ~/gapc/include/librna/rnalib.h ~/RNAHeliCes-distribution/src/librna1999/ 
+               cp ~/gapc/share/gapc/librna/rnalib.c ~/RNAHeliCes-distribution/src/librna1999/ 
+               cp ~/RNAHeliCes-distribution/RNAHeliCes-1.0.17/src/librna2004/Makefile.in ~/RNAHeliCes-distribution/src/librna2004/ 
+               cp ~/RNAHeliCes-distribution/RNAHeliCes-1.0.17/src/librna2004/Makefile.am ~/RNAHeliCes-distribution/src/librna2004/ 
+               cp ~/gapc/include/librna/rnalib.h ~/RNAHeliCes-distribution/src/librna2004/ 
+               cp ~/gapc/share/gapc/librna/rnalib.c ~/RNAHeliCes-distribution/src/librna2004/ 
+               cp ~/RNAHeliCes-distribution/RNAHeliCes-1.0.17/src/rtlib/Makefile.in ~/RNAHeliCes-distribution/src/rtlib/ 
+               cp ~/RNAHeliCes-distribution/RNAHeliCes-1.0.17/src/rtlib/Makefile.am ~/RNAHeliCes-distribution/src/rtlib/
+
+
+====================== for version 2012.05.07 ==============================
+rm -rf  rtlib 
+cp -r ~/gapc/include/rtlib ./
+rm -rf librna1999
+rm -rf librna2004
+cp -r ~/gapc/include/librna ./
+
+## test the 1st instance ##  gapc hishapes.gap -i hishapeb_mfe_pp -o my_first_instance.cc -t --kbacktrack --kbest --no-coopt-class
+copy algebra_add.hh, mfe_answer_v4.hh hishape_answer_v4.hh hishape_filter.hh
+================== instruction for production of ./main ====================
+============================================================================
+
+
+0, 
+// ##4## gapc hishapes.gap -i hishapeh_mfe_pp -o hishapeh_mfe_pp.cc -t --kbacktrack --kbest --no-coopt-class
+instance hishapeh_mfe_pp = canonicals_nonamb ( (hishape_h * mfe) * pretty ) ;
+// ##3## gapc hishapes.gap -i hishapehplus_mfe_pp -o hishapehplus_mfe_pp.cc -t --kbacktrack --kbest --no-coopt-class
+instance hishapehplus_mfe_pp = canonicals_nonamb ( (hishape_hplus * mfe) * pretty ) ;
+// ##2## gapc hishapes.gap -i hishapem_mfe_pp -o hishapem_mfe_pp.cc -t --kbacktrack --kbest --no-coopt-class
+instance hishapem_mfe_pp = canonicals_nonamb ( (hishape_m * mfe) * pretty ) ;
+// ##1## gapc hishapes.gap -i hishapeb_mfe_pp -o hishapeb_mfe_pp.cc -t --kbacktrack --kbest --no-coopt-class
+instance hishapeb_mfe_pp = canonicals_nonamb ( (hishape_b * mfe) * pretty ) ;
+
+
+// ##4## gapc hishapes.gap -i hishapeh_mfe_pfx -o hishapeh_mfe_pfx.cc -t --kbacktrack --kbest --no-coopt-class
+instance hishapeh_mfe_pfx = canonicals_nonamb ( hishape_h *(mfe%p_func)*pretty ); 
+// ##3## gapc hishapes.gap -i hishapehplus_mfe_pfx -o hishapehplus_mfe_pfx.cc -t --kbacktrack --kbest --no-coopt-class
+instance hishapehplus_mfe_pfx = canonicals_nonamb ( hishape_hplus *(mfe%p_func)*pretty ) ;
+// ##2## gapc hishapes.gap -i hishapem_mfe_pfx -o hishapem_mfe_pfx.cc -t --kbacktrack --kbest --no-coopt-class
+instance hishapem_mfe_pfx = canonicals_nonamb ( hishape_m *(mfe%p_func)*pretty ) ;
+// ##1## gapc hishapes.gap -i hishapeb_mfe_pfx -o hishapeb_mfe_pfx.cc -t --kbacktrack --kbest --no-coopt-class
+instance hishapeb_mfe_pfx = canonicals_nonamb ( hishape_b *(mfe%p_func)*pretty ) ;
+
+
+
+
+// ##4## gapc hishapes0.gap -i hishapeh_mfehV4_pp -o hishapeh_mfehV4_pp.cc -t --kbacktrack --kbest --no-coopt-class 
+instance hishapeh_mfehV4_pp = gra_microstate ( (hishapeh * mfehV4) * pretty ) ;
+// ##3## gapc hishapes0.gap -i hishapehplus_mfehplusV4_pp -o hishapehplus_mfehplusV4_pp.cc -t --kbacktrack --kbest --no-coopt-class
+instance hishapehplus_mfehplusV4_pp = gra_microstate ( (hishapehplus * mfehplusV4) * pretty ) ;
+// ##2## gapc hishapes0.gap -i hishapem_mfemV4_pp -o hishapem_mfemV4_pp.cc -t --kbacktrack --kbest --no-coopt-class 
+instance hishapem_mfemV4_pp = gra_microstate ( (hishapem * mfemV4) * pretty ) ;
+// ##1## gapc hishapes0.gap -i hishapeb_mfebV4_pp -o hishapeb_mfebV4_pp.cc -t --kbacktrack --kbest --no-coopt-class 
+instance hishapeb_mfebV4_pp = gra_microstate ( (hishapeb * mfebV4) * pretty ) ;
+
+
+
+
+
+
+
+
+
+
+
+.hh file
+1. change methode init(const &Opt) in .hh files ( 8 times )             Zeile 512
+//void init(const gapc::Opts &opts)
+void init(const std::vector<std::pair<const char *, unsigned> > &inp, uint32_t kbest, const std::string &matchStr, const bool exact, const int thresh=1000000000, const bool nosubset=false)
+{
+//const std::vector<std::pair<const char *, unsigned> > &inp = opts.inputs;
+...
+
+                                     //opts.k --> kbest
+hishapem_mfe_pp_insp_hash_h_m_pp::set_k(kbest);
+    std::vector<std::string> tokens;      
+    const std::string delimiters = ",";   
+    // Skip delimiters at beginning.
+    std::string::size_type lastPos = matchStr.find_first_not_of(delimiters, 0);
+    // Find first "non-delimiter".
+    std::string::size_type pos     = matchStr.find_first_of(delimiters, lastPos);
+    while (std::string::npos != pos || std::string::npos != lastPos)
+    {
+        // Found a token, add it to the vector.
+        tokens.push_back(matchStr.substr(lastPos, pos - lastPos));
+        // Skip delimiters.  Note the "not_of"
+        lastPos = matchStr.find_first_not_of(delimiters, pos);
+        // Find next "non-delimiter"
+        pos = matchStr.find_first_of(delimiters, lastPos);
+    }
+
+    
+    std::vector<std::string>::iterator it;
+    for ( it=tokens.begin() ; it < tokens.end(); it++ ) {
+      std::string tmp = *it;
+      if (tmp[tmp.length()-1] == 'm') {
+        tmp.erase(tmp.length()-1);
+        _match_tokens_m.push_back(tmp);
+      } else if (tmp[tmp.length()-1] == 'i') {
+        tmp.erase(tmp.length()-1);
+        _match_tokens_i.push_back(tmp);
+      } else if (tmp[tmp.length()-1] == 'b') {
+        tmp.erase(tmp.length()-1);
+        _match_tokens_b.push_back(tmp);
+      } else {
+        _match_tokens_h.push_back(tmp);
+      }
+    }
+    _exact = exact;
+    _thresh = thresh;
+    _nosubset = nosubset;
+}
+
+  private:
+    std::vector<std::string> _match_tokens_h, _match_tokens_m, _match_tokens_i, _match_tokens_b;
+    bool _exact;
+    int _thresh;
+    bool _nosubset;
+    ...
+
+
+
+== for pfx ==
+void init(const std::vector<std::pair<const char *, unsigned> > &inp, uint32_t kbest, const std::string &matchStr, const bool exact, const float thresh)
+//const std::vector<std::pair<const char *, unsigned> > &inp = opts.inputs;
+  ...
+                                        //opts.k --> kbest
+hishapeh_mfe_pfx_insp_hash_h_h_pfx::set_k(kbest);
+    std::vector<std::string> tokens;      
+    const std::string delimiters = ",";   
+    // Skip delimiters at beginning.
+    std::string::size_type lastPos = matchStr.find_first_not_of(delimiters, 0);
+    // Find first "non-delimiter".
+    std::string::size_type pos     = matchStr.find_first_of(delimiters, lastPos);
+    while (std::string::npos != pos || std::string::npos != lastPos)
+    {
+        // Found a token, add it to the vector.
+        tokens.push_back(matchStr.substr(lastPos, pos - lastPos));
+        // Skip delimiters.  Note the "not_of"
+        lastPos = matchStr.find_first_not_of(delimiters, pos);
+        // Find next "non-delimiter"
+        pos = matchStr.find_first_of(delimiters, lastPos);
+    }
+
+
+    std::vector<std::string>::iterator it;
+    for ( it=tokens.begin() ; it < tokens.end(); it++ ) {
+      std::string tmp = *it;
+      if (tmp[tmp.length()-1] == 'm') {
+        tmp.erase(tmp.length()-1);
+        _match_tokens_m.push_back(tmp);
+      } else if (tmp[tmp.length()-1] == 'i') {
+        tmp.erase(tmp.length()-1);
+        _match_tokens_i.push_back(tmp);
+      } else if (tmp[tmp.length()-1] == 'b') {
+        tmp.erase(tmp.length()-1);
+        _match_tokens_b.push_back(tmp);
+      } else {
+        _match_tokens_h.push_back(tmp);
+      }
+    }
+    _exact = exact;
+    _thresh = thresh;
+}
+
+  private:
+    std::vector<std::string> _match_tokens_h, _match_tokens_m, _match_tokens_i, _match_tokens_b;
+    bool _exact; 
+    float _thresh;
+    ...
+
+
+
+/* 在new version, 有可能这一些可以取消了
+2.
+                                                                                             in pp
+   in .cc files: hash_h ->    hash_h_h_pp,    hash_h_hplus_pp,    hash_h_m_pp,    hash_h_b_pp,   kinetic_hash_h_m_pp, hash_h_b_pp_for_lm  389     147 
+   in .hh files: hash_h ->    hash_h_h_pp,    hash_h_hplus_pp,    hash_h_m_pp,    hash_h_b_pp,   kinetic_hash_h_m_pp, hash_h_b_pp_for_lm   99      41
+                                                                                             in pfx    
+   in .cc files: hash_h ->    hash_h_h_pfx,    hash_h_hplus_pfx,    hash_h_m_pfx,    hash_h_b_pfx,            394   
+   in .hh files: hash_h ->    hash_h_h_pfx,    hash_h_hplus_pfx,    hash_h_m_pfx,    hash_h_b_pfx,            100       
+*/     
+
+
+3.  ## the first part of 3 is for rule 2 ##
+    ## add in .hh files
+
+add .hh file
+  ...
+  std::map<Rope, int> tabooRopes;             // added
+  std::map<Rope, int>::iterator tabooRopeIt;  // added
+};
+
+/* 在new version, 有可能这一些可以取消了, 如果用 --class-name arg       default: basename(output) ==> 不可以
+#ifndef NO_GAPC_TYPEDEFS
+namespace gapc {
+  typedef hishapeb_mfe_pp hishapeb_pp_cls;                                
+  typedef hishapeb_mfe_pp_hash_h_b_pp hishapeb_pp_ret;
+}
+#endif
+
+#ifndef NO_GAPC_TYPEDEFS
+namespace gapc {
+  typedef hishapeb_mfe_pfx hishapeb_pfx_cls;
+  typedef hishapeb_mfe_pfx_hash_h_b_p_pfx hishapeb_pfx_ret;
+}
+#endif
+
+
+hishapeb_pp_for_lm_cls
+hishapeb_pp_for_lm_res
+*/
+
+4_1. 
+in .cc file
+==> in hishapeh_mfe_pp.cc  1*2 = times
+search for '::nt_hairpin(' (8 records) and search for '::bt_nt_hairpin(' (8 records)        115   1704
+
+  if (((t_0_j - t_0_i) >= 7))
+    {
+      if (stackpairing(t_0_seq, t_0_i, t_0_j))
+      {
+  ==>
+  if (((t_0_j - t_0_i) >= 7))
+    {
+      if (pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h))  // added
+      {                                                               // added
+
+
+stackpairing(t_0_seq, t_0_i, t_0_j) is basic condition.
+==> in hishapem_mfe_pp.cc
+  ::nt_multiloop and ::bt_nt_multiloop   1*2 (from hairpin) + (4*2 times in it) = 10 times
+      if (((!_exact) && stackpairing(t_0_seq, t_0_i, t_0_j)) || ((_exact) && pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))  // added
+      {                                                                                                                                   // added
+
+==> in hishapeb_mfe_pp.cc          1*2 (from hairpin) + 4*2 (from multiloop) + 1*2 + 2*2 = 16 times
+  ::nt_iloop and ::bt_nt_iloop           (1*2 times)
+      if (((!_exact) && stackpairing(t_0_seq, t_0_i, t_0_j)) || ((_exact) && pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_i)))  // added
+      {                                                                                                                                   // added
+  ::nt_leftB and ::bt_nt_leftB, ::nt_rightB and ::bt_nt_rightB,  (2*2 times) 
+      if (((!_exact) && stackpairing(t_0_seq, t_0_i, t_0_j)) || ((_exact) && pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b)))  // added
+      {                                                                                                                                   // added
+
+
+#####################==RNAalihishapes== version 1
+using modified Extensions/alifold.hh
+
+==> in all cc files: search for ::nt_hairpin and ::bt_nt_hairpin ==> every file: 2 times
+      if (((!_matchStr.empty()) && fuzzy_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) || \
+          ((_matchStr.empty()) && (basepair(t_0_seq, t_0_i, t_0_j))))  // added
+      {                                                                // added 
+
+     
+
+#### FINAL VERSION #################==RNAalihishapes== NOTE that pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b) in current version is exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b)
+using modified Extensions/alifold.hh
+
+==> in all cc files: search for ::nt_hairpin and ::bt_nt_hairpin ==> every file: 2 times
+  if (((t_0_j - t_0_i) >= 5))
+    {
+      if (basepair(t_0_seq, t_0_i, t_0_j))
+      {
+  ==>
+  if (((t_0_j - t_0_i) >= 5))
+    {
+      if ( (_matchStr.empty() && basepair(t_0_seq, t_0_i, t_0_j)) || \
+           ((!_matchStr.empty() && !_exact) && fuzzy_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) || \
+           ((!_matchStr.empty() && _exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) )  // added
+      {                                                                                                           // added
+
+==stop, do not need to do following==
+2(i) records + 4(b) + 8(m)
+if (((!_exact) && basepair(t_0_seq, t_0_i, t_0_j)) || ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_i)))  // added_
+if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_i)))*/  // added_
+
+
+basepair(t_0_seq, t_0_i, t_0_j) is basic condition.
+==> in all cc files
+  ::nt_multiloop and ::bt_nt_multiloop    every file: 8 times
+      if (((!_exact) && basepair(t_0_seq, t_0_i, t_0_j)) || ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))  // added_
+      {                                                                                                                                     // added_
+
+==> in all cc files
+  ::nt_iloop and ::bt_nt_iloop    every file: 2 times
+      if (((!_exact) && basepair(t_0_seq, t_0_i, t_0_j)) || ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_i)))  // added_
+      {                                                                                                                                     // added_
+  ::nt_leftB and ::bt_nt_leftB, ::nt_rightB and ::bt_nt_rightB    every file: 4 times
+      if (((!_exact) && basepair(t_0_seq, t_0_i, t_0_j)) || ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b)))  // added_
+      {                                                                                                                                     // added_
+
+
+
+
+#####################==RNAalihishapes== NOTE that pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b) in current version is exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b)
+using modified Extensions/alifold.hh
+
+==> in all cc files: search for ::nt_hairpin and ::bt_nt_hairpin ==> every file: 2 times
+  if (((t_0_j - t_0_i) >= 5))
+    {
+      if (basepair(t_0_seq, t_0_i, t_0_j))
+      {
+  ==>
+  if (((t_0_j - t_0_i) >= 5))
+    {
+       if ( (_matchStr.empty() && basepair(t_0_seq, t_0_i, t_0_j)) || \
+            ((!_matchStr.empty() && !_exact) && fuzzy_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) || \
+            ((!_matchStr.empty() && _exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) )  // added
+       {                                                                                                           // added 
+
+
+basepair(t_0_seq, t_0_i, t_0_j) is basic condition.
+==> in all cc files
+  ::nt_multiloop and ::bt_nt_multiloop    every file: 8 times
+((!_exact) && basepair(t_0_seq, t_0_i, t_0_j)) ==> ((_matchStr.empty() || (!_matchStr.empty() && !_exact)) && basepair(t_0_seq, t_0_i, t_0_j))
+
+       if ( ((_matchStr.empty() || (!_matchStr.empty() && !_exact)) && basepair(t_0_seq, t_0_i, t_0_j)) || \
+            ((!_matchStr.empty() && _exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) )  // added
+       {                                                                                                           // added 
+
+      if ( ((_matchStr.empty() || (!_matchStr.empty() && !_exact)) && basepair(t_0_seq, t_0_i, t_0_j)) || \
+           ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)) )  // added
+      {                                                                                     // added
+
+==> in all cc files
+  ::nt_iloop and ::bt_nt_iloop    every file: 2 times
+      if ( ((_matchStr.empty() || (!_matchStr.empty() && !_exact)) && basepair(t_0_seq, t_0_i, t_0_j)) || \
+           ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_i)) )  // added
+      {                                                                                     // added
+  ::nt_leftB and ::bt_nt_leftB, ::nt_rightB and ::bt_nt_rightB    every file: 4 times
+      if ( ((_matchStr.empty() || (!_matchStr.empty() && !_exact)) && basepair(t_0_seq, t_0_i, t_0_j)) || \
+           ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b)) )  // added
+      {                                                                                     // added
+
+
+4_2. for rule 1: 
+
+step 1: replace in the file
+
+       for ::nt_dangle
+            if (mfe_thresh(ans))  ==>   
+            if (ans.second.energy <= _thresh)  // rule1
+
+step 2: search for rule1, replace the second 4 parts
+       for ::bt_nt_dangle
+            if (ans.first.second.energy <= _thresh)  // rule1
+
+==RNAalihishapes==
+for ::nt_dangle
+              if ((ans.second.first.mfe + ans.second.first.covar) <= _thresh)  // rule1
+              {
+                push_back( answers, ans);
+              }
+
+for ::bt_nt_dangle
+              if ((ans.first.second.first.mfe + ans.first.second.first.covar) <= _thresh)  // rule1
+              {
+                push_back( answers, ans);
+              }
+=============================================================================
+4_3. for rule 2
+
+==
+in all .cc and .hh files, comments following lines
+//#include "mfe_filter.hh"          // rule2
+//#include "hishape_mfe_filter.hh"  // rule2
+
+==
+//#### in .cc files, for bt in ::nt_ml_comps, ::nt_ml_comps1, ::nt_struct with  '//@@' #####
+the other part for forward calculation with replace
+     if (helix_repeat(ans))  => 
+     if (true)  // rule2
+
+==
+//#### in .cc files, for bt in ::bt_nt_ml_comps, ::bt_nt_ml_comps1, ::bt_nt_struct with  '//@@' #####
+
+  // STEP 1
+  std::vector<std::pair<std::pair<Rope, mfeanswer_v4> , intrusive_ptr<Backtrace<String, unsigned int> > > > temp_answers;  // rule2
+  temp_answers.clear();                                                                                                    // rule2
+
+                  // ## 2-4-2 ##
+                  if (_nosubset) {                // rule2
+                    // STEP 2
+                    temp_answers.push_back(ans);  // rule2
+                  } else {                        // rule2
+                    push_back( answers, ans);     // rule2
+                  }                               // rule2
+
+                  // ## 1 ##
+                  if (_nosubset) {                  // rule2
+                    // STEP 2
+                    temp_answers.push_back(ret_6);  // rule2
+                  } else {                          // rule2
+                    push_back( answers, ret_6);     // rule2
+                  }                                 // rule2
+
+
+  if (_nosubset) {
+    // STEP 3
+    std::vector<std::pair<std::pair<Rope, mfeanswer_v4> , intrusive_ptr<Backtrace<String, unsigned int> > > > temp_answers_2 = temp_answers;
+    std::vector<std::pair<std::pair<Rope, mfeanswer_v4> , intrusive_ptr<Backtrace<String, unsigned int> > > >::iterator it;
+    for ( it=temp_answers.begin() ; it < temp_answers.end(); it++ ) {
+      if ((*it).first.second.hi_i_j_vector.size()!=0) {
+        unsigned int z2 = 0;
+        for (z2=0; z2<temp_answers_2.size(); z2++) {
+          std::pair<std::pair<Rope, mfeanswer_v4> , intrusive_ptr<Backtrace<String, unsigned int> > > temp_ans_2 = temp_answers_2[z2];
+          if (std::includes(temp_ans_2.first.second.hi_i_j_vector.begin(), temp_ans_2.first.second.hi_i_j_vector.end(), (*it).first.second.hi_i_j_vector.begin(), (*it).first.second.hi_i_j_vector.end()) && \
+             !std::includes((*it).first.second.hi_i_j_vector.begin(), (*it).first.second.hi_i_j_vector.end(), temp_ans_2.first.second.hi_i_j_vector.begin(), temp_ans_2.first.second.hi_i_j_vector.end()))
+          {
+            //######## store the deleted records into 'tabooRopes' map, then delete it #########
+            if((*it).first.second.energy > temp_ans_2.first.second.energy) {
+              //tabooRopeIt=tabooRopes.find((*it).first.first);
+              //if (tabooRopeIt!=tabooRopes.end()) {
+              //  if ((*it).first.second.energy < tabooRopes[(*it).first.first]) {
+              //    tabooRopes[(*it).first.first] = (*it).first.second.energy;
+              //  }
+              //}
+              //else
+              //{
+              //  tabooRopes[(*it).first.first] = (*it).first.second.energy;
+              //}
+              temp_answers.erase(it);
+            } 
+          }
+        }
+      }
+    }
+
+    // STEP 4
+    for (it = temp_answers.begin(); it!=temp_answers.end(); ++it){
+      if (t_0_i==t_0_left_most) {
+        tabooRopeIt=tabooRopes.find((*it).first.first);
+        if (tabooRopeIt!=tabooRopes.end()) {
+          if ((*it).first.second.energy < tabooRopes[(*it).first.first]) {
+            push_back(answers,*it);
+          }
+        }
+        else
+        {
+          push_back(answers,*it);
+        }
+      }
+      else
+      {
+        push_back(answers,*it);
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
+==== for forward calculation ======================
+
+  // STEP 1
+  std::vector<std::pair<Rope, mfeanswer_v4> > temp_answers;  // rule2
+  temp_answers.clear();                                      // rule2
+
+                  // ## 2-4-2 ##
+                  if (_nosubset) {                // rule2
+                    // STEP 2
+                    temp_answers.push_back(ans);  // rule2
+                  } else {                        // rule2
+                    push_back( answers, ans);     // rule2
+                  }                               // rule2
+
+                  // ## 1 ##
+                  if (_nosubset) {                  // rule2                   
+                    // STEP 2
+                    temp_answers.push_back(ret_6);  // rule2
+                  } else {                          // rule2
+                    push_back( answers, ret_6);     // rule2
+                  }                                 // rule2
+
+
+  if (_nosubset) {
+    // STEP 3
+    std::vector<std::pair<Rope, mfeanswer_v4> > temp_answers_2 = temp_answers;
+    std::vector<std::pair<Rope, mfeanswer_v4> >::iterator it;
+    for ( it=temp_answers.begin() ; it < temp_answers.end(); it++ ) {
+      if ((*it).second.hi_i_j_vector.size()!=0 && (*it).second.hi_i_j_vector[0] != "") {
+        unsigned int z2 = 0;
+        for (z2=0; z2<temp_answers_2.size(); z2++) {
+          std::pair<Rope, mfeanswer_v4>  temp_ans_2 = temp_answers_2[z2];
+          if (std::includes(temp_ans_2.second.hi_i_j_vector.begin(), temp_ans_2.second.hi_i_j_vector.end(), (*it).second.hi_i_j_vector.begin(), (*it).second.hi_i_j_vector.end()) && \
+             !std::includes((*it).second.hi_i_j_vector.begin(), (*it).second.hi_i_j_vector.end(), temp_ans_2.second.hi_i_j_vector.begin(), temp_ans_2.second.hi_i_j_vector.end()))
+          {
+            //######## store the deleted records into 'tabooRopes' map, then delete it #########
+            if((*it).second.energy > temp_ans_2.second.energy) {
+              tabooRopeIt=tabooRopes.find((*it).first);
+              if (tabooRopeIt!=tabooRopes.end()) {
+                if ((*it).second.energy < tabooRopes[(*it).first]) {
+                  tabooRopes[(*it).first] = (*it).second.energy;
+                }
+              }
+              else
+              {
+                tabooRopes[(*it).first] = (*it).second.energy;
+              }
+              temp_answers.erase(it);
+            } 
+          }
+        }
+      }
+    }
+
+    // STEP 4
+    for (it = temp_answers.begin(); it!=temp_answers.end(); ++it){
+      if (t_0_i==t_0_left_most) {
+        tabooRopeIt=tabooRopes.find((*it).first);
+        if (tabooRopeIt!=tabooRopes.end()) {
+          if ((*it).second.energy < tabooRopes[(*it).first]) {
+            push_back(answers,*it);
+          }
+        }
+        else
+        {
+          push_back(answers,*it);
+        }
+      }
+      else
+      {
+        push_back(answers,*it);
+      }
+    }
+  }
+
+
+
+=================== forward calculation doesn't work at all ===============
+std::vector<Rope>::iterator vectorIt;
+std::cout << "temp_ans_2.second.hi_i_j_vector" << std::endl;
+for (vectorIt=temp_ans_2.second.hi_i_j_vector.begin(); vectorIt != temp_ans_2.second.hi_i_j_vector.end(); vectorIt++)
+{
+  std::cout << (*vectorIt) << "|";
+}
+std::cout << std::endl;
+std::cout << "(*it).second.hi_i_j_vector" << std::endl;
+for (vectorIt=(*it).second.hi_i_j_vector.begin(); vectorIt != (*it).second.hi_i_j_vector.end(); vectorIt++)
+{
+  std::cout << (*vectorIt) << "|";
+}
+std::cout << std::endl;
+
+
+
+=================== show location and debug output ===============
+  if (_nosubset) {
+    // STEP 3
+    std::vector<std::pair<std::pair<Rope, mfeanswer_v4> , intrusive_ptr<Backtrace<String, unsigned int> > > > temp_answers_2 = temp_answers;
+    std::vector<std::pair<std::pair<Rope, mfeanswer_v4> , intrusive_ptr<Backtrace<String, unsigned int> > > >::iterator it;
+    for ( it=temp_answers.begin() ; it < temp_answers.end(); it++ ) {
+      if ((*it).first.second.hi_i_j_vector.size()!=0 && (*it).first.second.hi_i_j_vector[0] != "") {
+        unsigned int z2 = 0;
+        for (z2=0; z2<temp_answers_2.size(); z2++) {
+          std::pair<std::pair<Rope, mfeanswer_v4> , intrusive_ptr<Backtrace<String, unsigned int> > > temp_ans_2 = temp_answers_2[z2];
+std::vector<Rope>::iterator vectorIt;
+std::cout << "temp_ans_2.first.second.hi_i_j_vector" << std::endl;
+for (vectorIt=temp_ans_2.first.second.hi_i_j_vector.begin(); vectorIt != temp_ans_2.first.second.hi_i_j_vector.end(); vectorIt++)
+{
+  std::cout << (*vectorIt) << "|";
+}
+std::cout << std::endl;
+std::cout << "(*it).first.second.hi_i_j_vector" << std::endl;
+for (vectorIt=(*it).first.second.hi_i_j_vector.begin(); vectorIt != (*it).first.second.hi_i_j_vector.end(); vectorIt++)
+{
+  std::cout << (*vectorIt) << "|";
+}
+std::cout << std::endl;
+std::cout << "(*it).first.first: " << (*it).first.first << std::endl;
+          if (std::includes(temp_ans_2.first.second.hi_i_j_vector.begin(), temp_ans_2.first.second.hi_i_j_vector.end(), (*it).first.second.hi_i_j_vector.begin(), (*it).first.second.hi_i_j_vector.end()) && \
+             !std::includes((*it).first.second.hi_i_j_vector.begin(), (*it).first.second.hi_i_j_vector.end(), temp_ans_2.first.second.hi_i_j_vector.begin(), temp_ans_2.first.second.hi_i_j_vector.end()))
+          {
+            //######## store the deleted records into 'tabooRopes' map, then delete it #########
+
+
+
+
+
+
+    // show content:
+    for ( tabooRopeIt=tabooRopes.begin() ; tabooRopeIt != tabooRopes.end(); tabooRopeIt++ )
+      std::cout << (*tabooRopeIt).first << " => " << (*tabooRopeIt).second << std::endl;
+    std::cout << "=====================================================" << std::endl;
+
+
+
+
+
+
+=============================================================================================================
+=============================================================================================================
+=============================================================================================================
+=============================================================================================================

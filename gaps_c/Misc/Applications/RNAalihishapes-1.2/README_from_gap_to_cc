@@ -1,0 +1,72 @@
+Usage: gapc (OPTION)* FILE
+
+Options:
+  -h [ --help ]                produce help message
+  -n [ --inline ]              try to inline NTs
+  -i [ --instance ] arg        use instance (else first)
+  -p [ --product ] arg         use product of algebras
+  -o [ --output ] arg          output filename (out.cc)
+  --class-name arg             default: basename(output)
+  -E [ --stdout ]              print code to stdout
+  --tab arg                    overwrite table conf with this list
+  -t [ --table-design ]        automatically compute optimal table 
+                               configuration (ignore conf from source file)
+  --tab-all                    tabulate everything
+  --cyk                        bottom up evalulation codgen (default: top down 
+                               unger style)
+  --backtrace                  use backtracing for the pretty print RHS of the 
+                               product
+  --kbacktrace                 backtracing for k-scoring lhs
+  --subopt-classify            classified dp
+  --subopt                     generate suboptimal backtracing code (needs foo 
+                               * pretty)
+  --sample                     generate stochastic backtracing code
+  --no-coopt                   with kbacktrace, don't output cooptimal 
+                               candidates
+  --no-coopt-class             with kbacktrace, don't output cooptimal 
+                               candidates
+  -w [ --window-mode ]         window mode
+  --kbest                      classify the k-best classes only
+  --ambiguity                  converts the selected instance into a context 
+                               free string grammar
+  --specialize_grammar         uses the selected instance and creates a GAP 
+                               program which creates specialized GAP programs 
+                               that recognize a subset of candidates of the 
+                               original grammar.
+  --verbose                    show suppressed warnings and messages
+  -l [ --log-level ] arg       the log level, valid values are 0 (VERBOSE), 1 
+                               (INFO),  2 (NORMAL), 3 (WARNING), 4 (ERROR). 
+                               Default is 2 (NORMAL).
+  -I [ --include ] arg         include path
+  -v [ --version ]             version string
+  -P [ --pareto-version ] arg  Implementation of Pareto Product to use 0 
+                               (NoSort), 1 (Sort),  2 (ISort), 3 
+                               (MultiDimOptimized), 4 (NoSort, domination 
+                               ordered) 
+  --multi-dim-pareto           Use multi-dimensional Pareto. Works with -P 0, 
+                               -P 1 and -P 3.
+  -c [ --cut-off ] arg         The cut-off value for -P 3 option (65 default).
+  -f [ --float-accuracy ] arg  The number of decimal places regarded for pareto
+                               and sorting procedures. If this is not set the 
+                               full floating point is compared.
+  -S [ --specialized-adp ] arg Set to generate specialized implementations of 
+                               the ADP framework: 0 (Standard), 1 (Sorted ADP),
+                               2 (Pareto Eager ADP)
+  --step-mode arg              Mode of specialization: 0 force block mode, 1 
+                               force stepwise mode. This is automatically set 
+                               to best option if not specified.
+
+
+
+                               
+alg_ali_hishape_m
+probs_m_microstate.mf
+gapc -I ../../../ -p (alg_ali_hishape_m * (alg_ali_mfe % alg_ali_pfunc)) suchthat filterLowProbShapes)*(alg_ali_dotBracket * alg_ali_pfunc) ../../../ali_microstate.gap --kbacktrace --no-coopt-class --kbest -o probs_m_microstate.cc 
+gapc -I ../../../ -p ((alg_ali_hishape_m * (alg_ali_mfe % alg_ali_pfunc)) suchthat filterLowProbShapes)*(alg_ali_dotBracket * alg_ali_pfunc) ../../../ali_microstate.gap --kbacktrace --no-coopt-class --kbest -o probs_m_microstate.cc
+
+gapc -I ../../../ -p ((alg_ali_hishape_h * alg_ali_mfe) * (alg_ali_dotBracket * alg_ali_pfunc)) suchthat suboptShapeClasses ../../../ali_microstate.gap --kbacktrace --no-coopt-class -o hishapes_microstate.cc 
+gapc -I ../../../ -i ((alg_ali_hishape_h * alg_ali_mfe) * (alg_ali_dotBracket * alg_ali_pfunc)) suchthat suboptShapeClasses ../../../ali_microstate.gap --kbacktrace --no-coopt-class -o hishapes_microstate.cc 
+
+gapc -I ../../../ -p ((alg_ali_hishape_h * alg_ali_mfe) * (alg_ali_dotBracket * alg_ali_pfunc)) suchthat suboptShapeClasses ../../../ali_microstate.gap --kbacktrace --no-coopt-class -o hishapes_microstate.cc 
+gapc -I ../../../ -i shape5mfepp ../../../ali_microstate.gap -o shape5mfepp.cc 
+gapc -I ../../../ -p ((alg_ali_hishape_m * (alg_ali_mfe % alg_ali_pfunc)) suchthat filterLowProbShapes)*(alg_ali_dotBracket * alg_ali_pfunc) ../../../ali_microstate.gap --kbacktrace --no-coopt-class --kbest -o probs_m_microstate.cc

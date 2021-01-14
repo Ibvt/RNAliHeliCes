@@ -1,0 +1,564 @@
+#!/usr/bin/env ruby
+
+require "pp"
+require "ShowTree.opt.rb"
+require 'open3'
+####require "folding.rb"
+
+#require 'assert.rb'
+require 'tree'  
+
+## input file is output of RNAHeliCes --minh 2
+
+options = RNAHeliCesBarrierOptparser.parse(ARGV)
+#pp options
+inputfiles = options.inputfiles[0]
+if (inputfiles.nil?)
+  puts "Could not detect the input file, please use option -f to read input!"
+  exit 1
+end
+
+nvalue = options.nvalue.to_i
+
+
+# ======== functions ==========
+def vienna2hishapeh(ss)
+  position_up=0
+  stack = []
+  hishapeh=[]
+
+  #puts ss
+  0.upto(ss.size-1) { |index|
+    if ss[index]==40 then  # 40 for '(',  41 for ')',  46 for '.'
+      position_up = index 
+      stack.push(index)
+    elsif ss[index]==41 then
+      if position_up==stack.pop then
+        hi = (position_up+1 + index+1)/2.0
+        if (hi.to_i == hi.to_f) then
+          hi=hi.to_i
+        else
+          hi=hi.to_f
+        end
+        hishapeh << hi
+      end
+    end 
+  }
+  return hishapeh
+end
+
+def mda(width,height)
+  a = Array.new(width)
+  a.map! { Array.new(height) }
+  return a
+end
+# =================================
+
+
+if (File.exist?(inputfiles[0]))
+  begin 
+    inputfile = File.new(inputfiles[0], "r")    
+  rescue
+    STDERR.print "Could not open file #{inputfiles[0]}!\n"
+    exit 1
+  end
+else
+  STDERR.print "File #{inputfiles[0]} does not exist!\n"
+  exit 1
+end
+
+
+ss_list = []
+ss_hishape_hash = {}
+leafss_minfreeenergy = {}  ## leafss for leaf 
+
+
+inputdata = inputfile.readlines()
+description = inputdata[0].chomp
+rna = inputdata[1].chomp
+2.upto(inputdata.length-1) do |i|
+  line = inputdata[i]
+  
+  puts line
+  line.strip!
+  line_data = line.split(%r{\s+})
+
+  if line_data.length==4 && !(line_data[0].start_with?('S')) then 
+    puts "line_data=#{line_data[0]}"
+    ss_list << line_data[1]
+    ss_hishape_hash[line_data[1]] = line_data[3]
+    leafss_minfreeenergy[line_data[1]] = line_data[2].to_f
+  end
+  
+end
+
+
+puts "======"
+pp ss_list
+pp ss_hishape_hash
+pp leafss_minfreeenergy
+puts "======"
+
+
+
+
+ma_list = []
+0.upto(ss_list.length-1) do |i|
+  ma_list << [i]
+end
+pp ma_list
+
+
+hi_energies = mda(ma_list.length,ma_list.length)# Fill the array with values
+i = 0
+2.upto(inputdata.length-1) do |line_no|
+  line = inputdata[line_no]
+  line_data = line.split(%r{\s+})
+
+
+  if (line_data[0].start_with?('S')) then
+    for j in 0..(line_data.length-3)
+# 	if (i!=j) then
+# 	  #puts "#{i},#{j},#{line_data[j+2].to_f}"
+# 	  hi_energies[i][j] = line_data[j+2].to_f
+# 	  hi_energies[j][i] = line_data[j+2].to_f
+# 	else
+# 	  hi_energies[i][j] = 0.0
+# 	end
+	hi_energies[i][j] = line_data[j+2].to_f
+    end
+    i += 1
+  end
+
+end
+puts "====================hi_energies====================="
+pp hi_energies
+
+
+ma_subtree = {}       # ss to subtree_structure
+saddle_minfreeenergy = {}
+root_i_j = Tree::TreeNode.new("", "")
+floorpair_saddleenergy = {}  #             important for drawing draw ps
+
+# ma_list is merged array list => at the end, ma_list is a list containing only a array containing all elements
+while ma_list.size()!=1 do
+  
+    ##count = 0
+    global_min_energy = 1.0/0
+    global_i = -1
+    global_j = -1
+    
+    ############################################################
+    #### STEP 1: find the i and j from the table            ####
+    #### calculate global_min_energy, global_i and global_j ####
+    #### with the help of ma_list[] is item_name in the table
+    0.upto(ma_list.length-1) do |i|
+	(i+1).upto(ma_list.length-1) do |j|   
+	    min_free_energy = 1.0/0
+	    # TODO: every only a row and a column changed, the remaining keep the same, so with saddle_minfreeenergy improve the efficiency
+	    # two cases,
+	    # if this record was once calculated, we take it from the saddle_minfreeenergy
+	    # if this record is not old, it is newly merged with two basic records, it needs to be newly calculated with min_free_energy
+	    # 0XXX
+	    #  0XX
+	    #   0X
+	    #    0
+	    ## consider the directions
+	    merged_array = [ma_list[i],ma_list[j]].flatten!
+	    joined_merged_array = merged_array.join(",")
+	    if (saddle_minfreeenergy.has_key?(joined_merged_array)) then
+	        min_free_energy = saddle_minfreeenergy[joined_merged_array]
+	    else
+		#### the key is array of array
+	        #[1,2,6] [7,8]
+	        # 1,7, 1,8, 2,7, 2,8, 6,7, 6,8
+	        ma_list[i].each do |k|
+		    ma_list[j].each do |l|        
+		        #pp ma_list[i]
+		        #pp ma_list[j]
+		        #puts "k=#{k},l=#{l},hi_energies[k][l]=#{hi_energies[k][l]}"
+		        if (hi_energies[k][l].to_f < min_free_energy) then
+		            min_free_energy = hi_energies[k][l]
+			end
+		    end
+		end
+=begin
+		saddle_minfreeenergy ===============
+		{"2,7"=>-3.8,
+		"7,10,11,9,6,1,3,8,4,0,5"=>2.2,
+		"2,8"=>2.3,
+		"4,5"=>-5.8,
+		"11,1,3"=>-4.6,
+		"7,6,1,3"=>-4.1,
+		"2,9"=>-3.8,
+		"4,6"=>2.3,
+		"4,7"=>2.3,
+		...
+		  "1,11"=>-4.6,
+		"11,6,1,3"=>-4.6,
+		"0,9"=>2.2,
+		"2,6"=>-3.8}
+=end
+		saddle_minfreeenergy[joined_merged_array] = min_free_energy
+	    end
+	    
+	    if (min_free_energy < global_min_energy) then
+		global_min_energy = min_free_energy
+		global_i = i
+		global_j = j
+	    end
+	end
+
+	
+      #puts count
+    end 
+    
+    # output only the maximal one, find a saddle structure
+    printf("global [  %d   %d  %0.3f] ", global_i, global_j, global_min_energy)  # global_i always smaller than global_j
+
+    
+
+    ##########################################################################
+    #### STEP 2: after finding the global smallest i and j
+    ####         we merge i and j together.
+    #### using ma_subtree determine it is a saddle or a leaf #### 
+    #pp ma_subtree.keys
+    # ma_subtree is a datastructure a ss represents a sub tree
+#|    +---+ 4,0,5
+#        |---> .......................((((((((((((.....)))))..)))))))..
+#        +---+ 0,5
+#            |---> ..((...((((((..(((((.((((...)))).)))))..))).)))..)).....
+#            +---> .......((((((..(((((.((((...)))).)))))..))).))).((....))
+
+    # ma_list[global_i]) is mergedarray
+    if (ma_subtree.has_key?(ma_list[global_i])) then  ##[1,3]    .length>1
+        # it is a saddle node
+        node_i = ma_subtree[ma_list[global_i]]        ##[1,3]==>subtree
+	energy_i = saddle_minfreeenergy[node_i.name]
+    else
+        # create a new leaf
+        #  ss_list[ma_list[global_i][0]]: the ss of this leaf
+        node_i = Tree::TreeNode.new(ss_list[ma_list[global_i][0]], 0)  # ma_list[global_i] = [1]  ==> ma_list[global_i][0]=1
+	energy_i = leafss_minfreeenergy[node_i.name]
+    end
+    
+    if (ma_subtree.has_key?(ma_list[global_j])) then    
+        node_j = ma_subtree[ma_list[global_j]]
+	energy_j = saddle_minfreeenergy[node_j.name]
+    else
+        ## node_j.content == 0 means it is a leaf, node_j.name is ss of the leaf
+        node_j = Tree::TreeNode.new(ss_list[ma_list[global_j][0]], 0)
+	energy_j = leafss_minfreeenergy[node_j.name]
+    end
+
+    
+    ## node_j.content ==1 means it is a node, take the smallest leaf of the node
+    merged_array = [ma_list[global_i],ma_list[global_j]].flatten!
+    root_i_j = Tree::TreeNode.new(merged_array.join(","), 1)    # global_min_energy
+    ma_subtree[merged_array] = root_i_j
+    # important
+    ##assert(global_min_energy >= energy_i, "global_min_energy >= energy_i")
+    ##assert(global_min_energy >= energy_j, "global_min_energy >= energy_j")
+    if(global_min_energy < energy_i) then
+      return 1
+    end
+    puts "#{global_min_energy} #{energy_j}"
+    if(global_min_energy < energy_j) then
+      return 1      
+    end
+    
+    root_i_j << node_i
+    root_i_j << node_j
+
+    
+    ###########################################################################################
+    #### STEP 3: generate floorpair_saddleenergy                                           ####
+    ####         it is important for drawing draw ps                                       ####
+    if (node_i.content == 0) then       # it is leaf
+        floor_i = node_i.name  
+    elsif (node_i.content == 1) then    # if it is internal node, choose the lowest leaf
+        temp_min_energy = 1.0/0
+	node_i.each_leaf {|leaf|
+	    if (leafss_minfreeenergy[leaf.name].to_f < temp_min_energy) then
+		temp_min_energy = leafss_minfreeenergy[leaf.name].to_f
+		floor_i = leaf.name
+	    end
+	}
+    end
+    
+    ## node_j.content == 0 means it is a leaf, node_j.name is ss of the leaf
+    if (node_j.content == 0) then
+        floor_j = node_j.name  
+    ## node_j.content ==1 means it is a leaf, take the smallest leaf of the leaf
+    elsif (node_j.content == 1) then
+        temp_min_energy = 1.0/0
+	node_j.each_leaf {|leaf|
+	    if (leafss_minfreeenergy[leaf.name].to_f < temp_min_energy) then
+		temp_min_energy = leafss_minfreeenergy[leaf.name].to_f
+		floor_j = leaf.name
+	    end
+	}
+    end
+    floorpair_saddleenergy["#{floor_i}_#{floor_j}"] = global_min_energy
+
+    
+ 
+    ###########################################################################################
+    #### STEP 4: update the content of ma_list
+    ma_list << [ma_list[global_i],ma_list[global_j]].flatten!
+    ma_list.delete_at(global_j)
+    ma_list.delete_at(global_i)
+
+#DEBUG    pp ma_list
+    
+    #pp(ma_subtree)
+    root_i_j.print_tree
+    
+end
+
+##pp floorpair_saddleenergy
+##puts "leafss_minfreeenergy ==============="
+##pp leafss_minfreeenergy
+##puts "saddle_minfreeenergy ==============="
+##pp saddle_minfreeenergy
+
+
+# Save a string to a file.
+
+out = File.new("#{inputfiles[0]}.ps", "w")
+#out.write(myStr)
+
+out.printf("%%!PS-Adobe-2.0 EPSF-1.2\n"\
+	  "%%%%Title: Tree Calculation and Plot\n"\
+	  "%%%%Creator: main_b_plot.rb\n"\
+	  "%%%%CreationDate: %s\n", Time.now)
+out.printf("%%%%BoundingBox: %d %d %d %d\n", 72, 144, 522, 700)
+	  #bbox[0], bbox[1], bbox[2], bbox[3]); # int bbox[4] = {72, 144, 522, 700};
+out.print(
+	  "%%%%EndComments\n"\
+	  "%%%%BeginProlog\n"\
+	  "/treedict 100 dict def\n"\
+	  "treedict begin\n"\
+	  "%% x y  => min(x,y)\n"\
+	  "  /min { 2 copy gt { exch } if pop } bind def\n"\
+	  "  /max { 2 copy lt { exch } if pop } bind def\n"\
+	  "  /cmtx matrix currentmatrix def\n"\
+	  "  /STR 128 string def\n"\
+	  "  /NumH 1 def\n"\
+	  "%% - => -\n"\
+	  "  /Init {\n"\
+	  "    /LX [\n"\
+	  "      LEAF {0 get} forall\n"\
+	  "    ] def\n\n"\
+	  "    /Helvetica findfont fsize scalefont setfont\n"\
+	  "    /Lo [\n"\
+	  "      (X) stringwidth pop %% width\n"\
+	  "      newpath 0 0 moveto\n"\
+	  "      (X) true charpath\n"\
+	  "      flattenpath pathbbox\n"\
+	  "      pop exch pop exch sub neg 2 div %% height\n"\
+	  "     ] def\n"\
+	  "  } def\n"\
+	  "%% - => -\n"\
+	  "  /DrawScale {\n"\
+	  "  gsave \n"\
+	  "    maxy miny sub 30 div dup maxy add /maxy exch def miny sub /miny def\n"\
+	  "    maxy miny sub log 0.9 sub floor 10 exch exp /tick exch def\n"\
+	  "    newpath\n"\
+	  "    LEAF length 0.5 sub 0 translate 0 miny moveto 0 maxy miny sub rlineto\n"\
+	  "    miny tick div ceiling tick mul dup 0 exch moveto \n"\
+	  "    maxy exch sub tick div cvi 1 add dup { %% draw minor ticks\n"\
+	  "      0.15 0 rlineto\n"\
+	  "      -0.15 tick rmoveto\n"\
+	  "    } repeat\n"\
+	  "    %% calculate major tick spacing (10, 5, or 2 minor ticks)\n"\
+	  "    dup 69 gt { pop 10\n"\
+	  "    } {\n"\
+	  "      32 gt { 5 }\n"\
+	  "      {2} ifelse\n"\
+	  "    } ifelse\n"\
+	  "    tick mul /mtick exch def\n"\
+	  "    miny mtick div ceiling mtick mul dup 0 exch moveto\n"\
+	  "    maxy exch sub mtick div cvi 1 add {\n"\
+	  "      0.3 0 rlineto \n"\
+	  "      gsave currentpoint 10 mul round 10 div cmtx setmatrix\n"\
+	  "      STR cvs dup stringwidth pop\n"\
+	  "      Lo aload pop 3 1 roll add neg exch rmoveto show pop\n"\
+	  "      grestore\n"\
+	  "      -0.3 mtick rmoveto\n"\
+	  "    } repeat\n"\
+	  "    cmtx setmatrix stroke    \n"\
+	  "  grestore\n"\
+	  "  } def\n"\
+	  "%% - => -\n"\
+	  "  /SetBarFont {\n"\
+	  "    matrix currentmatrix cmtx setmatrix\n"\
+	  "    /Helvetica findfont fbsize scalefont setfont\n"\
+	  "    setmatrix\n"\
+	  "  } bind def\n"\
+	  "%% - => -\n"\
+	  "  /SetLabelFont {\n"\
+	  "    matrix currentmatrix cmtx setmatrix\n"\
+	  "    /Courier findfont fsize scalefont setfont\n"\
+	  "    setmatrix\n"\
+	  "  } bind def\n"\
+	  "%% str => -\n"\
+	  "  /Rotshow {\n"\
+	  "    gsave\n"\
+	  "      cmtx setmatrix -90 rotate\n"\
+	  "      Lo aload pop\n"\
+	  "      rmoveto show\n"\
+	  "    grestore\n"\
+	  "  } def\n"\
+	  "%% dy => - \n"\
+	  "  /Rlineto {\n"\
+	  "    dup abs MinHeight ge { %% draw height at middle of line\n"\
+	  "      dup gsave\n"\
+	  "	dup 2 div 0 exch rmoveto\n"\
+	  "	cmtx setmatrix -90 rotate\n"\
+	  "	abs STR cvs dup stringwidth pop 2 div neg\n"\
+	  "	//NumH rmoveto\n"\
+	  "	show\n"\
+	  "      grestore\n"\
+	  "    } if\n"\
+	  "    0 exch rlineto\n"\
+	  "  } def\n"\
+	  "%% - => -\n"\
+	  "  /Drawlabels {\n"\
+	  "   0 LEAF {\n"\
+	  "      aload pop moveto\n"\
+	  "      dup LABEL exch get STR cvs Rotshow\n"\
+	  "      1 add\n"\
+	  "    } forall pop\n"\
+	  "  } def\n"\
+	  "%% n => n'    Detect whether a minimum is connected\n"\
+	  "  /MRX {\n"\
+	  "     /murxi { true } def\n"\
+          "     dup 0 lt { pop 0 /murxi { false } def } if\n"\
+          "  } def\n"\
+	  "%% - => -\n"\
+	  "  /Connectlmins {\n"\
+	  "    newpath\n"\
+	  "    SADDEL {\n"\
+	  "      /forest {false} def  %%  draw as tree or forest node\n"\
+	  "      aload pop exch dup 0 lt { pop 0 /forest {true} def} if"\
+	  "   %% => c h f\n"\
+	  "      dup LX exch get [ exch LX 5 index get add 2 div "\
+	  "%% => c h f [ nx\n"\
+	  "      3 index ]\t\t\t\t         %% => c h f [ nx h ]\n"\
+	  "      3 -1 roll dup LEAF 6 -1 roll get aload pop "\
+	  "%% => f [nx h] h h cx cy\n"\
+	  "      dup 3 1 roll moveto\t\t         %% => f [] h h cy\n"\
+	  "      sub Rlineto                                %% => f [] h\n"\
+	  "      LEAF 3 index get aload pop exch\t\t %% => f [] h fy fx\n"\
+	  "      2 index forest {moveto} {lineto} ifelse \n"\
+	  "      sub neg Rlineto\t\t\t         %% => f [] h fy\n"\
+	  "      LEAF 3 1 roll put\n"\
+	  "    } forall\n"\
+	  "    gsave\n"\
+	  "      cmtx setmatrix stroke\n"\
+	  "    grestore\n"\
+	  "  } def\n"\
+	  "%% data starts here!!!\n"\
+	  "  /LABEL [")
+  # print label array
+  #if(nodes[0].label==NULL) ll = 8;
+  #else ll = 3+strlen(nodes[0].label);
+  #if(ll<8) ll = 8;
+  #ll = (int) (80/ll);
+  #for (i=0; i<n; i++) {
+    #if (i%ll == 0)  fprintf(out, "\n   ");
+    #if (nodes[i].label) fprintf(out, "(%s) ", nodes[i].label);
+    #else fprintf(out, "%3d ", i+1);
+  #}
+  
+  #hishapes_for_out = []
+  i = 0
+#DEBUG  pp ss_hishape_hash
+  root_i_j.each_leaf {|leaf|
+      #ss_hishape_hash[leaf.name].gsub("(", "\(").gsub(")", "\)")
+      if (i%8 == 0) then
+          out.printf("\n   ")
+      end
+      puts "leaf.name=#{leaf.name},  ss_hishape_hash[leaf.name]=#{ss_hishape_hash[leaf.name]}"
+      hishape_1 = ss_hishape_hash[leaf.name].gsub("(", "\(")
+      hishape_2 = hishape_1.gsub(")", "\)")
+      out.printf("(%s) ", hishape_2)
+      #hishapes_for_out << hishape_2 
+      i += 1
+  }
+  out.print("\n  ] def\n")
+
+  # print leaf node coordinates 
+  out.print("%% leaf node coordinates\n"\
+	  "  /LEAF [")
+  i = 0
+  ss_index_hash = {}
+  root_i_j.each_leaf {|leaf|
+    if (i%5 == 0) then  
+        out.printf("\n   ")
+    end
+    puts leaf.name
+    out.printf("[%-3d %7.3f] ", i, leafss_minfreeenergy[leaf.name])    # using energy hash, did not use the content of each node => we can replace content of each node with sth. else
+    ss_index_hash[leaf.name] = i             
+    i += 1
+  }
+  out.print("  \n] def\n")
+
+  # print internal node coordinates
+  out.print("%% internal nodes (saddle) coordinates, sorted by height\n"\
+	  "  /SADDEL [")
+=begin
+  0.upto(n-1) { |i|
+    # int fath; 
+    if (i%4 == 0) then
+        printf(out, "\n   ")
+    end
+    k=sindex[i]; 
+    if (k==nodes[k].father) continue;
+    fprintf(out, "[%3d %3d %7.3f] ",k,nodes[k].father, nodes[k].saddle_height);
+  }
+ # free(chain);  free(sindex);
+=end
+  i = 0
+  floorpair_saddleenergy.sort_by { |a,b| b }.each { |k,v|  # h.sort_by { |k,v| v }    sort{|a,b| a[1] <=> b[1]}
+  #floorpair_saddleenergy.each { |k,v|
+      if (i%4 == 0) then
+          out.printf("\n   ")
+      end
+      k2 = k.split("_")       
+      out.printf("[%3d %3d %7.3f] ",ss_index_hash[k2[0]],ss_index_hash[k2[1]], v);
+      i += 1
+  }
+  out.printf(
+	  "  \n] def\n"\
+	  "end\n")
+  out.printf(
+	  "%%%%EndProlog\n"\
+	  "treedict begin\n"\
+	  "  /fsize 10 def\n"\
+	  "  /fbsize 7 def\n"\
+	  "  Init\n"\
+	  "  %d %d fsize 1.5 mul add translate\n", 522-1, 144)    # {72, 144, 522, 700}  +500
+  out.printf("  %d %d sub LEAF length div %% x-scale\n", 72, 522-1)
+  out.printf("  %d %d fsize dup add add sub\n", 700-1, 144)
+  out.print(
+	  "  SADDEL dup length 1 sub get 2 get /maxy exch def %% max height\n"\
+	  "  9999999 LEAF { aload pop exch pop min } forall\n"\
+	  "  /miny exch def %% min height\n"\
+	  "  maxy miny sub dup 20 div /MinHeight exch def\n"\
+	  "  div scale\n"\
+	  "  .5 LEAF 0 get 1 get neg translate\n"\
+	  "  SetLabelFont\n"\
+	  "  Drawlabels\n"\
+	  "  DrawScale\n"\
+	  "  SetBarFont\n"\
+	  "  Connectlmins\n"\
+	  "  showpage\n"\
+	  "end\n"\
+	  "%%%%EOF\n")
+
+out.close
+
+
+#end

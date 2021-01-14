@@ -1,0 +1,54 @@
+  try {
+    gapc::Opts::getOpts()->parse(argc, argv);
+  } catch (std::exception &e) {
+    std::cerr << "Exception: (line 355) " << e.what() << '\n';
+    std::exit(1);
+  }
+  gapc::class_name obj;
+
+  try {
+    obj.init(*gapc::Opts::getOpts());
+  } catch (std::exception &e) {
+    std::cerr << "Exception: " << e.what() << '\n';
+    std::exit(1);
+  }
+
+
+parameter of 1999
+jhuang@swimming-pool:~/hg.cebitec.uni-bielefeld.de/rnaalishapes_2.3.0/rnaalihishapes/Misc/Applications/RNAalihishapes/RNAalihishapes-1.0/src$ 
+./RNAalihishapes -s GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGCGUGGCAUUUC#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGGCCC_UCGGGC______GUUGAUAACC#GAGGGUAGCUCUGACUCUGCCCG_____AUGAC___ACCAACCUGCCCUGUGACCUAUCGUGUUGAAUUCC# -p -t 4 -k 10 
+-P ./librna/vienna/rna_turner2004.par
+
+( ( 12.5, , ( ( -702.222 = energy: -613.333 + covar.: -88.8889 ) , 192713 ) ) , ( ..((((((........))))))................................................. , 88289 ) )
+( ( 12.5,58, , ( ( -585.556 = energy: -530 + covar.: -55.5556 ) , 200607 ) ) , ( ..((((((........))))))...........................(((((.......)))))..... , 13084.6 ) )
+( ( 12.5,54, , ( ( -475.111 = energy: -430.667 + covar.: -44.4444 ) , 24653.1 ) ) , ( ..((((((........))))))....................((((...............))))...... , 2215.91 ) )
+( ( 25.5, , ( ( -391.889 = energy: -369.667 + covar.: -22.2222 ) , 2944.54 ) ) , ( ..((((((..................................))))))....................... , 565.035 ) )
+( ( 12.5,44, , ( ( -390 = energy: -256.667 + covar.: -133.333 ) , 3126.31 ) ) , ( ..((((((........))))))..............((...........)).................... , 559.965 ) )
+( ( 12.5,48, , ( ( -361.111 = energy: -283.333 + covar.: -77.7778 ) , 2316.87 ) ) , ( ..((((((........))))))......................((...)).................... , 344.784 ) )
+( ( 12.5,55.5, , ( ( -353.333 = energy: -353.333 + covar.: 0 ) , 5792.12 ) ) , ( ..((((((........))))))...........................(((......))).......... , 308.878 ) )
+( ( 12.5,41.5, , ( ( -338.889 = energy: -216.667 + covar.: -122.222 ) , 1112.62 ) ) , ( ..((((((........)))))).........((................)).................... , 244.345 ) )
+( ( 12.5,53.5, , ( ( -335.111 = energy: -257.333 + covar.: -77.7778 ) , 991.969 ) ) , ( ..((((((........))))))...................((....................))...... , 228.578 ) )
+( ( 24, , ( ( -325.778 = energy: -414.667 + covar.: 88.8889 ) , 2204.97 ) ) , ( ..((((((......((((...........)))).........))))))....................... , 194.343 ) )
+length = 216
+
+
+parameter of 2004
+jhuang@swimming-pool:~/hg.cebitec.uni-bielefeld.de/rnaalishapes_2.3.0/rnaalihishapes/Misc/Applications/RNAalihishapes$ 
+./RNAalihishapes_probs_h_microstate GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGCGUGGCAUUUC#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGGCCC_UCGGGC______GUUGAUAACC#GAGGGUAGCUCUGACUCUGCCCG_____AUGAC___ACCAACCUGCCCUGUGACCUAUCGUGUUGAAUUCC# -k 10
+Answer: 
+( ( 24, , ( ( -834.445 = energy: -956.667 + covar.: 122.222 ) , 0.00184247 ) ) , ( .(((((((......((((...........)))).........)))))))...................... , 0.000430019 ) )
+( ( 25.5, , ( ( -635.556 = energy: -646.667 + covar.: 11.1111 ) , 5.46111e-05 ) ) , ( .(((((((..................................)))))))...................... , 1.76237e-05 ) )
+( ( 12.5, , ( ( -595.556 = energy: -506.667 + covar.: -88.8889 ) , 2.40211e-05 ) ) , ( ..((((((........))))))................................................. , 9.11039e-06 ) )
+( ( 24,58, , ( ( -574.444 = energy: -696.667 + covar.: 122.222 ) , 0.000125471 ) ) , ( ..((((((......((((...........)))).........)))))).(((((.......)))))..... , 6.36399e-06 ) )
+( ( 25, , ( ( -515.556 = energy: -593.333 + covar.: 77.7778 ) , 7.67017e-06 ) ) , ( .(((((((.((...........................))..)))))))...................... , 2.51483e-06 ) )
+( ( 24,61.5, , ( ( -486.667 = energy: -620 + covar.: 133.333 ) , 1.15662e-05 ) ) , ( .(((((((......((((...........)))).........)))))))..((................)) , 1.53179e-06 ) )
+( ( 12.5,58, , ( ( -455.556 = energy: -433.333 + covar.: -22.2222 ) , 1.25818e-05 ) ) , ( ..((((((........))))))..........................((((((.......)))))).... , 9.34693e-07 ) )
+( ( 12.5,54, , ( ( -451.111 = energy: -406.667 + covar.: -44.4444 ) , 7.39199e-06 ) ) , ( ..((((((........))))))....................((((...............))))...... , 8.74379e-07 ) )
+( ( 24,61, , ( ( -433.333 = energy: -566.667 + covar.: 133.333 ) , 5.46571e-06 ) ) , ( .(((((((......((((...........)))).........)))))))..((...............)). , 6.37798e-07 ) )
+( ( 24,56.5, , ( ( -421.111 = energy: -543.333 + covar.: 122.222 ) , 6.5504e-06 ) ) , ( .(((((((......((((...........)))).........))))))).((........))......... , 5.23068e-07 ) )
+
+
+
+./RNAalihishapes_probs_h_microstate GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGCGUGGCAUUUC#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGGCCC_UCGGGC______GUUGAUAACC#GAGGGUAGCUCUGACUCUGCCCG_____AUGAC___ACCAACCUGCCCUGUGACCUAUCGUGUUGAAUUCC# -k 10
+
+cp -r ~/Downloads/bellmansgapc-2013.01.16/librna ./

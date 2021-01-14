@@ -1,0 +1,12 @@
+lib_LTLIBRARIES = librna.la
+librna_la_SOURCES = rnalib.c rnalib.h vienna/config.h   vienna/energy_par.c  vienna/fold_vars.h \
+                    vienna/params.h       vienna/utils.c \
+              vienna/energy_par.h  vienna/intloops.h   vienna/pair_mat.h  \
+            vienna/read_epars.c        vienna/utils.h vienna/data_structures.h  vienna/energy_const.h \
+            vienna/fold_vars.c   vienna/params.c    vienna/read_epars.h
+librna_la_CFLAGS = --pedantic -Wall -std=c99
+librna_la_LDFLAGS = -module -avoid-version
+EXTRA_DIST = vienna/dna_mathews1999.par  vienna/dna_mathews2004.par vienna/rna_andronescu2007.par vienna/rna_turner1999.par vienna/rna_turner2004.par readme vienna/COPYING
+
+
+  

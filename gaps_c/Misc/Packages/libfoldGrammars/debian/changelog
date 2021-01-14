@@ -1,0 +1,171 @@
+libfoldgrammars (1.0.7-0ubuntu1~quantal1) quantal; urgency=low
+
+  * Dangling corrections in outside algorithm for RNAshapes and
+    RNAalishapes.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 30 Apr 2013 10:50:32 +0200
+
+libfoldgrammars (1.0.7-0ubuntu1~precise1) precise; urgency=low
+
+  * Dangling corrections in outside algorithm for RNAshapes and
+    RNAalishapes.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 30 Apr 2013 10:50:25 +0200
+
+libfoldgrammars (1.0.7-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * Dangling corrections in outside algorithm for RNAshapes and
+    RNAalishapes.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 30 Apr 2013 10:50:18 +0200
+
+libfoldgrammars (1.0.7-0ubuntu1~lucid1) lucid; urgency=low
+
+  * Dangling corrections in outside algorithm for RNAshapes and
+    RNAalishapes.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 30 Apr 2013 10:50:01 +0200
+
+libfoldgrammars (1.0.6-0ubuntu1~quantal1) quantal; urgency=low
+
+  * extra commit to re-integrate lucid
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:42:55 +0200
+
+libfoldgrammars (1.0.6-0ubuntu1~precise1) precise; urgency=low
+
+  * extra commit to re-integrate lucid
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:42:48 +0200
+
+libfoldgrammars (1.0.6-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * extra commit to re-integrate lucid
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:42:41 +0200
+
+libfoldgrammars (1.0.6-0ubuntu1~lucid1) lucid; urgency=low
+
+  * extra commit to re-integrate lucid
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:39:42 +0200
+
+libfoldgrammars (1.0.5-0ubuntu1~quantal1) quantal; urgency=low
+
+  * Renaming of function is_empty into isEmpty in the underlying
+    bellmansgapc package to avoid naming conflicts with boost-lib
+    function names when compiling with an older gcc, like 4.2 in osx or
+    4.4 in lucid.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:33:02 +0200
+
+libfoldgrammars (1.0.5-0ubuntu1~precise1) precise; urgency=low
+
+  * Renaming of function is_empty into isEmpty in the underlying
+    bellmansgapc package to avoid naming conflicts with boost-lib
+    function names when compiling with an older gcc, like 4.2 in osx or
+    4.4 in lucid.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:32:55 +0200
+
+libfoldgrammars (1.0.5-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * Renaming of function is_empty into isEmpty in the underlying
+    bellmansgapc package to avoid naming conflicts with boost-lib
+    function names when compiling with an older gcc, like 4.2 in osx or
+    4.4 in lucid.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:29:56 +0200
+
+libfoldgrammars (1.0.4-0ubuntu1~quantal1) quantal; urgency=low
+
+  * new feature: outside base pair probability computation
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 09 Apr 2013 14:10:36 +0200
+
+libfoldgrammars (1.0.4-0ubuntu1~precise1) precise; urgency=low
+
+  * new feature: outside base pair probability computation
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 09 Apr 2013 14:10:30 +0200
+
+libfoldgrammars (1.0.4-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * new feature: outside base pair probability computation
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 09 Apr 2013 14:10:16 +0200
+
+libfoldgrammars (1.0.3-0ubuntu1~quantal1) quantal; urgency=low
+
+  * minor bugfixes
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Wed, 13 Mar 2013 00:21:04 +0100
+
+libfoldgrammars (1.0.3-0ubuntu1~precise1) precise; urgency=low
+
+  * minor bugfixes
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Wed, 13 Mar 2013 00:20:57 +0100
+
+libfoldgrammars (1.0.3-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * minor bugfixes
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Wed, 13 Mar 2013 00:18:48 +0100
+
+libfoldgrammars (1.0.2-0ubuntu1~quantal1) quantal; urgency=low
+
+  * new centralized version numbers
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 12 Mar 2013 09:09:59 +0100
+
+libfoldgrammars (1.0.2-0ubuntu1~precise1) precise; urgency=low
+
+  * new centralized version numbers
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 12 Mar 2013 09:09:50 +0100
+
+libfoldgrammars (1.0.2-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * new centralized version numbers
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 12 Mar 2013 09:07:34 +0100
+
+libfoldgrammars (1.0.1-0ubuntu1~quantal) quantal; urgency=low
+
+  * second commit, since I forgot different distribution names
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 17:29:00 +0200
+
+libfoldgrammars (1.0.1-0ubuntu1~oneiric) oneiric; urgency=low
+
+  * second commit, since I forgot different distribution names
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 17:29:00 +0200
+
+libfoldgrammars (1.0.1-0ubuntu1~precise) precise; urgency=low
+
+  * second commit, since I forgot different distribution names
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 17:29:00 +0200
+ 
+libfoldgrammars (1.0.0-0ubuntu1~quantal) quantal; urgency=low
+
+  * Initial release
+   - moved Perl library into a separate package to circumwent conflicts when installing several packages that use it.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 00:15:00 +0200
+
+libfoldgrammars (1.0.0-0ubuntu1~oneiric) oneiric; urgency=low
+
+  * Initial release
+   - moved Perl library into a separate package to circumwent conflicts when installing several packages that use it.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 00:15:00 +0200
+
+libfoldgrammars (1.0.0-0ubuntu1~precise) precise; urgency=low
+
+  * Initial release
+   - moved Perl library into a separate package to circumwent conflicts when installing several packages that use it.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 00:15:00 +0200

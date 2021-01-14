@@ -1,0 +1,106 @@
+CC = gcc
+LD = $(CC)
+SHARED_FLAGS ?= -shared
+PIC_FLAGS ?= -fpic
+
+#CPPFLAGS_EXTRA ?=
+CPPFLAGS ?= $(CPPFLAGS_EXTRA) $(RTLIB_CPPFLAGS)
+CFLAGS_OPT ?= -std=c99 -O3 -DNDEBUG
+
+#LDLIBS_EXTRA ?= 
+LDLIBS ?= $(LDLIBS_EXTRA) $(RTLIB_LDLIBS)
+
+CFLAGS=-Wall -g -std=c99
+LDLIBS=-lm
+
+SO_SUFFIX = .so
+AR = ar
+
+LIBRNA_SRC = rnalib.c vienna/energy_par.c vienna/fold_vars.c vienna/read_epars.c vienna/read_epars.c vienna/params.c vienna/utils.c
+LIBRNA_OBJ = $(LIBRNA_SRC:.c=.o)
+LIBRNA_PIO = $(LIBRNA_SRC:.c=.pio)
+
+TEMP = librna$(SO_SUFFIX) \
+       librnafast$(SO_SUFFIX) rnalib.fpio \
+       librna.a \
+       $(LIBRNA_OBJ) \
+       $(LIBRNA_PIO) \
+
+DIST_COMMON = $(srcdir)/Makefile
+librna_SOURCES = rnalib.c rnalib.h vienna/config.h \
+            vienna/energy_par.c  vienna/fold_vars.h  vienna/intl21dH.h  vienna/intl22.h    vienna/params.h      vienna/rna_andronescu2007.par  vienna/utils.c \
+            vienna/dna_mathews2004.par  vienna/energy_par.h  vienna/intl11dH.h   vienna/intl21.h    vienna/pair_mat.h  vienna/read_epars.c  vienna/rna_turner1999.par      vienna/utils.h \
+            vienna/data_structures.h  vienna/energy_const.h       vienna/fold_vars.c   vienna/intl11.h     vienna/intl22dH.h  vienna/params.c    vienna/read_epars.h  vienna/rna_turner2004.par
+
+DIST_SOURCES = $(librna__SOURCES)
+EXTRA_DIST = readme vienna/COPYING
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+srcdir = .
+top_srcdir = ../..
+top_builddir = ../..
+
+
+# librna.a
+all: librna$(SO_SUFFIX)
+
+###############################################################################
+# Shared libraries
+###############################################################################
+
+%.pio: %.c
+	$(CC) -c -o $@ $(PIC_FLAGS) $(CPPFLAGS) $(CFLAGS) $<
+
+#%.fpio: %.c
+#	$(CC) -c -o $@ $(PIC_FLAGS) $(CPPFLAGS) $(CFLAGS_FP_FAST) $<
+
+
+rnalib.pio: CFLAGS = $(CFLAGS_OPT)
+
+librna$(SO_SUFFIX): LDLIBS = -lm
+
+librna$(SO_SUFFIX): $(LIBRNA_PIO)
+	$(LD) $(SHARED_FLAGS) $^ $(LDLIBS) -o $@
+
+#librnafast$(SO_SUFFIX): LDLIBS = -lm
+
+#librnafast$(SO_SUFFIX): rnalib.fpio $(filter-out rnalib.pio, $(LIBRNA_PIO))
+#	$(LD) $(SHARED_FLAGS) $^ $(LDLIBS) -o $@
+
+
+librna.a: $(LIBRNA_OBJ)
+	$(AR) -r $@ $^
+
+clean:
+	rm -f $(TEMP)
+
+distdir: 
+# $(DISTFILES)
+# 	@srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
+# 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
+# 	list='$(DISTFILES)'; \
+# 	  dist_files=`for file in $$list; do echo $$file; done | \
+# 	  sed -e "s|^$$srcdirstrip/||;t" \
+# 	      -e "s|^$$topsrcdirstrip/|$(top_builddir)/|;t"`; \
+# 	case $$dist_files in \
+# 	  */*) $(MKDIR_P) `echo "$$dist_files" | \
+# 			   sed '/\//!d;s|^|$(distdir)/|;s,/[^/]*$$,,' | \
+# 			   sort -u` ;; \
+# 	esac; \
+# 	for file in $$dist_files; do \
+# 	  if test -f $$file || test -d $$file; then d=.; else d=$(srcdir); fi; \
+# 	  if test -d $$d/$$file; then \
+# 	    dir=`echo "/$$file" | sed -e 's,/[^/]*$$,,'`; \
+# 	    if test -d "$(distdir)/$$file"; then \
+# 	      find "$(distdir)/$$file" -type d ! -perm -700 -exec chmod u+rwx {} \;; \
+# 	    fi; \
+# 	    if test -d $(srcdir)/$$file && test $$d != $(srcdir); then \
+# 	      cp -fpR $(srcdir)/$$file "$(distdir)$$dir" || exit 1; \
+# 	      find "$(distdir)/$$file" -type d ! -perm -700 -exec chmod u+rwx {} \;; \
+# 	    fi; \
+# 	    cp -fpR $$d/$$file "$(distdir)$$dir" || exit 1; \
+# 	  else \
+# 	    test -f "$(distdir)/$$file" \
+# 	    || cp -p $$d/$$file "$(distdir)/$$file" \
+# 	    || exit 1; \
+# 	  fi; \
+# 	done

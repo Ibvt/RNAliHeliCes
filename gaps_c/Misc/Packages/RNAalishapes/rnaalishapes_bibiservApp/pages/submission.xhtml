@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de"
+
+Contributor(s):
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/toolsubmissionTpl.xhtml">
+
+    <ui:define name="app_title">
+        <h:outputText class="title" escape="false" value="#{messages.property('rnaalishapes_name')}"/>
+        <div class="separator app_separator"/>
+    </ui:define>
+
+    <ui:define name="app_page_counter">
+        1/4
+    </ui:define>
+    
+    <ui:define name="app_content">
+        <h:form id="rnaalishapes_function_selection" enctype="multipart/form-data">
+
+            
+            <span class="formblock_title">Choose one of #{messages.property('rnaalishapes_name')} functions ...</span><br/>
+
+            <h:panelGroup>
+
+                
+                <h:selectOneRadio layout="pageDirection" value="#{rnaalishapes_function.functionSelection}">
+                    
+                        <f:selectItem itemValue="rnaalishapes_function_probs_p_1" itemLabel="#{messages.property('rnaalishapes_function_probs_name')} : #{messages.property('rnaalishapes_function_probs_shortDescription')}"/>
+                     
+                        <f:selectItem itemValue="rnaalishapes_function_shapes_p_1" itemLabel="#{messages.property('rnaalishapes_function_shapes_name')} : #{messages.property('rnaalishapes_function_shapes_shortDescription')}"/>
+                     
+                        <f:selectItem itemValue="rnaalishapes_function_sample_p_1" itemLabel="#{messages.property('rnaalishapes_function_sample_name')} : #{messages.property('rnaalishapes_function_sample_shortDescription')}"/>
+                     
+                        <f:selectItem itemValue="rnaalishapes_function_mfe_p_1" itemLabel="#{messages.property('rnaalishapes_function_mfe_name')} : #{messages.property('rnaalishapes_function_mfe_shortDescription')}"/>
+                     
+                        <f:selectItem itemValue="rnaalishapes_function_subopt_p_1" itemLabel="#{messages.property('rnaalishapes_function_subopt_name')} : #{messages.property('rnaalishapes_function_subopt_shortDescription')}"/>
+                     
+                        <f:selectItem itemValue="rnaalishapes_function_outside_p_1" itemLabel="#{messages.property('rnaalishapes_function_outside_name')} : #{messages.property('rnaalishapes_function_outside_shortDescription')}"/>
+                     
+                        <f:selectItem itemValue="rnaalishapes_function_eval_p_1" itemLabel="#{messages.property('rnaalishapes_function_eval_name')} : #{messages.property('rnaalishapes_function_eval_shortDescription')}"/>
+                     
+                        <f:selectItem itemValue="rnaalishapes_function_convert_p_1" itemLabel="#{messages.property('rnaalishapes_function_convert_name')} : #{messages.property('rnaalishapes_function_convert_shortDescription')}"/>
+                     
+                </h:selectOneRadio>
+                    
+                <br/>
+                
+                 <!-- Submission Navigation -->
+                <table id="toolnavi" class="tool_navi">
+                    <tr>
+
+                        <!-- back navigation (only available if tool contains more than one function) -->
+                        <td id="toolback" class="tool_back tool_back_inactive" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.BACK_TITLE','function selection')}">
+                            &#x25C4; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.BACK')}  
+                        </td>
+
+                        <!-- example button -->
+                        <td  id="toolexample" class="tool_example tool_example_inactive">#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.EXAMPLE')}</td>    
+
+                        <!-- reset button -->
+
+                        <td id="toolreset" class="tool_reset tool_reset_inactive" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.RESET_TITLE','input')}">
+                            #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.RESET')}
+                        </td>
+
+                    <!-- next (validation) button -->   
+                    <td id="toolnext" class="tool_next" onclick="toolnext()" 
+                        onmouseover="setCSSclass('toolnext','tool_next tool_next_highlighted')" 
+                        onmouseout="setCSSclass('toolnext','tool_next')">
+                        #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.NEXT')} &#x25BA;
+                    <p:remoteCommand name="toolnext" actionListener="#{rnaalishapes_function.select}" />
+                    </td> 
+                    </tr>
+                </table>         
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+
+
+</ui:composition>
+
+
+
+
+

@@ -1,0 +1,265 @@
+PREFIX=$(HOME)/local/RNAalihishapes
+#~ CXXFLAGS_EXTRA="-O3 -DNDEBUG"
+CXXFLAGS_EXTRA=-O3 -DNDEBUG
+PROGRAMPREFIX=RNAalihishapes_
+WINDOWSUFFIX=_window
+FASTLIBRNA=
+RNAOPTIONSPERLSCRIPT=../addRNAoptions.pl
+
+GAPC=~/local/gapc/bin/gapc
+MAKE=make
+PERL=perl
+BASEDIR=../../../
+
+#targets=mfe subopt shapes probs sample eval outside pfall
+targets=shapes probs eval pfall
+targets_window=mfe subopt shapes probs sample pfall
+grammars=microstate
+#~ nodangle overdangle microstate macrostate
+consensus=consensus mis
+#~ consensus mis
+window=
+outname=out
+isEval=0
+ifdef window
+	windowmodeflag=--window-mode
+	current_windowmodesuffix=$(WINDOWSUFFIX)
+else
+	windowmodeflag=
+	current_windowmodesuffix=
+endif
+
+#all: all_normal all_window helper clean
+all: all_normal helper
+
+all_normal:
+	for target in `echo "$(targets)"`; do \
+		$(MAKE) $${target}; \
+	done
+	
+all_window:
+	for target in `echo "$(targets_window)"`; do \
+		$(MAKE) $${target} window="yes"; \
+	done
+	
+install: install-lib install-program
+
+install-program:
+	if [ ! -d "$(PREFIX)/bin" ]; then install -d $(PREFIX)/bin; fi;
+	for grammar in `echo "$(grammars)"`; do \
+		for mode in $(targets); do \
+			if [ $${grammar} = "macrostate" ] && [ $${mode} = "outside" ]; then \
+				continue; \
+			fi; \
+			install -m 755 $(PROGRAMPREFIX)$${mode}_$${grammar} $(PREFIX)/bin; \
+		done; \
+		for mode in $(targets_window); do \
+			install -m 755 $(PROGRAMPREFIX)$${mode}_$${grammar}$(WINDOWSUFFIX) $(PREFIX)/bin; \
+		done; \
+	done;
+	for grammar in `echo "$(grammars)"`; do \
+		install -m 755 $(PROGRAMPREFIX)sci_$${grammar} $(PREFIX)/bin; \
+	done;
+	for consensus in `echo "$(consensus)"`; do \
+		install -m 755 $(PROGRAMPREFIX)rep_$${consensus} $(PREFIX)/bin; \
+	done;
+	install -m 755 RNAalihishapes $(PREFIX)/bin
+
+install-lib:
+	make -C $(BASEDIR)/Misc/Applications/lib/ install PREFIX=$(PREFIX)
+
+mfe:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "alg_ali_mfe$${suffix} * (alg_ali_dotBracket * alg_ali_shapeX * alg_ali_pfunc$${suffix})" $(BASEDIR)ali_$${grammar}.gap --kbacktrace --no-coopt $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="$@_$${grammar}"; \
+		fi; \
+	done
+
+subopt:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "alg_ali_mfe_subopt$${suffix} * (alg_ali_dotBracket * alg_ali_shapeX * alg_ali_pfunc$${suffix})" $(BASEDIR)ali_$${grammar}.gap --kbacktrace $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="subopt_$${grammar}"; \
+		fi; \
+	done
+
+shapes:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "((alg_ali_hishape_h * alg_ali_mfe$${suffix}) * (alg_ali_dotBracket * alg_ali_pfunc$${suffix})) suchthat suboptShapeClasses" $(BASEDIR)ali_$${grammar}.gap --kbacktrace --no-coopt-class $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="hishapes_$${grammar}"; \
+		fi; \
+	done
+
+probs_h:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "((alg_ali_hishape_h * (alg_ali_mfe$${suffix} % alg_ali_pfunc$${suffix})) suchthat filterLowProbShapes) * (alg_ali_dotBracket * alg_ali_pfunc$${suffix})" $(BASEDIR)ali_$${grammar}.gap --kbacktrace --no-coopt-class --kbest $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="probs_h_$${grammar}"; \
+		fi; \
+	done
+
+probs_hplus:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "((alg_ali_hishape_hplus * (alg_ali_mfe$${suffix} % alg_ali_pfunc$${suffix})) suchthat filterLowProbShapes) * (alg_ali_dotBracket * alg_ali_pfunc$${suffix})" $(BASEDIR)ali_$${grammar}.gap --kbacktrace --no-coopt-class --kbest $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="probs_hplus_$${grammar}"; \
+		fi; \
+	done
+
+probs_m:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "((alg_ali_hishape_m * (alg_ali_mfe$${suffix} % alg_ali_pfunc$${suffix})) suchthat filterLowProbShapes) * (alg_ali_dotBracket * alg_ali_pfunc$${suffix})" $(BASEDIR)ali_$${grammar}.gap --kbacktrace --no-coopt-class --kbest $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="probs_m_$${grammar}"; \
+		fi; \
+	done
+
+probs_a:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "((alg_ali_hishape_a * (alg_ali_mfe$${suffix} % alg_ali_pfunc$${suffix})) suchthat filterLowProbShapes) * (alg_ali_dotBracket * alg_ali_pfunc$${suffix})" $(BASEDIR)ali_$${grammar}.gap --kbacktrace --no-coopt-class --kbest $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="probs_a_$${grammar}"; \
+		fi; \
+	done
+
+
+
+# related:
+# 	for grammar in `echo "$(grammars)"`; do \
+# 		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+# 		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+# 		suffix=`echo "$${sOv}$${sMa}"`; \
+# 		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+# 			$(GAPC) -I $(BASEDIR) -p "((alg_ali_hishape_a * (alg_ali_mfe$${suffix} % alg_ali_pfunc$${suffix})) suchthat filterLowProbShapes) * alg_ali_dotBracket" $(BASEDIR)ali_$${grammar}.gap --kbacktrace --no-coopt-class --kbest $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+# 			$(MAKE) compile outname="related_$${grammar}"; \
+# 		fi; \
+# 	done
+
+sample:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "(((alg_ali_pfunc$${suffix} | alg_ali_pfunc_id$${suffix}) * (alg_ali_shapeX * alg_ali_mfe$${suffix} * alg_ali_dotBracket * alg_ali_pfunc$${suffix})) suchthat sample_filter)" $(BASEDIR)ali_$${grammar}.gap --sample $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="sample_$${grammar}"; \
+		fi; \
+	done
+
+# * alg_ali_shapeX
+#( ( 11.1111 = energy: -3.05176e-05 + covar.: 11.1111 ) , ..((((((........)))))).((........)).............((((((.......)))))).... )
+#   ((alg_ali_shapeX *             (alg_ali_mfe$${suffix} %        alg_ali_pfunc$${suffix})) suchthat filterLowProbShapes) * (alg_ali_dotBracket * alg_ali_pfunc$${suffix})
+#( ( [][][] , ( ( 11.1111 = energy: -3.05176e-05 + covar.: 11.1111 ) , 8.79477e-08 ) ) , ( ..((((((........)))))).((........)).............((((((.......)))))).... , 4.78545e-10 ) )
+eval:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		sMi=`if [ $$grammar = "microstate" ]; then echo "_id"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "alg_ali_mfe$${suffix} * alg_ali_dotBracket$${sMi}" $(BASEDIR)eval_ali_$${grammar}.gap $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="eval_$${grammar}" isEval=1; \
+		fi; \
+	done
+	
+outside:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		suffix=`echo "$${sOv}"`; \
+		if [ $${grammar} = "macrostate" ]; then \
+			echo "Sorry, we don't provide a outside version for macrostate yet"; \
+			continue; \
+		fi; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "alg_ali_outside_pfunc$${suffix}" $(BASEDIR)ali_outside_$${grammar}.gap $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="outside_$${grammar}"; \
+		fi; \
+	done
+
+
+helper:
+	for consensus in `echo "$(consensus)"`; do \
+		if [ ! -f "$(PROGRAMPREFIX)rep_$${consensus}" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "alg_ali_$${consensus}" $(BASEDIR)ali_nodangle.gap $(windowmodeflag) -o rep_$${consensus}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="rep_$${consensus}"; \
+		fi; \
+	done
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)sci_$${grammar}" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "alg_mfe$${suffix}" $(BASEDIR)$${grammar}.gap $(windowmodeflag) -o sci_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="sci_$${grammar}"; \
+		fi; \
+	done
+	
+pfall:
+	for grammar in `echo "$(grammars)"`; do \
+		sOv=`if [ $$grammar = "overdangle" ]; then echo "_overdangle"; fi`; \
+		sMa=`if [ $$grammar = "macrostate" ]; then echo "_macrostate"; fi`; \
+		suffix=`echo "$${sOv}$${sMa}"`; \
+		if [ ! -f "$(PROGRAMPREFIX)$@_$${grammar}$(current_windowmodesuffix)" ]; then \
+			$(GAPC) -I $(BASEDIR) -p "alg_ali_pfunc$${suffix}" $(BASEDIR)ali_$${grammar}.gap $(windowmodeflag) -o $@_$${grammar}$(current_windowmodesuffix).cc; \
+			$(MAKE) compile outname="$@_$${grammar}"; \
+		fi; \
+	done
+
+
+	
+compile:
+	$(PERL) $(RNAOPTIONSPERLSCRIPT) $(outname)$(current_windowmodesuffix).mf  $(isEval)
+	$(MAKE) -f $(outname)$(current_windowmodesuffix).mf CPPFLAGS_EXTRA="-I $(BASEDIR) -I ./" CXXFLAGS_EXTRA="$(CXXFLAGS_EXTRA)" $(FASTLIBRNA)
+	mv $(outname)$(current_windowmodesuffix) $(PROGRAMPREFIX)$(outname)$(current_windowmodesuffix)
+
+
+clean:
+	for program in `echo "$(targets)"`; do rm -f $${program}.*; rm -f $${program}_*; done
+	for program in `echo "$(targets_window)"`; do rm -f $${program}$(WINDOWSUFFIX).*; rm -f $${program}$(WINDOWSUFFIX)_*; done
+	for consensus in `echo "$(consensus)"`; do \
+		rm -f rep_$${consensus}*; \
+		rm -f rep_$${consensus}$(WINDOWSUFFIX)*; \
+	done
+	for grammar in `echo "$(grammars)"`; do \
+		rm -f sci_$${grammar}*; \
+		rm -f sci_$${grammar}$(WINDOWSUFFIX)*; \
+	done
+	
+	rm -f string.*
+	
+cleandist: clean
+	for grammar in `echo "$(grammars)"`; do \
+		for program in `echo "$(targets)"`; do rm -f $(PROGRAMPREFIX)$${program}_$${grammar}; done; \
+		for program in `echo "$(targets_window)"`; do rm -f $(PROGRAMPREFIX)$${program}_$${grammar}$(WINDOWSUFFIX); done; \
+	done
+	for consensus in `echo "$(consensus)"`; do \
+		rm -f $(PROGRAMPREFIX)rep_$${consensus}; \
+		rm -f $(PROGRAMPREFIX)rep_$${consensus}$(WINDOWSUFFIX); \
+	done
+	for grammar in `echo "$(grammars)"`; do \
+		rm -f $(PROGRAMPREFIX)sci_$${grammar}; \
+		rm -f $(PROGRAMPREFIX)sci_$${grammar}$(WINDOWSUFFIX); \
+	done

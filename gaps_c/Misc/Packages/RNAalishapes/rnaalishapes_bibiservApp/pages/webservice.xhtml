@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de"
+
+Contributor(s):
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                template="/WEB-INF/templates/toolTpl.xhtml">
+
+
+
+    <ui:define name="headContentTitle">
+       #{messages.property('rnaalishapes_name')}
+    </ui:define>
+
+    <ui:define name="app_title">
+            <h:outputText class="title" escape="false" value="#{messages.property('rnaalishapes_name')}"/>
+            <div class="separator app_separator"/>
+    </ui:define>
+
+    <ui:define name="app_content">
+        <div class="content">
+            This is a short introduction using #{messages.property('rnaalishapes_name')} WebServices offered by BiBiServ.
+            If you're not familiar with using webservices in general you should have a closer look to our webservice related
+            linklist <em>[todo: create link list]</em>.
+        </div>
+        <div class="content">
+            <h4>WSDL - methods, parameters and datatypes</h4>
+            <p>
+                If you've a closer look at the WSDL file(s) describing the #{messages.property('rnaalishapes_name')} webservice,
+                you can see a couple of public accessible methods.
+            </p>
+
+
+            
+            <h4>#{messages.property('rnaalishapes_function_mfe_name')} (<a href="#{toolBean_rnaalishapes_webservice.wsdl('rnaalishapes_function_mfe')}">wsdl</a>)</h4>
+            <ul>
+                <ui:repeat value="#{toolBean_rnaalishapes_webservice.methodList('rnaalishapes_function_mfe')}" var="method">
+                    <li>#{method}</li>
+                </ui:repeat>
+            </ul>
+            
+            <h4>#{messages.property('rnaalishapes_function_subopt_name')} (<a href="#{toolBean_rnaalishapes_webservice.wsdl('rnaalishapes_function_subopt')}">wsdl</a>)</h4>
+            <ul>
+                <ui:repeat value="#{toolBean_rnaalishapes_webservice.methodList('rnaalishapes_function_subopt')}" var="method">
+                    <li>#{method}</li>
+                </ui:repeat>
+            </ul>
+            
+            <h4>#{messages.property('rnaalishapes_function_shapes_name')} (<a href="#{toolBean_rnaalishapes_webservice.wsdl('rnaalishapes_function_shapes')}">wsdl</a>)</h4>
+            <ul>
+                <ui:repeat value="#{toolBean_rnaalishapes_webservice.methodList('rnaalishapes_function_shapes')}" var="method">
+                    <li>#{method}</li>
+                </ui:repeat>
+            </ul>
+            
+            <h4>#{messages.property('rnaalishapes_function_probs_name')} (<a href="#{toolBean_rnaalishapes_webservice.wsdl('rnaalishapes_function_probs')}">wsdl</a>)</h4>
+            <ul>
+                <ui:repeat value="#{toolBean_rnaalishapes_webservice.methodList('rnaalishapes_function_probs')}" var="method">
+                    <li>#{method}</li>
+                </ui:repeat>
+            </ul>
+            
+            <h4>#{messages.property('rnaalishapes_function_sample_name')} (<a href="#{toolBean_rnaalishapes_webservice.wsdl('rnaalishapes_function_sample')}">wsdl</a>)</h4>
+            <ul>
+                <ui:repeat value="#{toolBean_rnaalishapes_webservice.methodList('rnaalishapes_function_sample')}" var="method">
+                    <li>#{method}</li>
+                </ui:repeat>
+            </ul>
+            
+            <h4>#{messages.property('rnaalishapes_function_eval_name')} (<a href="#{toolBean_rnaalishapes_webservice.wsdl('rnaalishapes_function_eval')}">wsdl</a>)</h4>
+            <ul>
+                <ui:repeat value="#{toolBean_rnaalishapes_webservice.methodList('rnaalishapes_function_eval')}" var="method">
+                    <li>#{method}</li>
+                </ui:repeat>
+            </ul>
+            
+            <h4>#{messages.property('rnaalishapes_function_convert_name')} (<a href="#{toolBean_rnaalishapes_webservice.wsdl('rnaalishapes_function_convert')}">wsdl</a>)</h4>
+            <ul>
+                <ui:repeat value="#{toolBean_rnaalishapes_webservice.methodList('rnaalishapes_function_convert')}" var="method">
+                    <li>#{method}</li>
+                </ui:repeat>
+            </ul>
+            
+            <h4>#{messages.property('rnaalishapes_function_outside_name')} (<a href="#{toolBean_rnaalishapes_webservice.wsdl('rnaalishapes_function_outside')}">wsdl</a>)</h4>
+            <ul>
+                <ui:repeat value="#{toolBean_rnaalishapes_webservice.methodList('rnaalishapes_function_outside')}" var="method">
+                    <li>#{method}</li>
+                </ui:repeat>
+            </ul>
+            
+
+            <p>
+            Bioinformatic programs often perform computation on large data sets and therefore require much CPU time. This can cause
+            problems like http connection timeouts (usually after 5 minutes) during online usage. To avoid such problems when using
+            BiBiServ WebServices we use a technique called Request and Reply with polling. First the client side (e.g. your program)
+            requests a REPuter job submitting the necessary data (parameter and data - if provided) and gets an id after the job is
+            started. Afterwards the client can request the result by calling the corresponding response method with the id returned
+            earlier. If the REPuter job is not finished, the user gets a status code with an enhanced description of current status
+            back (see HOBIT status codes for more information). For easier handling the WebService interface provides two method
+            <em>getStatus</em> (Status Code + human readable description) and <em>getStatusCode</em> (status code only) accessing
+            the tool status without parsing the SOAP fault message returned from the response method.
+            </p>
+
+            <p>
+                The methods, parameter and supported data types are the same as in the browser based interface and are described detailed
+                in the <a href="rnaalishapes?viewType=manual">manual</a>.
+            </p>
+        </div>
+        <br/><br/>
+         <!-- Custom Content -->
+        <h:outputText escape="false" class="content" value="#{messages.property('rnaalishapes_view_webservice_customContent')}"/>
+        
+    </ui:define>
+
+ 
+</ui:composition>

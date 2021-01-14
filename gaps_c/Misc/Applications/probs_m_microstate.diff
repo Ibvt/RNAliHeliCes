@@ -1,0 +1,408 @@
+5c5
+< //     bellmansgapc-2013.05.02
+---
+> //     bellmansgapc-2020.01.08
+8c8
+< //     /home/jhuang/local/gapc/bin/gapc -I ../../../ -p ((alg_ali_hishape_m * (alg_ali_mfe % alg_ali_pfunc)) suchthat filterLowProbShapes) * (alg_ali_dotBracket * alg_ali_pfunc) ../../../ali_microstate.gap --kbacktrace --no-coopt-class --kbest -o probs_m_microstate.cc 
+---
+> //     gapc -I ../../../ -p ((alg_ali_hishape_m * (alg_ali_mfe % alg_ali_pfunc)) suchthat filterLowProbShapes)*(alg_ali_dotBracket * alg_ali_pfunc) ../../../ali_microstate.gap --kbacktrace --no-coopt-class --kbest -o probs_m_microstate.cc 
+25,28c25,27
+< #include "Extensions/rnaoptions.hh"
+< //#include "filter_add.hh"
+< 
+< #include <typeinfo>
+---
+> #include <rtlib/generic_opts.hh>
+> #include "rtlib/pareto_dom_sort.hh"
+> #include "rtlib/pareto_yukish_ref.hh"
+68,71c67
+<               if ((ans.second.first.mfe + ans.second.first.covar) <= _thresh)  // rule1
+<               {
+<                 push_back( answers, ans);
+<               }
+---
+>               push_back( answers, ans);
+112,115c108
+<               if ((ans.second.first.mfe + ans.second.first.covar) <= _thresh)  // rule1
+<               {
+<                 push_back( answers, ans);
+<               }
+---
+>               push_back( answers, ans);
+166,169c159
+<               if ((ans.second.first.mfe + ans.second.first.covar) <= _thresh)  // rule1
+<               {
+<                 push_back( answers, ans);
+<               }
+---
+>               push_back( answers, ans);
+200,203c190
+<               if ((ans.second.first.mfe + ans.second.first.covar) <= _thresh)  // rule1
+<               {
+<                 push_back( answers, ans);
+<               }
+---
+>               push_back( answers, ans);
+226c213
+<       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x2620aa0_zero;
+---
+>       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x20ae340_zero;
+235,241c222,223
+<       //std::string s = typeid(t_0_seq).name();
+<       //std::cout << _match_tokens_h[0] << "," << s << std::endl;
+<       //std::cout << t_0_seq.seq.row(1) << std::endl;
+<       if ( (_matchStr.empty() && basepair(t_0_seq, t_0_i, t_0_j)) || \
+<            ((!_matchStr.empty() && !_exact) && fuzzy_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) || \
+<            ((!_matchStr.empty() && _exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) )  // added
+<       {                                                                                                           // added 
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+327,328c309,310
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_i)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>         {
+416c398
+<       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x2620aa0_zero;
+---
+>       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x20ae340_zero;
+425,426c407,408
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>         {
+763c745
+<       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x2620aa0_zero;
+---
+>       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x20ae340_zero;
+772,773c754,755
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+812,813c794,795
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+869,870c851,852
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+926,927c908,909
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+1006c988
+<       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x2620aa0_zero;
+---
+>       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x20ae340_zero;
+1015,1016c997,998
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>         {
+1082c1064
+<       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x2620aa0_zero;
+---
+>       return LBRope_firstG_Bmfecovar_firstG_float_secondG_E_secondG_EMhdecl0x20ae340_zero;
+1653c1635
+< #line 1634 "probs_m_microstate.cc"
+---
+> #line 1636 "probs_m_microstate.cc"
+1660c1642
+< #line 1641 "probs_m_microstate.cc"
+---
+> #line 1643 "probs_m_microstate.cc"
+1667c1649
+< #line 1648 "probs_m_microstate.cc"
+---
+> #line 1650 "probs_m_microstate.cc"
+1683c1665
+< #line 1664 "probs_m_microstate.cc"
+---
+> #line 1666 "probs_m_microstate.cc"
+1690c1672
+< #line 1671 "probs_m_microstate.cc"
+---
+> #line 1673 "probs_m_microstate.cc"
+1697c1679
+< #line 1678 "probs_m_microstate.cc"
+---
+> #line 1680 "probs_m_microstate.cc"
+1704c1686
+< #line 1685 "probs_m_microstate.cc"
+---
+> #line 1687 "probs_m_microstate.cc"
+1711c1693
+< #line 1692 "probs_m_microstate.cc"
+---
+> #line 1694 "probs_m_microstate.cc"
+1738c1720
+< #line 1719 "probs_m_microstate.cc"
+---
+> #line 1721 "probs_m_microstate.cc"
+1745c1727
+< #line 1726 "probs_m_microstate.cc"
+---
+> #line 1728 "probs_m_microstate.cc"
+1769c1751
+< #line 1750 "probs_m_microstate.cc"
+---
+> #line 1752 "probs_m_microstate.cc"
+1793c1775
+< #line 1774 "probs_m_microstate.cc"
+---
+> #line 1776 "probs_m_microstate.cc"
+1817c1799
+< #line 1798 "probs_m_microstate.cc"
+---
+> #line 1800 "probs_m_microstate.cc"
+1841c1823
+< #line 1822 "probs_m_microstate.cc"
+---
+> #line 1824 "probs_m_microstate.cc"
+1872c1854
+< #line 1853 "probs_m_microstate.cc"
+---
+> #line 1855 "probs_m_microstate.cc"
+2175c2157
+< #line 2156 "probs_m_microstate.cc"
+---
+> #line 2158 "probs_m_microstate.cc"
+2185c2167
+< #line 2166 "probs_m_microstate.cc"
+---
+> #line 2168 "probs_m_microstate.cc"
+2195c2177
+< #line 2176 "probs_m_microstate.cc"
+---
+> #line 2178 "probs_m_microstate.cc"
+2202c2184
+< #line 2183 "probs_m_microstate.cc"
+---
+> #line 2185 "probs_m_microstate.cc"
+2211c2193
+< #line 2192 "probs_m_microstate.cc"
+---
+> #line 2194 "probs_m_microstate.cc"
+2222c2204
+< #line 2203 "probs_m_microstate.cc"
+---
+> #line 2205 "probs_m_microstate.cc"
+2235c2217
+< #line 2216 "probs_m_microstate.cc"
+---
+> #line 2218 "probs_m_microstate.cc"
+2246c2228
+< #line 2227 "probs_m_microstate.cc"
+---
+> #line 2229 "probs_m_microstate.cc"
+2256c2238
+< #line 2237 "probs_m_microstate.cc"
+---
+> #line 2239 "probs_m_microstate.cc"
+2266c2248
+< #line 2247 "probs_m_microstate.cc"
+---
+> #line 2249 "probs_m_microstate.cc"
+2275c2257
+< #line 2256 "probs_m_microstate.cc"
+---
+> #line 2258 "probs_m_microstate.cc"
+2285c2267
+< #line 2266 "probs_m_microstate.cc"
+---
+> #line 2268 "probs_m_microstate.cc"
+2295c2277
+< #line 2276 "probs_m_microstate.cc"
+---
+> #line 2278 "probs_m_microstate.cc"
+2305c2287
+< #line 2286 "probs_m_microstate.cc"
+---
+> #line 2288 "probs_m_microstate.cc"
+2315c2297
+< #line 2296 "probs_m_microstate.cc"
+---
+> #line 2298 "probs_m_microstate.cc"
+2325c2307
+< #line 2306 "probs_m_microstate.cc"
+---
+> #line 2308 "probs_m_microstate.cc"
+2344c2326
+< #line 2325 "probs_m_microstate.cc"
+---
+> #line 2327 "probs_m_microstate.cc"
+2354c2336
+< #line 2335 "probs_m_microstate.cc"
+---
+> #line 2337 "probs_m_microstate.cc"
+2363c2345
+< #line 2344 "probs_m_microstate.cc"
+---
+> #line 2346 "probs_m_microstate.cc"
+2370c2352
+< #line 2351 "probs_m_microstate.cc"
+---
+> #line 2353 "probs_m_microstate.cc"
+2377c2359
+< #line 2358 "probs_m_microstate.cc"
+---
+> #line 2360 "probs_m_microstate.cc"
+2384c2366
+< #line 2365 "probs_m_microstate.cc"
+---
+> #line 2367 "probs_m_microstate.cc"
+2391c2373
+< #line 2372 "probs_m_microstate.cc"
+---
+> #line 2374 "probs_m_microstate.cc"
+2400c2382
+< #line 2381 "probs_m_microstate.cc"
+---
+> #line 2383 "probs_m_microstate.cc"
+2411c2393
+< #line 2392 "probs_m_microstate.cc"
+---
+> #line 2394 "probs_m_microstate.cc"
+2420c2402
+< #line 2401 "probs_m_microstate.cc"
+---
+> #line 2403 "probs_m_microstate.cc"
+2427c2409
+< #line 2408 "probs_m_microstate.cc"
+---
+> #line 2410 "probs_m_microstate.cc"
+2434c2416
+< #line 2415 "probs_m_microstate.cc"
+---
+> #line 2417 "probs_m_microstate.cc"
+2441c2423
+< #line 2422 "probs_m_microstate.cc"
+---
+> #line 2424 "probs_m_microstate.cc"
+2448c2430
+< #line 2429 "probs_m_microstate.cc"
+---
+> #line 2431 "probs_m_microstate.cc"
+2455c2437
+< #line 2436 "probs_m_microstate.cc"
+---
+> #line 2438 "probs_m_microstate.cc"
+2462c2444
+< #line 2443 "probs_m_microstate.cc"
+---
+> #line 2445 "probs_m_microstate.cc"
+2469c2451
+< #line 2450 "probs_m_microstate.cc"
+---
+> #line 2452 "probs_m_microstate.cc"
+2476c2458
+< #line 2457 "probs_m_microstate.cc"
+---
+> #line 2459 "probs_m_microstate.cc"
+2493c2475
+< #line 2474 "probs_m_microstate.cc"
+---
+> #line 2476 "probs_m_microstate.cc"
+2500c2482
+< #line 2481 "probs_m_microstate.cc"
+---
+> #line 2483 "probs_m_microstate.cc"
+2511c2493
+< #ident "$Id: Compiled with gapc bellmansgapc-2013.05.02 $"
+---
+> #ident "$Id: Compiled with gapc bellmansgapc-2020.01.08 $"
+2813,2816c2795
+<               if ((ans.first.second.first.mfe + ans.first.second.first.covar) <= _thresh)  // rule1
+<               {
+<                 push_back( answers, ans);
+<               }
+---
+>               push_back( answers, ans);
+2857,2860c2836
+<               if ((ans.first.second.first.mfe + ans.first.second.first.covar) <= _thresh)  // rule1
+<               {
+<                 push_back( answers, ans);
+<               }
+---
+>               push_back( answers, ans);
+2911,2914c2887
+<               if ((ans.first.second.first.mfe + ans.first.second.first.covar) <= _thresh)  // rule1
+<               {
+<                 push_back( answers, ans);
+<               }
+---
+>               push_back( answers, ans);
+2945,2948c2918
+<               if ((ans.first.second.first.mfe + ans.first.second.first.covar) <= _thresh)  // rule1
+<               {
+<                 push_back( answers, ans);
+<               }
+---
+>               push_back( answers, ans);
+2980,2983c2950,2951
+<       if ( (_matchStr.empty() && basepair(t_0_seq, t_0_i, t_0_j)) || \
+<            ((!_matchStr.empty() && !_exact) && fuzzy_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) || \
+<            ((!_matchStr.empty() && _exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_h)) )  // added
+<       {                                                                                                           // added
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+3064,3065c3032,3033
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_i)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>         {
+3163,3164c3131,3132
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>         {
+3530,3531c3498,3499
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+3570,3571c3538,3539
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+3627,3628c3595,3596
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+3684,3685c3652,3653
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_m)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>       {
+3775,3776c3743,3744
+<       if /*(*/(/*(!_exact) && */basepair(t_0_seq, t_0_i, t_0_j)) /*|| ((_exact) && exact_pairing_center_at(t_0_seq, t_0_i, t_0_j, _match_tokens_b)))*/  // added_
+<       {                                                                                                                                     // added_
+---
+>       if (basepair(t_0_seq, t_0_i, t_0_j))
+>         {
+4353c4321
+<   return h_bt(range);
+---
+>   return h_bt(range, left_answers);

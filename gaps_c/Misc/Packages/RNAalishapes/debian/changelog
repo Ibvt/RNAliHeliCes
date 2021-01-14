@@ -1,0 +1,266 @@
+rnaalishapes (2.2.2-0ubuntu1~quantal1) quantal; urgency=low
+
+  * Dangling corrections in outside algorithm for RNAshapes and
+    RNAalishapes.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 30 Apr 2013 10:52:27 +0200
+
+rnaalishapes (2.2.2-0ubuntu1~precise1) precise; urgency=low
+
+  * Dangling corrections in outside algorithm for RNAshapes and
+    RNAalishapes.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 30 Apr 2013 10:52:20 +0200
+
+rnaalishapes (2.2.2-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * Dangling corrections in outside algorithm for RNAshapes and
+    RNAalishapes.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 30 Apr 2013 10:52:14 +0200
+
+rnaalishapes (2.2.2-0ubuntu1~lucid1) lucid; urgency=low
+
+  * Dangling corrections in outside algorithm for RNAshapes and
+    RNAalishapes.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 30 Apr 2013 10:52:04 +0200
+
+rnaalishapes (2.2.1-0ubuntu1~quantal1) quantal; urgency=low
+
+  * Renaming of function is_empty into isEmpty in the underlying
+    bellmansgapc package to avoid naming conflicts with boost-lib
+    function names when compiling with an older gcc, like 4.2 in osx or
+    4.4 in lucid.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:54:07 +0200
+
+rnaalishapes (2.2.1-0ubuntu1~precise1) precise; urgency=low
+
+  * Renaming of function is_empty into isEmpty in the underlying
+    bellmansgapc package to avoid naming conflicts with boost-lib
+    function names when compiling with an older gcc, like 4.2 in osx or
+    4.4 in lucid.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:54:00 +0200
+
+rnaalishapes (2.2.1-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * Renaming of function is_empty into isEmpty in the underlying
+    bellmansgapc package to avoid naming conflicts with boost-lib
+    function names when compiling with an older gcc, like 4.2 in osx or
+    4.4 in lucid.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:53:52 +0200
+
+rnaalishapes (2.2.1-0ubuntu1~lucid1) lucid; urgency=low
+
+  * Renaming of function is_empty into isEmpty in the underlying
+    bellmansgapc package to avoid naming conflicts with boost-lib
+    function names when compiling with an older gcc, like 4.2 in osx or
+    4.4 in lucid.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Sun, 14 Apr 2013 10:50:44 +0200
+
+rnaalishapes (2.2.0-0ubuntu1~quantal1) quantal; urgency=low
+
+  * updated dependency to bellmansgapc
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 09 Apr 2013 17:34:25 +0200
+
+rnaalishapes (2.2.0-0ubuntu1~precise1) precise; urgency=low
+
+  * updated dependency to bellmansgapc
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 09 Apr 2013 17:34:19 +0200
+
+rnaalishapes (2.2.0-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * updated dependency to bellmansgapc
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 09 Apr 2013 17:34:09 +0200
+
+rnaalishapes (2.1.5-0ubuntu1~quantal1) quantal; urgency=low
+
+  * new feature: outside base pair probability computation
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 09 Apr 2013 14:21:29 +0200
+
+rnaalishapes (2.1.5-0ubuntu1~precise1) precise; urgency=low
+
+  * new feature: outside base pair probability computation
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 09 Apr 2013 14:21:23 +0200
+
+rnaalishapes (2.1.5-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * new feature: outside base pair probability computation
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 09 Apr 2013 14:21:14 +0200
+
+rnaalishapes (2.1.4-0ubuntu1~quantal1) quantal; urgency=low
+
+  * minor bugfixes
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Wed, 13 Mar 2013 00:09:51 +0100
+
+rnaalishapes (2.1.4-0ubuntu1~precise1) precise; urgency=low
+
+  * minor bugfixes
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Wed, 13 Mar 2013 00:09:45 +0100
+
+rnaalishapes (2.1.4-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * minor bugfixes
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Wed, 13 Mar 2013 00:07:31 +0100
+
+rnaalishapes (2.1.3-0ubuntu1~quantal1) quantal; urgency=low
+
+  * new centralized version numbers
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 12 Mar 2013 09:21:09 +0100
+
+rnaalishapes (2.1.3-0ubuntu1~precise1) precise; urgency=low
+
+  * new centralized version numbers
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 12 Mar 2013 09:21:03 +0100
+
+rnaalishapes (2.1.3-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * new centralized version numbers
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 12 Mar 2013 09:18:55 +0100
+
+rnaalishapes (2.1.2-0ubuntu1~quantal1) quantal; urgency=low
+
+  * new launchpad upload
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 12 Mar 2013 00:04:41 +0100
+
+rnaalishapes (2.1.2-0ubuntu1~precise1) precise; urgency=low
+
+  * new launchpad upload
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 12 Mar 2013 00:04:34 +0100
+
+rnaalishapes (2.1.2-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * new launchpad upload
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 12 Mar 2013 00:02:17 +0100
+
+rnaalishapes (2.1.1-0ubuntu1~quantal1) quantal; urgency=low
+
+  * new modes eval and convert. eval is like RNAeval: input is a
+    sequence and a structure, output is the energy of this very
+    structure for the given sequence. convert takes a dot Bracket string
+    and returns a shape string. In addition: all modes return shape
+    strings.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 23:57:05 +0100
+
+rnaalishapes (2.1.1-0ubuntu1~precise1) precise; urgency=low
+
+  * new modes eval and convert. eval is like RNAeval: input is a
+    sequence and a structure, output is the energy of this very
+    structure for the given sequence. convert takes a dot Bracket string
+    and returns a shape string. In addition: all modes return shape
+    strings.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 23:56:58 +0100
+
+rnaalishapes (2.1.1-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * new modes eval and convert. eval is like RNAeval: input is a
+    sequence and a structure, output is the energy of this very
+    structure for the given sequence. convert takes a dot Bracket string
+    and returns a shape string. In addition: all modes return shape
+    strings.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 23:56:52 +0100
+
+rnaalishapes (2.1.1-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * new modes eval and convert. eval is like RNAeval: input is a
+    sequence and a structure, output is the energy of this very
+    structure for the given sequence. convert takes a dot Bracket string
+    and returns a shape string. In addition: all modes return shape
+    strings.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 23:56:17 +0100
+
+rnaalishapes (2.0.3-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * now addressing right target for install in makefile
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 11 Mar 2013 17:11:18 +0100
+
+rnaalishapes (2.0.2-0ubuntu1~quantal1) quantal; urgency=low
+
+  * now addressing right target for install in makefile
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 26 Feb 2013 08:52:11 +0100
+
+rnaalishapes (2.0.2-0ubuntu1~precise1) precise; urgency=low
+
+  * now addressing right target for install in makefile
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 26 Feb 2013 08:52:05 +0100
+
+rnaalishapes (2.0.2-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * now addressing right target for install in makefile
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 26 Feb 2013 08:50:31 +0100
+
+rnaalishapes (2.0.1-0ubuntu1~quantal1) quantal; urgency=low
+
+  * corrected makefile for RNAalishapes, such that install target should
+    really copy compiled binaries into PREFIX, now.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 26 Feb 2013 00:05:30 +0100
+
+rnaalishapes (2.0.1-0ubuntu1~precise1) precise; urgency=low
+
+  * corrected makefile for RNAalishapes, such that install target should
+    really copy compiled binaries into PREFIX, now.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 26 Feb 2013 00:05:24 +0100
+
+rnaalishapes (2.0.1-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * corrected makefile for RNAalishapes, such that install target should
+    really copy compiled binaries into PREFIX, now.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 26 Feb 2013 00:05:17 +0100
+
+rnaalishapes (2.0.1-0ubuntu1~lucid1) lucid; urgency=low
+
+  * corrected makefile for RNAalishapes, such that install target should
+    really copy compiled binaries into PREFIX, now.
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Tue, 26 Feb 2013 00:03:52 +0100
+
+rnaalishapes (2.0.0-0ubuntu1~quantal1) quantal; urgency=low
+
+  * Initial release
+   - code transition from prototypic Haskell-ADP to Bellman's GAP
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 25 Feb 2013 17:03:00 +0200
+
+rnaalishapes (2.0.0-0ubuntu1~precise1) precise1; urgency=low
+
+  * Initial release
+   - code transition from prototypic Haskell-ADP to Bellman's GAP
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 25 Feb 2013 17:03:00 +0200
+
+rnaalishapes (2.0.0-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * Initial release
+   - code transition from prototypic Haskell-ADP to Bellman's GAP
+
+ -- Bielefeld BioInformatics Service <bibi-help@cebitec.uni-bielefeld.de>  Mon, 25 Feb 2013 17:03:00 +0200

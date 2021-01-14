@@ -1,0 +1,26 @@
+1. in  librna/rnalib.c 
+before:
+double scale(int x)
+{
+  double mean_nrg= -0.1843;  /* mean energy for random sequences: 184.3*length cal */
+  double mean_scale = exp (-1.0 * mean_nrg / (GASCONST/1000 * (temperature + K0)));
+
+  return 1.0;
+}
+after:
+double scale(int x)
+{
+  double mean_nrg= -0.1843;  /* mean energy for random sequences: 184.3*length cal */
+  double mean_scale = exp (-1.0 * mean_nrg / (GASCONST/1000 * (temperature + K0)));
+
+  //return (1.0 / pow(mean_scale, x));
+  return 1.0;
+}
+
+2. in rtlib/hashtng.hh
+before:
+              if (!inspector.equal_score(*last, *i))
+after:
+#if 0 
+              if (!inspector.equal_score(*last, *i))
+#endif

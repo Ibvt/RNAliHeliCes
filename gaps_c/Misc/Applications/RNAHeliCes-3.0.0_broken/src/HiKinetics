@@ -1,0 +1,68 @@
+#! /bin/bash
+
+# Usage example: ./HiKinetics xbix.seq
+#! /bin/sh
+#TODO: extend analysing the $0 to fit it worked with ../examples/xbix.seq directory
+
+# http://blog.mafr.de/2007/08/05/cmdline-options-in-shell-scripts/
+USAGE="Usage: `basename $0` faa-file [-hv]"  # [-o arg] args
+EXAMPLE="Example: `basename $0` xbix.seq"
+
+# Parse command line options.
+while getopts hvo: OPT; do
+    case "$OPT" in
+        h)
+            echo $USAGE
+            echo $EXAMPLE
+            exit 0
+            ;;
+        v)
+            echo "`basename $0` version 0.1"
+            exit 0
+            ;;
+#         o)
+#             OUTPUT_FILE=$OPTARG
+#             ;;
+        \?)
+            # getopts issues an error message
+            echo $USAGE #>&2
+            echo $EXAMPLE #>&2
+            exit 1
+            ;;
+    esac
+done
+
+# Remove the switches we parsed above.
+shift `expr $OPTIND - 1`
+
+# We want at least one non-option argument. 
+# Remove this block if you don't need it.
+if [ $# -ne 1 ]; then
+    echo $USAGE #>&2
+    echo $EXAMPLE #>&2
+    exit 1
+fi
+
+# Access additional arguments as usual through 
+# variables $@, $*, $1, $2, etc. or using this loop:
+#for PARAM; do
+    #echo $PARAM
+#done
+while test $1
+do
+    rootname=`echo $1 | cut -d"." -f1`  # $1
+    ./RNAHeliCes -f $1 --minh 8 -k 100 > $rootname.dis
+    echo "finish RNAHeliCes calculation!"
+    ./hikinetic_helper0.rb $rootname.dis $rootname.fa $rootname.hi
+    ./HiPath -f $rootname.fa -a -t 1 -r -s $rootname.hi > $rootname.hi.dis
+    echo "finish HiPath calculation!"
+    ./hikinetic_helper1.rb $rootname.hi.dis $rootname.hi.dis.1 rates.out $rootname.kin.plt
+    treekin --p0 2=1 -m H < $rootname.hi.dis.1 > $rootname.hi.dis.kin
+    echo "finish treekin calculation!"
+    shift
+done
+
+# EOF
+
+
+

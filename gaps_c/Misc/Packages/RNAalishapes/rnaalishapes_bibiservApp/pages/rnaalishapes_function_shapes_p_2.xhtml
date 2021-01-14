@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright 2010 BiBiServ Curator Team, http://bibiserv.cebitec.uni-bielefeld.de,
+All rights reserved.
+
+The contents of this file are subject to the terms of the Common
+Development and Distribution License("CDDL") (the "License"). You
+may not use this file except in compliance with the License. You can
+obtain a copy of the License at http://www.sun.com/cddl/cddl.html
+
+See the License for the specific language governing permissions and
+limitations under the License.  When distributing the software, include
+this License Header Notice in each file.  If applicable, add the following
+below the License Header, with the fields enclosed by brackets [] replaced
+ by your own identifying information:
+
+"Portions Copyrighted [year] [name of copyright owner]"
+
+Contributor(s):
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/toolsubmissionTpl.xhtml">
+
+
+    <!-- for each start :: input create a file upload and a textarea box -->
+    <ui:define name="app_title">
+        <h:outputText styleClass="title"
+                      escape="false"
+                      value="#{messages.property('rnaalishapes_name')}[rnaalishapes_function_shapes]"/>
+        <div class="separator app_separator"/>
+    </ui:define>
+    
+     <ui:define name="scripts">
+         <script type="text/javascript"  src="/resources/scripts/submission.js"/> 
+    </ui:define>
+    
+    <ui:define name="app_page_counter">
+        3/4
+    </ui:define>
+    
+    <ui:define name="app_content">
+       
+        <h:form>
+        <h:panelGroup id="paramGroup" styleClass="paramBox" layout="block">
+            
+               
+                <fieldset style="clear:both">
+<legend title="#{messages.property('rnaalishapes_paramgroup_grp_energydeviation_shortDescription')}">#{messages.property('rnaalishapes_paramgroup_grp_energydeviation_name')}</legend>
+<div class="paramBox">
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_relative_deviation_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_relative_deviation_name')}" for="rnaalishapes_parameter_relative_deviation" id="rnaalishapes_parameter_relative_deviation_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_relative_deviation">(?)</a></div>
+<h:inputText styleClass="input_parameter" id="rnaalishapes_parameter_relative_deviation_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_relative_deviation}" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}"/>  <br/>
+<h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_relative_deviation_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_relative_deviation_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_absolute_deviation_shortDescription')}&#0010;0 &#8804; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.input.param.num.VALUE')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_absolute_deviation_name')}" for="rnaalishapes_parameter_absolute_deviation" id="rnaalishapes_parameter_absolute_deviation_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_absolute_deviation">(?)</a></div>
+<h:inputText styleClass="input_parameter" id="rnaalishapes_parameter_absolute_deviation_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_absolute_deviation}" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}"/>  <br/>
+<h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_absolute_deviation_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_absolute_deviation_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+
+</div>
+</fieldset>
+            <fieldset style="clear:both">
+<legend title="#{messages.property('rnaalishapes_paramgroup_grp_stochasticoptions_shortDescription')}">#{messages.property('rnaalishapes_paramgroup_grp_stochasticoptions_name')}</legend>
+<div class="paramBox">
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_structureprobs_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_structureprobs_name')}" for="rnaalishapes_parameter_structureprobs" id="rnaalishapes_parameter_structureprobs_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_structureprobs">(?)</a></div>
+<h:selectOneRadio id="rnaalishapes_parameter_structureprobs_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_structureprobs}" title="#{messages.property('rnaalishapes_parameter_structureprobs_shortDescription')}" layout="pageDirection" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}">
+    <f:selectItem itemValue="0" itemLabel="#{messages.property('rnaalishapes_parameter_structureprobs_0')} [0]"/>
+    <f:selectItem itemValue="1" itemLabel="#{messages.property('rnaalishapes_parameter_structureprobs_1')} [1]"/>
+</h:selectOneRadio> <br/> <h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_structureprobs_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_structureprobs_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+
+</div>
+</fieldset>
+<fieldset style="clear:both">
+<legend title="#{messages.property('rnaalishapes_paramgroup_grp_alignmentoptions_shortDescription')}">#{messages.property('rnaalishapes_paramgroup_grp_alignmentoptions_name')}</legend>
+<div class="paramBox">
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_structure_conservation_index_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_structure_conservation_index_name')}" for="rnaalishapes_parameter_structure_conservation_index" id="rnaalishapes_parameter_structure_conservation_index_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_structure_conservation_index">(?)</a></div>
+<h:selectOneRadio id="rnaalishapes_parameter_structure_conservation_index_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_structure_conservation_index}" title="#{messages.property('rnaalishapes_parameter_structure_conservation_index_shortDescription')}" layout="pageDirection" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}">
+<f:selectItem itemValue="0" itemLabel="#{messages.property('rnaalishapes_parameter_structure_conservation_index_0')} [0]"/>
+<f:selectItem itemValue="1" itemLabel="#{messages.property('rnaalishapes_parameter_structure_conservation_index_1')} [1]"/>
+</h:selectOneRadio> <br/> <h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_structure_conservation_index_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_structure_conservation_index_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_consensus_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_consensus_name')}" for="rnaalishapes_parameter_consensus" id="rnaalishapes_parameter_consensus_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_consensus">(?)</a></div>
+<h:selectOneRadio id="rnaalishapes_parameter_consensus_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_consensus}" title="#{messages.property('rnaalishapes_parameter_consensus_shortDescription')}" layout="pageDirection" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}">
+<f:selectItem itemValue="consensus" itemLabel="#{messages.property('rnaalishapes_parameter_consensus_consensus')} [consensus]"/>
+<f:selectItem itemValue="mis" itemLabel="#{messages.property('rnaalishapes_parameter_consensus_mis')} [mis]"/>
+</h:selectOneRadio> <br/> <h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_consensus_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_consensus_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_pairing_fraction_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_pairing_fraction_name')}" for="rnaalishapes_parameter_pairing_fraction" id="rnaalishapes_parameter_pairing_fraction_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_pairing_fraction">(?)</a></div>
+<h:inputText styleClass="input_parameter" id="rnaalishapes_parameter_pairing_fraction_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_pairing_fraction}" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}"/>  <br/>
+<h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_pairing_fraction_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_pairing_fraction_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_cfactor_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_cfactor_name')}" for="rnaalishapes_parameter_cfactor" id="rnaalishapes_parameter_cfactor_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_cfactor">(?)</a></div>
+<h:inputText styleClass="input_parameter" id="rnaalishapes_parameter_cfactor_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_cfactor}" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}"/>  <br/>
+<h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_cfactor_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_cfactor_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_nfactor_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_nfactor_name')}" for="rnaalishapes_parameter_nfactor" id="rnaalishapes_parameter_nfactor_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_nfactor">(?)</a></div>
+<h:inputText styleClass="input_parameter" id="rnaalishapes_parameter_nfactor_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_nfactor}" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}"/>  <br/>
+<h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_nfactor_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_nfactor_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+
+</div>
+</fieldset>
+<fieldset style="clear:both">
+<legend title="#{messages.property('rnaalishapes_paramgroup_grp_foldingoptions_shortDescription')}">#{messages.property('rnaalishapes_paramgroup_grp_foldingoptions_name')}</legend>
+<div class="paramBox">
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_grammar_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_grammar_name')}" for="rnaalishapes_parameter_grammar" id="rnaalishapes_parameter_grammar_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_grammar">(?)</a></div>
+<h:selectOneRadio id="rnaalishapes_parameter_grammar_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_grammar}" title="#{messages.property('rnaalishapes_parameter_grammar_shortDescription')}" layout="pageDirection" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}">
+<f:selectItem itemValue="nodangle" itemLabel="#{messages.property('rnaalishapes_parameter_grammar_nodangle')} [nodangle]"/>
+<f:selectItem itemValue="overdangle" itemLabel="#{messages.property('rnaalishapes_parameter_grammar_overdangle')} [overdangle]"/>
+<f:selectItem itemValue="microstate" itemLabel="#{messages.property('rnaalishapes_parameter_grammar_microstate')} [microstate]"/>
+<f:selectItem itemValue="macrostate" itemLabel="#{messages.property('rnaalishapes_parameter_grammar_macrostate')} [macrostate]"/>
+</h:selectOneRadio> <br/> <h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_grammar_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_grammar_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_shape_level_shortDescription')}&#0010;1 &#8804; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.input.param.num.VALUE')} &#8804; 5"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_shape_level_name')}" for="rnaalishapes_parameter_shape_level" id="rnaalishapes_parameter_shape_level_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_shape_level">(?)</a></div>
+<h:inputText styleClass="input_parameter" id="rnaalishapes_parameter_shape_level_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_shape_level}" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}"/>  <br/>
+<h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_shape_level_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_shape_level_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_temperature_shortDescription')}&#0010;-273 &#8804; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.input.param.num.VALUE')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_temperature_name')}" for="rnaalishapes_parameter_temperature" id="rnaalishapes_parameter_temperature_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_temperature">(?)</a></div>
+<h:inputText styleClass="input_parameter" id="rnaalishapes_parameter_temperature_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_temperature}" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}"/>  <br/>
+<h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_temperature_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_temperature_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_name')}" for="rnaalishapes_parameter_thermodynamic_model_parameters" id="rnaalishapes_parameter_thermodynamic_model_parameters_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_thermodynamic_model_parameters">(?)</a></div>
+<h:selectOneRadio id="rnaalishapes_parameter_thermodynamic_model_parameters_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_thermodynamic_model_parameters}" title="#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_shortDescription')}" layout="pageDirection" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}">
+<f:selectItem itemValue="rna_turner2004.par" itemLabel="#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_rna_turner2004.par')} [rna_turner2004.par]"/>
+<f:selectItem itemValue="rna_turner1999.par" itemLabel="#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_rna_turner1999.par')} [rna_turner1999.par]"/>
+<f:selectItem itemValue="rna_andronescu2007.par" itemLabel="#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_rna_andronescu2007.par')} [rna_andronescu2007.par]"/>
+<f:selectItem itemValue="dna_mathews2004.par" itemLabel="#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_dna_mathews2004.par')} [dna_mathews2004.par]"/>
+<f:selectItem itemValue="dna_mathews1999.par" itemLabel="#{messages.property('rnaalishapes_parameter_thermodynamic_model_parameters_dna_mathews1999.par')} [dna_mathews1999.par]"/>
+</h:selectOneRadio> <br/> <h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_thermodynamic_model_parameters_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_thermodynamic_model_parameters_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_lonely_base_pairs_shortDescription')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_lonely_base_pairs_name')}" for="rnaalishapes_parameter_lonely_base_pairs" id="rnaalishapes_parameter_lonely_base_pairs_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_lonely_base_pairs">(?)</a></div>
+<h:selectOneRadio id="rnaalishapes_parameter_lonely_base_pairs_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_lonely_base_pairs}" title="#{messages.property('rnaalishapes_parameter_lonely_base_pairs_shortDescription')}" layout="pageDirection" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}">
+<f:selectItem itemValue="0" itemLabel="#{messages.property('rnaalishapes_parameter_lonely_base_pairs_0')} [0]"/>
+<f:selectItem itemValue="1" itemLabel="#{messages.property('rnaalishapes_parameter_lonely_base_pairs_1')} [1]"/>
+</h:selectOneRadio> <br/> <h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_lonely_base_pairs_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_lonely_base_pairs_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+
+</div>
+</fieldset>
+<fieldset style="clear:both">
+<legend title="#{messages.property('rnaalishapes_paramgroup_grp_inputstyle_shortDescription')}">#{messages.property('rnaalishapes_paramgroup_grp_inputstyle_name')}</legend>
+<div class="paramBox">
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_window_size_shortDescription')}&#0010;1 &lt; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.input.param.num.VALUE')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_window_size_name')}" for="rnaalishapes_parameter_window_size" id="rnaalishapes_parameter_window_size_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_window_size">(?)</a></div>
+<h:inputText styleClass="input_parameter" id="rnaalishapes_parameter_window_size_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_window_size}" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}"/>  <br/>
+<h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_window_size_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_window_size_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="formblock_parambox">
+<div class="label_wrapper" title="#{messages.property('rnaalishapes_parameter_window_increment_shortDescription')}&#0010;1 &#8804; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.input.param.num.VALUE')}"><h:outputLabel value="#{messages.property('rnaalishapes_parameter_window_increment_name')}" for="rnaalishapes_parameter_window_increment" id="rnaalishapes_parameter_window_increment_rnaalishapes_function_shapes_label"/>
+<a class="icon" href="rnaalishapes?viewType=manual#rnaalishapes_parameter_window_increment">(?)</a></div>
+<h:inputText styleClass="input_parameter" id="rnaalishapes_parameter_window_increment_rnaalishapes_function_shapes" value="#{rnaalishapes_function_shapes_param.rnaalishapes_parameter_window_increment}" valueChangeListener="#{rnaalishapes_function_shapes_controller.paramChanged}"/>  <br/>
+<h:outputText value="#{rnaalishapes_function_shapes_param.faultmsg('rnaalishapes_parameter_window_increment_rnaalishapes_function_shapes')}"  rendered="#{rnaalishapes_function_shapes_param.faultmsgExist('rnaalishapes_parameter_window_increment_rnaalishapes_function_shapes')}" styleClass="formblock_normal invalid" style="color: #E32119"/>
+</h:panelGroup>
+
+</div>
+</fieldset>
+
+                
+        </h:panelGroup>
+
+            <br/>
+            
+                
+            <!-- Submission Navigation -->
+            <table id="toolnavi" class="tool_navi">
+                <tr>
+                    <!-- back navigation -->
+                    <td id="toolback" class="tool_back" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.BACK_TITLE','input')}"
+                        onclick="window.location='/rnaalishapes?viewType=submission&amp;subType=rnaalishapes_function_shapes_p_1'"
+                        onmouseover="setCSSclass('toolback','tool_back tool_back_highlighted')" 
+                        onmouseout="setCSSclass('toolback','tool_back')">
+                        
+                        &#x25C4; #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.BACK')}
+                      
+                    </td>
+                    
+                    <!-- example button  -->
+                    <c:if test="#{rnaalishapes_function_shapes_controller.exampleCount == 0}">
+                        <td  id="toolexample" class="tool_example tool_example_inactive">#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.EXAMPLE_NO')}</td>    
+                    </c:if>
+                
+                    <c:if test="#{rnaalishapes_function_shapes_controller.exampleCount >= 1}">
+                        <td id="toolexample" class="tool_example tool_example_inactive">#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.EXAMPLE')}</td>
+                    </c:if>    
+                  
+                
+                    <!-- reset button -->
+                    <td id="toolreset" class="tool_reset" onclick="toolreset()" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.RESET_TITLE','param')}"
+                        onmouseover="setCSSclass('toolreset','tool_reset tool_reset_highlighted')" 
+                        onmouseout="setCSSclass('toolreset','tool_reset')">
+                        #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.RESET')}
+                        <p:remoteCommand name="toolreset" actionListener="#{rnaalishapes_function_shapes_param.reset}" 
+                                         update="paramGroup"/>
+                    </td>
+                    
+                    <!-- next (calculate) button -->
+                    <td id="toolnext" class="tool_next" onclick="toolnext()" title="#{messages.property('de.unibi.techfak.bibiserv.bibimainapp.CALCULATE_TITLE')}"
+                        onmouseover="setCSSclass('toolnext','tool_next tool_next_highlighted')" 
+                        onmouseout="setCSSclass('toolnext','tool_next')">
+                        #{messages.property('de.unibi.techfak.bibiserv.bibimainapp.NEXT')}&#x25BA;
+                        <p:remoteCommand name="toolnext" actionListener="#{rnaalishapes_function_shapes_controller.paramSet}" update="paramGroup"/>
+                    </td> 
+                </tr>
+            </table>
+
+            
+               
+            </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,1739 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns4:runnableItem xmlns:ns2="bibiserv:de.unibi.techfak.bibiserv.cms.microhtml" xmlns:ns3="bibiserv:de.unibi.techfak.bibiserv.cms.minihtml" xmlns:ns4="bibiserv:de.unibi.techfak.bibiserv.cms" xmlns:ns5="http://java.sun.com/dtd/jnlp-6.0.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="rnaalishapes" xsi:schemaLocation="bibiserv:de.unibi.techfak.bibiserv.cms http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/BiBiServAbstraction.xsd">
+    <ns4:name xml:lang="en">RNAalishapes</ns4:name>
+    <ns4:shortDescription xml:lang="en">RNA secondary structure prediction and shape abstraction for sequence alignments.</ns4:shortDescription>
+    <ns4:description xml:lang="en">
+RNAalishapes is a tool for secondary structure prediction, using shape abstraction. Input is a multiple sequence alignment. Pseudoknots are not considered at all.
+</ns4:description>
+    <ns4:toolTipText xml:lang="en">RNAalishapes</ns4:toolTipText>
+    <ns4:keywords xml:lang="en">RNA prediction folding alignment shapes</ns4:keywords>
+    <ns4:responsibleAuthor>
+        <ns4:firstname>Stefan</ns4:firstname>
+        <ns4:lastname>Janssen</ns4:lastname>
+        <ns4:organisation>Bielefeld University, AG Practical Computer Science</ns4:organisation>
+        <ns4:email>stefan.janssen@uni-bielefeld.de</ns4:email>
+        <ns4:phone>++49 521 106 2903</ns4:phone>
+        <ns4:adress>Room M3-114&#xD;
+            Universitätsstraße 25&#xD;
+            33615 Bielefeld&#xD;
+            Germany</ns4:adress>
+    </ns4:responsibleAuthor>
+    <ns4:references>
+        <ns4:reference>@article{vos:2006,
+            author={Björn Voß},
+title={Structural analysis of aligned RNAs.},
+journal={Nucleic Acids Research},
+year={2006},
+doi={10.1093/nar/gkl692}}</ns4:reference>
+        <ns4:reference>@article{hof:fek:sta:2002,
+author={Hofacker, Ivo L. and Fekete, Martin and Stadler, Peter F.},
+title={Secondary structure prediction for aligned RNA sequences.},
+journal={Joural of Molecular Biology},
+year={2002},
+doi={10.1016/S0022-2836(02)00308-X},
+url={http://www.tbi.univie.ac.at/papers/Abstracts/01-11-067.pdf}}</ns4:reference>
+        <ns4:reference>@article{ber:hof:wil:gru:sta:2008,
+author={Bernhart, Stephan H. and Hofacker, Ivo L. and Will, Sebastian and Gruber, Andreas R. and Stadler, Peter F.},
+title={RNAalifold: improved consensus structure prediction for RNA alignments.},
+journal={BMC Bioinformatics},
+year={2008},
+doi={10.1186/1471-2105-9-474}}</ns4:reference>
+        <ns4:reference>@article{mat:dis:chil:schro:zuk:tur:2004,
+author={Mathews, David H. and Disney, Matthew D. and Childs, Jessica L. and Schroeder, Susan J. and Zuker, Michael and Turner, Douglas H.},
+title={Incorporating chemical modification constraints into a dynamic programming algorithm for prediction of RNA secondary structure},
+journal={Proceedings of the National Academy of Sciences of the United States of America},
+year={2004},
+doi={10.1073/pnas.0401799101},
+url={http://www.pnas.org/content/101/19/7287.abstract}}</ns4:reference>
+        <ns4:reference>@article{tur:mat:2010,
+author={Turner, Douglas H. and Mathews, David H.},
+title={NNDB: the nearest neighbor parameter database for predicting stability of nucleic acid secondary structure},
+journal={Nucleic Acids Research},
+year={2010},
+doi={10.1093/nar/gkp892},
+url={http://nar.oxfordjournals.org/content/38/suppl_1/D280.abstract}}</ns4:reference>
+        <ns4:reference>@article{jan:schud:ste:gie:2011,
+author={Janssen, Stefan and Schudoma, Christian and Steger, Gerhard and Giegerich, Robert},
+title={Lost in folding space? Comparing four variants of the thermodynamic model for RNA secondary structure prediction},
+journal={BMC Bioinformatics},
+year={2011},
+doi={10.1186/1471-2105-12-429},
+url={http://www.biomedcentral.com/1471-2105/12/429}}</ns4:reference>
+        <ns4:reference>@article{jan:gie:2010,
+author={Janssen, Stefan and Giegerich, Robert},
+title={Faster computation of exact RNA shape probabilities},
+journal={Bioinformatics},
+year={2010},
+doi={10.1093/bioinformatics/btq014},
+url={http://bioinformatics.oxfordjournals.org/content/26/5/632.abstract}}</ns4:reference>
+        <ns4:reference>@article{vos:gie:reh:2006,
+author={Voß, Björn and Giegerich, Robert and Rehmsmeier, Marc},
+title={Complete probabilistic analysis of RNA shapes},
+journal={BMC Biology},
+year={2006},
+doi={10.1186/1741-7007-4-5},
+url={http://www.biomedcentral.com/1741-7007/4/5}}</ns4:reference>
+        <ns4:reference>@article{was:hof:sta:2004,
+author={Washietl, Stefan and Hofacker, Ivo L. and Stadler, Peter F.},
+title={Fast and reliable prediction of noncoding RNAs.},
+journal={Proceedings of the National Academy of Sciences of the United States of America},
+year={2004},
+doi={10.1073/pnas.0409169102}}</ns4:reference>
+<ns4:reference>@article{mcc:1990,
+author={McCaskill, John S.},
+title={The Equilibrium Partition Function and Base Pair Binding Probabilities for RNA Secondary Structure.},
+journal={Biopolymers},
+year={1990},
+url={http://www.ncbi.nlm.nih.gov/pubmed/1695107}}</ns4:reference>
+    </ns4:references>
+    <ns4:customContent xml:lang="en">
+Basic Information : Extended Information
+</ns4:customContent>
+    <ns4:executable>
+        <ns4:version>2.3.0</ns4:version>
+        <ns4:execInfo>
+            <ns4:executableType>binary</ns4:executableType>
+            <ns4:path></ns4:path>
+            <ns4:callingInformation>RNAalishapes</ns4:callingInformation>
+        </ns4:execInfo>
+        <ns4:input id="rnaalishapes_input_rna_sequence_alignment">
+            <ns4:name xml:lang="en">RNA sequence alignment</ns4:name>
+            <ns4:shortDescription xml:lang="en">multiple RNA sequence alignment</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+multiple RNA sequence alignment
+</ns4:description>
+            <ns4:type>Clustal_NA</ns4:type>
+            <ns4:handling>file</ns4:handling>
+            <ns4:example></ns4:example>
+            <ns4:streamsSupported>false</ns4:streamsSupported>
+        </ns4:input>
+        <ns4:input id="rnaalishapes_input_rna_secondary_structure">
+            <ns4:name xml:lang="en">RNA secondary structure</ns4:name>
+            <ns4:shortDescription xml:lang="en">A Vienna dot-bracket formatted string, representing a seconday RNA structure.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>A Vienna dot-bracket formatted string, representing a seconday RNA structure.</ns2:p></ns4:description>
+            <ns4:type>ToolDependentRepresentation</ns4:type>
+            <ns4:handling>file</ns4:handling>
+            <ns4:example>Li4oKCguLigoLi4uKSkuLi4pKSkuLi4=</ns4:example>
+            <ns4:streamsSupported>false</ns4:streamsSupported>
+        </ns4:input>
+        <ns4:output id="rnaalishapes_output_output">
+            <ns4:name xml:lang="en">output</ns4:name>
+            <ns4:shortDescription xml:lang="en">see manual</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>see manual description</ns2:p>
+            </ns4:description>
+            <ns4:type>ToolDependentRepresentation</ns4:type>
+            <ns4:handling>stdout</ns4:handling>
+        </ns4:output>
+        <ns4:outputfile id="rnaalishapes_additionaloutput_dotplot">
+            <ns4:name xml:lang="en">base-pair dot plot as PostScript file</ns4:name>
+            <ns4:filename>dotPlot.ps</ns4:filename>
+            <ns4:contenttype>application/postscript</ns4:contenttype>
+        </ns4:outputfile>
+        <ns4:param id="rnaalishapes_parameter_bppmthreshold">
+            <ns4:name xml:lang="en">bppmThreshold</ns4:name>
+            <ns4:shortDescription xml:lang="en">Minimal probability of a base-pair to be displayed in a "dot plot"</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Set the threshold for base pair probabilities included in the PostScript "dot plot" output.</ns2:p>
+                <ns2:p>Default is 0.00001.</ns2:p>
+            </ns4:description>
+            <ns4:type>float</ns4:type>
+            <ns4:option>--bppmThreshold </ns4:option>
+            <ns4:defaultValue>0.00001</ns4:defaultValue>
+            <ns4:min included="true">0.0</ns4:min>
+            <ns4:max included="false">1.0</ns4:max>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_temperature">
+            <ns4:name xml:lang="en">temperature</ns4:name>
+            <ns4:shortDescription xml:lang="en">Rescale energy parameters to a temperature of temp C.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>The energy parameters used in the calculation have been measured at 37 C. Parameters at other temperatures can be extrapolated, but for temperatures far from 37 C results will be increasingly unreliable.</ns2:p>
+            </ns4:description>
+            <ns4:type>float</ns4:type>
+            <ns4:option>--temperature </ns4:option>
+            <ns4:defaultValue>37.0</ns4:defaultValue>
+            <ns4:min included="true">-273.15</ns4:min>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_nfactor">
+            <ns4:name xml:lang="en">nfactor</ns4:name>
+            <ns4:shortDescription xml:lang="en">Penalty for non-compatible sequences.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Determines how strongly pairs that cannot be formed by all sequences are penalised within the covariance term. Default value is 1.0.</ns2:p>
+            </ns4:description>
+            <ns4:type>float</ns4:type>
+            <ns4:option>--nfactor=</ns4:option>
+            <ns4:defaultValue>1.0</ns4:defaultValue>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_decimals_for_probabilities">
+            <ns4:name xml:lang="en">decimals for probabilities</ns4:name>
+            <ns4:shortDescription xml:lang="en">Number of digits, used for output probabilities.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Sets the number of digits used for printing shape probabilities.</ns2:p>
+                <ns2:p><ns2:strong>decimals for probabilities</ns2:strong> must be a positive integer number. The default value is 7.</ns2:p>
+            </ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--probDecimals </ns4:option>
+            <ns4:defaultValue>7</ns4:defaultValue>
+            <ns4:min included="true">0.0</ns4:min>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_window_size">
+            <ns4:name xml:lang="en">window size</ns4:name>
+            <ns4:shortDescription xml:lang="en">Constant number of bases in one window.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Instead of running the computation for the whole input sequence, you can apply a window style. </ns2:p>
+                <ns2:p>Imagine your input is a 4 mega bases genome, but you are looking for e.g. t-RNA, which is a small cloverleaf structure of say 80 bases. You don't want to have one prediction for the complete 4 MB genome, but predictions for 80 bases long parts of the genome.</ns2:p>
+                <ns2:p>If you input a positive <ns2:strong>window size</ns2:strong>, window style will be activated - as described above. After computation for the current window is done, it will be shifted by X bases to the right and computation for the next window starts. X can be modified via parameter <ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_window_increment">window increment</ns2:a>.</ns2:p>
+                <ns2:p>Overlapping parts are internally reused to save compute time.</ns2:p>
+            </ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--windowSize=</ns4:option>
+            <ns4:min included="false">1.0</ns4:min>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_numsamples">
+            <ns4:name xml:lang="en">numSamples</ns4:name>
+            <ns4:shortDescription xml:lang="en">Sets the number of samples that are drawn to estimate shape probabilities.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Sets the number of samples that are drawn to estimate shape probabilities.</ns2:p>
+                <ns2:p>In our experience, 1000 iterations are sufficient to achieve reasonable results for shapes with high probability. Thus, default is 1000.</ns2:p>
+            </ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--numSamples=</ns4:option>
+            <ns4:defaultValue>1000</ns4:defaultValue>
+            <ns4:min included="true">1.0</ns4:min>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_relative_deviation">
+            <ns4:name xml:lang="en">relative deviation</ns4:name>
+            <ns4:shortDescription xml:lang="en">Inspect folding space up to a deviation, computed relative to MFE, e.g. 10%</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p><ns2:strong>relative deviation</ns2:strong> sets the energy range as percentage value of the minimum free energy. For example, when <ns2:strong>relative deviation</ns2:strong> is specified as 5.0, and the minimum free energy is -10.0 kcal/mol, the energy range is set to -9.5 to -10.0 kcal/mol.</ns2:p>
+                <ns2:p><ns2:strong>relative deviation</ns2:strong> must be a positive floating point number; by default it is set to to 10 %.</ns2:p>
+                <ns2:p>It cannot be combined with <ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_absolute_deviation">absolute deviation</ns2:a>.</ns2:p>
+            </ns4:description>
+            <ns4:type>float</ns4:type>
+            <ns4:option>--relativeDeviation </ns4:option>
+            <ns4:defaultValue>10.0</ns4:defaultValue>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_absolute_deviation">
+            <ns4:name xml:lang="en">absolute deviation</ns4:name>
+            <ns4:shortDescription xml:lang="en">Inspect folding space up to a deviation, computed absolute to MFE, e.g. 10 kcal/mol.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>This sets the energy range as an absolute value of the minimum free energy. For example, when <ns2:strong>absolute deviation</ns2:strong> 10.0 kcal/mol is specified, and the minimum free energy is -10.0 kcal/mol, the energy range is set to 0.0 to -10.0 kcal/mol.</ns2:p>
+                <ns2:p><ns2:strong>absolute deviation</ns2:strong> must be a positive floating point number. Cannot be combined with <ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_relative_deviation">relative deviation</ns2:a>.</ns2:p>
+            </ns4:description>
+            <ns4:type>float</ns4:type>
+            <ns4:option>--absoluteDeviation </ns4:option>
+            <ns4:min included="true">0.0</ns4:min>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_window_increment">
+            <ns4:name xml:lang="en">window increment</ns4:name>
+            <ns4:shortDescription xml:lang="en">Number of bases a window is shifted between two computations.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Once you activate window style, by setting <ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_windows_size">window size</ns2:a> to a positive integer value, the sliding window will be shifted by X bases to the right after a window is computed. You can modify X with the parameter window increment.</ns2:p>
+                <ns2:p>Since there must be a overlap of at least one base between two windows, <ns2:strong>window increment</ns2:strong> must be smaller than <ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_windows_size">window size</ns2:a>. Only positive integer values are allowed.</ns2:p>
+            </ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--windowIncrement=</ns4:option>
+            <ns4:defaultValue>1</ns4:defaultValue>
+            <ns4:min included="true">1.0</ns4:min>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_cfactor">
+            <ns4:name xml:lang="en">cfactor</ns4:name>
+            <ns4:shortDescription xml:lang="en">Weight of covariance term.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Determines the relative strength of secondary structure energy vs covariance term. Default is 1.0.</ns2:p>
+            </ns4:description>
+            <ns4:type>float</ns4:type>
+            <ns4:option>--cfactor=</ns4:option>
+            <ns4:defaultValue>1.0</ns4:defaultValue>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_output_probability_filter">
+            <ns4:name xml:lang="en">output probability filter</ns4:name>
+            <ns4:shortDescription xml:lang="en">Don't print results with very low probability.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p><ns2:strong>output probability filter</ns2:strong> sets a filter for omitting low probability results during output. It is just for reporting convenience. Unlike <ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_low_probability_filter">low probability filter</ns2:a>, this option does not have any influence on runtime or probabilities beyond this value.</ns2:p>               
+                <ns2:p>Only floating point values between 0 and 1 are allowed, excluding 1.0, because otherwise virtually all results would be filtered out.</ns2:p>
+            </ns4:description>
+            <ns4:type>float</ns4:type>
+            <ns4:option>--outputLowProbFilter </ns4:option>
+            <ns4:defaultValue>0.000001</ns4:defaultValue>
+            <ns4:min included="true">0.0</ns4:min>
+            <ns4:max included="false">1.0</ns4:max>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_low_probability_filter">
+            <ns4:name xml:lang="en">low probability filter</ns4:name>
+            <ns4:shortDescription xml:lang="en">Omit shape classes with very low probability during computation. May distort results!</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p><ns2:strong>low probability filter</ns2:strong> sets a barrier for filtering out results with very low probabilities during calculation. The default value here is 0.000001, which gives a significant speedup compared to a disabled filter. Note that by turning on this filter, results are no longer guaranteed to be exact. This also influences shapes which have not been filtered out. For technical details, see [<ns2:a href="/rnaalishapes?viewType=references#vos:gie:reh:2006">vos:gie:reh:2006</ns2:a>]</ns2:p>
+                <ns2:p>Only floating point values between 0 and 1 are allowed, excluding 1.0, because otherwise virtually all results would be filtered out.</ns2:p>
+            </ns4:description>
+            <ns4:type>float</ns4:type>
+            <ns4:option>--lowProbFilter </ns4:option>
+            <ns4:defaultValue>0.000001</ns4:defaultValue>
+            <ns4:min included="true">0.0</ns4:min>
+            <ns4:max included="false">1.0</ns4:max>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_shape_level">
+            <ns4:name xml:lang="en">shape level</ns4:name>
+            <ns4:shortDescription xml:lang="en">Level of shape abstraction, 5=most abstract, 1=most concrete.</ns4:shortDescription>
+            <ns4:description xml:lang="en">manually curated text, since I need html tables ...</ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--shapeLevel </ns4:option>
+            <ns4:defaultValue>5</ns4:defaultValue>
+            <ns4:min included="true">1.0</ns4:min>
+            <ns4:max included="true">5.0</ns4:max>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:param id="rnaalishapes_parameter_pairing_fraction">
+            <ns4:name xml:lang="en">pairing fraction</ns4:name>
+            <ns4:shortDescription xml:lang="en">Ratio of sequences in the alignment that must build a pair at i and j, to consider these columns to also pair.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>For a single RNA sequence it is easy to decide if positions <ns2:em>i</ns2:em> and <ns2:em>j</ns2:em> build a valid base pair. For <ns2:em>alignments</ns2:em> of RNA sequences this is more complicated, because some sequences might contain gaps. For exact definitions, see papers see [<ns2:a href="/rnaalishapes?viewType=references#hof:fek:sta:2002">hof:fek:sta:2002</ns2:a>] and [<ns2:a href="/rnaalishapes?viewType=references#ber:hof:wil:gru:sta:2008">ber:hof:wil:gru:sta:2008</ns2:a>] from the Vienna group. </ns2:p>
+                <ns2:p>Roughly speaking, the less <ns2:strong>pairingFraction</ns2:strong>, the more sequences must have a valid pair at positions <ns2:em>i</ns2:em> and <ns2:em>j</ns2:em>.</ns2:p>
+                <ns2:p>Default value is -200, meaning that at most half of the sequences must pair to let alignment positions <ns2:em>i</ns2:em> and <ns2:em>j</ns2:em> be a pair.</ns2:p>
+            </ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--pairingFraction=</ns4:option>
+            <ns4:defaultValue>-200</ns4:defaultValue>
+            <ns4:guiElement>INPUTTEXT</ns4:guiElement>
+        </ns4:param>
+        <ns4:enumParam id="rnaalishapes_parameter_structureprobs" minoccurs="1" maxoccurs="1">
+            <ns4:name xml:lang="en">structure probabilities</ns4:name>
+            <ns4:shortDescription xml:lang="en">Switch on / off computation of individual struct probabilities.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>If activated, in addition to free energy also the probability of individual structures will be computed. To speed up computation, this calculation is switched off by default.</ns2:p>
+            </ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--structureProbs </ns4:option>
+            <ns4:separator> </ns4:separator>
+            <ns4:values defaultValue="true">
+                <ns4:key>0</ns4:key>
+                <ns4:value>0</ns4:value>
+                <ns4:name xml:lang="en">don't compute individual structure probabilities</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>1</ns4:key>
+                <ns4:value>1</ns4:value>
+                <ns4:name xml:lang="en">compute individual structure probabilities</ns4:name>
+            </ns4:values>
+            <ns4:guiElement>SELECTONERADIO</ns4:guiElement>
+        </ns4:enumParam>
+        <ns4:enumParam id="rnaalishapes_parameter_show_samples" minoccurs="1" maxoccurs="1">
+            <ns4:name xml:lang="en">show samples</ns4:name>
+            <ns4:shortDescription xml:lang="en">Show samples of stochastic backtrace.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>You can inspect the samples drawn by stochastic backtrace if you activate <ns2:strong>show samples</ns2:strong>.</ns2:p>
+            </ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--showSamples=</ns4:option>
+            <ns4:separator>,</ns4:separator>
+            <ns4:values defaultValue="true">
+                <ns4:key>0</ns4:key>
+                <ns4:value>0</ns4:value>
+                <ns4:name xml:lang="en">hide samples on output</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>1</ns4:key>
+                <ns4:value>1</ns4:value>
+                <ns4:name xml:lang="en">show samples on output</ns4:name>
+            </ns4:values>
+            <ns4:guiElement>SELECTONERADIO</ns4:guiElement>
+        </ns4:enumParam>
+        <ns4:enumParam id="rnaalishapes_parameter_grammar">
+            <ns4:name xml:lang="en">grammar</ns4:name>
+            <ns4:shortDescription xml:lang="en">How to treat "dangling end" energies for bases adjacent to helices in free ends and multi-loops.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>How to treat <ns2:em>dangling end</ns2:em> energies for bases adjacent to helices in free ends and multi-loops.</ns2:p>
+                <ns2:p><ns2:strong>nodangle</ns2:strong>: (-d 0 in Vienna package) ignores dangling energies altogether.</ns2:p>
+                <ns2:p><ns2:strong>overdangle</ns2:strong>: (-d 2 in Vienna package) always dangles bases onto helices, even if they are part of neighbouring helices themselves. Seems to be wrong, but could perform surprisingly well.</ns2:p>
+                <ns2:p><ns2:strong>microstate</ns2:strong>: (-d 1 in Vienna package) correct optimization of all dangling possibilities, unfortunately this results in an semantically ambiguous search space regarding Vienna-Dot-Bracket notations.</ns2:p>
+                <ns2:p><ns2:strong>macrostate</ns2:strong>: (no correspondens in Vienna package) same as <ns2:strong>microstate</ns2:strong>, while staying unambiguous. Unfortunately, mfe computation violates Bellman's principle of optimality. </ns2:p>
+                <ns2:p>See [<ns2:a href="/rnaalishapes?viewType=references#jan:schud:ste:gie:2011">jan:schud:ste:gie:2011</ns2:a>] for further details.</ns2:p>
+            </ns4:description>
+            <ns4:type>string</ns4:type>
+            <ns4:option>--grammar=</ns4:option>
+            <ns4:separator>,</ns4:separator>
+            <ns4:values defaultValue="false">
+                <ns4:key>nodangle</ns4:key>
+                <ns4:value>nodangle</ns4:value>
+                <ns4:name xml:lang="en">nodangle</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="true">
+                <ns4:key>overdangle</ns4:key>
+                <ns4:value>overdangle</ns4:value>
+                <ns4:name xml:lang="en">overdangle</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>microstate</ns4:key>
+                <ns4:value>microstate</ns4:value>
+                <ns4:name xml:lang="en">microstate</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>macrostate</ns4:key>
+                <ns4:value>macrostate</ns4:value>
+                <ns4:name xml:lang="en">macrostate</ns4:name>
+            </ns4:values>
+            <ns4:guiElement>SELECTONERADIO</ns4:guiElement>
+        </ns4:enumParam>
+        <ns4:enumParam id="rnaalishapes_parameter_structure_conservation_index" minoccurs="1" maxoccurs="1">
+            <ns4:name xml:lang="en">structure conservation index</ns4:name>
+            <ns4:shortDescription xml:lang="en">Compute "structure conservation indices".</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>The structure conservation index (<ns2:strong>SCI</ns2:strong>) is a measure for the likelihood that individual sequences will fold similar to the aligned sequences. It is computed as the aligned minimum free energy (MFE) divided by the average MFE of the unaligned sequences. </ns2:p>
+                <ns2:p>A SCI close to zero indicates that this structure is not a good consensus structure, whereas a set of perfectly conserved structures has <ns2:strong>SCI</ns2:strong> of 1. A <ns2:strong>SCI</ns2:strong> &gt; 1 indicates a perfectly conserved secondary structure, which is, in addition, supported by compensatory and/or consistent mutations, which contribute a covariance score to the alignment MFE. </ns2:p>
+                <ns2:p>For further details see [<ns2:a href="/rnaalifold?viewType=references#was:hof:sta:2004">was:hof:sta:2004</ns2:a>].</ns2:p>
+                <ns2:p>For the sake of speed, <ns2:strong>SCI</ns2:strong> computation is switched off by default.</ns2:p>
+            </ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--sci=</ns4:option>
+            <ns4:separator>,</ns4:separator>
+            <ns4:values defaultValue="true">
+                <ns4:key>0</ns4:key>
+                <ns4:value>0</ns4:value>
+                <ns4:name xml:lang="en">no SCI computation</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>1</ns4:key>
+                <ns4:value>1</ns4:value>
+                <ns4:name xml:lang="en">with SCI computation</ns4:name>
+            </ns4:values>
+            <ns4:guiElement>SELECTONERADIO</ns4:guiElement>
+        </ns4:enumParam>
+        <ns4:enumParam id="rnaalishapes_parameter_thermodynamic_model_parameters" minoccurs="0" maxoccurs="1">
+            <ns4:name xml:lang="en">thermodynamic model parameters</ns4:name>
+            <ns4:shortDescription xml:lang="en">Sets energy parameters.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Read energy parameters from a file, instead of using the default parameter set. See the RNAlib (<ns2:a href="http://www.tbi.univie.ac.at/RNA/">Vienna RNA package</ns2:a>) documentation for details on the file format.</ns2:p>
+                <ns2:p>Default are parameters released by the Turner group in 2004 (see [<ns2:a href="/rnaalishapes?viewType=references#mat:dis:chil:schro:zuk:tur:2004">mat:dis:chil:schro:zuk:tur:2004</ns2:a>] and [<ns2:a href="/rnaalishapes?viewType=references#tur:mat:2010">tur:mat:2010</ns2:a>]). A visit of the aforementioned author's <ns2:a href="http://rna.urmc.rochester.edu/NNDB/">Nearest Neighbor Database</ns2:a> might also be informative.</ns2:p>
+            </ns4:description>
+            <ns4:type>string</ns4:type>
+            <ns4:option>--param </ns4:option>
+            <ns4:prefix>/vol/gapc/share/gapc/librna/</ns4:prefix>
+            <ns4:separator> </ns4:separator>
+            <ns4:values defaultValue="true">
+                <ns4:key>rna_turner2004.par</ns4:key>
+                <ns4:value>rna_turner2004.par</ns4:value>
+                <ns4:name xml:lang="en">Turner model, 2004</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>rna_turner1999.par</ns4:key>
+                <ns4:value>rna_turner1999.par</ns4:value>
+                <ns4:name xml:lang="en">Turner model, 1999</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>rna_andronescu2007.par</ns4:key>
+                <ns4:value>rna_andronescu2007.par</ns4:value>
+                <ns4:name xml:lang="en">Andronescu model, 2007</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>dna_mathews2004.par</ns4:key>
+                <ns4:value>dna_mathews2004.par</ns4:value>
+                <ns4:name xml:lang="en">Matthews model, 2004</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>dna_mathews1999.par</ns4:key>
+                <ns4:value>dna_mathews1999.par</ns4:value>
+                <ns4:name xml:lang="en">Matthews model, 1999</ns4:name>
+            </ns4:values>
+            <ns4:guiElement>SELECTONERADIO</ns4:guiElement>
+        </ns4:enumParam>
+        <ns4:enumParam id="rnaalishapes_parameter_lonely_base_pairs" minoccurs="1" maxoccurs="1">
+            <ns4:name xml:lang="en">lonely base pairs</ns4:name>
+            <ns4:shortDescription xml:lang="en">Switch on / off lonely base pairs.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Lonely base pairs have no stabilising effect, because they cannot stack on another pair, but they heavily increase the size of the folding space. Thus, we normally forbid them. Should you want to allow them set <ns2:strong>lonely base pairs</ns2:strong> to 1.</ns2:p>
+                <ns2:p><ns2:strong>lonely base pairs</ns2:strong> must be either 0 (=don't allow lonely base pairs) or 1 (= allow them).</ns2:p>
+                <ns2:p>Default is 0, i.e. no lonely base pairs.</ns2:p>
+            </ns4:description>
+            <ns4:type>int</ns4:type>
+            <ns4:option>--allowLP </ns4:option>
+            <ns4:separator> </ns4:separator>
+            <ns4:values defaultValue="true">
+                <ns4:key>0</ns4:key>
+                <ns4:value>0</ns4:value>
+                <ns4:name xml:lang="en">no lonely pairs</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>1</ns4:key>
+                <ns4:value>1</ns4:value>
+                <ns4:name xml:lang="en">allow lonely pairs</ns4:name>
+            </ns4:values>
+            <ns4:guiElement>SELECTONERADIO</ns4:guiElement>
+        </ns4:enumParam>
+        <ns4:enumParam id="rnaalishapes_parameter_consensus" minoccurs="1" maxoccurs="1">
+            <ns4:name xml:lang="en">consensus</ns4:name>
+            <ns4:shortDescription xml:lang="en">Select method to represent alignment in a single line.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>The input alignment will be represented in a single line. You can choose between</ns2:p>
+                <ns2:p><ns2:strong>consensus</ns2:strong>: for a simple consensus sequence, determined by most frequent character. In case of co-optimals the alphabetically smaller base is reported. </ns2:p>
+                <ns2:p><ns2:strong>mis</ns2:strong> the "most informative sequence": For each column of the alignment output the set of nucleotides with frequence greater than average in <ns2:a href="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html">IUPAC</ns2:a> notation.</ns2:p>
+                <ns2:p>Default is <ns2:strong>consensus</ns2:strong>.</ns2:p>
+            </ns4:description>
+            <ns4:type>string</ns4:type>
+            <ns4:option>--consensus=</ns4:option>
+            <ns4:separator>,</ns4:separator>
+            <ns4:values defaultValue="true">
+                <ns4:key>consensus</ns4:key>
+                <ns4:value>consensus</ns4:value>
+                <ns4:name xml:lang="en">consensus</ns4:name>
+            </ns4:values>
+            <ns4:values defaultValue="false">
+                <ns4:key>mis</ns4:key>
+                <ns4:value>mis</ns4:value>
+                <ns4:name xml:lang="en">most informative sequence</ns4:name>
+            </ns4:values>
+            <ns4:guiElement>SELECTONERADIO</ns4:guiElement>
+        </ns4:enumParam>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_foldingoptions_convert">
+            <ns4:name xml:lang="en">folding options</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_grammar"/>
+            <ns4:paramref ref="rnaalishapes_parameter_shape_level"/>
+            <ns4:paramref ref="rnaalishapes_parameter_lonely_base_pairs"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_stochasticoptions_sample">
+            <ns4:name xml:lang="en">stochastic options</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_numsamples"/>
+            <ns4:paramref ref="rnaalishapes_parameter_show_samples"/>
+            <ns4:paramref ref="rnaalishapes_parameter_output_probability_filter"/>
+            <ns4:paramref ref="rnaalishapes_parameter_decimals_for_probabilities"/>
+            <ns4:paramref ref="rnaalishapes_parameter_structureprobs"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_stochasticoptions">
+            <ns4:name xml:lang="en">stochastic options</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_structureprobs"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_alignmentoptions">
+            <ns4:name xml:lang="en">alignment options</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_structure_conservation_index"/>
+            <ns4:paramref ref="rnaalishapes_parameter_consensus"/>
+            <ns4:paramref ref="rnaalishapes_parameter_pairing_fraction"/>
+            <ns4:paramref ref="rnaalishapes_parameter_cfactor"/>
+            <ns4:paramref ref="rnaalishapes_parameter_nfactor"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_alignmentoptions_outside">
+            <ns4:name xml:lang="en">alignment options</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_consensus"/>
+            <ns4:paramref ref="rnaalishapes_parameter_pairing_fraction"/>
+            <ns4:paramref ref="rnaalishapes_parameter_cfactor"/>
+            <ns4:paramref ref="rnaalishapes_parameter_nfactor"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_foldingoptions">
+            <ns4:name xml:lang="en">folding options</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_grammar"/>
+            <ns4:paramref ref="rnaalishapes_parameter_shape_level"/>
+            <ns4:paramref ref="rnaalishapes_parameter_temperature"/>
+            <ns4:paramref ref="rnaalishapes_parameter_thermodynamic_model_parameters"/>
+            <ns4:paramref ref="rnaalishapes_parameter_lonely_base_pairs"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_foldingoptions_outside">
+            <ns4:name xml:lang="en">folding options</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_grammar"/>
+            <ns4:paramref ref="rnaalishapes_parameter_temperature"/>
+            <ns4:paramref ref="rnaalishapes_parameter_thermodynamic_model_parameters"/>
+            <ns4:paramref ref="rnaalishapes_parameter_lonely_base_pairs"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_inputstyle">
+            <ns4:name xml:lang="en">input style</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_window_size"/>
+            <ns4:paramref ref="rnaalishapes_parameter_window_increment"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_stochasticoptions_probs">
+            <ns4:name xml:lang="en">stochastic options</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_low_probability_filter"/>
+            <ns4:paramref ref="rnaalishapes_parameter_output_probability_filter"/>
+            <ns4:paramref ref="rnaalishapes_parameter_decimals_for_probabilities"/>
+            <ns4:paramref ref="rnaalishapes_parameter_structureprobs"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_grp_energydeviation">
+            <ns4:name xml:lang="en">sub-optimal energy deviation</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_relative_deviation"/>
+            <ns4:paramref ref="rnaalishapes_parameter_absolute_deviation"/>
+        </ns4:paramGroup>
+        <ns4:paramGroup id="rnaalishapes_paramgroup_outside_options">
+            <ns4:name xml:lang="en">outside options</ns4:name>
+            <ns4:paramref ref="rnaalishapes_parameter_bppmthreshold"/>
+        </ns4:paramGroup>
+        
+        <ns4:dependency id="rnaalishapes_parameterdependency_windowstyle">
+            <ns4:name xml:lang="en">windowstyle</ns4:name>
+            <ns4:shortDescription xml:lang="en">a</ns4:shortDescription>
+            <ns4:dependencyDefinition>impl(def(@rnaalishapes_parameter_window_size),lt(@rnaalishapes_parameter_window_increment,@rnaalishapes_parameter_window_size)) </ns4:dependencyDefinition>
+        </ns4:dependency>
+        <ns4:function id="rnaalishapes_function_probs">
+            <ns4:name xml:lang="en">probs</ns4:name>
+            <ns4:shortDescription xml:lang="en">computes probabilistic shape analysis.</ns4:shortDescription>
+            <ns4:description xml:lang="en">Structure probabilities are strictly correlated to their energy values. Grouped together into shape classes, their probabilities add up. Often a shape class with many members of worse energy becomes more probable than the shape containing the mfe structure but not much more members. See [<ns2:a href="/rnaalishapes?viewType=references#vos:gie:reh:2006">vos:gie:reh:2006</ns2:a>] for details on shape probabilities.</ns4:description>
+            <ns4:inputref ref="rnaalishapes_input_rna_sequence_alignment"/>
+            <ns4:outputref ref="rnaalishapes_output_output"/>
+            <ns4:paramGroup id="rnaalishapes_paramgroup_fn_rnaalishapes_probs">
+                <ns4:name xml:lang="en">HIDEME</ns4:name>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_stochasticoptions_probs"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_alignmentoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_foldingoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_inputstyle"/>
+            </ns4:paramGroup>
+            <ns4:depref ref="rnaalishapes_parameterdependency_windowstyle"/>
+            <ns4:paramAndInputOutputOrder>
+                <ns4:reference>rnaalishapes_parameter_lonely_base_pairs</ns4:reference>
+                <ns4:additionalString> --mode=probs </ns4:additionalString>
+                <ns4:reference>rnaalishapes_parameter_window_increment</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_output_probability_filter</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_cfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_consensus</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_grammar</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_shape_level</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_temperature</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_low_probability_filter</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_pairing_fraction</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_thermodynamic_model_parameters</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structure_conservation_index</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_window_size</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structureprobs</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_decimals_for_probabilities</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_nfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_input_rna_sequence_alignment</ns4:reference>
+                <ns4:reference>rnaalishapes_output_output</ns4:reference>
+            </ns4:paramAndInputOutputOrder>
+            <ns4:example>
+                <ns4:name xml:lang="en">t-box leaders</ns4:name>
+                <ns4:description xml:lang="en">T-box leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpBTi8xLTE1&#xD;
+                    OCAgICAgICAgLWNjZ3VjY2NnZ2F1Z2dnZ2NnY2djYS0tLS0tLWd1YWNnZy1jYWFnY2dhZ2d1Z2d1&#xD;
+                    YWNjZ2NnZ3VnY2ctDQpNYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FndWdnY2NhY2djZ2FhYWdj&#xD;
+                    LS0tZ2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNbC8xLTE1OCAgICAgICAgLS0tLS1h&#xD;
+                    LS0tLS1ndWdnY2NndWdjZ3V1Y2djLWd1Z2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpN&#xD;
+                    bS8xLTE1OCAgICAgICAgLS0tLWFhYXV1Z2FnY2dnY2NnY2FjdWNhZ2d1LS0tZ2NnZy1jYWFnY2dn&#xD;
+                    Z2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNYi8xLTE1OCAgICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2dj&#xD;
+                    YXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Y2N1YWNjZ2NnZ2NndXUtDQpNdDEvMS0xNTggICAgICAg&#xD;
+                    LS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2Nn&#xD;
+                    dXUtDQpNdDIvMS0xNTggICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1j&#xD;
+                    YWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NndXUtDQpOZi8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FnZ3Vj&#xD;
+                    Y2dndWdjZ3VjY2dhY2djY2dnYS1jYWFhY2dnZ2d1Z2d1YWNjZ2NnZ3V1dWMtDQpQYS8xLTE1OCAg&#xD;
+                    ICAgICAgLS0tLS0tLS0tLS0tLS0tY2dhY2d1Y2d1dWdhY2d1Y2d1Zy1jYWFnZ2FnZ2d1Z2d1YWNj&#xD;
+                    Z2NnZ2d1YWNjDQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLWdndWdjYWNhY2FnZ2djZ2NjZ2dn&#xD;
+                    LWdhZ2NjYWFnZ2FnZ2d1Y2d1YWNjZ2NnZ2dhZ2NnDQpTYy8xLTE1OCAgICAgICAgLS0tLS0tLS0t&#xD;
+                    LS1nYWdjYWNhY2dhY2djYWNjZ2djY2dnZ2NjYWFnZ2FnZ2d1Z2d1YWNjZ2NnZ2dhZ2NhDQpUZi8x&#xD;
+                    LTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLWdnY2FnZ2FjZ2FjZ2djY2djZ2NnZ2NjYWFnZ2FnZ2d1&#xD;
+                    Z2d1YWNjZ2NnZ2dnY2d1DQpSeC8xLTE1OCAgICAgICAgYWdjZ2d1Y2MtLS1nZ2dnY2NnY2dhZ2dj&#xD;
+                    Y3VjLS0tLWdnZy1jYWFnY2FnZ2d1Z2d1YWNjZ2NnYWdhZ2MtDQpDZC8xLTE1OCAgICAgICAgLS0t&#xD;
+                    LXVhY2EtLS11Y2FnYXVnY2N1Y3VnZy11Z2dhYXVnY3VjYWFnY2djY2N1Z2d1YWNjZ2NjLS0tLS0t&#xD;
+                    DQpDZS8xLTE1OCAgICAgICAgZ2d1Z2djY3UtLS1ndXVnZ3VnZ2djYy1nYy1hLS0tLWdndXVjYWFn&#xD;
+                    Y2FnZ2d1Z2d1YWNjZ2NndWMtLS0tDQpDZy8xLTE1OCAgICAgICAgYS0tLS0tYWMtLS1nYWFndWdn&#xD;
+                    YWdjdWFndXVhYXV1dWFnY3VjYWFnY3VnZ2d1Z2d1YWNjZ2NndWMtLS0tDQogICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqKiogICAgICAgICAgKioqKiog&#xD;
+                    ICAgICAgDQoNCkFOLzEtMTU4ICAgICAgICAtLS0tZ2NhY2NhZ2NjZ2ctLS0tLS0tLS0tLS1nY2Et&#xD;
+                    LWNjYWdjY2NjZ2d1Y2dnZ2FnY2NnYWNndWNndWMNCk1hLzEtMTU4ICAgICAgICAtY2djZ2NhZ2Nj&#xD;
+                    YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ2ctdXV1LS0tLS0tLS0tLS0tLS0NCk1sLzEt&#xD;
+                    MTU4ICAgICAgICAtY2djZ2NhY2N1YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ3VndWN1&#xD;
+                    LS0tLS0tLS0tLS1hY3UNCk1tLzEtMTU4ICAgICAgICAtY2djZ2NhY3VnYWdjZ2MtLS0tLS0tLS0t&#xD;
+                    LS1ndWNnLXVjZ3VjY2NjZ3VnY2NnLS0tLS0tLS0tLS0tLS0NCk1iLzEtMTU4ICAgICAgICAtY2dj&#xD;
+                    Z2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cN&#xD;
+                    Ck10MS8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2Nj&#xD;
+                    Z2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk10Mi8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0t&#xD;
+                    LS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk5mLzEtMTU4ICAgICAg&#xD;
+                    ICAtZ2djZ2NhY2NnZ2djZ2MtLS0tLS0tLS0tLS1jZ2FnZ3VjZ3VjY2NjZ3VnY2NjYWNhLS0tY2Fn&#xD;
+                    YWNhY2cNClBhLzEtMTU4ICAgICAgICBjZ2dhZ2FhdWNjZ2d1Z3VnYy0tLS0tLS0tdWNndWNjY3Vj&#xD;
+                    Z2d1Z2FjY2NnYWctLS0tLS0tLS0tLS0tLS0NClNhLzEtMTU4ICAgICAgICBjZ2NjZ2NhY2FjZ2dj&#xD;
+                    Z3VhY2dnYWFhZ2FjdWNnZ2N1Y3VjZ3VjY2N1Y2NnZ2FjZ2dhYWdnYS1nLS0tLS0NClNjLzEtMTU4&#xD;
+                    ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWNnZ2N1Y3VjZ3VjY2N1Y2NnLWFjZ2dh&#xD;
+                    YWdnY2FnLS0tLS0NClRmLzEtMTU4ICAgICAgICBjdWdjLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t&#xD;
+                    LS0tY3VjZ3VjY2N1Y2NndWNhZ2d1Z2FjY2FnLS0tLS0NClJ4LzEtMTU4ICAgICAgICAtY2djdXVj&#xD;
+                    dXV1Z2dhZ2FhYWdhLS0tLS0tLWdnZ2N1Y2NjZ3VjY2N1Z2NnZ2NjZ2dhLS0tLS0tLS0tLS0NCkNk&#xD;
+                    LzEtMTU4ICAgICAgICAtLS1jZ2dhYS0tLS1hLS0tLS0tLS0tLS0tLS0tLS0tY2djZ3VjY2NjZ2Nh&#xD;
+                    Y3V1dWEtLS0tLS0tLS0tYWcNCkNlLzEtMTU4ICAgICAgICAtLS1jZ2dhdWNhYWdnLS0tLS0tLS0t&#xD;
+                    LS0tLS0tLS0tZ2djZ3VjY2NjZ2NhYWd1YS0tLS0tLS0tLS0tY2ENCkNnLzEtMTU4ICAgICAgICAt&#xD;
+                    LS1jZ3V1dXV1dWFnLS0tLS0tLS0tLS0tLS0tLS0tZ2djZ2NjY2NjZ2NhZ2d1YWctLS0tLS0tLS0t&#xD;
+                    YWENCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgIA0KDQpBTi8xLTE1OCAgICAgICAgY3UtLS0tY2d1Y2FnZ2Nj&#xD;
+                    Y2NnZ2djYWNjY2djY2NnYWdnY2dnY2FnLWdhYWNnYS0tLQ0KTWEvMS0xNTggICAgICAgIC0tLS1n&#xD;
+                    Y2EtLS0tLS0tLWNjZ3VnLS0tLS1nY2FjLWFnZ2FnYWNhLS1hY2djZ2NhdWMNCk1sLzEtMTU4ICAg&#xD;
+                    ICAgICB1LWd1Z3V1LS0tLS0tLS1hYWd1Zy0tLS0tZ2NjYy1hZ2dhZ2FjLS0tLS1ndS0tLS0tDQpN&#xD;
+                    bS8xLTE1OCAgICAgICAgdS1ndWdhdS0tLS0tLS0tdXVjdWctLS0tLWdjYWMtYWdnYWdhYy0tLS1j&#xD;
+                    Zy0tLS0tLQ0KTWIvMS0xNTggICAgICAgIGNhZ3VnY2NnYWFjZ2d1Z2N1Z2dnLS0tLS1nY2N1Z2dn&#xD;
+                    Z2FnYWNnLS1hY2djZ2NhYWENCk10MS8xLTE1OCAgICAgICBjYWd1Z2NjZ2FhY2dndWdjdWdnZy0t&#xD;
+                    LS0tZ2NjdWdnZ2dhZ2FjZy0tYWNnY2djYWFhDQpNdDIvMS0xNTggICAgICAgY2FndWdjY2dhYWNn&#xD;
+                    Z3VnY3VnZ2ctLS0tLWdjY3VnZ2dnYWdhY2ctLWFjZ2NnY2FhYQ0KTmYvMS0xNTggICAgICAgIGMt&#xD;
+                    LS1nY2NjdWdjZ2djZ2NnZ3VnLS0tLS1nY2FjZ2FnZ2FnYWNnYy1hdWNjZ2NnLS0NClBhLzEtMTU4&#xD;
+                    ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWFjZ2FhZ2dhY2NhLS1jY2NnY3VnY2ctLS0t&#xD;
+                    DQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLS0tLS0tYWFhZ3VjY2djY2dnYWdnYWFnY3Vj&#xD;
+                    Z2NjZy0tLS0tLQ0KU2MvMS0xNTggICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLWNhY2d1Y2NnY2Nn&#xD;
+                    Z2FnZ2FhZ2N1Y2djdWctLS0tLS0NClRmLzEtMTU4ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS1j&#xD;
+                    YWNjY2N1Z2F1Z2dhYS1hZ2d1YWNnY2NhYy0tLS0tDQpSeC8xLTE1OCAgICAgICAgLS1nYWdndWNn&#xD;
+                    Y2NnZ2dnY2dnZ2EtLS0tLWdjY3VnZ2N1dXV1Y2EtLWFjZ2dnYWctLQ0KQ2QvMS0xNTggICAgICAg&#xD;
+                    IGdjYWdhYXUtLS0tLS0tZ2N1dWdjZ2FhYWd1Z2FhZ2dhZ2FhYWEtLS0tLS0tLS0tLS0NCkNlLzEt&#xD;
+                    MTU4ICAgICAgICB1Z2FjY2F1Y2F1dWdnY2FjdXVnYy0tZ2FhZ2dhdXVhYWdnZ2FjY2ctYWN1Y2Fj&#xD;
+                    LS0tDQpDZy8xLTE1OCAgICAgICAgY2dhdWFhdXVhdXVndXVhY3V1Z2NndWdhYWdnYS0tLXVnZ2dh&#xD;
+                    Y2NnYWFjYWNhYy0tLQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgICANCg0KDQoNCg==&#xD;
+                </ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">tRNA</ns4:name>
+                <ns4:description xml:lang="en">tRNA</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXKDEuODEpIG11bHRpcGxlIHNlcXVlbmNlIGFsaWdubWVudA0KDQoNClg1MTQyMy4x&#xD;
+                    LzE4MDItMTg3NCAgICAgR0dHQ1VVR1VBR0NVQ0FHQ1UtR0dVLS1BR0FHQ0dDQ0dDQ1VVVUdDQUFH&#xD;
+                    R0NHR0FHR0NDQ1VHR0dVQ0NHDQpBRjAwODIyMC4xLzY3MTMtNjc4NSAgIEdDR0dVVUdVR0dDR0FB&#xD;
+                    R1UtLUdHVVUtQUFDR0NBQ0NBR0FVVUdVR0dDVUNVR0dDQVVVQ0dVR0dHVVVDRw0KWDU0NDA4LjEv&#xD;
+                    MS03MyAgICAgICAgICBHQ0NDQ0NBVUNHVUNVQUdBLS1HR0NDVUFHR0FDQUNDVUNDQ1VVVUNBQ0dH&#xD;
+                    QUdBQUFBLUNHQ0dHQVVVQ0cNCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgR0dVVVVDR1VHR1VDVUFH&#xD;
+                    VUMtR0dVVS1BVUdHQ0FVQ1VHQ1VVQUFDQUNHQ0FHQUFDR1VDQ0NDQUdVVUNHDQpYMTI5NzcuMS80&#xD;
+                    NzUtNTQ4ICAgICAgIENHR1VHQVVVQUdDR0NBR0NDQ0dHVS0tQUdDR0NBVUNVR0dVVVVHR0dBQ0NB&#xD;
+                    R0FHR0dVQ0FBQUdHVVVDRw0KWDAzMTI2LjEvMzY0LTQzNCAgICAgICBBQUdBR1VBVUFHVVVVQUFB&#xD;
+                    LS1HR1UtLUFBQUFDQUdBQUFHQ1VVQ0FBQ0NVVVVBQVVVLVVDVVVBR1VVQ0cNClg1MjA3MC4xLzc3&#xD;
+                    Ny04NDkgICAgICAgVUNDVUNDR1VBR0NVQ0FBVVUtR0dDLS1BR0FHQ0FHQ0NHR0NVR1VVQUFDQ0dH&#xD;
+                    Q0FHR1VVQUNVR0dVVUNHDQpYMTM1NTguMS8xODYtMTE1ICAgICAgIFVHR0dHQ0dVQUdDQ0FBR0Mt&#xD;
+                    LUdHVS0tQUFHR0NBQUNHR0dVVVVVR0dVQ0NDR0NVQVVVQ0dHQUdHVVVDRw0KWDUyMzkyLjEvMzk2&#xD;
+                    Ny00MDQwICAgICBHQ1VBR0NHVUdHQ0FHQUdDVUNHR0NBLUFBVUdDQUFBQUdHQ1VVQUFHQ0NDVVVV&#xD;
+                    QVVDLUNBR0FHR1VVQ0ENCkswMDI4Ny4xLzEtNzMgICAgICAgICAgVUNDVVVHVVVBR0NVQ0FHVVUt&#xD;
+                    R0dVLS1BR0FHQ0dVVUNHR0NVVVVVQUFDQ0dBQUFVR1VDQUdHR0dVVUNHDQogICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAqICogICAqICAgICoqICAgKiAgICogICAgICAgKiAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgKiAqIA0KDQoNClg1MTQyMy4xLzE4MDItMTg3NCAgICAgQUFVQ0NDQUdDQUFHVUND&#xD;
+                    QQ0KQUYwMDgyMjAuMS82NzEzLTY3ODUgICBBVVVDQ0NBVUNBQVVDR0NDDQpYNTQ0MDguMS8xLTcz&#xD;
+                    ICAgICAgICAgIEFBVVVDQ0dDVUdHR0dHVUENCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgQVVDQ1VH&#xD;
+                    R0dDR0FBQVVDRw0KWDEyOTc3LjEvNDc1LTU0OCAgICAgICBBQVVDQ1VVVUFVQ0FDQ0dBDQpYMDMx&#xD;
+                    MjYuMS8zNjQtNDM0ICAgICAgIEFHVUNVQUFHVUdDVUNVVUcNClg1MjA3MC4xLzc3Ny04NDkgICAg&#xD;
+                    ICAgQUdVQ0NBR1VDR0dHR0dBRw0KWDEzNTU4LjEvMTg2LTExNSAgICAgICBBQVVDQ1VVQ0NHVUND&#xD;
+                    Q0FHDQpYNTIzOTIuMS8zOTY3LTQwNDAgICAgIEFBVUNDVUNVQ0NDVUFHQ1UNCkswMDI4Ny4xLzEt&#xD;
+                    NzMgICAgICAgICAgQUdDQ0NDQ1VBVUdBR0dBRw0KICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+                    ICAgICAgICAgICAgDQoNCg0K&#xD;
+                </ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">trp-operon leaders</ns4:name>
+                <ns4:description xml:lang="en">trp-operon leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpnaXw1Nzgz&#xD;
+                    Mzg0Nl9jNzMyMjM5MC03MzIyMzAxICAgICAgVEdHVEdHVEdHQUNDR0NUQ0FUQ0NHR0NHR0NDQ0Et&#xD;
+                    LS0tLS1DVEdBQ1RHQ0NDVFRUQ0dURw0KZ2l8MzIxNDEwOTVfMjI3NjU2NC0yMjc2NjUzICAgICAg&#xD;
+                    IFRHR1RHR1RHR0FDQ0dDVENBQ0NDR0dDR0dDQ0NBLS0tLS0tQ1RHQUNUR0NDQ1RUQ0dHVEcNCmdp&#xD;
+                    fDIzMTgxMTFfMTE3LTIwMSAgICAgICAgICAgICAgICBUR0dUR0dUR0dBQ0NHQ1RDQUNDQ0dHQ0dH&#xD;
+                    Q0NDQS0tLS0tLUNUR0FUQ0dDQ0NUVFRDVENHDQpnaXw1NzgzMzg0Nl9jNTc1ODYyMC01NzU4NTQx&#xD;
+                    ICAgICAgLS0tVEdHVEdHR0NDR0NDVEdBQy1HR0NHR0NDR1QtLS0tLS1BQ0FDQUNHVFRUQ1RDR1RU&#xD;
+                    VA0KZ2l8MjUwMjY1NTZfMzA1MjY1NC0zMDUyNzY1ICAgICAgIFRHR1RHR1RHR0NHQ0dDVEFHQVRB&#xD;
+                    QUdDR0dHQ0NDQUFUQ0FDVFRHVFRUVENHQ0NUVFRULUcNCmdpfDYyMzg4ODkyXzMyMDY0OTItMzIw&#xD;
+                    NjYwMyAgICAgICBUR0dUR0dUR0dDR0NHQ1RBQUNUQUFHQ0dBR0NDVC1DQUNDVFRUR1RUVFRDR0ND&#xD;
+                    VFRUVC1HDQpnaXwzODIzMjY0Ml8yNDU2NTI5LTI0NTY2MjkgICAgICAgVEdHVEdHVEdHQ0dDR0NU&#xD;
+                    VEFBQ0MtR0NHR0dDQ0ctLVRUVFQtQ0dDQVRUQ0dDQ1RUVFRURw0KZ2l8MzgyMzI2NDJfMjQ2NTAw&#xD;
+                    MS0yNDY1MDk5ICAgICAgIFRUQ1RHR1RHR0NHQ0dDQ1RBR0NBR0dDR0dHQ0NDLS0tQ1RUR1RHQUdD&#xD;
+                    QVRHQ1RUVFRUQ0cNCg==&#xD;
+                </ns4:prop>
+            </ns4:example>
+        </ns4:function>
+        <ns4:function id="rnaalishapes_function_shapes">
+            <ns4:name xml:lang="en">shapes</ns4:name>
+            <ns4:shortDescription xml:lang="en">computes shape representative structures.</ns4:shortDescription>
+            <ns4:description xml:lang="en">Output of <ns2:strong>subopt</ns2:strong> mode is crowded by many very similar answers, which make it hard to focus to the "important" changes. The abstract shape concept [<ns2:a href="/rnaalishapes?viewType=references#jan:gie:2010">jan:gie:2010</ns2:a>] groups similar answers together and reports only the best answer within such a group. Due to abstraction suboptimal analyses can be done more thorough, by ignoring boring differences (see option <ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_shape_level">shape level</ns2:a>).</ns4:description>
+            <ns4:inputref ref="rnaalishapes_input_rna_sequence_alignment"/>
+            <ns4:outputref ref="rnaalishapes_output_output"/>
+            <ns4:paramGroup id="rnaalishapes_paramgroup_fn_rnaalishapes_shapes">
+                <ns4:name xml:lang="en">HIDEME</ns4:name>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_energydeviation"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_stochasticoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_alignmentoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_foldingoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_inputstyle"/>
+            </ns4:paramGroup>
+            <ns4:depref ref="rnaalishapes_parameterdependency_windowstyle"/>
+            <ns4:paramAndInputOutputOrder>
+                <ns4:reference>rnaalishapes_parameter_lonely_base_pairs</ns4:reference>
+                <ns4:additionalString> --mode=shapes </ns4:additionalString>
+                <ns4:reference>rnaalishapes_parameter_window_increment</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_cfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_consensus</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_grammar</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_shape_level</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_temperature</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_pairing_fraction</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_absolute_deviation</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_thermodynamic_model_parameters</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structure_conservation_index</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_window_size</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_nfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structureprobs</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_relative_deviation</ns4:reference>
+                <ns4:reference>rnaalishapes_input_rna_sequence_alignment</ns4:reference>
+                <ns4:reference>rnaalishapes_output_output</ns4:reference>
+            </ns4:paramAndInputOutputOrder>
+            <ns4:example>
+                <ns4:name xml:lang="en">t-box leaders</ns4:name>
+                <ns4:description xml:lang="en">T-box leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpBTi8xLTE1&#xD;
+                    OCAgICAgICAgLWNjZ3VjY2NnZ2F1Z2dnZ2NnY2djYS0tLS0tLWd1YWNnZy1jYWFnY2dhZ2d1Z2d1&#xD;
+                    YWNjZ2NnZ3VnY2ctDQpNYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FndWdnY2NhY2djZ2FhYWdj&#xD;
+                    LS0tZ2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNbC8xLTE1OCAgICAgICAgLS0tLS1h&#xD;
+                    LS0tLS1ndWdnY2NndWdjZ3V1Y2djLWd1Z2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpN&#xD;
+                    bS8xLTE1OCAgICAgICAgLS0tLWFhYXV1Z2FnY2dnY2NnY2FjdWNhZ2d1LS0tZ2NnZy1jYWFnY2dn&#xD;
+                    Z2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNYi8xLTE1OCAgICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2dj&#xD;
+                    YXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Y2N1YWNjZ2NnZ2NndXUtDQpNdDEvMS0xNTggICAgICAg&#xD;
+                    LS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2Nn&#xD;
+                    dXUtDQpNdDIvMS0xNTggICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1j&#xD;
+                    YWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NndXUtDQpOZi8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FnZ3Vj&#xD;
+                    Y2dndWdjZ3VjY2dhY2djY2dnYS1jYWFhY2dnZ2d1Z2d1YWNjZ2NnZ3V1dWMtDQpQYS8xLTE1OCAg&#xD;
+                    ICAgICAgLS0tLS0tLS0tLS0tLS0tY2dhY2d1Y2d1dWdhY2d1Y2d1Zy1jYWFnZ2FnZ2d1Z2d1YWNj&#xD;
+                    Z2NnZ2d1YWNjDQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLWdndWdjYWNhY2FnZ2djZ2NjZ2dn&#xD;
+                    LWdhZ2NjYWFnZ2FnZ2d1Y2d1YWNjZ2NnZ2dhZ2NnDQpTYy8xLTE1OCAgICAgICAgLS0tLS0tLS0t&#xD;
+                    LS1nYWdjYWNhY2dhY2djYWNjZ2djY2dnZ2NjYWFnZ2FnZ2d1Z2d1YWNjZ2NnZ2dhZ2NhDQpUZi8x&#xD;
+                    LTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLWdnY2FnZ2FjZ2FjZ2djY2djZ2NnZ2NjYWFnZ2FnZ2d1&#xD;
+                    Z2d1YWNjZ2NnZ2dnY2d1DQpSeC8xLTE1OCAgICAgICAgYWdjZ2d1Y2MtLS1nZ2dnY2NnY2dhZ2dj&#xD;
+                    Y3VjLS0tLWdnZy1jYWFnY2FnZ2d1Z2d1YWNjZ2NnYWdhZ2MtDQpDZC8xLTE1OCAgICAgICAgLS0t&#xD;
+                    LXVhY2EtLS11Y2FnYXVnY2N1Y3VnZy11Z2dhYXVnY3VjYWFnY2djY2N1Z2d1YWNjZ2NjLS0tLS0t&#xD;
+                    DQpDZS8xLTE1OCAgICAgICAgZ2d1Z2djY3UtLS1ndXVnZ3VnZ2djYy1nYy1hLS0tLWdndXVjYWFn&#xD;
+                    Y2FnZ2d1Z2d1YWNjZ2NndWMtLS0tDQpDZy8xLTE1OCAgICAgICAgYS0tLS0tYWMtLS1nYWFndWdn&#xD;
+                    YWdjdWFndXVhYXV1dWFnY3VjYWFnY3VnZ2d1Z2d1YWNjZ2NndWMtLS0tDQogICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqKiogICAgICAgICAgKioqKiog&#xD;
+                    ICAgICAgDQoNCkFOLzEtMTU4ICAgICAgICAtLS0tZ2NhY2NhZ2NjZ2ctLS0tLS0tLS0tLS1nY2Et&#xD;
+                    LWNjYWdjY2NjZ2d1Y2dnZ2FnY2NnYWNndWNndWMNCk1hLzEtMTU4ICAgICAgICAtY2djZ2NhZ2Nj&#xD;
+                    YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ2ctdXV1LS0tLS0tLS0tLS0tLS0NCk1sLzEt&#xD;
+                    MTU4ICAgICAgICAtY2djZ2NhY2N1YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ3VndWN1&#xD;
+                    LS0tLS0tLS0tLS1hY3UNCk1tLzEtMTU4ICAgICAgICAtY2djZ2NhY3VnYWdjZ2MtLS0tLS0tLS0t&#xD;
+                    LS1ndWNnLXVjZ3VjY2NjZ3VnY2NnLS0tLS0tLS0tLS0tLS0NCk1iLzEtMTU4ICAgICAgICAtY2dj&#xD;
+                    Z2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cN&#xD;
+                    Ck10MS8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2Nj&#xD;
+                    Z2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk10Mi8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0t&#xD;
+                    LS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk5mLzEtMTU4ICAgICAg&#xD;
+                    ICAtZ2djZ2NhY2NnZ2djZ2MtLS0tLS0tLS0tLS1jZ2FnZ3VjZ3VjY2NjZ3VnY2NjYWNhLS0tY2Fn&#xD;
+                    YWNhY2cNClBhLzEtMTU4ICAgICAgICBjZ2dhZ2FhdWNjZ2d1Z3VnYy0tLS0tLS0tdWNndWNjY3Vj&#xD;
+                    Z2d1Z2FjY2NnYWctLS0tLS0tLS0tLS0tLS0NClNhLzEtMTU4ICAgICAgICBjZ2NjZ2NhY2FjZ2dj&#xD;
+                    Z3VhY2dnYWFhZ2FjdWNnZ2N1Y3VjZ3VjY2N1Y2NnZ2FjZ2dhYWdnYS1nLS0tLS0NClNjLzEtMTU4&#xD;
+                    ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWNnZ2N1Y3VjZ3VjY2N1Y2NnLWFjZ2dh&#xD;
+                    YWdnY2FnLS0tLS0NClRmLzEtMTU4ICAgICAgICBjdWdjLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t&#xD;
+                    LS0tY3VjZ3VjY2N1Y2NndWNhZ2d1Z2FjY2FnLS0tLS0NClJ4LzEtMTU4ICAgICAgICAtY2djdXVj&#xD;
+                    dXV1Z2dhZ2FhYWdhLS0tLS0tLWdnZ2N1Y2NjZ3VjY2N1Z2NnZ2NjZ2dhLS0tLS0tLS0tLS0NCkNk&#xD;
+                    LzEtMTU4ICAgICAgICAtLS1jZ2dhYS0tLS1hLS0tLS0tLS0tLS0tLS0tLS0tY2djZ3VjY2NjZ2Nh&#xD;
+                    Y3V1dWEtLS0tLS0tLS0tYWcNCkNlLzEtMTU4ICAgICAgICAtLS1jZ2dhdWNhYWdnLS0tLS0tLS0t&#xD;
+                    LS0tLS0tLS0tZ2djZ3VjY2NjZ2NhYWd1YS0tLS0tLS0tLS0tY2ENCkNnLzEtMTU4ICAgICAgICAt&#xD;
+                    LS1jZ3V1dXV1dWFnLS0tLS0tLS0tLS0tLS0tLS0tZ2djZ2NjY2NjZ2NhZ2d1YWctLS0tLS0tLS0t&#xD;
+                    YWENCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgIA0KDQpBTi8xLTE1OCAgICAgICAgY3UtLS0tY2d1Y2FnZ2Nj&#xD;
+                    Y2NnZ2djYWNjY2djY2NnYWdnY2dnY2FnLWdhYWNnYS0tLQ0KTWEvMS0xNTggICAgICAgIC0tLS1n&#xD;
+                    Y2EtLS0tLS0tLWNjZ3VnLS0tLS1nY2FjLWFnZ2FnYWNhLS1hY2djZ2NhdWMNCk1sLzEtMTU4ICAg&#xD;
+                    ICAgICB1LWd1Z3V1LS0tLS0tLS1hYWd1Zy0tLS0tZ2NjYy1hZ2dhZ2FjLS0tLS1ndS0tLS0tDQpN&#xD;
+                    bS8xLTE1OCAgICAgICAgdS1ndWdhdS0tLS0tLS0tdXVjdWctLS0tLWdjYWMtYWdnYWdhYy0tLS1j&#xD;
+                    Zy0tLS0tLQ0KTWIvMS0xNTggICAgICAgIGNhZ3VnY2NnYWFjZ2d1Z2N1Z2dnLS0tLS1nY2N1Z2dn&#xD;
+                    Z2FnYWNnLS1hY2djZ2NhYWENCk10MS8xLTE1OCAgICAgICBjYWd1Z2NjZ2FhY2dndWdjdWdnZy0t&#xD;
+                    LS0tZ2NjdWdnZ2dhZ2FjZy0tYWNnY2djYWFhDQpNdDIvMS0xNTggICAgICAgY2FndWdjY2dhYWNn&#xD;
+                    Z3VnY3VnZ2ctLS0tLWdjY3VnZ2dnYWdhY2ctLWFjZ2NnY2FhYQ0KTmYvMS0xNTggICAgICAgIGMt&#xD;
+                    LS1nY2NjdWdjZ2djZ2NnZ3VnLS0tLS1nY2FjZ2FnZ2FnYWNnYy1hdWNjZ2NnLS0NClBhLzEtMTU4&#xD;
+                    ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWFjZ2FhZ2dhY2NhLS1jY2NnY3VnY2ctLS0t&#xD;
+                    DQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLS0tLS0tYWFhZ3VjY2djY2dnYWdnYWFnY3Vj&#xD;
+                    Z2NjZy0tLS0tLQ0KU2MvMS0xNTggICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLWNhY2d1Y2NnY2Nn&#xD;
+                    Z2FnZ2FhZ2N1Y2djdWctLS0tLS0NClRmLzEtMTU4ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS1j&#xD;
+                    YWNjY2N1Z2F1Z2dhYS1hZ2d1YWNnY2NhYy0tLS0tDQpSeC8xLTE1OCAgICAgICAgLS1nYWdndWNn&#xD;
+                    Y2NnZ2dnY2dnZ2EtLS0tLWdjY3VnZ2N1dXV1Y2EtLWFjZ2dnYWctLQ0KQ2QvMS0xNTggICAgICAg&#xD;
+                    IGdjYWdhYXUtLS0tLS0tZ2N1dWdjZ2FhYWd1Z2FhZ2dhZ2FhYWEtLS0tLS0tLS0tLS0NCkNlLzEt&#xD;
+                    MTU4ICAgICAgICB1Z2FjY2F1Y2F1dWdnY2FjdXVnYy0tZ2FhZ2dhdXVhYWdnZ2FjY2ctYWN1Y2Fj&#xD;
+                    LS0tDQpDZy8xLTE1OCAgICAgICAgY2dhdWFhdXVhdXVndXVhY3V1Z2NndWdhYWdnYS0tLXVnZ2dh&#xD;
+                    Y2NnYWFjYWNhYy0tLQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgICANCg0KDQoNCg==&#xD;
+                </ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">tRNA</ns4:name>
+                <ns4:description xml:lang="en">tRNA</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXKDEuODEpIG11bHRpcGxlIHNlcXVlbmNlIGFsaWdubWVudA0KDQoNClg1MTQyMy4x&#xD;
+                    LzE4MDItMTg3NCAgICAgR0dHQ1VVR1VBR0NVQ0FHQ1UtR0dVLS1BR0FHQ0dDQ0dDQ1VVVUdDQUFH&#xD;
+                    R0NHR0FHR0NDQ1VHR0dVQ0NHDQpBRjAwODIyMC4xLzY3MTMtNjc4NSAgIEdDR0dVVUdVR0dDR0FB&#xD;
+                    R1UtLUdHVVUtQUFDR0NBQ0NBR0FVVUdVR0dDVUNVR0dDQVVVQ0dVR0dHVVVDRw0KWDU0NDA4LjEv&#xD;
+                    MS03MyAgICAgICAgICBHQ0NDQ0NBVUNHVUNVQUdBLS1HR0NDVUFHR0FDQUNDVUNDQ1VVVUNBQ0dH&#xD;
+                    QUdBQUFBLUNHQ0dHQVVVQ0cNCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgR0dVVVVDR1VHR1VDVUFH&#xD;
+                    VUMtR0dVVS1BVUdHQ0FVQ1VHQ1VVQUFDQUNHQ0FHQUFDR1VDQ0NDQUdVVUNHDQpYMTI5NzcuMS80&#xD;
+                    NzUtNTQ4ICAgICAgIENHR1VHQVVVQUdDR0NBR0NDQ0dHVS0tQUdDR0NBVUNVR0dVVVVHR0dBQ0NB&#xD;
+                    R0FHR0dVQ0FBQUdHVVVDRw0KWDAzMTI2LjEvMzY0LTQzNCAgICAgICBBQUdBR1VBVUFHVVVVQUFB&#xD;
+                    LS1HR1UtLUFBQUFDQUdBQUFHQ1VVQ0FBQ0NVVVVBQVVVLVVDVVVBR1VVQ0cNClg1MjA3MC4xLzc3&#xD;
+                    Ny04NDkgICAgICAgVUNDVUNDR1VBR0NVQ0FBVVUtR0dDLS1BR0FHQ0FHQ0NHR0NVR1VVQUFDQ0dH&#xD;
+                    Q0FHR1VVQUNVR0dVVUNHDQpYMTM1NTguMS8xODYtMTE1ICAgICAgIFVHR0dHQ0dVQUdDQ0FBR0Mt&#xD;
+                    LUdHVS0tQUFHR0NBQUNHR0dVVVVVR0dVQ0NDR0NVQVVVQ0dHQUdHVVVDRw0KWDUyMzkyLjEvMzk2&#xD;
+                    Ny00MDQwICAgICBHQ1VBR0NHVUdHQ0FHQUdDVUNHR0NBLUFBVUdDQUFBQUdHQ1VVQUFHQ0NDVVVV&#xD;
+                    QVVDLUNBR0FHR1VVQ0ENCkswMDI4Ny4xLzEtNzMgICAgICAgICAgVUNDVVVHVVVBR0NVQ0FHVVUt&#xD;
+                    R0dVLS1BR0FHQ0dVVUNHR0NVVVVVQUFDQ0dBQUFVR1VDQUdHR0dVVUNHDQogICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAqICogICAqICAgICoqICAgKiAgICogICAgICAgKiAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgKiAqIA0KDQoNClg1MTQyMy4xLzE4MDItMTg3NCAgICAgQUFVQ0NDQUdDQUFHVUND&#xD;
+                    QQ0KQUYwMDgyMjAuMS82NzEzLTY3ODUgICBBVVVDQ0NBVUNBQVVDR0NDDQpYNTQ0MDguMS8xLTcz&#xD;
+                    ICAgICAgICAgIEFBVVVDQ0dDVUdHR0dHVUENCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgQVVDQ1VH&#xD;
+                    R0dDR0FBQVVDRw0KWDEyOTc3LjEvNDc1LTU0OCAgICAgICBBQVVDQ1VVVUFVQ0FDQ0dBDQpYMDMx&#xD;
+                    MjYuMS8zNjQtNDM0ICAgICAgIEFHVUNVQUFHVUdDVUNVVUcNClg1MjA3MC4xLzc3Ny04NDkgICAg&#xD;
+                    ICAgQUdVQ0NBR1VDR0dHR0dBRw0KWDEzNTU4LjEvMTg2LTExNSAgICAgICBBQVVDQ1VVQ0NHVUND&#xD;
+                    Q0FHDQpYNTIzOTIuMS8zOTY3LTQwNDAgICAgIEFBVUNDVUNVQ0NDVUFHQ1UNCkswMDI4Ny4xLzEt&#xD;
+                    NzMgICAgICAgICAgQUdDQ0NDQ1VBVUdBR0dBRw0KICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+                    ICAgICAgICAgICAgDQoNCg0K&#xD;
+                </ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">trp-operon leaders</ns4:name>
+                <ns4:description xml:lang="en">trp-operon leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpnaXw1Nzgz&#xD;
+                    Mzg0Nl9jNzMyMjM5MC03MzIyMzAxICAgICAgVEdHVEdHVEdHQUNDR0NUQ0FUQ0NHR0NHR0NDQ0Et&#xD;
+                    LS0tLS1DVEdBQ1RHQ0NDVFRUQ0dURw0KZ2l8MzIxNDEwOTVfMjI3NjU2NC0yMjc2NjUzICAgICAg&#xD;
+                    IFRHR1RHR1RHR0FDQ0dDVENBQ0NDR0dDR0dDQ0NBLS0tLS0tQ1RHQUNUR0NDQ1RUQ0dHVEcNCmdp&#xD;
+                    fDIzMTgxMTFfMTE3LTIwMSAgICAgICAgICAgICAgICBUR0dUR0dUR0dBQ0NHQ1RDQUNDQ0dHQ0dH&#xD;
+                    Q0NDQS0tLS0tLUNUR0FUQ0dDQ0NUVFRDVENHDQpnaXw1NzgzMzg0Nl9jNTc1ODYyMC01NzU4NTQx&#xD;
+                    ICAgICAgLS0tVEdHVEdHR0NDR0NDVEdBQy1HR0NHR0NDR1QtLS0tLS1BQ0FDQUNHVFRUQ1RDR1RU&#xD;
+                    VA0KZ2l8MjUwMjY1NTZfMzA1MjY1NC0zMDUyNzY1ICAgICAgIFRHR1RHR1RHR0NHQ0dDVEFHQVRB&#xD;
+                    QUdDR0dHQ0NDQUFUQ0FDVFRHVFRUVENHQ0NUVFRULUcNCmdpfDYyMzg4ODkyXzMyMDY0OTItMzIw&#xD;
+                    NjYwMyAgICAgICBUR0dUR0dUR0dDR0NHQ1RBQUNUQUFHQ0dBR0NDVC1DQUNDVFRUR1RUVFRDR0ND&#xD;
+                    VFRUVC1HDQpnaXwzODIzMjY0Ml8yNDU2NTI5LTI0NTY2MjkgICAgICAgVEdHVEdHVEdHQ0dDR0NU&#xD;
+                    VEFBQ0MtR0NHR0dDQ0ctLVRUVFQtQ0dDQVRUQ0dDQ1RUVFRURw0KZ2l8MzgyMzI2NDJfMjQ2NTAw&#xD;
+                    MS0yNDY1MDk5ICAgICAgIFRUQ1RHR1RHR0NHQ0dDQ1RBR0NBR0dDR0dHQ0NDLS0tQ1RUR1RHQUdD&#xD;
+                    QVRHQ1RUVFRUQ0cNCg==&#xD;
+                </ns4:prop>
+            </ns4:example>
+        </ns4:function>
+        <ns4:function id="rnaalishapes_function_sample">
+            <ns4:name xml:lang="en">sample</ns4:name>
+            <ns4:shortDescription xml:lang="en">sampling of shape class probabilities via stochastic backtracing.</ns4:shortDescription>
+            <ns4:description xml:lang="en">Probabilistic sampling based on partition function. This mode combines stochastic sampling with a-posteriori shape abstraction. A sample from the structure space holds <ns2:em>M</ns2:em> structures together with their shapes, on which classification is performed. The probability of a shape can then be approximated by its frequency in the sample.</ns4:description>
+            <ns4:inputref ref="rnaalishapes_input_rna_sequence_alignment"/>
+            <ns4:outputref ref="rnaalishapes_output_output"/>
+            <ns4:paramGroup id="rnaalishapes_paramgroup_fn_rnaalishapes_sample">
+                <ns4:name xml:lang="en">HIDEME</ns4:name>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_stochasticoptions_sample"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_alignmentoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_foldingoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_inputstyle"/>
+            </ns4:paramGroup>
+            <ns4:depref ref="rnaalishapes_parameterdependency_windowstyle"/>
+            <ns4:paramAndInputOutputOrder>
+                <ns4:reference>rnaalishapes_parameter_lonely_base_pairs</ns4:reference>
+                <ns4:additionalString> --mode=sample </ns4:additionalString>
+                <ns4:reference>rnaalishapes_parameter_window_increment</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_output_probability_filter</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_cfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_consensus</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_show_samples</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_grammar</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_shape_level</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_temperature</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_pairing_fraction</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_thermodynamic_model_parameters</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_numsamples</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structure_conservation_index</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_window_size</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structureprobs</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_decimals_for_probabilities</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_nfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_input_rna_sequence_alignment</ns4:reference>
+                <ns4:reference>rnaalishapes_output_output</ns4:reference>
+            </ns4:paramAndInputOutputOrder>
+            <ns4:example>
+                <ns4:name xml:lang="en">t-box leaders</ns4:name>
+                <ns4:description xml:lang="en">t-box leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpBTi8xLTE1&#xD;
+                    OCAgICAgICAgLWNjZ3VjY2NnZ2F1Z2dnZ2NnY2djYS0tLS0tLWd1YWNnZy1jYWFnY2dhZ2d1Z2d1&#xD;
+                    YWNjZ2NnZ3VnY2ctDQpNYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FndWdnY2NhY2djZ2FhYWdj&#xD;
+                    LS0tZ2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNbC8xLTE1OCAgICAgICAgLS0tLS1h&#xD;
+                    LS0tLS1ndWdnY2NndWdjZ3V1Y2djLWd1Z2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpN&#xD;
+                    bS8xLTE1OCAgICAgICAgLS0tLWFhYXV1Z2FnY2dnY2NnY2FjdWNhZ2d1LS0tZ2NnZy1jYWFnY2dn&#xD;
+                    Z2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNYi8xLTE1OCAgICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2dj&#xD;
+                    YXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Y2N1YWNjZ2NnZ2NndXUtDQpNdDEvMS0xNTggICAgICAg&#xD;
+                    LS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2Nn&#xD;
+                    dXUtDQpNdDIvMS0xNTggICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1j&#xD;
+                    YWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NndXUtDQpOZi8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FnZ3Vj&#xD;
+                    Y2dndWdjZ3VjY2dhY2djY2dnYS1jYWFhY2dnZ2d1Z2d1YWNjZ2NnZ3V1dWMtDQpQYS8xLTE1OCAg&#xD;
+                    ICAgICAgLS0tLS0tLS0tLS0tLS0tY2dhY2d1Y2d1dWdhY2d1Y2d1Zy1jYWFnZ2FnZ2d1Z2d1YWNj&#xD;
+                    Z2NnZ2d1YWNjDQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLWdndWdjYWNhY2FnZ2djZ2NjZ2dn&#xD;
+                    LWdhZ2NjYWFnZ2FnZ2d1Y2d1YWNjZ2NnZ2dhZ2NnDQpTYy8xLTE1OCAgICAgICAgLS0tLS0tLS0t&#xD;
+                    LS1nYWdjYWNhY2dhY2djYWNjZ2djY2dnZ2NjYWFnZ2FnZ2d1Z2d1YWNjZ2NnZ2dhZ2NhDQpUZi8x&#xD;
+                    LTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLWdnY2FnZ2FjZ2FjZ2djY2djZ2NnZ2NjYWFnZ2FnZ2d1&#xD;
+                    Z2d1YWNjZ2NnZ2dnY2d1DQpSeC8xLTE1OCAgICAgICAgYWdjZ2d1Y2MtLS1nZ2dnY2NnY2dhZ2dj&#xD;
+                    Y3VjLS0tLWdnZy1jYWFnY2FnZ2d1Z2d1YWNjZ2NnYWdhZ2MtDQpDZC8xLTE1OCAgICAgICAgLS0t&#xD;
+                    LXVhY2EtLS11Y2FnYXVnY2N1Y3VnZy11Z2dhYXVnY3VjYWFnY2djY2N1Z2d1YWNjZ2NjLS0tLS0t&#xD;
+                    DQpDZS8xLTE1OCAgICAgICAgZ2d1Z2djY3UtLS1ndXVnZ3VnZ2djYy1nYy1hLS0tLWdndXVjYWFn&#xD;
+                    Y2FnZ2d1Z2d1YWNjZ2NndWMtLS0tDQpDZy8xLTE1OCAgICAgICAgYS0tLS0tYWMtLS1nYWFndWdn&#xD;
+                    YWdjdWFndXVhYXV1dWFnY3VjYWFnY3VnZ2d1Z2d1YWNjZ2NndWMtLS0tDQogICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqKiogICAgICAgICAgKioqKiog&#xD;
+                    ICAgICAgDQoNCkFOLzEtMTU4ICAgICAgICAtLS0tZ2NhY2NhZ2NjZ2ctLS0tLS0tLS0tLS1nY2Et&#xD;
+                    LWNjYWdjY2NjZ2d1Y2dnZ2FnY2NnYWNndWNndWMNCk1hLzEtMTU4ICAgICAgICAtY2djZ2NhZ2Nj&#xD;
+                    YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ2ctdXV1LS0tLS0tLS0tLS0tLS0NCk1sLzEt&#xD;
+                    MTU4ICAgICAgICAtY2djZ2NhY2N1YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ3VndWN1&#xD;
+                    LS0tLS0tLS0tLS1hY3UNCk1tLzEtMTU4ICAgICAgICAtY2djZ2NhY3VnYWdjZ2MtLS0tLS0tLS0t&#xD;
+                    LS1ndWNnLXVjZ3VjY2NjZ3VnY2NnLS0tLS0tLS0tLS0tLS0NCk1iLzEtMTU4ICAgICAgICAtY2dj&#xD;
+                    Z2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cN&#xD;
+                    Ck10MS8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2Nj&#xD;
+                    Z2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk10Mi8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0t&#xD;
+                    LS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk5mLzEtMTU4ICAgICAg&#xD;
+                    ICAtZ2djZ2NhY2NnZ2djZ2MtLS0tLS0tLS0tLS1jZ2FnZ3VjZ3VjY2NjZ3VnY2NjYWNhLS0tY2Fn&#xD;
+                    YWNhY2cNClBhLzEtMTU4ICAgICAgICBjZ2dhZ2FhdWNjZ2d1Z3VnYy0tLS0tLS0tdWNndWNjY3Vj&#xD;
+                    Z2d1Z2FjY2NnYWctLS0tLS0tLS0tLS0tLS0NClNhLzEtMTU4ICAgICAgICBjZ2NjZ2NhY2FjZ2dj&#xD;
+                    Z3VhY2dnYWFhZ2FjdWNnZ2N1Y3VjZ3VjY2N1Y2NnZ2FjZ2dhYWdnYS1nLS0tLS0NClNjLzEtMTU4&#xD;
+                    ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWNnZ2N1Y3VjZ3VjY2N1Y2NnLWFjZ2dh&#xD;
+                    YWdnY2FnLS0tLS0NClRmLzEtMTU4ICAgICAgICBjdWdjLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t&#xD;
+                    LS0tY3VjZ3VjY2N1Y2NndWNhZ2d1Z2FjY2FnLS0tLS0NClJ4LzEtMTU4ICAgICAgICAtY2djdXVj&#xD;
+                    dXV1Z2dhZ2FhYWdhLS0tLS0tLWdnZ2N1Y2NjZ3VjY2N1Z2NnZ2NjZ2dhLS0tLS0tLS0tLS0NCkNk&#xD;
+                    LzEtMTU4ICAgICAgICAtLS1jZ2dhYS0tLS1hLS0tLS0tLS0tLS0tLS0tLS0tY2djZ3VjY2NjZ2Nh&#xD;
+                    Y3V1dWEtLS0tLS0tLS0tYWcNCkNlLzEtMTU4ICAgICAgICAtLS1jZ2dhdWNhYWdnLS0tLS0tLS0t&#xD;
+                    LS0tLS0tLS0tZ2djZ3VjY2NjZ2NhYWd1YS0tLS0tLS0tLS0tY2ENCkNnLzEtMTU4ICAgICAgICAt&#xD;
+                    LS1jZ3V1dXV1dWFnLS0tLS0tLS0tLS0tLS0tLS0tZ2djZ2NjY2NjZ2NhZ2d1YWctLS0tLS0tLS0t&#xD;
+                    YWENCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgIA0KDQpBTi8xLTE1OCAgICAgICAgY3UtLS0tY2d1Y2FnZ2Nj&#xD;
+                    Y2NnZ2djYWNjY2djY2NnYWdnY2dnY2FnLWdhYWNnYS0tLQ0KTWEvMS0xNTggICAgICAgIC0tLS1n&#xD;
+                    Y2EtLS0tLS0tLWNjZ3VnLS0tLS1nY2FjLWFnZ2FnYWNhLS1hY2djZ2NhdWMNCk1sLzEtMTU4ICAg&#xD;
+                    ICAgICB1LWd1Z3V1LS0tLS0tLS1hYWd1Zy0tLS0tZ2NjYy1hZ2dhZ2FjLS0tLS1ndS0tLS0tDQpN&#xD;
+                    bS8xLTE1OCAgICAgICAgdS1ndWdhdS0tLS0tLS0tdXVjdWctLS0tLWdjYWMtYWdnYWdhYy0tLS1j&#xD;
+                    Zy0tLS0tLQ0KTWIvMS0xNTggICAgICAgIGNhZ3VnY2NnYWFjZ2d1Z2N1Z2dnLS0tLS1nY2N1Z2dn&#xD;
+                    Z2FnYWNnLS1hY2djZ2NhYWENCk10MS8xLTE1OCAgICAgICBjYWd1Z2NjZ2FhY2dndWdjdWdnZy0t&#xD;
+                    LS0tZ2NjdWdnZ2dhZ2FjZy0tYWNnY2djYWFhDQpNdDIvMS0xNTggICAgICAgY2FndWdjY2dhYWNn&#xD;
+                    Z3VnY3VnZ2ctLS0tLWdjY3VnZ2dnYWdhY2ctLWFjZ2NnY2FhYQ0KTmYvMS0xNTggICAgICAgIGMt&#xD;
+                    LS1nY2NjdWdjZ2djZ2NnZ3VnLS0tLS1nY2FjZ2FnZ2FnYWNnYy1hdWNjZ2NnLS0NClBhLzEtMTU4&#xD;
+                    ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWFjZ2FhZ2dhY2NhLS1jY2NnY3VnY2ctLS0t&#xD;
+                    DQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLS0tLS0tYWFhZ3VjY2djY2dnYWdnYWFnY3Vj&#xD;
+                    Z2NjZy0tLS0tLQ0KU2MvMS0xNTggICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLWNhY2d1Y2NnY2Nn&#xD;
+                    Z2FnZ2FhZ2N1Y2djdWctLS0tLS0NClRmLzEtMTU4ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS1j&#xD;
+                    YWNjY2N1Z2F1Z2dhYS1hZ2d1YWNnY2NhYy0tLS0tDQpSeC8xLTE1OCAgICAgICAgLS1nYWdndWNn&#xD;
+                    Y2NnZ2dnY2dnZ2EtLS0tLWdjY3VnZ2N1dXV1Y2EtLWFjZ2dnYWctLQ0KQ2QvMS0xNTggICAgICAg&#xD;
+                    IGdjYWdhYXUtLS0tLS0tZ2N1dWdjZ2FhYWd1Z2FhZ2dhZ2FhYWEtLS0tLS0tLS0tLS0NCkNlLzEt&#xD;
+                    MTU4ICAgICAgICB1Z2FjY2F1Y2F1dWdnY2FjdXVnYy0tZ2FhZ2dhdXVhYWdnZ2FjY2ctYWN1Y2Fj&#xD;
+                    LS0tDQpDZy8xLTE1OCAgICAgICAgY2dhdWFhdXVhdXVndXVhY3V1Z2NndWdhYWdnYS0tLXVnZ2dh&#xD;
+                    Y2NnYWFjYWNhYy0tLQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgICANCg0KDQoNCg==&#xD;
+                </ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">tRNA</ns4:name>
+                <ns4:description xml:lang="en">tRNA</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXKDEuODEpIG11bHRpcGxlIHNlcXVlbmNlIGFsaWdubWVudA0KDQoNClg1MTQyMy4x&#xD;
+                    LzE4MDItMTg3NCAgICAgR0dHQ1VVR1VBR0NVQ0FHQ1UtR0dVLS1BR0FHQ0dDQ0dDQ1VVVUdDQUFH&#xD;
+                    R0NHR0FHR0NDQ1VHR0dVQ0NHDQpBRjAwODIyMC4xLzY3MTMtNjc4NSAgIEdDR0dVVUdVR0dDR0FB&#xD;
+                    R1UtLUdHVVUtQUFDR0NBQ0NBR0FVVUdVR0dDVUNVR0dDQVVVQ0dVR0dHVVVDRw0KWDU0NDA4LjEv&#xD;
+                    MS03MyAgICAgICAgICBHQ0NDQ0NBVUNHVUNVQUdBLS1HR0NDVUFHR0FDQUNDVUNDQ1VVVUNBQ0dH&#xD;
+                    QUdBQUFBLUNHQ0dHQVVVQ0cNCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgR0dVVVVDR1VHR1VDVUFH&#xD;
+                    VUMtR0dVVS1BVUdHQ0FVQ1VHQ1VVQUFDQUNHQ0FHQUFDR1VDQ0NDQUdVVUNHDQpYMTI5NzcuMS80&#xD;
+                    NzUtNTQ4ICAgICAgIENHR1VHQVVVQUdDR0NBR0NDQ0dHVS0tQUdDR0NBVUNVR0dVVVVHR0dBQ0NB&#xD;
+                    R0FHR0dVQ0FBQUdHVVVDRw0KWDAzMTI2LjEvMzY0LTQzNCAgICAgICBBQUdBR1VBVUFHVVVVQUFB&#xD;
+                    LS1HR1UtLUFBQUFDQUdBQUFHQ1VVQ0FBQ0NVVVVBQVVVLVVDVVVBR1VVQ0cNClg1MjA3MC4xLzc3&#xD;
+                    Ny04NDkgICAgICAgVUNDVUNDR1VBR0NVQ0FBVVUtR0dDLS1BR0FHQ0FHQ0NHR0NVR1VVQUFDQ0dH&#xD;
+                    Q0FHR1VVQUNVR0dVVUNHDQpYMTM1NTguMS8xODYtMTE1ICAgICAgIFVHR0dHQ0dVQUdDQ0FBR0Mt&#xD;
+                    LUdHVS0tQUFHR0NBQUNHR0dVVVVVR0dVQ0NDR0NVQVVVQ0dHQUdHVVVDRw0KWDUyMzkyLjEvMzk2&#xD;
+                    Ny00MDQwICAgICBHQ1VBR0NHVUdHQ0FHQUdDVUNHR0NBLUFBVUdDQUFBQUdHQ1VVQUFHQ0NDVVVV&#xD;
+                    QVVDLUNBR0FHR1VVQ0ENCkswMDI4Ny4xLzEtNzMgICAgICAgICAgVUNDVVVHVVVBR0NVQ0FHVVUt&#xD;
+                    R0dVLS1BR0FHQ0dVVUNHR0NVVVVVQUFDQ0dBQUFVR1VDQUdHR0dVVUNHDQogICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAqICogICAqICAgICoqICAgKiAgICogICAgICAgKiAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgKiAqIA0KDQoNClg1MTQyMy4xLzE4MDItMTg3NCAgICAgQUFVQ0NDQUdDQUFHVUND&#xD;
+                    QQ0KQUYwMDgyMjAuMS82NzEzLTY3ODUgICBBVVVDQ0NBVUNBQVVDR0NDDQpYNTQ0MDguMS8xLTcz&#xD;
+                    ICAgICAgICAgIEFBVVVDQ0dDVUdHR0dHVUENCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgQVVDQ1VH&#xD;
+                    R0dDR0FBQVVDRw0KWDEyOTc3LjEvNDc1LTU0OCAgICAgICBBQVVDQ1VVVUFVQ0FDQ0dBDQpYMDMx&#xD;
+                    MjYuMS8zNjQtNDM0ICAgICAgIEFHVUNVQUFHVUdDVUNVVUcNClg1MjA3MC4xLzc3Ny04NDkgICAg&#xD;
+                    ICAgQUdVQ0NBR1VDR0dHR0dBRw0KWDEzNTU4LjEvMTg2LTExNSAgICAgICBBQVVDQ1VVQ0NHVUND&#xD;
+                    Q0FHDQpYNTIzOTIuMS8zOTY3LTQwNDAgICAgIEFBVUNDVUNVQ0NDVUFHQ1UNCkswMDI4Ny4xLzEt&#xD;
+                    NzMgICAgICAgICAgQUdDQ0NDQ1VBVUdBR0dBRw0KICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+                    ICAgICAgICAgICAgDQoNCg0K&#xD;
+                </ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">trp-operon leaders</ns4:name>
+                <ns4:description xml:lang="en">trp-operon leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpnaXw1Nzgz&#xD;
+                    Mzg0Nl9jNzMyMjM5MC03MzIyMzAxICAgICAgVEdHVEdHVEdHQUNDR0NUQ0FUQ0NHR0NHR0NDQ0Et&#xD;
+                    LS0tLS1DVEdBQ1RHQ0NDVFRUQ0dURw0KZ2l8MzIxNDEwOTVfMjI3NjU2NC0yMjc2NjUzICAgICAg&#xD;
+                    IFRHR1RHR1RHR0FDQ0dDVENBQ0NDR0dDR0dDQ0NBLS0tLS0tQ1RHQUNUR0NDQ1RUQ0dHVEcNCmdp&#xD;
+                    fDIzMTgxMTFfMTE3LTIwMSAgICAgICAgICAgICAgICBUR0dUR0dUR0dBQ0NHQ1RDQUNDQ0dHQ0dH&#xD;
+                    Q0NDQS0tLS0tLUNUR0FUQ0dDQ0NUVFRDVENHDQpnaXw1NzgzMzg0Nl9jNTc1ODYyMC01NzU4NTQx&#xD;
+                    ICAgICAgLS0tVEdHVEdHR0NDR0NDVEdBQy1HR0NHR0NDR1QtLS0tLS1BQ0FDQUNHVFRUQ1RDR1RU&#xD;
+                    VA0KZ2l8MjUwMjY1NTZfMzA1MjY1NC0zMDUyNzY1ICAgICAgIFRHR1RHR1RHR0NHQ0dDVEFHQVRB&#xD;
+                    QUdDR0dHQ0NDQUFUQ0FDVFRHVFRUVENHQ0NUVFRULUcNCmdpfDYyMzg4ODkyXzMyMDY0OTItMzIw&#xD;
+                    NjYwMyAgICAgICBUR0dUR0dUR0dDR0NHQ1RBQUNUQUFHQ0dBR0NDVC1DQUNDVFRUR1RUVFRDR0ND&#xD;
+                    VFRUVC1HDQpnaXwzODIzMjY0Ml8yNDU2NTI5LTI0NTY2MjkgICAgICAgVEdHVEdHVEdHQ0dDR0NU&#xD;
+                    VEFBQ0MtR0NHR0dDQ0ctLVRUVFQtQ0dDQVRUQ0dDQ1RUVFRURw0KZ2l8MzgyMzI2NDJfMjQ2NTAw&#xD;
+                    MS0yNDY1MDk5ICAgICAgIFRUQ1RHR1RHR0NHQ0dDQ1RBR0NBR0dDR0dHQ0NDLS0tQ1RUR1RHQUdD&#xD;
+                    QVRHQ1RUVFRUQ0cNCg==&#xD;
+                </ns4:prop>
+            </ns4:example>
+        </ns4:function>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <ns4:function id="rnaalishapes_function_mfe">
+            <ns4:name xml:lang="en">mfe</ns4:name>
+            <ns4:shortDescription xml:lang="en">computes the single energetically best secondary structure.</ns4:shortDescription>
+            <ns4:description xml:lang="en">Computes the single energetically most stable secondary structure for the given RNA alignment. Co-optimal results will be suppressed, i.e. should different prediction have the same best energy value, just an arbitrary one out of them will be reported. This resembles the function of the program <ns2:a href="http://rna.tbi.univie.ac.at/cgi-bin/RNAalifold.cgi">RNAalifold</ns2:a> of the <ns2:a href="http://www.tbi.univie.ac.at/RNA/">Vienna group</ns2:a> (see [<ns2:a href="/rnaalishapes?viewType=references#hof:fek:sta:2002">hof:fek:sta:2002</ns2:a>] and [<ns2:a href="/rnaalishapes?viewType=references#ber:hof:wil:gru:sta:2008">ber:hof:wil:gru:sta:2008</ns2:a>]). If you only use <ns2:strong>mfe</ns2:strong> mode, consider switching to RNAalifold, because their implementation is much faster, due to sophisticated low level C optimizations.</ns4:description>
+            <ns4:inputref ref="rnaalishapes_input_rna_sequence_alignment"/>
+            <ns4:outputref ref="rnaalishapes_output_output"/>
+            <ns4:paramGroup id="rnaalishapes_paramgroup_fn_rnaalishapes_mfe">
+                <ns4:name xml:lang="en">HIDEME</ns4:name>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_stochasticoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_alignmentoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_foldingoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_inputstyle"/>
+            </ns4:paramGroup>
+            <ns4:depref ref="rnaalishapes_parameterdependency_windowstyle"/>
+            <ns4:paramAndInputOutputOrder>
+                <ns4:reference>rnaalishapes_input_rna_sequence_alignment</ns4:reference>
+                <ns4:additionalString> --mode=mfe </ns4:additionalString>
+                <ns4:reference>rnaalishapes_output_output</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_lonely_base_pairs</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_window_increment</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_pairing_fraction</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_cfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_consensus</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_thermodynamic_model_parameters</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structure_conservation_index</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_window_size</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_nfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_temperature</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_shape_level</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structureprobs</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_grammar</ns4:reference>
+            </ns4:paramAndInputOutputOrder>
+            <ns4:example>
+                <ns4:name xml:lang="en">t-box leaders</ns4:name>
+                <ns4:description xml:lang="en">T-box leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpBTi8xLTE1&#xD;
+OCAgICAgICAgLWNjZ3VjY2NnZ2F1Z2dnZ2NnY2djYS0tLS0tLWd1YWNnZy1jYWFnY2dhZ2d1Z2d1&#xD;
+YWNjZ2NnZ3VnY2ctDQpNYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FndWdnY2NhY2djZ2FhYWdj&#xD;
+LS0tZ2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNbC8xLTE1OCAgICAgICAgLS0tLS1h&#xD;
+LS0tLS1ndWdnY2NndWdjZ3V1Y2djLWd1Z2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpN&#xD;
+bS8xLTE1OCAgICAgICAgLS0tLWFhYXV1Z2FnY2dnY2NnY2FjdWNhZ2d1LS0tZ2NnZy1jYWFnY2dn&#xD;
+Z2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNYi8xLTE1OCAgICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2dj&#xD;
+YXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Y2N1YWNjZ2NnZ2NndXUtDQpNdDEvMS0xNTggICAgICAg&#xD;
+LS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2Nn&#xD;
+dXUtDQpNdDIvMS0xNTggICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1j&#xD;
+YWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NndXUtDQpOZi8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FnZ3Vj&#xD;
+Y2dndWdjZ3VjY2dhY2djY2dnYS1jYWFhY2dnZ2d1Z2d1YWNjZ2NnZ3V1dWMtDQpQYS8xLTE1OCAg&#xD;
+ICAgICAgLS0tLS0tLS0tLS0tLS0tY2dhY2d1Y2d1dWdhY2d1Y2d1Zy1jYWFnZ2FnZ2d1Z2d1YWNj&#xD;
+Z2NnZ2d1YWNjDQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLWdndWdjYWNhY2FnZ2djZ2NjZ2dn&#xD;
+LWdhZ2NjYWFnZ2FnZ2d1Y2d1YWNjZ2NnZ2dhZ2NnDQpTYy8xLTE1OCAgICAgICAgLS0tLS0tLS0t&#xD;
+LS1nYWdjYWNhY2dhY2djYWNjZ2djY2dnZ2NjYWFnZ2FnZ2d1Z2d1YWNjZ2NnZ2dhZ2NhDQpUZi8x&#xD;
+LTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLWdnY2FnZ2FjZ2FjZ2djY2djZ2NnZ2NjYWFnZ2FnZ2d1&#xD;
+Z2d1YWNjZ2NnZ2dnY2d1DQpSeC8xLTE1OCAgICAgICAgYWdjZ2d1Y2MtLS1nZ2dnY2NnY2dhZ2dj&#xD;
+Y3VjLS0tLWdnZy1jYWFnY2FnZ2d1Z2d1YWNjZ2NnYWdhZ2MtDQpDZC8xLTE1OCAgICAgICAgLS0t&#xD;
+LXVhY2EtLS11Y2FnYXVnY2N1Y3VnZy11Z2dhYXVnY3VjYWFnY2djY2N1Z2d1YWNjZ2NjLS0tLS0t&#xD;
+DQpDZS8xLTE1OCAgICAgICAgZ2d1Z2djY3UtLS1ndXVnZ3VnZ2djYy1nYy1hLS0tLWdndXVjYWFn&#xD;
+Y2FnZ2d1Z2d1YWNjZ2NndWMtLS0tDQpDZy8xLTE1OCAgICAgICAgYS0tLS0tYWMtLS1nYWFndWdn&#xD;
+YWdjdWFndXVhYXV1dWFnY3VjYWFnY3VnZ2d1Z2d1YWNjZ2NndWMtLS0tDQogICAgICAgICAgICAg&#xD;
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqKiogICAgICAgICAgKioqKiog&#xD;
+ICAgICAgDQoNCkFOLzEtMTU4ICAgICAgICAtLS0tZ2NhY2NhZ2NjZ2ctLS0tLS0tLS0tLS1nY2Et&#xD;
+LWNjYWdjY2NjZ2d1Y2dnZ2FnY2NnYWNndWNndWMNCk1hLzEtMTU4ICAgICAgICAtY2djZ2NhZ2Nj&#xD;
+YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ2ctdXV1LS0tLS0tLS0tLS0tLS0NCk1sLzEt&#xD;
+MTU4ICAgICAgICAtY2djZ2NhY2N1YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ3VndWN1&#xD;
+LS0tLS0tLS0tLS1hY3UNCk1tLzEtMTU4ICAgICAgICAtY2djZ2NhY3VnYWdjZ2MtLS0tLS0tLS0t&#xD;
+LS1ndWNnLXVjZ3VjY2NjZ3VnY2NnLS0tLS0tLS0tLS0tLS0NCk1iLzEtMTU4ICAgICAgICAtY2dj&#xD;
+Z2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cN&#xD;
+Ck10MS8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2Nj&#xD;
+Z2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk10Mi8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0t&#xD;
+LS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk5mLzEtMTU4ICAgICAg&#xD;
+ICAtZ2djZ2NhY2NnZ2djZ2MtLS0tLS0tLS0tLS1jZ2FnZ3VjZ3VjY2NjZ3VnY2NjYWNhLS0tY2Fn&#xD;
+YWNhY2cNClBhLzEtMTU4ICAgICAgICBjZ2dhZ2FhdWNjZ2d1Z3VnYy0tLS0tLS0tdWNndWNjY3Vj&#xD;
+Z2d1Z2FjY2NnYWctLS0tLS0tLS0tLS0tLS0NClNhLzEtMTU4ICAgICAgICBjZ2NjZ2NhY2FjZ2dj&#xD;
+Z3VhY2dnYWFhZ2FjdWNnZ2N1Y3VjZ3VjY2N1Y2NnZ2FjZ2dhYWdnYS1nLS0tLS0NClNjLzEtMTU4&#xD;
+ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWNnZ2N1Y3VjZ3VjY2N1Y2NnLWFjZ2dh&#xD;
+YWdnY2FnLS0tLS0NClRmLzEtMTU4ICAgICAgICBjdWdjLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t&#xD;
+LS0tY3VjZ3VjY2N1Y2NndWNhZ2d1Z2FjY2FnLS0tLS0NClJ4LzEtMTU4ICAgICAgICAtY2djdXVj&#xD;
+dXV1Z2dhZ2FhYWdhLS0tLS0tLWdnZ2N1Y2NjZ3VjY2N1Z2NnZ2NjZ2dhLS0tLS0tLS0tLS0NCkNk&#xD;
+LzEtMTU4ICAgICAgICAtLS1jZ2dhYS0tLS1hLS0tLS0tLS0tLS0tLS0tLS0tY2djZ3VjY2NjZ2Nh&#xD;
+Y3V1dWEtLS0tLS0tLS0tYWcNCkNlLzEtMTU4ICAgICAgICAtLS1jZ2dhdWNhYWdnLS0tLS0tLS0t&#xD;
+LS0tLS0tLS0tZ2djZ3VjY2NjZ2NhYWd1YS0tLS0tLS0tLS0tY2ENCkNnLzEtMTU4ICAgICAgICAt&#xD;
+LS1jZ3V1dXV1dWFnLS0tLS0tLS0tLS0tLS0tLS0tZ2djZ2NjY2NjZ2NhZ2d1YWctLS0tLS0tLS0t&#xD;
+YWENCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+ICAgICAgICAgICAgICAgICAgICAgIA0KDQpBTi8xLTE1OCAgICAgICAgY3UtLS0tY2d1Y2FnZ2Nj&#xD;
+Y2NnZ2djYWNjY2djY2NnYWdnY2dnY2FnLWdhYWNnYS0tLQ0KTWEvMS0xNTggICAgICAgIC0tLS1n&#xD;
+Y2EtLS0tLS0tLWNjZ3VnLS0tLS1nY2FjLWFnZ2FnYWNhLS1hY2djZ2NhdWMNCk1sLzEtMTU4ICAg&#xD;
+ICAgICB1LWd1Z3V1LS0tLS0tLS1hYWd1Zy0tLS0tZ2NjYy1hZ2dhZ2FjLS0tLS1ndS0tLS0tDQpN&#xD;
+bS8xLTE1OCAgICAgICAgdS1ndWdhdS0tLS0tLS0tdXVjdWctLS0tLWdjYWMtYWdnYWdhYy0tLS1j&#xD;
+Zy0tLS0tLQ0KTWIvMS0xNTggICAgICAgIGNhZ3VnY2NnYWFjZ2d1Z2N1Z2dnLS0tLS1nY2N1Z2dn&#xD;
+Z2FnYWNnLS1hY2djZ2NhYWENCk10MS8xLTE1OCAgICAgICBjYWd1Z2NjZ2FhY2dndWdjdWdnZy0t&#xD;
+LS0tZ2NjdWdnZ2dhZ2FjZy0tYWNnY2djYWFhDQpNdDIvMS0xNTggICAgICAgY2FndWdjY2dhYWNn&#xD;
+Z3VnY3VnZ2ctLS0tLWdjY3VnZ2dnYWdhY2ctLWFjZ2NnY2FhYQ0KTmYvMS0xNTggICAgICAgIGMt&#xD;
+LS1nY2NjdWdjZ2djZ2NnZ3VnLS0tLS1nY2FjZ2FnZ2FnYWNnYy1hdWNjZ2NnLS0NClBhLzEtMTU4&#xD;
+ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWFjZ2FhZ2dhY2NhLS1jY2NnY3VnY2ctLS0t&#xD;
+DQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLS0tLS0tYWFhZ3VjY2djY2dnYWdnYWFnY3Vj&#xD;
+Z2NjZy0tLS0tLQ0KU2MvMS0xNTggICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLWNhY2d1Y2NnY2Nn&#xD;
+Z2FnZ2FhZ2N1Y2djdWctLS0tLS0NClRmLzEtMTU4ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS1j&#xD;
+YWNjY2N1Z2F1Z2dhYS1hZ2d1YWNnY2NhYy0tLS0tDQpSeC8xLTE1OCAgICAgICAgLS1nYWdndWNn&#xD;
+Y2NnZ2dnY2dnZ2EtLS0tLWdjY3VnZ2N1dXV1Y2EtLWFjZ2dnYWctLQ0KQ2QvMS0xNTggICAgICAg&#xD;
+IGdjYWdhYXUtLS0tLS0tZ2N1dWdjZ2FhYWd1Z2FhZ2dhZ2FhYWEtLS0tLS0tLS0tLS0NCkNlLzEt&#xD;
+MTU4ICAgICAgICB1Z2FjY2F1Y2F1dWdnY2FjdXVnYy0tZ2FhZ2dhdXVhYWdnZ2FjY2ctYWN1Y2Fj&#xD;
+LS0tDQpDZy8xLTE1OCAgICAgICAgY2dhdWFhdXVhdXVndXVhY3V1Z2NndWdhYWdnYS0tLXVnZ2dh&#xD;
+Y2NnYWFjYWNhYy0tLQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg&#xD;
+ICAgICAgICAgICAgICAgICAgICAgICANCg0KDQoNCg==&#xD;
+</ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">tRNA</ns4:name>
+                <ns4:description xml:lang="en">tRNA</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXKDEuODEpIG11bHRpcGxlIHNlcXVlbmNlIGFsaWdubWVudA0KDQoNClg1MTQyMy4x&#xD;
+LzE4MDItMTg3NCAgICAgR0dHQ1VVR1VBR0NVQ0FHQ1UtR0dVLS1BR0FHQ0dDQ0dDQ1VVVUdDQUFH&#xD;
+R0NHR0FHR0NDQ1VHR0dVQ0NHDQpBRjAwODIyMC4xLzY3MTMtNjc4NSAgIEdDR0dVVUdVR0dDR0FB&#xD;
+R1UtLUdHVVUtQUFDR0NBQ0NBR0FVVUdVR0dDVUNVR0dDQVVVQ0dVR0dHVVVDRw0KWDU0NDA4LjEv&#xD;
+MS03MyAgICAgICAgICBHQ0NDQ0NBVUNHVUNVQUdBLS1HR0NDVUFHR0FDQUNDVUNDQ1VVVUNBQ0dH&#xD;
+QUdBQUFBLUNHQ0dHQVVVQ0cNCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgR0dVVVVDR1VHR1VDVUFH&#xD;
+VUMtR0dVVS1BVUdHQ0FVQ1VHQ1VVQUFDQUNHQ0FHQUFDR1VDQ0NDQUdVVUNHDQpYMTI5NzcuMS80&#xD;
+NzUtNTQ4ICAgICAgIENHR1VHQVVVQUdDR0NBR0NDQ0dHVS0tQUdDR0NBVUNVR0dVVVVHR0dBQ0NB&#xD;
+R0FHR0dVQ0FBQUdHVVVDRw0KWDAzMTI2LjEvMzY0LTQzNCAgICAgICBBQUdBR1VBVUFHVVVVQUFB&#xD;
+LS1HR1UtLUFBQUFDQUdBQUFHQ1VVQ0FBQ0NVVVVBQVVVLVVDVVVBR1VVQ0cNClg1MjA3MC4xLzc3&#xD;
+Ny04NDkgICAgICAgVUNDVUNDR1VBR0NVQ0FBVVUtR0dDLS1BR0FHQ0FHQ0NHR0NVR1VVQUFDQ0dH&#xD;
+Q0FHR1VVQUNVR0dVVUNHDQpYMTM1NTguMS8xODYtMTE1ICAgICAgIFVHR0dHQ0dVQUdDQ0FBR0Mt&#xD;
+LUdHVS0tQUFHR0NBQUNHR0dVVVVVR0dVQ0NDR0NVQVVVQ0dHQUdHVVVDRw0KWDUyMzkyLjEvMzk2&#xD;
+Ny00MDQwICAgICBHQ1VBR0NHVUdHQ0FHQUdDVUNHR0NBLUFBVUdDQUFBQUdHQ1VVQUFHQ0NDVVVV&#xD;
+QVVDLUNBR0FHR1VVQ0ENCkswMDI4Ny4xLzEtNzMgICAgICAgICAgVUNDVVVHVVVBR0NVQ0FHVVUt&#xD;
+R0dVLS1BR0FHQ0dVVUNHR0NVVVVVQUFDQ0dBQUFVR1VDQUdHR0dVVUNHDQogICAgICAgICAgICAg&#xD;
+ICAgICAgICAgICAgICAgICAqICogICAqICAgICoqICAgKiAgICogICAgICAgKiAgICAgICAgICAg&#xD;
+ICAgICAgICAgKiAqIA0KDQoNClg1MTQyMy4xLzE4MDItMTg3NCAgICAgQUFVQ0NDQUdDQUFHVUND&#xD;
+QQ0KQUYwMDgyMjAuMS82NzEzLTY3ODUgICBBVVVDQ0NBVUNBQVVDR0NDDQpYNTQ0MDguMS8xLTcz&#xD;
+ICAgICAgICAgIEFBVVVDQ0dDVUdHR0dHVUENCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgQVVDQ1VH&#xD;
+R0dDR0FBQVVDRw0KWDEyOTc3LjEvNDc1LTU0OCAgICAgICBBQVVDQ1VVVUFVQ0FDQ0dBDQpYMDMx&#xD;
+MjYuMS8zNjQtNDM0ICAgICAgIEFHVUNVQUFHVUdDVUNVVUcNClg1MjA3MC4xLzc3Ny04NDkgICAg&#xD;
+ICAgQUdVQ0NBR1VDR0dHR0dBRw0KWDEzNTU4LjEvMTg2LTExNSAgICAgICBBQVVDQ1VVQ0NHVUND&#xD;
+Q0FHDQpYNTIzOTIuMS8zOTY3LTQwNDAgICAgIEFBVUNDVUNVQ0NDVUFHQ1UNCkswMDI4Ny4xLzEt&#xD;
+NzMgICAgICAgICAgQUdDQ0NDQ1VBVUdBR0dBRw0KICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+ICAgICAgICAgICAgDQoNCg0K&#xD;
+</ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">trp-operon leaders</ns4:name>
+                <ns4:description xml:lang="en">trp-operon leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpnaXw1Nzgz&#xD;
+Mzg0Nl9jNzMyMjM5MC03MzIyMzAxICAgICAgVEdHVEdHVEdHQUNDR0NUQ0FUQ0NHR0NHR0NDQ0Et&#xD;
+LS0tLS1DVEdBQ1RHQ0NDVFRUQ0dURw0KZ2l8MzIxNDEwOTVfMjI3NjU2NC0yMjc2NjUzICAgICAg&#xD;
+IFRHR1RHR1RHR0FDQ0dDVENBQ0NDR0dDR0dDQ0NBLS0tLS0tQ1RHQUNUR0NDQ1RUQ0dHVEcNCmdp&#xD;
+fDIzMTgxMTFfMTE3LTIwMSAgICAgICAgICAgICAgICBUR0dUR0dUR0dBQ0NHQ1RDQUNDQ0dHQ0dH&#xD;
+Q0NDQS0tLS0tLUNUR0FUQ0dDQ0NUVFRDVENHDQpnaXw1NzgzMzg0Nl9jNTc1ODYyMC01NzU4NTQx&#xD;
+ICAgICAgLS0tVEdHVEdHR0NDR0NDVEdBQy1HR0NHR0NDR1QtLS0tLS1BQ0FDQUNHVFRUQ1RDR1RU&#xD;
+VA0KZ2l8MjUwMjY1NTZfMzA1MjY1NC0zMDUyNzY1ICAgICAgIFRHR1RHR1RHR0NHQ0dDVEFHQVRB&#xD;
+QUdDR0dHQ0NDQUFUQ0FDVFRHVFRUVENHQ0NUVFRULUcNCmdpfDYyMzg4ODkyXzMyMDY0OTItMzIw&#xD;
+NjYwMyAgICAgICBUR0dUR0dUR0dDR0NHQ1RBQUNUQUFHQ0dBR0NDVC1DQUNDVFRUR1RUVFRDR0ND&#xD;
+VFRUVC1HDQpnaXwzODIzMjY0Ml8yNDU2NTI5LTI0NTY2MjkgICAgICAgVEdHVEdHVEdHQ0dDR0NU&#xD;
+VEFBQ0MtR0NHR0dDQ0ctLVRUVFQtQ0dDQVRUQ0dDQ1RUVFRURw0KZ2l8MzgyMzI2NDJfMjQ2NTAw&#xD;
+MS0yNDY1MDk5ICAgICAgIFRUQ1RHR1RHR0NHQ0dDQ1RBR0NBR0dDR0dHQ0NDLS0tQ1RUR1RHQUdD&#xD;
+QVRHQ1RUVFRUQ0cNCg==&#xD;
+</ns4:prop>
+                <ns4:prop idref="rnaalishapes_parameter_grammar">microstate</ns4:prop>
+            </ns4:example>
+        </ns4:function>
+        <ns4:function id="rnaalishapes_function_subopt">
+            <ns4:name xml:lang="en">subopt</ns4:name>
+            <ns4:shortDescription xml:lang="en">predicts mfe &amp; energetically suboptimal structures.</ns4:shortDescription>
+            <ns4:description xml:lang="en">Often, the biological relevant structure is hidden among suboptimal predictions. In <ns2:strong>subopt</ns2:strong> mode, you can also inspect all suboptimal solutions up to a given threshold (see parameters <ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_absolute_deviation">absolute deviation</ns2:a> and <ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_relative_deviation">relative deviation</ns2:a>). Due to semantic ambiguity of the underlying "microstate" grammar, sometimes identical predictions will show up. As Vienna-Dot-Bracket strings they seem to be the same, but according to base dangling they differ and thus might even have slightly different energies. See [<ns2:a href="/rnaalishapes?viewType=references#jan:schud:ste:gie:2011">jan:schud:ste:gie:2011</ns2:a>] for details.</ns4:description>
+            <ns4:inputref ref="rnaalishapes_input_rna_sequence_alignment"/>
+            <ns4:outputref ref="rnaalishapes_output_output"/>
+            <ns4:paramGroup id="rnaalishapes_paramgroup_fn_rnaalishapes_subopt">
+                <ns4:name xml:lang="en">HIDEME</ns4:name>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_energydeviation"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_stochasticoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_alignmentoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_foldingoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_inputstyle"/>
+            </ns4:paramGroup>
+            <ns4:depref ref="rnaalishapes_parameterdependency_windowstyle"/>
+            <ns4:paramAndInputOutputOrder>
+                <ns4:reference>rnaalishapes_parameter_lonely_base_pairs</ns4:reference>
+                <ns4:additionalString> --mode=subopt </ns4:additionalString>
+                <ns4:reference>rnaalishapes_parameter_window_increment</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_cfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_consensus</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_grammar</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_shape_level</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_temperature</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_pairing_fraction</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_absolute_deviation</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_thermodynamic_model_parameters</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structure_conservation_index</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_window_size</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_nfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structureprobs</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_relative_deviation</ns4:reference>
+                <ns4:reference>rnaalishapes_input_rna_sequence_alignment</ns4:reference>
+                <ns4:reference>rnaalishapes_output_output</ns4:reference>
+            </ns4:paramAndInputOutputOrder>
+            <ns4:example>
+                <ns4:name xml:lang="en">t-box leaders</ns4:name>
+                <ns4:description xml:lang="en">t-box leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpBTi8xLTE1&#xD;
+OCAgICAgICAgLWNjZ3VjY2NnZ2F1Z2dnZ2NnY2djYS0tLS0tLWd1YWNnZy1jYWFnY2dhZ2d1Z2d1&#xD;
+YWNjZ2NnZ3VnY2ctDQpNYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FndWdnY2NhY2djZ2FhYWdj&#xD;
+LS0tZ2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNbC8xLTE1OCAgICAgICAgLS0tLS1h&#xD;
+LS0tLS1ndWdnY2NndWdjZ3V1Y2djLWd1Z2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpN&#xD;
+bS8xLTE1OCAgICAgICAgLS0tLWFhYXV1Z2FnY2dnY2NnY2FjdWNhZ2d1LS0tZ2NnZy1jYWFnY2dn&#xD;
+Z2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNYi8xLTE1OCAgICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2dj&#xD;
+YXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Y2N1YWNjZ2NnZ2NndXUtDQpNdDEvMS0xNTggICAgICAg&#xD;
+LS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2Nn&#xD;
+dXUtDQpNdDIvMS0xNTggICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1j&#xD;
+YWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NndXUtDQpOZi8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FnZ3Vj&#xD;
+Y2dndWdjZ3VjY2dhY2djY2dnYS1jYWFhY2dnZ2d1Z2d1YWNjZ2NnZ3V1dWMtDQpQYS8xLTE1OCAg&#xD;
+ICAgICAgLS0tLS0tLS0tLS0tLS0tY2dhY2d1Y2d1dWdhY2d1Y2d1Zy1jYWFnZ2FnZ2d1Z2d1YWNj&#xD;
+Z2NnZ2d1YWNjDQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLWdndWdjYWNhY2FnZ2djZ2NjZ2dn&#xD;
+LWdhZ2NjYWFnZ2FnZ2d1Y2d1YWNjZ2NnZ2dhZ2NnDQpTYy8xLTE1OCAgICAgICAgLS0tLS0tLS0t&#xD;
+LS1nYWdjYWNhY2dhY2djYWNjZ2djY2dnZ2NjYWFnZ2FnZ2d1Z2d1YWNjZ2NnZ2dhZ2NhDQpUZi8x&#xD;
+LTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLWdnY2FnZ2FjZ2FjZ2djY2djZ2NnZ2NjYWFnZ2FnZ2d1&#xD;
+Z2d1YWNjZ2NnZ2dnY2d1DQpSeC8xLTE1OCAgICAgICAgYWdjZ2d1Y2MtLS1nZ2dnY2NnY2dhZ2dj&#xD;
+Y3VjLS0tLWdnZy1jYWFnY2FnZ2d1Z2d1YWNjZ2NnYWdhZ2MtDQpDZC8xLTE1OCAgICAgICAgLS0t&#xD;
+LXVhY2EtLS11Y2FnYXVnY2N1Y3VnZy11Z2dhYXVnY3VjYWFnY2djY2N1Z2d1YWNjZ2NjLS0tLS0t&#xD;
+DQpDZS8xLTE1OCAgICAgICAgZ2d1Z2djY3UtLS1ndXVnZ3VnZ2djYy1nYy1hLS0tLWdndXVjYWFn&#xD;
+Y2FnZ2d1Z2d1YWNjZ2NndWMtLS0tDQpDZy8xLTE1OCAgICAgICAgYS0tLS0tYWMtLS1nYWFndWdn&#xD;
+YWdjdWFndXVhYXV1dWFnY3VjYWFnY3VnZ2d1Z2d1YWNjZ2NndWMtLS0tDQogICAgICAgICAgICAg&#xD;
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqKiogICAgICAgICAgKioqKiog&#xD;
+ICAgICAgDQoNCkFOLzEtMTU4ICAgICAgICAtLS0tZ2NhY2NhZ2NjZ2ctLS0tLS0tLS0tLS1nY2Et&#xD;
+LWNjYWdjY2NjZ2d1Y2dnZ2FnY2NnYWNndWNndWMNCk1hLzEtMTU4ICAgICAgICAtY2djZ2NhZ2Nj&#xD;
+YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ2ctdXV1LS0tLS0tLS0tLS0tLS0NCk1sLzEt&#xD;
+MTU4ICAgICAgICAtY2djZ2NhY2N1YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ3VndWN1&#xD;
+LS0tLS0tLS0tLS1hY3UNCk1tLzEtMTU4ICAgICAgICAtY2djZ2NhY3VnYWdjZ2MtLS0tLS0tLS0t&#xD;
+LS1ndWNnLXVjZ3VjY2NjZ3VnY2NnLS0tLS0tLS0tLS0tLS0NCk1iLzEtMTU4ICAgICAgICAtY2dj&#xD;
+Z2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cN&#xD;
+Ck10MS8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2Nj&#xD;
+Z2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk10Mi8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0t&#xD;
+LS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk5mLzEtMTU4ICAgICAg&#xD;
+ICAtZ2djZ2NhY2NnZ2djZ2MtLS0tLS0tLS0tLS1jZ2FnZ3VjZ3VjY2NjZ3VnY2NjYWNhLS0tY2Fn&#xD;
+YWNhY2cNClBhLzEtMTU4ICAgICAgICBjZ2dhZ2FhdWNjZ2d1Z3VnYy0tLS0tLS0tdWNndWNjY3Vj&#xD;
+Z2d1Z2FjY2NnYWctLS0tLS0tLS0tLS0tLS0NClNhLzEtMTU4ICAgICAgICBjZ2NjZ2NhY2FjZ2dj&#xD;
+Z3VhY2dnYWFhZ2FjdWNnZ2N1Y3VjZ3VjY2N1Y2NnZ2FjZ2dhYWdnYS1nLS0tLS0NClNjLzEtMTU4&#xD;
+ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWNnZ2N1Y3VjZ3VjY2N1Y2NnLWFjZ2dh&#xD;
+YWdnY2FnLS0tLS0NClRmLzEtMTU4ICAgICAgICBjdWdjLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t&#xD;
+LS0tY3VjZ3VjY2N1Y2NndWNhZ2d1Z2FjY2FnLS0tLS0NClJ4LzEtMTU4ICAgICAgICAtY2djdXVj&#xD;
+dXV1Z2dhZ2FhYWdhLS0tLS0tLWdnZ2N1Y2NjZ3VjY2N1Z2NnZ2NjZ2dhLS0tLS0tLS0tLS0NCkNk&#xD;
+LzEtMTU4ICAgICAgICAtLS1jZ2dhYS0tLS1hLS0tLS0tLS0tLS0tLS0tLS0tY2djZ3VjY2NjZ2Nh&#xD;
+Y3V1dWEtLS0tLS0tLS0tYWcNCkNlLzEtMTU4ICAgICAgICAtLS1jZ2dhdWNhYWdnLS0tLS0tLS0t&#xD;
+LS0tLS0tLS0tZ2djZ3VjY2NjZ2NhYWd1YS0tLS0tLS0tLS0tY2ENCkNnLzEtMTU4ICAgICAgICAt&#xD;
+LS1jZ3V1dXV1dWFnLS0tLS0tLS0tLS0tLS0tLS0tZ2djZ2NjY2NjZ2NhZ2d1YWctLS0tLS0tLS0t&#xD;
+YWENCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+ICAgICAgICAgICAgICAgICAgICAgIA0KDQpBTi8xLTE1OCAgICAgICAgY3UtLS0tY2d1Y2FnZ2Nj&#xD;
+Y2NnZ2djYWNjY2djY2NnYWdnY2dnY2FnLWdhYWNnYS0tLQ0KTWEvMS0xNTggICAgICAgIC0tLS1n&#xD;
+Y2EtLS0tLS0tLWNjZ3VnLS0tLS1nY2FjLWFnZ2FnYWNhLS1hY2djZ2NhdWMNCk1sLzEtMTU4ICAg&#xD;
+ICAgICB1LWd1Z3V1LS0tLS0tLS1hYWd1Zy0tLS0tZ2NjYy1hZ2dhZ2FjLS0tLS1ndS0tLS0tDQpN&#xD;
+bS8xLTE1OCAgICAgICAgdS1ndWdhdS0tLS0tLS0tdXVjdWctLS0tLWdjYWMtYWdnYWdhYy0tLS1j&#xD;
+Zy0tLS0tLQ0KTWIvMS0xNTggICAgICAgIGNhZ3VnY2NnYWFjZ2d1Z2N1Z2dnLS0tLS1nY2N1Z2dn&#xD;
+Z2FnYWNnLS1hY2djZ2NhYWENCk10MS8xLTE1OCAgICAgICBjYWd1Z2NjZ2FhY2dndWdjdWdnZy0t&#xD;
+LS0tZ2NjdWdnZ2dhZ2FjZy0tYWNnY2djYWFhDQpNdDIvMS0xNTggICAgICAgY2FndWdjY2dhYWNn&#xD;
+Z3VnY3VnZ2ctLS0tLWdjY3VnZ2dnYWdhY2ctLWFjZ2NnY2FhYQ0KTmYvMS0xNTggICAgICAgIGMt&#xD;
+LS1nY2NjdWdjZ2djZ2NnZ3VnLS0tLS1nY2FjZ2FnZ2FnYWNnYy1hdWNjZ2NnLS0NClBhLzEtMTU4&#xD;
+ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWFjZ2FhZ2dhY2NhLS1jY2NnY3VnY2ctLS0t&#xD;
+DQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLS0tLS0tYWFhZ3VjY2djY2dnYWdnYWFnY3Vj&#xD;
+Z2NjZy0tLS0tLQ0KU2MvMS0xNTggICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLWNhY2d1Y2NnY2Nn&#xD;
+Z2FnZ2FhZ2N1Y2djdWctLS0tLS0NClRmLzEtMTU4ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS1j&#xD;
+YWNjY2N1Z2F1Z2dhYS1hZ2d1YWNnY2NhYy0tLS0tDQpSeC8xLTE1OCAgICAgICAgLS1nYWdndWNn&#xD;
+Y2NnZ2dnY2dnZ2EtLS0tLWdjY3VnZ2N1dXV1Y2EtLWFjZ2dnYWctLQ0KQ2QvMS0xNTggICAgICAg&#xD;
+IGdjYWdhYXUtLS0tLS0tZ2N1dWdjZ2FhYWd1Z2FhZ2dhZ2FhYWEtLS0tLS0tLS0tLS0NCkNlLzEt&#xD;
+MTU4ICAgICAgICB1Z2FjY2F1Y2F1dWdnY2FjdXVnYy0tZ2FhZ2dhdXVhYWdnZ2FjY2ctYWN1Y2Fj&#xD;
+LS0tDQpDZy8xLTE1OCAgICAgICAgY2dhdWFhdXVhdXVndXVhY3V1Z2NndWdhYWdnYS0tLXVnZ2dh&#xD;
+Y2NnYWFjYWNhYy0tLQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg&#xD;
+ICAgICAgICAgICAgICAgICAgICAgICANCg0KDQoNCg==&#xD;
+</ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">tRNA</ns4:name>
+                <ns4:description xml:lang="en">tRNA</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXKDEuODEpIG11bHRpcGxlIHNlcXVlbmNlIGFsaWdubWVudA0KDQoNClg1MTQyMy4x&#xD;
+LzE4MDItMTg3NCAgICAgR0dHQ1VVR1VBR0NVQ0FHQ1UtR0dVLS1BR0FHQ0dDQ0dDQ1VVVUdDQUFH&#xD;
+R0NHR0FHR0NDQ1VHR0dVQ0NHDQpBRjAwODIyMC4xLzY3MTMtNjc4NSAgIEdDR0dVVUdVR0dDR0FB&#xD;
+R1UtLUdHVVUtQUFDR0NBQ0NBR0FVVUdVR0dDVUNVR0dDQVVVQ0dVR0dHVVVDRw0KWDU0NDA4LjEv&#xD;
+MS03MyAgICAgICAgICBHQ0NDQ0NBVUNHVUNVQUdBLS1HR0NDVUFHR0FDQUNDVUNDQ1VVVUNBQ0dH&#xD;
+QUdBQUFBLUNHQ0dHQVVVQ0cNCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgR0dVVVVDR1VHR1VDVUFH&#xD;
+VUMtR0dVVS1BVUdHQ0FVQ1VHQ1VVQUFDQUNHQ0FHQUFDR1VDQ0NDQUdVVUNHDQpYMTI5NzcuMS80&#xD;
+NzUtNTQ4ICAgICAgIENHR1VHQVVVQUdDR0NBR0NDQ0dHVS0tQUdDR0NBVUNVR0dVVVVHR0dBQ0NB&#xD;
+R0FHR0dVQ0FBQUdHVVVDRw0KWDAzMTI2LjEvMzY0LTQzNCAgICAgICBBQUdBR1VBVUFHVVVVQUFB&#xD;
+LS1HR1UtLUFBQUFDQUdBQUFHQ1VVQ0FBQ0NVVVVBQVVVLVVDVVVBR1VVQ0cNClg1MjA3MC4xLzc3&#xD;
+Ny04NDkgICAgICAgVUNDVUNDR1VBR0NVQ0FBVVUtR0dDLS1BR0FHQ0FHQ0NHR0NVR1VVQUFDQ0dH&#xD;
+Q0FHR1VVQUNVR0dVVUNHDQpYMTM1NTguMS8xODYtMTE1ICAgICAgIFVHR0dHQ0dVQUdDQ0FBR0Mt&#xD;
+LUdHVS0tQUFHR0NBQUNHR0dVVVVVR0dVQ0NDR0NVQVVVQ0dHQUdHVVVDRw0KWDUyMzkyLjEvMzk2&#xD;
+Ny00MDQwICAgICBHQ1VBR0NHVUdHQ0FHQUdDVUNHR0NBLUFBVUdDQUFBQUdHQ1VVQUFHQ0NDVVVV&#xD;
+QVVDLUNBR0FHR1VVQ0ENCkswMDI4Ny4xLzEtNzMgICAgICAgICAgVUNDVVVHVVVBR0NVQ0FHVVUt&#xD;
+R0dVLS1BR0FHQ0dVVUNHR0NVVVVVQUFDQ0dBQUFVR1VDQUdHR0dVVUNHDQogICAgICAgICAgICAg&#xD;
+ICAgICAgICAgICAgICAgICAqICogICAqICAgICoqICAgKiAgICogICAgICAgKiAgICAgICAgICAg&#xD;
+ICAgICAgICAgKiAqIA0KDQoNClg1MTQyMy4xLzE4MDItMTg3NCAgICAgQUFVQ0NDQUdDQUFHVUND&#xD;
+QQ0KQUYwMDgyMjAuMS82NzEzLTY3ODUgICBBVVVDQ0NBVUNBQVVDR0NDDQpYNTQ0MDguMS8xLTcz&#xD;
+ICAgICAgICAgIEFBVVVDQ0dDVUdHR0dHVUENCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgQVVDQ1VH&#xD;
+R0dDR0FBQVVDRw0KWDEyOTc3LjEvNDc1LTU0OCAgICAgICBBQVVDQ1VVVUFVQ0FDQ0dBDQpYMDMx&#xD;
+MjYuMS8zNjQtNDM0ICAgICAgIEFHVUNVQUFHVUdDVUNVVUcNClg1MjA3MC4xLzc3Ny04NDkgICAg&#xD;
+ICAgQUdVQ0NBR1VDR0dHR0dBRw0KWDEzNTU4LjEvMTg2LTExNSAgICAgICBBQVVDQ1VVQ0NHVUND&#xD;
+Q0FHDQpYNTIzOTIuMS8zOTY3LTQwNDAgICAgIEFBVUNDVUNVQ0NDVUFHQ1UNCkswMDI4Ny4xLzEt&#xD;
+NzMgICAgICAgICAgQUdDQ0NDQ1VBVUdBR0dBRw0KICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+ICAgICAgICAgICAgDQoNCg0K&#xD;
+</ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">trp-operon leaders</ns4:name>
+                <ns4:description xml:lang="en">trp-operon leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpnaXw1Nzgz&#xD;
+Mzg0Nl9jNzMyMjM5MC03MzIyMzAxICAgICAgVEdHVEdHVEdHQUNDR0NUQ0FUQ0NHR0NHR0NDQ0Et&#xD;
+LS0tLS1DVEdBQ1RHQ0NDVFRUQ0dURw0KZ2l8MzIxNDEwOTVfMjI3NjU2NC0yMjc2NjUzICAgICAg&#xD;
+IFRHR1RHR1RHR0FDQ0dDVENBQ0NDR0dDR0dDQ0NBLS0tLS0tQ1RHQUNUR0NDQ1RUQ0dHVEcNCmdp&#xD;
+fDIzMTgxMTFfMTE3LTIwMSAgICAgICAgICAgICAgICBUR0dUR0dUR0dBQ0NHQ1RDQUNDQ0dHQ0dH&#xD;
+Q0NDQS0tLS0tLUNUR0FUQ0dDQ0NUVFRDVENHDQpnaXw1NzgzMzg0Nl9jNTc1ODYyMC01NzU4NTQx&#xD;
+ICAgICAgLS0tVEdHVEdHR0NDR0NDVEdBQy1HR0NHR0NDR1QtLS0tLS1BQ0FDQUNHVFRUQ1RDR1RU&#xD;
+VA0KZ2l8MjUwMjY1NTZfMzA1MjY1NC0zMDUyNzY1ICAgICAgIFRHR1RHR1RHR0NHQ0dDVEFHQVRB&#xD;
+QUdDR0dHQ0NDQUFUQ0FDVFRHVFRUVENHQ0NUVFRULUcNCmdpfDYyMzg4ODkyXzMyMDY0OTItMzIw&#xD;
+NjYwMyAgICAgICBUR0dUR0dUR0dDR0NHQ1RBQUNUQUFHQ0dBR0NDVC1DQUNDVFRUR1RUVFRDR0ND&#xD;
+VFRUVC1HDQpnaXwzODIzMjY0Ml8yNDU2NTI5LTI0NTY2MjkgICAgICAgVEdHVEdHVEdHQ0dDR0NU&#xD;
+VEFBQ0MtR0NHR0dDQ0ctLVRUVFQtQ0dDQVRUQ0dDQ1RUVFRURw0KZ2l8MzgyMzI2NDJfMjQ2NTAw&#xD;
+MS0yNDY1MDk5ICAgICAgIFRUQ1RHR1RHR0NHQ0dDQ1RBR0NBR0dDR0dHQ0NDLS0tQ1RUR1RHQUdD&#xD;
+QVRHQ1RUVFRUQ0cNCg==&#xD;
+</ns4:prop>
+            </ns4:example>
+        </ns4:function>
+        <ns4:function id="rnaalishapes_function_outside">
+            <ns4:name xml:lang="en">outside</ns4:name>
+            <ns4:shortDescription xml:lang="en">computes base-pair probabilities.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Applies the "outside"-algorithm to compute probabilities for all base pairs (i,j), based on the partition function [<ns2:a href="/rnaalishapes?viewType=references#mcc:1990">mcc:1990</ns2:a>]. Output is a PostScript file, visualizing these probabilities as a "dot plot".</ns2:p>
+            </ns4:description>
+            <ns4:inputref ref="rnaalishapes_input_rna_sequence_alignment"/>
+            <ns4:outputref ref="rnaalishapes_output_output"/>
+            <ns4:outputfileref ref="rnaalishapes_additionaloutput_dotplot"/>
+            <ns4:paramGroup id="rnaalishapes_paramgroup_fn_rnaalishapes_outside">
+                <ns4:name xml:lang="en">HIDEME</ns4:name>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_alignmentoptions_outside"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_foldingoptions_outside"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_outside_options"/>
+            </ns4:paramGroup>
+            <ns4:paramAndInputOutputOrder>
+                <ns4:reference>rnaalishapes_input_rna_sequence_alignment</ns4:reference>
+                <ns4:additionalString> --mode=outside </ns4:additionalString>
+                <ns4:reference>rnaalishapes_parameter_consensus</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_pairing_fraction</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_cfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_nfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_grammar</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_temperature</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_thermodynamic_model_parameters</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_lonely_base_pairs</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_bppmthreshold</ns4:reference>
+                <ns4:reference>rnaalishapes_output_output</ns4:reference>
+                <ns4:additionalString> --png=1 </ns4:additionalString>
+            </ns4:paramAndInputOutputOrder>
+            <ns4:example>
+                <ns4:name xml:lang="en">t-box leaders</ns4:name>
+                <ns4:description xml:lang="en">t-box leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpBTi8xLTE1&#xD;
+                    OCAgICAgICAgLWNjZ3VjY2NnZ2F1Z2dnZ2NnY2djYS0tLS0tLWd1YWNnZy1jYWFnY2dhZ2d1Z2d1&#xD;
+                    YWNjZ2NnZ3VnY2ctDQpNYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FndWdnY2NhY2djZ2FhYWdj&#xD;
+                    LS0tZ2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNbC8xLTE1OCAgICAgICAgLS0tLS1h&#xD;
+                    LS0tLS1ndWdnY2NndWdjZ3V1Y2djLWd1Z2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpN&#xD;
+                    bS8xLTE1OCAgICAgICAgLS0tLWFhYXV1Z2FnY2dnY2NnY2FjdWNhZ2d1LS0tZ2NnZy1jYWFnY2dn&#xD;
+                    Z2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNYi8xLTE1OCAgICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2dj&#xD;
+                    YXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Y2N1YWNjZ2NnZ2NndXUtDQpNdDEvMS0xNTggICAgICAg&#xD;
+                    LS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2Nn&#xD;
+                    dXUtDQpNdDIvMS0xNTggICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1j&#xD;
+                    YWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NndXUtDQpOZi8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FnZ3Vj&#xD;
+                    Y2dndWdjZ3VjY2dhY2djY2dnYS1jYWFhY2dnZ2d1Z2d1YWNjZ2NnZ3V1dWMtDQpQYS8xLTE1OCAg&#xD;
+                    ICAgICAgLS0tLS0tLS0tLS0tLS0tY2dhY2d1Y2d1dWdhY2d1Y2d1Zy1jYWFnZ2FnZ2d1Z2d1YWNj&#xD;
+                    Z2NnZ2d1YWNjDQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLWdndWdjYWNhY2FnZ2djZ2NjZ2dn&#xD;
+                    LWdhZ2NjYWFnZ2FnZ2d1Y2d1YWNjZ2NnZ2dhZ2NnDQpTYy8xLTE1OCAgICAgICAgLS0tLS0tLS0t&#xD;
+                    LS1nYWdjYWNhY2dhY2djYWNjZ2djY2dnZ2NjYWFnZ2FnZ2d1Z2d1YWNjZ2NnZ2dhZ2NhDQpUZi8x&#xD;
+                    LTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLWdnY2FnZ2FjZ2FjZ2djY2djZ2NnZ2NjYWFnZ2FnZ2d1&#xD;
+                    Z2d1YWNjZ2NnZ2dnY2d1DQpSeC8xLTE1OCAgICAgICAgYWdjZ2d1Y2MtLS1nZ2dnY2NnY2dhZ2dj&#xD;
+                    Y3VjLS0tLWdnZy1jYWFnY2FnZ2d1Z2d1YWNjZ2NnYWdhZ2MtDQpDZC8xLTE1OCAgICAgICAgLS0t&#xD;
+                    LXVhY2EtLS11Y2FnYXVnY2N1Y3VnZy11Z2dhYXVnY3VjYWFnY2djY2N1Z2d1YWNjZ2NjLS0tLS0t&#xD;
+                    DQpDZS8xLTE1OCAgICAgICAgZ2d1Z2djY3UtLS1ndXVnZ3VnZ2djYy1nYy1hLS0tLWdndXVjYWFn&#xD;
+                    Y2FnZ2d1Z2d1YWNjZ2NndWMtLS0tDQpDZy8xLTE1OCAgICAgICAgYS0tLS0tYWMtLS1nYWFndWdn&#xD;
+                    YWdjdWFndXVhYXV1dWFnY3VjYWFnY3VnZ2d1Z2d1YWNjZ2NndWMtLS0tDQogICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqKiogICAgICAgICAgKioqKiog&#xD;
+                    ICAgICAgDQoNCkFOLzEtMTU4ICAgICAgICAtLS0tZ2NhY2NhZ2NjZ2ctLS0tLS0tLS0tLS1nY2Et&#xD;
+                    LWNjYWdjY2NjZ2d1Y2dnZ2FnY2NnYWNndWNndWMNCk1hLzEtMTU4ICAgICAgICAtY2djZ2NhZ2Nj&#xD;
+                    YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ2ctdXV1LS0tLS0tLS0tLS0tLS0NCk1sLzEt&#xD;
+                    MTU4ICAgICAgICAtY2djZ2NhY2N1YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ3VndWN1&#xD;
+                    LS0tLS0tLS0tLS1hY3UNCk1tLzEtMTU4ICAgICAgICAtY2djZ2NhY3VnYWdjZ2MtLS0tLS0tLS0t&#xD;
+                    LS1ndWNnLXVjZ3VjY2NjZ3VnY2NnLS0tLS0tLS0tLS0tLS0NCk1iLzEtMTU4ICAgICAgICAtY2dj&#xD;
+                    Z2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cN&#xD;
+                    Ck10MS8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2Nj&#xD;
+                    Z2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk10Mi8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0t&#xD;
+                    LS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk5mLzEtMTU4ICAgICAg&#xD;
+                    ICAtZ2djZ2NhY2NnZ2djZ2MtLS0tLS0tLS0tLS1jZ2FnZ3VjZ3VjY2NjZ3VnY2NjYWNhLS0tY2Fn&#xD;
+                    YWNhY2cNClBhLzEtMTU4ICAgICAgICBjZ2dhZ2FhdWNjZ2d1Z3VnYy0tLS0tLS0tdWNndWNjY3Vj&#xD;
+                    Z2d1Z2FjY2NnYWctLS0tLS0tLS0tLS0tLS0NClNhLzEtMTU4ICAgICAgICBjZ2NjZ2NhY2FjZ2dj&#xD;
+                    Z3VhY2dnYWFhZ2FjdWNnZ2N1Y3VjZ3VjY2N1Y2NnZ2FjZ2dhYWdnYS1nLS0tLS0NClNjLzEtMTU4&#xD;
+                    ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWNnZ2N1Y3VjZ3VjY2N1Y2NnLWFjZ2dh&#xD;
+                    YWdnY2FnLS0tLS0NClRmLzEtMTU4ICAgICAgICBjdWdjLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t&#xD;
+                    LS0tY3VjZ3VjY2N1Y2NndWNhZ2d1Z2FjY2FnLS0tLS0NClJ4LzEtMTU4ICAgICAgICAtY2djdXVj&#xD;
+                    dXV1Z2dhZ2FhYWdhLS0tLS0tLWdnZ2N1Y2NjZ3VjY2N1Z2NnZ2NjZ2dhLS0tLS0tLS0tLS0NCkNk&#xD;
+                    LzEtMTU4ICAgICAgICAtLS1jZ2dhYS0tLS1hLS0tLS0tLS0tLS0tLS0tLS0tY2djZ3VjY2NjZ2Nh&#xD;
+                    Y3V1dWEtLS0tLS0tLS0tYWcNCkNlLzEtMTU4ICAgICAgICAtLS1jZ2dhdWNhYWdnLS0tLS0tLS0t&#xD;
+                    LS0tLS0tLS0tZ2djZ3VjY2NjZ2NhYWd1YS0tLS0tLS0tLS0tY2ENCkNnLzEtMTU4ICAgICAgICAt&#xD;
+                    LS1jZ3V1dXV1dWFnLS0tLS0tLS0tLS0tLS0tLS0tZ2djZ2NjY2NjZ2NhZ2d1YWctLS0tLS0tLS0t&#xD;
+                    YWENCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgIA0KDQpBTi8xLTE1OCAgICAgICAgY3UtLS0tY2d1Y2FnZ2Nj&#xD;
+                    Y2NnZ2djYWNjY2djY2NnYWdnY2dnY2FnLWdhYWNnYS0tLQ0KTWEvMS0xNTggICAgICAgIC0tLS1n&#xD;
+                    Y2EtLS0tLS0tLWNjZ3VnLS0tLS1nY2FjLWFnZ2FnYWNhLS1hY2djZ2NhdWMNCk1sLzEtMTU4ICAg&#xD;
+                    ICAgICB1LWd1Z3V1LS0tLS0tLS1hYWd1Zy0tLS0tZ2NjYy1hZ2dhZ2FjLS0tLS1ndS0tLS0tDQpN&#xD;
+                    bS8xLTE1OCAgICAgICAgdS1ndWdhdS0tLS0tLS0tdXVjdWctLS0tLWdjYWMtYWdnYWdhYy0tLS1j&#xD;
+                    Zy0tLS0tLQ0KTWIvMS0xNTggICAgICAgIGNhZ3VnY2NnYWFjZ2d1Z2N1Z2dnLS0tLS1nY2N1Z2dn&#xD;
+                    Z2FnYWNnLS1hY2djZ2NhYWENCk10MS8xLTE1OCAgICAgICBjYWd1Z2NjZ2FhY2dndWdjdWdnZy0t&#xD;
+                    LS0tZ2NjdWdnZ2dhZ2FjZy0tYWNnY2djYWFhDQpNdDIvMS0xNTggICAgICAgY2FndWdjY2dhYWNn&#xD;
+                    Z3VnY3VnZ2ctLS0tLWdjY3VnZ2dnYWdhY2ctLWFjZ2NnY2FhYQ0KTmYvMS0xNTggICAgICAgIGMt&#xD;
+                    LS1nY2NjdWdjZ2djZ2NnZ3VnLS0tLS1nY2FjZ2FnZ2FnYWNnYy1hdWNjZ2NnLS0NClBhLzEtMTU4&#xD;
+                    ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWFjZ2FhZ2dhY2NhLS1jY2NnY3VnY2ctLS0t&#xD;
+                    DQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLS0tLS0tYWFhZ3VjY2djY2dnYWdnYWFnY3Vj&#xD;
+                    Z2NjZy0tLS0tLQ0KU2MvMS0xNTggICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLWNhY2d1Y2NnY2Nn&#xD;
+                    Z2FnZ2FhZ2N1Y2djdWctLS0tLS0NClRmLzEtMTU4ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS1j&#xD;
+                    YWNjY2N1Z2F1Z2dhYS1hZ2d1YWNnY2NhYy0tLS0tDQpSeC8xLTE1OCAgICAgICAgLS1nYWdndWNn&#xD;
+                    Y2NnZ2dnY2dnZ2EtLS0tLWdjY3VnZ2N1dXV1Y2EtLWFjZ2dnYWctLQ0KQ2QvMS0xNTggICAgICAg&#xD;
+                    IGdjYWdhYXUtLS0tLS0tZ2N1dWdjZ2FhYWd1Z2FhZ2dhZ2FhYWEtLS0tLS0tLS0tLS0NCkNlLzEt&#xD;
+                    MTU4ICAgICAgICB1Z2FjY2F1Y2F1dWdnY2FjdXVnYy0tZ2FhZ2dhdXVhYWdnZ2FjY2ctYWN1Y2Fj&#xD;
+                    LS0tDQpDZy8xLTE1OCAgICAgICAgY2dhdWFhdXVhdXVndXVhY3V1Z2NndWdhYWdnYS0tLXVnZ2dh&#xD;
+                    Y2NnYWFjYWNhYy0tLQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAgICAgICANCg0KDQoNCg==&#xD;
+                </ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">tRNA</ns4:name>
+                <ns4:description xml:lang="en">tRNA</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXKDEuODEpIG11bHRpcGxlIHNlcXVlbmNlIGFsaWdubWVudA0KDQoNClg1MTQyMy4x&#xD;
+                    LzE4MDItMTg3NCAgICAgR0dHQ1VVR1VBR0NVQ0FHQ1UtR0dVLS1BR0FHQ0dDQ0dDQ1VVVUdDQUFH&#xD;
+                    R0NHR0FHR0NDQ1VHR0dVQ0NHDQpBRjAwODIyMC4xLzY3MTMtNjc4NSAgIEdDR0dVVUdVR0dDR0FB&#xD;
+                    R1UtLUdHVVUtQUFDR0NBQ0NBR0FVVUdVR0dDVUNVR0dDQVVVQ0dVR0dHVVVDRw0KWDU0NDA4LjEv&#xD;
+                    MS03MyAgICAgICAgICBHQ0NDQ0NBVUNHVUNVQUdBLS1HR0NDVUFHR0FDQUNDVUNDQ1VVVUNBQ0dH&#xD;
+                    QUdBQUFBLUNHQ0dHQVVVQ0cNCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgR0dVVVVDR1VHR1VDVUFH&#xD;
+                    VUMtR0dVVS1BVUdHQ0FVQ1VHQ1VVQUFDQUNHQ0FHQUFDR1VDQ0NDQUdVVUNHDQpYMTI5NzcuMS80&#xD;
+                    NzUtNTQ4ICAgICAgIENHR1VHQVVVQUdDR0NBR0NDQ0dHVS0tQUdDR0NBVUNVR0dVVVVHR0dBQ0NB&#xD;
+                    R0FHR0dVQ0FBQUdHVVVDRw0KWDAzMTI2LjEvMzY0LTQzNCAgICAgICBBQUdBR1VBVUFHVVVVQUFB&#xD;
+                    LS1HR1UtLUFBQUFDQUdBQUFHQ1VVQ0FBQ0NVVVVBQVVVLVVDVVVBR1VVQ0cNClg1MjA3MC4xLzc3&#xD;
+                    Ny04NDkgICAgICAgVUNDVUNDR1VBR0NVQ0FBVVUtR0dDLS1BR0FHQ0FHQ0NHR0NVR1VVQUFDQ0dH&#xD;
+                    Q0FHR1VVQUNVR0dVVUNHDQpYMTM1NTguMS8xODYtMTE1ICAgICAgIFVHR0dHQ0dVQUdDQ0FBR0Mt&#xD;
+                    LUdHVS0tQUFHR0NBQUNHR0dVVVVVR0dVQ0NDR0NVQVVVQ0dHQUdHVVVDRw0KWDUyMzkyLjEvMzk2&#xD;
+                    Ny00MDQwICAgICBHQ1VBR0NHVUdHQ0FHQUdDVUNHR0NBLUFBVUdDQUFBQUdHQ1VVQUFHQ0NDVVVV&#xD;
+                    QVVDLUNBR0FHR1VVQ0ENCkswMDI4Ny4xLzEtNzMgICAgICAgICAgVUNDVVVHVVVBR0NVQ0FHVVUt&#xD;
+                    R0dVLS1BR0FHQ0dVVUNHR0NVVVVVQUFDQ0dBQUFVR1VDQUdHR0dVVUNHDQogICAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgICAgICAgICAqICogICAqICAgICoqICAgKiAgICogICAgICAgKiAgICAgICAgICAg&#xD;
+                    ICAgICAgICAgKiAqIA0KDQoNClg1MTQyMy4xLzE4MDItMTg3NCAgICAgQUFVQ0NDQUdDQUFHVUND&#xD;
+                    QQ0KQUYwMDgyMjAuMS82NzEzLTY3ODUgICBBVVVDQ0NBVUNBQVVDR0NDDQpYNTQ0MDguMS8xLTcz&#xD;
+                    ICAgICAgICAgIEFBVVVDQ0dDVUdHR0dHVUENCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgQVVDQ1VH&#xD;
+                    R0dDR0FBQVVDRw0KWDEyOTc3LjEvNDc1LTU0OCAgICAgICBBQVVDQ1VVVUFVQ0FDQ0dBDQpYMDMx&#xD;
+                    MjYuMS8zNjQtNDM0ICAgICAgIEFHVUNVQUFHVUdDVUNVVUcNClg1MjA3MC4xLzc3Ny04NDkgICAg&#xD;
+                    ICAgQUdVQ0NBR1VDR0dHR0dBRw0KWDEzNTU4LjEvMTg2LTExNSAgICAgICBBQVVDQ1VVQ0NHVUND&#xD;
+                    Q0FHDQpYNTIzOTIuMS8zOTY3LTQwNDAgICAgIEFBVUNDVUNVQ0NDVUFHQ1UNCkswMDI4Ny4xLzEt&#xD;
+                    NzMgICAgICAgICAgQUdDQ0NDQ1VBVUdBR0dBRw0KICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+                    ICAgICAgICAgICAgDQoNCg0K&#xD;
+                </ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">trp-operon leaders</ns4:name>
+                <ns4:description xml:lang="en">trp-operon leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpnaXw1Nzgz&#xD;
+                    Mzg0Nl9jNzMyMjM5MC03MzIyMzAxICAgICAgVEdHVEdHVEdHQUNDR0NUQ0FUQ0NHR0NHR0NDQ0Et&#xD;
+                    LS0tLS1DVEdBQ1RHQ0NDVFRUQ0dURw0KZ2l8MzIxNDEwOTVfMjI3NjU2NC0yMjc2NjUzICAgICAg&#xD;
+                    IFRHR1RHR1RHR0FDQ0dDVENBQ0NDR0dDR0dDQ0NBLS0tLS0tQ1RHQUNUR0NDQ1RUQ0dHVEcNCmdp&#xD;
+                    fDIzMTgxMTFfMTE3LTIwMSAgICAgICAgICAgICAgICBUR0dUR0dUR0dBQ0NHQ1RDQUNDQ0dHQ0dH&#xD;
+                    Q0NDQS0tLS0tLUNUR0FUQ0dDQ0NUVFRDVENHDQpnaXw1NzgzMzg0Nl9jNTc1ODYyMC01NzU4NTQx&#xD;
+                    ICAgICAgLS0tVEdHVEdHR0NDR0NDVEdBQy1HR0NHR0NDR1QtLS0tLS1BQ0FDQUNHVFRUQ1RDR1RU&#xD;
+                    VA0KZ2l8MjUwMjY1NTZfMzA1MjY1NC0zMDUyNzY1ICAgICAgIFRHR1RHR1RHR0NHQ0dDVEFHQVRB&#xD;
+                    QUdDR0dHQ0NDQUFUQ0FDVFRHVFRUVENHQ0NUVFRULUcNCmdpfDYyMzg4ODkyXzMyMDY0OTItMzIw&#xD;
+                    NjYwMyAgICAgICBUR0dUR0dUR0dDR0NHQ1RBQUNUQUFHQ0dBR0NDVC1DQUNDVFRUR1RUVFRDR0ND&#xD;
+                    VFRUVC1HDQpnaXwzODIzMjY0Ml8yNDU2NTI5LTI0NTY2MjkgICAgICAgVEdHVEdHVEdHQ0dDR0NU&#xD;
+                    VEFBQ0MtR0NHR0dDQ0ctLVRUVFQtQ0dDQVRUQ0dDQ1RUVFRURw0KZ2l8MzgyMzI2NDJfMjQ2NTAw&#xD;
+                    MS0yNDY1MDk5ICAgICAgIFRUQ1RHR1RHR0NHQ0dDQ1RBR0NBR0dDR0dHQ0NDLS0tQ1RUR1RHQUdD&#xD;
+                    QVRHQ1RUVFRUQ0cNCg==&#xD;
+                </ns4:prop>
+            </ns4:example>
+        </ns4:function>
+        
+        
+        <ns4:function id="rnaalishapes_function_eval">
+            <ns4:name xml:lang="en">eval</ns4:name>
+            <ns4:shortDescription xml:lang="en">evaluates the free energy of an RNA molecule in fixed secondary structure.</ns4:shortDescription>
+            <ns4:description xml:lang="en">
+                <ns2:p>Evaluates the free energy of an RNA molecule in fixed secondary structure, similar to RNAeval from the Vienna group. </ns2:p>
+                <ns2:p>Multiple answers stem from semantic ambiguity of the underlying grammar. It might happen, that your given structure is not a structure for the sequence. Maybe your settings are too restrictive, e.g. not allowing lonely base-pairs (<ns2:a href="/rnaalishapes?viewType=manual#rnaalishapes_parameter_lonely_base_pairs">lonely base pairs</ns2:a>).</ns2:p>
+            </ns4:description>
+            <ns4:inputref ref="rnaalishapes_input_rna_sequence_alignment"/>
+            <ns4:inputref ref="rnaalishapes_input_rna_secondary_structure"/>
+            <ns4:outputref ref="rnaalishapes_output_output"/>
+            <ns4:paramGroup id="rnaalishapes_paramgroup_fn_rnaalishapes_eval">
+                <ns4:name xml:lang="en">HIDEME</ns4:name>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_alignmentoptions"/>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_foldingoptions"/>
+            </ns4:paramGroup>
+            <ns4:paramAndInputOutputOrder>
+                <ns4:additionalString> --mode=eval </ns4:additionalString>
+                <ns4:reference>rnaalishapes_output_output</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_lonely_base_pairs</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_pairing_fraction</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_cfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_consensus</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_thermodynamic_model_parameters</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_structure_conservation_index</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_nfactor</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_temperature</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_shape_level</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_grammar</ns4:reference>
+                <ns4:reference>rnaalishapes_input_rna_sequence_alignment</ns4:reference>
+                <ns4:reference>rnaalishapes_input_rna_secondary_structure</ns4:reference>
+            </ns4:paramAndInputOutputOrder>
+            <ns4:example>
+                <ns4:name xml:lang="en">t-box leaders</ns4:name>
+                <ns4:description xml:lang="en">T-box leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_secondary_structure">Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uKCguKCguLi4uLikpLigoKC4u&#xD;
+Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4pKSkuLi4uKSkuLi4uLi4uLi4uLi4u&#xD;
+Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLg==&#xD;
+</ns4:prop>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpBTi8xLTE1&#xD;
+OCAgICAgICAgLWNjZ3VjY2NnZ2F1Z2dnZ2NnY2djYS0tLS0tLWd1YWNnZy1jYWFnY2dhZ2d1Z2d1&#xD;
+YWNjZ2NnZ3VnY2ctDQpNYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FndWdnY2NhY2djZ2FhYWdj&#xD;
+LS0tZ2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNbC8xLTE1OCAgICAgICAgLS0tLS1h&#xD;
+LS0tLS1ndWdnY2NndWdjZ3V1Y2djLWd1Z2NnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NnY3UtDQpN&#xD;
+bS8xLTE1OCAgICAgICAgLS0tLWFhYXV1Z2FnY2dnY2NnY2FjdWNhZ2d1LS0tZ2NnZy1jYWFnY2dn&#xD;
+Z2d1Z2d1YWNjZ2NnZ2NnY3UtDQpNYi8xLTE1OCAgICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2dj&#xD;
+YXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Y2N1YWNjZ2NnZ2NndXUtDQpNdDEvMS0xNTggICAgICAg&#xD;
+LS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1jYWFnY2dnZ2d1Z2d1YWNjZ2NnZ2Nn&#xD;
+dXUtDQpNdDIvMS0xNTggICAgICAgLS0tLS0tLS1jZ2FnY2dnY2NnY2djYXVjZ2djLS0tZ3VnZy1j&#xD;
+YWFnY2dnZ2d1Z2d1YWNjZ2NnZ2NndXUtDQpOZi8xLTE1OCAgICAgICAgLS0tLS0tLS0tZ2FnZ3Vj&#xD;
+Y2dndWdjZ3VjY2dhY2djY2dnYS1jYWFhY2dnZ2d1Z2d1YWNjZ2NnZ3V1dWMtDQpQYS8xLTE1OCAg&#xD;
+ICAgICAgLS0tLS0tLS0tLS0tLS0tY2dhY2d1Y2d1dWdhY2d1Y2d1Zy1jYWFnZ2FnZ2d1Z2d1YWNj&#xD;
+Z2NnZ2d1YWNjDQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLWdndWdjYWNhY2FnZ2djZ2NjZ2dn&#xD;
+LWdhZ2NjYWFnZ2FnZ2d1Y2d1YWNjZ2NnZ2dhZ2NnDQpTYy8xLTE1OCAgICAgICAgLS0tLS0tLS0t&#xD;
+LS1nYWdjYWNhY2dhY2djYWNjZ2djY2dnZ2NjYWFnZ2FnZ2d1Z2d1YWNjZ2NnZ2dhZ2NhDQpUZi8x&#xD;
+LTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLWdnY2FnZ2FjZ2FjZ2djY2djZ2NnZ2NjYWFnZ2FnZ2d1&#xD;
+Z2d1YWNjZ2NnZ2dnY2d1DQpSeC8xLTE1OCAgICAgICAgYWdjZ2d1Y2MtLS1nZ2dnY2NnY2dhZ2dj&#xD;
+Y3VjLS0tLWdnZy1jYWFnY2FnZ2d1Z2d1YWNjZ2NnYWdhZ2MtDQpDZC8xLTE1OCAgICAgICAgLS0t&#xD;
+LXVhY2EtLS11Y2FnYXVnY2N1Y3VnZy11Z2dhYXVnY3VjYWFnY2djY2N1Z2d1YWNjZ2NjLS0tLS0t&#xD;
+DQpDZS8xLTE1OCAgICAgICAgZ2d1Z2djY3UtLS1ndXVnZ3VnZ2djYy1nYy1hLS0tLWdndXVjYWFn&#xD;
+Y2FnZ2d1Z2d1YWNjZ2NndWMtLS0tDQpDZy8xLTE1OCAgICAgICAgYS0tLS0tYWMtLS1nYWFndWdn&#xD;
+YWdjdWFndXVhYXV1dWFnY3VjYWFnY3VnZ2d1Z2d1YWNjZ2NndWMtLS0tDQogICAgICAgICAgICAg&#xD;
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqKiogICAgICAgICAgKioqKiog&#xD;
+ICAgICAgDQoNCkFOLzEtMTU4ICAgICAgICAtLS0tZ2NhY2NhZ2NjZ2ctLS0tLS0tLS0tLS1nY2Et&#xD;
+LWNjYWdjY2NjZ2d1Y2dnZ2FnY2NnYWNndWNndWMNCk1hLzEtMTU4ICAgICAgICAtY2djZ2NhZ2Nj&#xD;
+YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ2ctdXV1LS0tLS0tLS0tLS0tLS0NCk1sLzEt&#xD;
+MTU4ICAgICAgICAtY2djZ2NhY2N1YWdjZ2MtLS0tLS0tLS0tLS1ndWNnLXVjZ3VjY2NjZ3VndWN1&#xD;
+LS0tLS0tLS0tLS1hY3UNCk1tLzEtMTU4ICAgICAgICAtY2djZ2NhY3VnYWdjZ2MtLS0tLS0tLS0t&#xD;
+LS1ndWNnLXVjZ3VjY2NjZ3VnY2NnLS0tLS0tLS0tLS0tLS0NCk1iLzEtMTU4ICAgICAgICAtY2dj&#xD;
+Z2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cN&#xD;
+Ck10MS8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0tLS0tLS0tLS1nZ2NnLXVjZ3VjY2Nj&#xD;
+Z2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk10Mi8xLTE1OCAgICAgICAtY2djZ2NhY2NnLWdjZ3UtLS0t&#xD;
+LS0tLS0tLS1nZ2NnLXVjZ3VjY2NjZ2FnY2N1Z2dhdXVnY2FnZ2NhY2cNCk5mLzEtMTU4ICAgICAg&#xD;
+ICAtZ2djZ2NhY2NnZ2djZ2MtLS0tLS0tLS0tLS1jZ2FnZ3VjZ3VjY2NjZ3VnY2NjYWNhLS0tY2Fn&#xD;
+YWNhY2cNClBhLzEtMTU4ICAgICAgICBjZ2dhZ2FhdWNjZ2d1Z3VnYy0tLS0tLS0tdWNndWNjY3Vj&#xD;
+Z2d1Z2FjY2NnYWctLS0tLS0tLS0tLS0tLS0NClNhLzEtMTU4ICAgICAgICBjZ2NjZ2NhY2FjZ2dj&#xD;
+Z3VhY2dnYWFhZ2FjdWNnZ2N1Y3VjZ3VjY2N1Y2NnZ2FjZ2dhYWdnYS1nLS0tLS0NClNjLzEtMTU4&#xD;
+ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWNnZ2N1Y3VjZ3VjY2N1Y2NnLWFjZ2dh&#xD;
+YWdnY2FnLS0tLS0NClRmLzEtMTU4ICAgICAgICBjdWdjLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t&#xD;
+LS0tY3VjZ3VjY2N1Y2NndWNhZ2d1Z2FjY2FnLS0tLS0NClJ4LzEtMTU4ICAgICAgICAtY2djdXVj&#xD;
+dXV1Z2dhZ2FhYWdhLS0tLS0tLWdnZ2N1Y2NjZ3VjY2N1Z2NnZ2NjZ2dhLS0tLS0tLS0tLS0NCkNk&#xD;
+LzEtMTU4ICAgICAgICAtLS1jZ2dhYS0tLS1hLS0tLS0tLS0tLS0tLS0tLS0tY2djZ3VjY2NjZ2Nh&#xD;
+Y3V1dWEtLS0tLS0tLS0tYWcNCkNlLzEtMTU4ICAgICAgICAtLS1jZ2dhdWNhYWdnLS0tLS0tLS0t&#xD;
+LS0tLS0tLS0tZ2djZ3VjY2NjZ2NhYWd1YS0tLS0tLS0tLS0tY2ENCkNnLzEtMTU4ICAgICAgICAt&#xD;
+LS1jZ3V1dXV1dWFnLS0tLS0tLS0tLS0tLS0tLS0tZ2djZ2NjY2NjZ2NhZ2d1YWctLS0tLS0tLS0t&#xD;
+YWENCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+ICAgICAgICAgICAgICAgICAgICAgIA0KDQpBTi8xLTE1OCAgICAgICAgY3UtLS0tY2d1Y2FnZ2Nj&#xD;
+Y2NnZ2djYWNjY2djY2NnYWdnY2dnY2FnLWdhYWNnYS0tLQ0KTWEvMS0xNTggICAgICAgIC0tLS1n&#xD;
+Y2EtLS0tLS0tLWNjZ3VnLS0tLS1nY2FjLWFnZ2FnYWNhLS1hY2djZ2NhdWMNCk1sLzEtMTU4ICAg&#xD;
+ICAgICB1LWd1Z3V1LS0tLS0tLS1hYWd1Zy0tLS0tZ2NjYy1hZ2dhZ2FjLS0tLS1ndS0tLS0tDQpN&#xD;
+bS8xLTE1OCAgICAgICAgdS1ndWdhdS0tLS0tLS0tdXVjdWctLS0tLWdjYWMtYWdnYWdhYy0tLS1j&#xD;
+Zy0tLS0tLQ0KTWIvMS0xNTggICAgICAgIGNhZ3VnY2NnYWFjZ2d1Z2N1Z2dnLS0tLS1nY2N1Z2dn&#xD;
+Z2FnYWNnLS1hY2djZ2NhYWENCk10MS8xLTE1OCAgICAgICBjYWd1Z2NjZ2FhY2dndWdjdWdnZy0t&#xD;
+LS0tZ2NjdWdnZ2dhZ2FjZy0tYWNnY2djYWFhDQpNdDIvMS0xNTggICAgICAgY2FndWdjY2dhYWNn&#xD;
+Z3VnY3VnZ2ctLS0tLWdjY3VnZ2dnYWdhY2ctLWFjZ2NnY2FhYQ0KTmYvMS0xNTggICAgICAgIGMt&#xD;
+LS1nY2NjdWdjZ2djZ2NnZ3VnLS0tLS1nY2FjZ2FnZ2FnYWNnYy1hdWNjZ2NnLS0NClBhLzEtMTU4&#xD;
+ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLWFjZ2FhZ2dhY2NhLS1jY2NnY3VnY2ctLS0t&#xD;
+DQpTYS8xLTE1OCAgICAgICAgLS0tLS0tLS0tLS0tLS0tLS0tYWFhZ3VjY2djY2dnYWdnYWFnY3Vj&#xD;
+Z2NjZy0tLS0tLQ0KU2MvMS0xNTggICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLWNhY2d1Y2NnY2Nn&#xD;
+Z2FnZ2FhZ2N1Y2djdWctLS0tLS0NClRmLzEtMTU4ICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS1j&#xD;
+YWNjY2N1Z2F1Z2dhYS1hZ2d1YWNnY2NhYy0tLS0tDQpSeC8xLTE1OCAgICAgICAgLS1nYWdndWNn&#xD;
+Y2NnZ2dnY2dnZ2EtLS0tLWdjY3VnZ2N1dXV1Y2EtLWFjZ2dnYWctLQ0KQ2QvMS0xNTggICAgICAg&#xD;
+IGdjYWdhYXUtLS0tLS0tZ2N1dWdjZ2FhYWd1Z2FhZ2dhZ2FhYWEtLS0tLS0tLS0tLS0NCkNlLzEt&#xD;
+MTU4ICAgICAgICB1Z2FjY2F1Y2F1dWdnY2FjdXVnYy0tZ2FhZ2dhdXVhYWdnZ2FjY2ctYWN1Y2Fj&#xD;
+LS0tDQpDZy8xLTE1OCAgICAgICAgY2dhdWFhdXVhdXVndXVhY3V1Z2NndWdhYWdnYS0tLXVnZ2dh&#xD;
+Y2NnYWFjYWNhYy0tLQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg&#xD;
+ICAgICAgICAgICAgICAgICAgICAgICANCg0KDQo=&#xD;
+</ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">tRNA</ns4:name>
+                <ns4:description xml:lang="en">tRNA</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_secondary_structure">KCgoKCgoKC4uKCgoLi4uLi4uLi4uLi4uLikpKS4uLigoKC4uLi4uLi4pKSkuLi4uLi4uKCgoKCgu&#xD;
+Li4uLi4uKSkpKSkpKSkpKSkpLg==&#xD;
+</ns4:prop>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXKDEuODEpIG11bHRpcGxlIHNlcXVlbmNlIGFsaWdubWVudA0KDQoNClg1MTQyMy4x&#xD;
+LzE4MDItMTg3NCAgICAgR0dHQ1VVR1VBR0NVQ0FHQ1UtR0dVLS1BR0FHQ0dDQ0dDQ1VVVUdDQUFH&#xD;
+R0NHR0FHR0NDQ1VHR0dVQ0NHDQpBRjAwODIyMC4xLzY3MTMtNjc4NSAgIEdDR0dVVUdVR0dDR0FB&#xD;
+R1UtLUdHVVUtQUFDR0NBQ0NBR0FVVUdVR0dDVUNVR0dDQVVVQ0dVR0dHVVVDRw0KWDU0NDA4LjEv&#xD;
+MS03MyAgICAgICAgICBHQ0NDQ0NBVUNHVUNVQUdBLS1HR0NDVUFHR0FDQUNDVUNDQ1VVVUNBQ0dH&#xD;
+QUdBQUFBLUNHQ0dHQVVVQ0cNCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgR0dVVVVDR1VHR1VDVUFH&#xD;
+VUMtR0dVVS1BVUdHQ0FVQ1VHQ1VVQUFDQUNHQ0FHQUFDR1VDQ0NDQUdVVUNHDQpYMTI5NzcuMS80&#xD;
+NzUtNTQ4ICAgICAgIENHR1VHQVVVQUdDR0NBR0NDQ0dHVS0tQUdDR0NBVUNVR0dVVVVHR0dBQ0NB&#xD;
+R0FHR0dVQ0FBQUdHVVVDRw0KWDAzMTI2LjEvMzY0LTQzNCAgICAgICBBQUdBR1VBVUFHVVVVQUFB&#xD;
+LS1HR1UtLUFBQUFDQUdBQUFHQ1VVQ0FBQ0NVVVVBQVVVLVVDVVVBR1VVQ0cNClg1MjA3MC4xLzc3&#xD;
+Ny04NDkgICAgICAgVUNDVUNDR1VBR0NVQ0FBVVUtR0dDLS1BR0FHQ0FHQ0NHR0NVR1VVQUFDQ0dH&#xD;
+Q0FHR1VVQUNVR0dVVUNHDQpYMTM1NTguMS8xODYtMTE1ICAgICAgIFVHR0dHQ0dVQUdDQ0FBR0Mt&#xD;
+LUdHVS0tQUFHR0NBQUNHR0dVVVVVR0dVQ0NDR0NVQVVVQ0dHQUdHVVVDRw0KWDUyMzkyLjEvMzk2&#xD;
+Ny00MDQwICAgICBHQ1VBR0NHVUdHQ0FHQUdDVUNHR0NBLUFBVUdDQUFBQUdHQ1VVQUFHQ0NDVVVV&#xD;
+QVVDLUNBR0FHR1VVQ0ENCkswMDI4Ny4xLzEtNzMgICAgICAgICAgVUNDVVVHVVVBR0NVQ0FHVVUt&#xD;
+R0dVLS1BR0FHQ0dVVUNHR0NVVVVVQUFDQ0dBQUFVR1VDQUdHR0dVVUNHDQogICAgICAgICAgICAg&#xD;
+ICAgICAgICAgICAgICAgICAqICogICAqICAgICoqICAgKiAgICogICAgICAgKiAgICAgICAgICAg&#xD;
+ICAgICAgICAgKiAqIA0KDQoNClg1MTQyMy4xLzE4MDItMTg3NCAgICAgQUFVQ0NDQUdDQUFHVUND&#xD;
+QQ0KQUYwMDgyMjAuMS82NzEzLTY3ODUgICBBVVVDQ0NBVUNBQVVDR0NDDQpYNTQ0MDguMS8xLTcz&#xD;
+ICAgICAgICAgIEFBVVVDQ0dDVUdHR0dHVUENCkowNTM5NS4xLzIzMjUtMjI1MiAgICAgQVVDQ1VH&#xD;
+R0dDR0FBQVVDRw0KWDEyOTc3LjEvNDc1LTU0OCAgICAgICBBQVVDQ1VVVUFVQ0FDQ0dBDQpYMDMx&#xD;
+MjYuMS8zNjQtNDM0ICAgICAgIEFHVUNVQUFHVUdDVUNVVUcNClg1MjA3MC4xLzc3Ny04NDkgICAg&#xD;
+ICAgQUdVQ0NBR1VDR0dHR0dBRw0KWDEzNTU4LjEvMTg2LTExNSAgICAgICBBQVVDQ1VVQ0NHVUND&#xD;
+Q0FHDQpYNTIzOTIuMS8zOTY3LTQwNDAgICAgIEFBVUNDVUNVQ0NDVUFHQ1UNCkswMDI4Ny4xLzEt&#xD;
+NzMgICAgICAgICAgQUdDQ0NDQ1VBVUdBR0dBRw0KICAgICAgICAgICAgICAgICAgICAgICAqICAg&#xD;
+ICAgICAgICAgICAgDQoNCg==&#xD;
+</ns4:prop>
+            </ns4:example>
+            <ns4:example>
+                <ns4:name xml:lang="en">trp-operon leaders</ns4:name>
+                <ns4:description xml:lang="en">trp-operon leaders</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_secondary_structure">LigoLigoLigoLi4oKCgoLi4uLi4pKSkpLi4pKS4uLi4uLi4uLi4uLi4uLi4pKSkpLi4uLg==&#xD;
+</ns4:prop>
+                <ns4:prop idref="rnaalishapes_input_rna_sequence_alignment">Q0xVU1RBTCBXICgxLjgzKSBtdWx0aXBsZSBzZXF1ZW5jZSBhbGlnbm1lbnQNCg0KDQpnaXw1Nzgz&#xD;
+Mzg0Nl9jNzMyMjM5MC03MzIyMzAxICAgICAgVEdHVEdHVEdHQUNDR0NUQ0FUQ0NHR0NHR0NDQ0Et&#xD;
+LS0tLS1DVEdBQ1RHQ0NDVFRUQ0dURw0KZ2l8MzIxNDEwOTVfMjI3NjU2NC0yMjc2NjUzICAgICAg&#xD;
+IFRHR1RHR1RHR0FDQ0dDVENBQ0NDR0dDR0dDQ0NBLS0tLS0tQ1RHQUNUR0NDQ1RUQ0dHVEcNCmdp&#xD;
+fDIzMTgxMTFfMTE3LTIwMSAgICAgICAgICAgICAgICBUR0dUR0dUR0dBQ0NHQ1RDQUNDQ0dHQ0dH&#xD;
+Q0NDQS0tLS0tLUNUR0FUQ0dDQ0NUVFRDVENHDQpnaXw1NzgzMzg0Nl9jNTc1ODYyMC01NzU4NTQx&#xD;
+ICAgICAgLS0tVEdHVEdHR0NDR0NDVEdBQy1HR0NHR0NDR1QtLS0tLS1BQ0FDQUNHVFRUQ1RDR1RU&#xD;
+VA0KZ2l8MjUwMjY1NTZfMzA1MjY1NC0zMDUyNzY1ICAgICAgIFRHR1RHR1RHR0NHQ0dDVEFHQVRB&#xD;
+QUdDR0dHQ0NDQUFUQ0FDVFRHVFRUVENHQ0NUVFRULUcNCmdpfDYyMzg4ODkyXzMyMDY0OTItMzIw&#xD;
+NjYwMyAgICAgICBUR0dUR0dUR0dDR0NHQ1RBQUNUQUFHQ0dBR0NDVC1DQUNDVFRUR1RUVFRDR0ND&#xD;
+VFRUVC1HDQpnaXwzODIzMjY0Ml8yNDU2NTI5LTI0NTY2MjkgICAgICAgVEdHVEdHVEdHQ0dDR0NU&#xD;
+VEFBQ0MtR0NHR0dDQ0ctLVRUVFQtQ0dDQVRUQ0dDQ1RUVFRURw0KZ2l8MzgyMzI2NDJfMjQ2NTAw&#xD;
+MS0yNDY1MDk5ICAgICAgIFRUQ1RHR1RHR0NHQ0dDQ1RBR0NBR0dDR0dHQ0NDLS0tQ1RUR1RHQUdD&#xD;
+QVRHQ1RUVFRUQ0cNCg==&#xD;
+</ns4:prop>
+                <ns4:prop idref="rnaalishapes_parameter_shape_level">2</ns4:prop>
+            </ns4:example>
+        </ns4:function>
+        <ns4:function id="rnaalishapes_function_convert">
+            <ns4:name xml:lang="en">abstract</ns4:name>
+            <ns4:shortDescription xml:lang="en">converts a dot-Bracket string into a shape string.</ns4:shortDescription>
+            <ns4:description xml:lang="en">Converts a Vienna-Dot-Bracket representation of a secondary structure into a shape string.</ns4:description>
+            <ns4:inputref ref="rnaalishapes_input_rna_secondary_structure"/>
+            <ns4:outputref ref="rnaalishapes_output_output"/>
+            <ns4:paramGroup id="rnaalishapes_paramgroup_fn_rnaalishapes_convert">
+                <ns4:name xml:lang="en">HIDEME</ns4:name>
+                <ns4:paramGroupref ref="rnaalishapes_paramgroup_grp_foldingoptions_convert"/>
+            </ns4:paramGroup>
+            <ns4:paramAndInputOutputOrder>
+                <ns4:reference>rnaalishapes_parameter_lonely_base_pairs</ns4:reference>
+                <ns4:additionalString> --mode=convert </ns4:additionalString>
+                <ns4:reference>rnaalishapes_parameter_shape_level</ns4:reference>
+                <ns4:reference>rnaalishapes_parameter_grammar</ns4:reference>
+                <ns4:reference>rnaalishapes_input_rna_secondary_structure</ns4:reference>
+                <ns4:reference>rnaalishapes_output_output</ns4:reference>
+            </ns4:paramAndInputOutputOrder>
+            <ns4:example>
+                <ns4:name xml:lang="en">cloverleaf</ns4:name>
+                <ns4:description xml:lang="en">tRNA cloverleaf</ns4:description>
+                <ns4:prop idref="rnaalishapes_input_rna_secondary_structure">KCgoKCgoKC4uLigoLi4uLi4uLi4uLi4uLikpLi4uKCgoKC4uLi4uLi4pKSkpLi4uLi4uKCgoKCgu&#xD;
+Li4uLi4uKSkpKSkpKSkpKSkpLg==&#xD;
+</ns4:prop>
+            </ns4:example>
+        </ns4:function>
+        
+    </ns4:executable>
+    <ns4:view type="download" id="rnaalishapes_view_download">
+        <ns4:title xml:lang="en">Download</ns4:title>
+        <ns4:customContent xml:lang="en">
+    <ns2:p>Download page description</ns2:p>
+        </ns4:customContent>
+    </ns4:view>
+    <ns4:view type="submission" id="rnaalishapes_view_submission">
+        <ns4:title>Submission</ns4:title>
+    </ns4:view>
+    <ns4:manual id="rnaalishapes_manual_manual">
+        <ns4:introductoryText xml:lang="en">missing manual intro</ns4:introductoryText>
+        <ns4:customContent xml:lang="en">custom content editor</ns4:customContent>
+    </ns4:manual>
+</ns4:runnableItem>

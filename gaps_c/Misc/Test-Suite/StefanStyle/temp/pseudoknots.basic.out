@@ -1,0 +1,24 @@
+#CMD: temp/pKiss_enforce -y 9.99 -z 3 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_enforce_window -w 30 -i 8 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_local -s P -e 0.5 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_local_window -l 30 -w 40 -i 4 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_mfe -P /stefan/share/gapc/librna/rna_turner1999.par -u 1 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_mfe_window -w 70 -i 2 -u 1 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_probs -F 0.01 -q 3 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_probs_window -w 20 -i 10 -q 1 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_shapes -q 2 -e 3.8 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_shapes_window -w 30 -i 10 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_subopt -c 5 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+
+#CMD: temp/pKiss_subopt_window -w 20 -i 2 acccccaccccaagggggaCCCAGAGGAAACCACAGGGacacccccaaggggaagggggg
+

@@ -1,0 +1,56 @@
+#Single base stacking energies
+#Ref: http://www.bioinfo.rpi.edu/zukerm/cgi-bin/efiles-3.0.cgi#DANGLE
+#Single base is at 3' end
+# 5'-->3'
+# d5(h,k-1,k)   d3(i,i+1,j)
+# .....\k.....i/-----\
+#       |||||||      |
+#       h.....j      |
+# ...../       \_____/
+# d3(h,h+1,k)   d5(i,j-1,j)
+# 3'<--5'
+
+alphabet = ACGU
+
+#5'-->3'
+#A
+#UX
+#3'<--5'
+>AXU
+-30	-10	-20	-20
+
+#5'-->3'
+#C
+#GX
+#3'<--5'
+>CXG
+-20	-30	-0	-0
+
+#5'-->3'
+#G
+#CX
+#3'<--5'
+>GXC
+-50	-30	-20	-10
+
+#5'-->3'
+#G
+#UX
+#3'<--5'
+>GXU
+-30	-10	-20	-20
+
+#5'-->3'
+#U
+#AX
+#3'<--5'
+>UXA
+-30	-30	-40	-20
+
+#5'-->3'
+#U
+#GX
+#3'<--5'
+>UXG
+-30	-30	-40	-20
+

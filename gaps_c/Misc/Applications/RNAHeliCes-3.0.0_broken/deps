@@ -1,0 +1,27 @@
+Minimum versions are those which were used for testing - thus, perhaps
+older versions work as well ...
+
+compile time:
+- C++ compiler (GCC g++ for example)
+- C compiler (GCC for example)
+- GNU make >= 3.81
+- C++ Standard Library
+- boost >=  1.36
+  - Accumulators
+  - Format
+  - Integer
+  - Lexical Cast
+  - Pool
+  - Smart Ptr
+
+  - Date Time
+  - Program Options
+- lapack >= 3.2.1
+- ksh93 - or - bash >= 2.03.0(1) (only needed for test scripts)
+
+
+runtime:
+- boost >=  1.36
+  - Date Time
+  - Program Options
+- lapack >= 3.2.1

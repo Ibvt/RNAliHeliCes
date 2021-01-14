@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This document is in part copied from the W3Cs XHTML specification,
+for which the following notice is included here:
+
+W3C® SOFTWARE NOTICE AND LICENSE
+Copyright © 1994-2002 World Wide Web Consortium, (Massachusetts Institute of Technology, Institut National de Recherche en Informatique et en Automatique, Keio University). All Rights Reserved. http://www.w3.org/Consortium/Legal/
+
+This W3C work (including software, documents, or other related items) is being provided by the copyright holders under the following license. By obtaining, using and/or copying this work, you (the licensee) agree that you have read, understood, and will comply with the following terms and conditions:
+
+Permission to use, copy, modify, and distribute this software and its documentation, with or without modification,  for any purpose and without fee or royalty is hereby granted, provided that you include the following on ALL copies of the software and documentation or portions thereof, including modifications, that you make:
+
+   1. The full text of this NOTICE in a location viewable to users of the redistributed or derivative work.
+   2. Any pre-existing intellectual property disclaimers, notices, or terms and conditions. If none exist, a short notice of the following form (hypertext is preferred, text is permitted) should be used within the body of any redistributed or derivative code: "Copyright © [$date-of-software] World Wide Web Consortium, (Massachusetts Institute of Technology, Institut National de Recherche en Informatique et en Automatique, Keio University). All Rights Reserved. http://www.w3.org/Consortium/Legal/"
+   3. Notice of any changes or modifications to the W3C files, including the date changes were made. (We recommend you provide URIs to the location from which the code is derived.)
+
+THIS SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS," AND COPYRIGHT HOLDERS MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE SOFTWARE OR DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS.
+
+COPYRIGHT HOLDERS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF ANY USE OF THE SOFTWARE OR DOCUMENTATION.
+
+The name and trademarks of copyright holders may NOT be used in advertising or publicity pertaining to the software without specific, written prior permission. Title to copyright in this software and any associated documentation will at all times remain with copyright holders.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="bibiserv:de.unibi.techfak.bibiserv.cms.minihtml"
+           xmlns="bibiserv:de.unibi.techfak.bibiserv.cms.minihtml"
+           xmlns:minihtml="bibiserv:de.unibi.techfak.bibiserv.cms.minihtml"
+           xmlns:microhtml="bibiserv:de.unibi.techfak.bibiserv.cms.microhtml">
+
+    <xs:import namespace="bibiserv:de.unibi.techfak.bibiserv.cms.microhtml" schemaLocation="microhtml.xsd"/>
+   
+    <xs:element name="minihtml" type="Flow" >
+        <xs:annotation>
+            <xs:documentation>
+                Experimental : explicit Root Element as replacement of the body tag from xhtml
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="table">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="caption" type="minihtml:Inline"/>
+                <xs:element minOccurs="0" ref="thead"/>
+                <xs:element minOccurs="0" ref="tfoot"/>
+                <xs:choice>
+                    <xs:element maxOccurs="unbounded" ref="tbody"/>
+                    <xs:element maxOccurs="unbounded" ref="tr"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="summary" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="tbody">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="tr"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="td">
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="microhtml:Flow">
+                    <xs:attribute name="abbr" type="xs:string"/>
+                    <xs:attribute name="axis"/>
+                    <xs:attribute name="headers" type="xs:IDREFS"/>
+                    <xs:attribute name="scope" type="Scope"/>
+                    <xs:attribute name="rowspan" default="1" type="microhtml:Number"/>
+                    <xs:attribute name="colspan" default="1" type="microhtml:Number"/>
+                    <xs:attribute name="nowrap">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="nowrap"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="tfoot">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="tr"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="th">
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="microhtml:Flow">
+                    <xs:attribute name="abbr" type="xs:string"/>
+                    <xs:attribute name="axis"/>
+                    <xs:attribute name="headers" type="xs:IDREFS"/>
+                    <xs:attribute name="scope" type="Scope"/>
+                    <xs:attribute name="rowspan" default="1" type="microhtml:Number"/>
+                    <xs:attribute name="colspan" default="1" type="microhtml:Number"/>
+                    <xs:attribute name="nowrap">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="nowrap"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="thead">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="tr"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="tr">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="th"/>
+                <xs:element ref="td"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="h4">
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="h5">
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="h6">
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Complex Types -->
+    <xs:complexType name="Inline" mixed="true">
+        <xs:annotation>
+            <xs:documentation>
+                "Inline" covers inline or "text-level" element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="microhtml:inline"/>
+        </xs:choice>
+    </xs:complexType>
+
+
+    <xs:complexType name="Flow" mixed="true">
+        <xs:annotation>
+            <xs:documentation>
+                "Flow"  is used for list items and contain all Inline and Block elements
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="microhtml:inline"/>
+            <xs:group ref="block"/>
+
+        </xs:choice>
+    </xs:complexType>
+
+
+    <!-- Simple Types -->
+
+    <xs:simpleType name="MultiLength">
+        <xs:annotation>
+            <xs:documentation>
+                pixel, percentage, or relative
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[\-\+]?(\d+|\d+(\.\d+)?%)|[1-9]?(\d+)?\*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Scope">
+        <xs:annotation>
+            <xs:documentation>
+                Scope is simpler than headers attribute for common tables
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="row"/>
+            <xs:enumeration value="col"/>
+            <xs:enumeration value="rowgroup"/>
+            <xs:enumeration value="colgroup"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!-- Groups -->
+    <xs:group name="block">
+        <xs:choice>
+            <xs:element ref="microhtml:p"/>
+            <xs:group ref="microhtml:lists"/>
+            <xs:group ref="headers"/>
+            <xs:element ref="table"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:group name="headers">
+        <xs:choice>
+            <xs:element ref="h4"/>
+            <xs:element ref="h5"/>
+            <xs:element ref="h6"/>
+        </xs:choice>
+    </xs:group>
+
+</xs:schema>

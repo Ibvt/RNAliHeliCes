@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  
+  <!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0//EN" "http://java.sun.com/dtd/JNLP-6.0.dtd">
+  
+-->
+<!-- The root element for the JNLP file.  -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://java.sun.com/dtd/jnlp-6.0.dtd" xmlns:j="http://java.sun.com/dtd/jnlp-6.0.dtd">
+  <xs:element name="jnlp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="j:information"/>
+        <xs:element minOccurs="0" ref="j:security"/>
+        <xs:element minOccurs="0" ref="j:update"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:resources"/>
+        <xs:choice>
+          <xs:element ref="j:application-desc"/>
+          <xs:element ref="j:applet-desc"/>
+          <xs:element ref="j:component-desc"/>
+          <xs:element ref="j:installer-desc"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.jnlp"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The spec attribute of the jnlp element specifies what versions of the JNLP 
+    specification a particular JNLP file works with. The default value is "1.0+".
+  -->
+  <xs:attributeGroup name="attlist.jnlp">
+    <xs:attribute name="spec"/>
+    <xs:attribute name="version"/>
+    <xs:attribute name="codebase"/>
+    <xs:attribute name="href"/>
+  </xs:attributeGroup>
+  <!--
+    The version attribute of the jnlp element specifies the version of the 
+    application being launched, as well as the version of the JNLP file itself.
+  -->
+  <!--
+    The codebase attribute of the jnlp element specifies the codebase for the 
+    application. This is also used as the base URL for all relative URLs in 
+    href attributes.
+  -->
+  <!--
+    The href attribute of the jnlp element contains the location of the JNLP 
+    file as a URL.
+  -->
+  <!--
+    The information element contains various descriptive information about the 
+    application being launched.
+  -->
+  <xs:element name="information">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="j:title"/>
+        <xs:element ref="j:vendor"/>
+        <xs:element minOccurs="0" ref="j:homepage"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:description"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:icon"/>
+        <xs:element minOccurs="0" ref="j:offline-allowed"/>
+        <xs:element minOccurs="0" ref="j:shortcut"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:association"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:related-content"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.information"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The os attribute of the information element specifies for which operating 
+    system this element should be considered.
+  -->
+  <xs:attributeGroup name="attlist.information">
+    <xs:attribute name="os"/>
+    <xs:attribute name="arch"/>
+    <xs:attribute name="platform"/>
+    <xs:attribute name="locale"/>
+  </xs:attributeGroup>
+  <!--
+    The arch attribute of the information element specifies for what architecure 
+    this element should be considered.
+  -->
+  <!--
+    The platform attribute of the information element specifies for what 
+    platform this element should be considered.
+  -->
+  <!--
+    The locale attribute of the information element specifies the locale for 
+    which this information element should be used.
+  -->
+  <!-- The title element contains the name of the application. -->
+  <xs:element name="title" type="xs:string"/>
+  <!-- The vendor element contains the name of the vendor. -->
+  <xs:element name="vendor" type="xs:string"/>
+  <!-- The homepage element contains a href to the homepage for the application. -->
+  <xs:element name="homepage">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.homepage"/>
+    </xs:complexType>
+  </xs:element>
+  <!-- The href attribute of the homepage element specifies the URL for the homepage. -->
+  <xs:attributeGroup name="attlist.homepage">
+    <xs:attribute name="href" use="required"/>
+  </xs:attributeGroup>
+  <!-- The description element contains a description of the application. -->
+  <xs:element name="description">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="j:attlist.description"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The kind attribute for the description element indicates the use of a 
+    description element. The values are: i) one-line, for a one-line 
+    description, ii) short, for a one paragraph description, and iii) tooltip, 
+    for a tool-tip description. Longer descriptions should be put on a separate 
+    web page and referred to using the homepage element.
+  -->
+  <xs:attributeGroup name="attlist.description">
+    <xs:attribute name="kind">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="one-line"/>
+          <xs:enumeration value="short"/>
+          <xs:enumeration value="tooltip"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!-- The icon element describes an image for an application. -->
+  <xs:element name="icon">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.icon"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The href attribute of an icon contains a URL to a location on the web 
+    containing an image file for an icon.
+  -->
+  <xs:attributeGroup name="attlist.icon">
+    <xs:attribute name="href" use="required"/>
+    <xs:attribute name="version"/>
+    <xs:attribute name="width"/>
+    <xs:attribute name="height"/>
+    <xs:attribute name="kind"/>
+    <xs:attribute name="depth"/>
+    <xs:attribute name="size"/>
+  </xs:attributeGroup>
+  <!--
+    The version attribute of an icon contains a string describing the version of 
+    the image that is requested.
+  -->
+  <!--
+    The width attribute of the icon element describes the width of the icon 
+    in pixels.
+  -->
+  <!--
+    The height attribute of the icon element describes the height of the icon 
+    in pixels.
+  -->
+  <!-- The kind attribute of the icon element describes the use of the icon. -->
+  <!--
+    The depth attribute of the icon element describes the color depth of the image 
+    in bits-per-pixel. Common values will be 8, 16, or 24.
+  -->
+  <!--
+    The size attribute of an icon element indicates the size of an icon file 
+    in bytes.
+  -->
+  <!--
+    The offline-allowed element indicates if the application can be launched 
+    offline. Default value (i.e., if the element is not specified) is online.
+  -->
+  <xs:element name="offline-allowed">
+    <xs:complexType/>
+  </xs:element>
+  <!-- The security element describes the security requirements of the application. -->
+  <xs:element name="security">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="j:all-permissions"/>
+        <xs:element minOccurs="0" ref="j:j2ee-application-client-permissions"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The all-permissions element indicates that the application needs full access 
+    the the local system and network.
+  -->
+  <xs:element name="all-permissions">
+    <xs:complexType/>
+  </xs:element>
+  <!--
+    The j2ee-application-client-permissions element indicates that the application 
+    needs the set of permissions defined for a J2EE application client.
+  -->
+  <xs:element name="j2ee-application-client-permissions">
+    <xs:complexType/>
+  </xs:element>
+  <!-- The update element contains the applications preference for application update. -->
+  <xs:element name="update">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.update"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The check attribute of the update element indicates the applications 
+    preference for when to check for updates.
+  -->
+  <xs:attributeGroup name="attlist.update">
+    <xs:attribute name="check" default="timeout">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="always"/>
+          <xs:enumeration value="timeout"/>
+          <xs:enumeration value="background"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="policy" default="always">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="always"/>
+          <xs:enumeration value="prompt-update"/>
+          <xs:enumeration value="prompt-run"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    The policy attribute of the update element indicates the applications 
+    preference for what to do when updates are available.
+  -->
+  <!--
+    The resources element contains an ordered set of resources that 
+    constitutes an application.
+  -->
+  <xs:element name="resources">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="j:java"/>
+        <xs:element ref="j:j2se"/>
+        <xs:element ref="j:jar"/>
+        <xs:element ref="j:nativelib"/>
+        <xs:element ref="j:extension"/>
+        <xs:element ref="j:property"/>
+        <xs:element ref="j:package"/>
+      </xs:choice>
+      <xs:attributeGroup ref="j:attlist.resources"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The os attribute of the resources element specifies for which operating 
+    system this element should be considered.
+  -->
+  <xs:attributeGroup name="attlist.resources">
+    <xs:attribute name="os"/>
+    <xs:attribute name="arch"/>
+    <xs:attribute name="locale"/>
+  </xs:attributeGroup>
+  <!--
+    The arch attribute of the resources element specifies for what platform this 
+    element should be considered.
+  -->
+  <!--
+    The locale attribute of the resources element specifies for which locales 
+    this element should be considered.
+  -->
+  <!--
+    The java element describes a supported JRE version and an optional resources 
+    element to be used by the particular JRE.
+  -->
+  <xs:element name="java">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:resources"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.java"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The version attribute of the java element describes the versions of the JRE 
+    that this application is supported on.
+  -->
+  <xs:attributeGroup name="attlist.java">
+    <xs:attribute name="version" use="required"/>
+    <xs:attribute name="href"/>
+    <xs:attribute name="initial-heap-size"/>
+    <xs:attribute name="max-heap-size"/>
+    <xs:attribute name="java-vm-args"/>
+  </xs:attributeGroup>
+  <!--
+    The href attribute of the java element specifies the location where the JRE 
+    should be downloaded from.
+  -->
+  <!--
+    The initial-heap-size attribute of the java element specifies the initial 
+    size of the object heap.
+  -->
+  <!--
+    The max-heap-size attribute of the java element specifies the preferred 
+    maximum size of the object heap.
+  -->
+  <!--
+    The java-vm-args attribute of the java element specifies a preferred set of 
+    virtual machine arguments to use when launching java.
+  -->
+  <!--
+    The j2se element describes a supported JRE version and an optional resources 
+    element to be used by the particular JRE.
+  -->
+  <xs:element name="j2se">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:resources"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.j2se"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The version attribute of the j2se element describes the versions of the JRE 
+    that this application is supported on.
+  -->
+  <xs:attributeGroup name="attlist.j2se">
+    <xs:attribute name="version" use="required"/>
+    <xs:attribute name="href"/>
+    <xs:attribute name="initial-heap-size"/>
+    <xs:attribute name="max-heap-size"/>
+    <xs:attribute name="java-vm-args"/>
+  </xs:attributeGroup>
+  <!--
+    The href attribute of the j2se element specifies the location where the JRE 
+    should be downloaded from.
+  -->
+  <!--
+    The initial-heap-size attribute of the j2se element specifies the initial 
+    size of the object heap.
+  -->
+  <!--
+    The max-heap-size attribute of the j2se element specifies the preferred 
+    maximum size of the object heap.
+  -->
+  <!--
+    The java-vm-args attribute of the j2se element specifies a preferred set of 
+    virtual machine arguments to use when launching java.
+  -->
+  <!-- The jar element describes a jar file resource. -->
+  <xs:element name="jar">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.jar"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The href attribute of the jar element contains the location of a jar file 
+    as a URL.
+  -->
+  <xs:attributeGroup name="attlist.jar">
+    <xs:attribute name="href" use="required"/>
+    <xs:attribute name="version"/>
+    <xs:attribute name="main" default="false">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="download" default="eager">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="eager"/>
+          <xs:enumeration value="lazy"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="size"/>
+    <xs:attribute name="part"/>
+  </xs:attributeGroup>
+  <!--
+    The version attribute of a jar element describes the version of a particular 
+    JAR file that is requested.
+  -->
+  <!--
+    The main attribute of a jar element indicates whether this element contains 
+    the main class.
+  -->
+  <!--
+    The download attribute of a jar element indicates if this element must be 
+    downloaded before an application is launched (eager), or not (lazy).
+  -->
+  <!-- The size attribute of a jar element indicates the size of a JAR file in bytes. -->
+  <!--
+    The part attribute of a jar element describes the name of the group it 
+    belongs too.
+  -->
+  <!-- The nativelib element describes a resource containing native files. -->
+  <xs:element name="nativelib">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.nativelib"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The href attribute of a nativelib element contains the location of a 
+    nativelib file as a URL.
+  -->
+  <xs:attributeGroup name="attlist.nativelib">
+    <xs:attribute name="href" use="required"/>
+    <xs:attribute name="version"/>
+    <xs:attribute name="download" default="eager">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="eager"/>
+          <xs:enumeration value="lazy"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="size"/>
+    <xs:attribute name="part"/>
+  </xs:attributeGroup>
+  <!--
+    The version attribute of a nativelib element describes the version of a 
+    particular nativelib file that is requested.
+  -->
+  <!--
+    The download attribute of a nativelib element indicates if this element 
+    must be downloaded before an application is launched (eager), or not (lazy).
+  -->
+  <!--
+    The size attribute of a nativelib element indicates the size of a nativelib 
+    file in bytes.
+  -->
+  <!--
+    The part attribute of a nativelib element describes the name of the part it 
+    belongs to.
+  -->
+  <!--
+    The extension element describes an extension that is required in order to 
+    run the application.
+  -->
+  <xs:element name="extension">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:ext-download"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.extension"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The version attribute of an extension element specifies the version of the 
+    extension requested.
+  -->
+  <xs:attributeGroup name="attlist.extension">
+    <xs:attribute name="version"/>
+    <xs:attribute name="name"/>
+    <xs:attribute name="href" use="required"/>
+  </xs:attributeGroup>
+  <!-- The name attribute of an extension element specifies the name of the extension. -->
+  <!--
+    The href attribute of an extension element specifies the location of the 
+    extension.
+  -->
+  <!-- The ext-download element defines how parts of the extension are downloaded. -->
+  <xs:element name="ext-download">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.ext-download"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The ext-part attribute of an ext-download element describes the name of a 
+    part in the extension.
+  -->
+  <xs:attributeGroup name="attlist.ext-download">
+    <xs:attribute name="ext-part" use="required"/>
+    <xs:attribute name="download" default="eager">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="lazy"/>
+          <xs:enumeration value="eager"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="part"/>
+  </xs:attributeGroup>
+  <!--
+    The download attribute of an ext-download element describes if the resource 
+    may be lazily downloaded.
+  -->
+  <!--
+    The part attribute of an ext-download element describes the name of the 
+    part it belongs to in the current JNLP file.
+  -->
+  <!--
+    The property element describes a name/value pair that is available to the 
+    launched application as a system property.
+  -->
+  <xs:element name="property">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.property"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The name attribute of the property element describes the name of a system 
+    property.
+  -->
+  <xs:attributeGroup name="attlist.property">
+    <xs:attribute name="name" use="required"/>
+    <xs:attribute name="value" use="required"/>
+  </xs:attributeGroup>
+  <!-- The value element describes the value of a system property. -->
+  <!--
+    The package element defines a relationship between a Java package or 
+    class name and a part.
+  -->
+  <xs:element name="package">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.package"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The name attribute of the package element describes the name of a package 
+    or class.
+  -->
+  <xs:attributeGroup name="attlist.package">
+    <xs:attribute name="name" use="required"/>
+    <xs:attribute name="part" use="required"/>
+    <xs:attribute name="recursive" default="false">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    The part attribute of the package element describes the part that contains 
+    the specified package or class.
+  -->
+  <!--
+    The recursive attribute of the package element indicates if all sub-packages 
+    of this particular package is also included.
+  -->
+  <!--
+    The application-desc element describes how to launch a Java-based application. 
+    It contains information about the main class and arguments.
+  -->
+  <xs:element name="application-desc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:argument"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.application-desc"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The main-class attribute of the application-desc element describes the 
+    main class of an application.
+  -->
+  <xs:attributeGroup name="attlist.application-desc">
+    <xs:attribute name="main-class"/>
+  </xs:attributeGroup>
+  <!--
+    The argument elements describe the ordered set of arguments to an application. 
+    These arguments will be passed into the main method of the application's 
+    main class.
+  -->
+  <xs:element name="argument" type="xs:string"/>
+  <!-- The applet-desc element describes how to launch a Java Technology-based Applet. It contains information about, e.g., the main class, size, and parameters. -->
+  <xs:element name="applet-desc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="j:param"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.applet-desc"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The documentbase attribute of the applet-desc element describes the 
+    documentbase for the applet as a URL.
+  -->
+  <xs:attributeGroup name="attlist.applet-desc">
+    <xs:attribute name="documentbase"/>
+    <xs:attribute name="main-class" use="required"/>
+    <xs:attribute name="name" use="required"/>
+    <xs:attribute name="width" use="required"/>
+    <xs:attribute name="height" use="required"/>
+  </xs:attributeGroup>
+  <!--
+    The main-class attribute of the applet-desc element describes the name of the 
+    main Applet class.
+    
+  -->
+  <!-- The name attribute of the applet-desc element describes the name of the Applet. -->
+  <!--
+    The width attribute of the applet-desc element describes the width of the 
+    Applet in pixels.
+  -->
+  <!--
+    The height attribute of the applet-desc element describes the height of the 
+    Applet in pixels.
+  -->
+  <!-- The param element describes a parameter to an Applet. -->
+  <xs:element name="param">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.param"/>
+    </xs:complexType>
+  </xs:element>
+  <!-- The name attribute of the param element describes the name of a parameter. -->
+  <xs:attributeGroup name="attlist.param">
+    <xs:attribute name="name" use="required"/>
+    <xs:attribute name="value" use="required"/>
+  </xs:attributeGroup>
+  <!--
+    The value attribute of the param element describes the value of a parameter.
+    
+  -->
+  <!-- The component-desc element specifies a component extension. -->
+  <xs:element name="component-desc">
+    <xs:complexType/>
+  </xs:element>
+  <!-- The installer-desc element specifies an installer extension. -->
+  <xs:element name="installer-desc">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.installer-desc"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The main-class attribute of the installer-desc element describes the 
+    main class for the installer/uninstaller.
+  -->
+  <xs:attributeGroup name="attlist.installer-desc">
+    <xs:attribute name="main-class"/>
+  </xs:attributeGroup>
+  <!--
+    The shortcut element describes an application's preferences for desktop 
+    integration.
+  -->
+  <xs:element name="shortcut">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="j:desktop"/>
+        <xs:element minOccurs="0" ref="j:menu"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.shortcut"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The online attribute of the shortcut element describes an application's 
+    preferences launching shortcuts online or offline
+  -->
+  <xs:attributeGroup name="attlist.shortcut">
+    <xs:attribute name="online" default="true">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!-- The desktop element indicates that a shortcut on the desktop is desired. -->
+  <xs:element name="desktop">
+    <xs:complexType/>
+  </xs:element>
+  <!-- The menu element indicates that a shortcut in a menu is desired. -->
+  <xs:element name="menu">
+    <xs:complexType>
+      <xs:attributeGroup ref="j:attlist.menu"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The submenu attribute of the menu element indicates where in the menu a 
+    shortcut is desired.
+  -->
+  <xs:attributeGroup name="attlist.menu">
+    <xs:attribute name="submenu"/>
+  </xs:attributeGroup>
+  <!--
+    The association element describes an application's preferences for desktop 
+    associations.
+  -->
+  <xs:element name="association">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="j:description"/>
+        <xs:element minOccurs="0" ref="j:icon"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.association"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The extensions attribute of the association element indicates a list of 
+    extensions to associate.
+  -->
+  <xs:attributeGroup name="attlist.association">
+    <xs:attribute name="extensions" use="required"/>
+    <xs:attribute name="mime-type" use="required"/>
+  </xs:attributeGroup>
+  <!--
+    The mime-type attribute of the association element indicates a mime-types 
+    to associate.
+  -->
+  <!--
+    The related-content element described additional content that may be 
+    integrated with the application.
+  -->
+  <xs:element name="related-content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="j:title"/>
+        <xs:element minOccurs="0" ref="j:description"/>
+        <xs:element minOccurs="0" ref="j:icon"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="j:attlist.related-content"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    The href attribute of the related-content element contains a URL to a 
+    location on the web containing additional related content for the application.
+  -->
+  <xs:attributeGroup name="attlist.related-content">
+    <xs:attribute name="href" use="required"/>
+  </xs:attributeGroup>
+</xs:schema>

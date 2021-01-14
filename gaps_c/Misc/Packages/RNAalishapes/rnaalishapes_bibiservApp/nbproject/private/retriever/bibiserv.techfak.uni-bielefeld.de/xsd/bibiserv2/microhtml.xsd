@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This document is in part copied from the W3Cs XHTML specification,
+    for which the following notice is included here:
+    
+    W3C® SOFTWARE NOTICE AND LICENSE
+    Copyright © 1994-2002 World Wide Web Consortium, (Massachusetts Institute of Technology, Institut National de Recherche en Informatique et en Automatique, Keio University). All Rights Reserved. http://www.w3.org/Consortium/Legal/
+    
+    This W3C work (including software, documents, or other related items) is being provided by the copyright holders under the following license. By obtaining, using and/or copying this work, you (the licensee) agree that you have read, understood, and will comply with the following terms and conditions:
+    
+    Permission to use, copy, modify, and distribute this software and its documentation, with or without modification,  for any purpose and without fee or royalty is hereby granted, provided that you include the following on ALL copies of the software and documentation or portions thereof, including modifications, that you make:
+    
+    1. The full text of this NOTICE in a location viewable to users of the redistributed or derivative work.
+    2. Any pre-existing intellectual property disclaimers, notices, or terms and conditions. If none exist, a short notice of the following form (hypertext is preferred, text is permitted) should be used within the body of any redistributed or derivative code: "Copyright © [$date-of-software] World Wide Web Consortium, (Massachusetts Institute of Technology, Institut National de Recherche en Informatique et en Automatique, Keio University). All Rights Reserved. http://www.w3.org/Consortium/Legal/"
+    3. Notice of any changes or modifications to the W3C files, including the date changes were made. (We recommend you provide URIs to the location from which the code is derived.)
+    
+    THIS SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS," AND COPYRIGHT HOLDERS MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE SOFTWARE OR DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS.
+    
+    COPYRIGHT HOLDERS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF ANY USE OF THE SOFTWARE OR DOCUMENTATION.
+    
+    The name and trademarks of copyright holders may NOT be used in advertising or publicity pertaining to the software without specific, written prior permission. Title to copyright in this software and any associated documentation will at all times remain with copyright holders.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="bibiserv:de.unibi.techfak.bibiserv.cms.microhtml"
+           xmlns="bibiserv:de.unibi.techfak.bibiserv.cms.microhtml">
+
+    <xs:element name="microhtml" type="Flow" >
+        <xs:annotation>
+            <xs:documentation>
+                Experimental : explicit Root Element as replacement of the body tag from xhtml
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="a">
+        <xs:annotation>
+            <xs:documentation>
+                content is "Inline" except that anchors shouldn't be nested
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="a.content">
+
+                    <xs:attribute name="href" type="xs:anyURI"/>
+                    <xs:attribute name="hreflang" type="xs:language"/>
+                    <xs:attribute name="name" type="xs:NCName"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="cite">
+        <xs:annotation>
+            <xs:documentation>
+                citation
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="code">
+        <xs:annotation>
+            <xs:documentation>
+                program code
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="em">
+        <xs:annotation>
+            <xs:documentation>
+                emphasis
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="img">
+        <xs:complexType>
+            <xs:attribute name="src" use="required" type="xs:anyURI"/>
+            <xs:attribute name="alt" use="required" type="xs:string"/>
+            <xs:attribute name="name" type="xs:NMTOKEN"/>
+            <xs:attribute name="longdesc" type="xs:anyURI"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="li">
+        <xs:annotation>
+            <xs:documentation>
+                list item
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Flow">
+                    <xs:attribute name="value" type="Number"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ol">
+        <xs:annotation>
+            <xs:documentation>
+                Ordered (numbered) list
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="li"/>
+            </xs:sequence>
+            <xs:attribute name="start" type="Number"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="br">
+        <xs:annotation>
+            <xs:documentation>line break</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="hr">
+        <xs:annotation>
+            <xs:documentation>horizontal break</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="p">
+        <xs:annotation>
+            <xs:documentation>Paragraph</xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="q">
+        <xs:annotation>
+            <xs:documentation>
+                inlined quote
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline">
+                    <xs:attribute name="cite" type="xs:anyURI"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="samp">
+        <xs:annotation>
+            <xs:documentation>
+                sample
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="sub">
+        <xs:annotation>
+            <xs:documentation>
+                subscript
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="sup">
+        <xs:annotation>
+            <xs:documentation>
+                superscript
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="strong">
+        <xs:annotation>
+            <xs:documentation>
+                strong emphasis
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="Inline">
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ul">
+        <xs:annotation>
+            <xs:documentation>
+                Unordered list
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="li"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Complex Types -->
+
+    <xs:complexType name="a.content" mixed="true">
+        <xs:annotation>
+            <xs:documentation>
+                a elements use "Inline" excluding a
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="phrase"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="Flow" mixed="true">
+        <xs:annotation>
+            <xs:documentation>
+                "Flow"  is used for list items etc.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="inline"/>
+            <xs:group ref="block"/>
+        </xs:choice>
+    </xs:complexType>
+
+
+    <xs:complexType name="Inline" mixed="true">
+        <xs:annotation>
+            <xs:documentation>
+                "Inline" covers inline or "text-level" element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="inline"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Simple Types -->
+    <xs:simpleType name="Number">
+        <xs:annotation>
+            <xs:documentation>
+                one or more digits
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:nonNegativeInteger">
+            <xs:pattern value="[0-9]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!-- Groups -->
+
+    <xs:group name="block">
+        <xs:choice>
+            <xs:element ref="p"/>
+            <xs:group ref="lists"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:group name="inline">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element ref="a"/>
+            <xs:element ref="img"/>
+            <xs:element ref="br"/>
+            <xs:group ref="phrase"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:group name="lists">
+        <xs:choice>
+            <xs:element ref="ul"/>
+            <xs:element ref="ol"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:group name="phrase.extra">
+        <xs:choice>
+            <xs:element ref="sub"/>
+            <xs:element ref="sup"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:group name="phrase.basic">
+        <xs:choice>
+            <xs:element ref="em"/>
+            <xs:element ref="strong"/>
+            <!-- <xs:element ref="dfn"/> -->
+            <xs:element ref="code"/>
+            <xs:element ref="q"/>
+            <xs:element ref="samp"/>
+            <!-- <xs:element ref="kbd"/> -->
+            <!-- <xs:element ref="var"/> -->
+            <xs:element ref="cite"/>
+            <!-- <xs:element ref="abbr"/> -->
+            <!-- <xs:element ref="acronym"/> -->
+        </xs:choice>
+    </xs:group>
+
+    <xs:group name="phrase">
+        <xs:choice>
+            <xs:group ref="phrase.basic"/>
+            <xs:group ref="phrase.extra"/>
+        </xs:choice>
+    </xs:group>
+
+
+
+</xs:schema>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/BiBiServAbstraction.xsd" uri="bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/BiBiServAbstraction.xsd"/>
+    <system systemId="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/xml.xsd" uri="bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/xml.xsd"/>
+    <system systemId="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/microhtml.xsd" uri="bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/microhtml.xsd"/>
+    <system systemId="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/minihtml.xsd" uri="bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/minihtml.xsd"/>
+    <system systemId="http://bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/jnlp-6.0.xsd" uri="bibiserv.techfak.uni-bielefeld.de/xsd/bibiserv2/jnlp-6.0.xsd"/>
+    <system systemId="http://java.sun.com/dtd/jnlp-6.0.dtd" uri="www.oracle.com/technetwork/java/index.html"/>
+</catalog>

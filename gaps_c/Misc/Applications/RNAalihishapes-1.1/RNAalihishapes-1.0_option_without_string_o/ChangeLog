@@ -1,0 +1,147 @@
+Version 1.0   May 21, 2013
+        * minor
+
+Version 2.0.12   Feb. 09, 2013
+        * minor
+
+Version 2.0.11   Jan. 31, 2013
+        * add an option -P for assigning partition functions of hishape classes
+
+Version 2.0.10   Dec. 20, 2012
+        * use n=124000*length^(-1.5) to auto-adjust the number of related hishapes in HiPath
+
+Version 2.0.9   Dec. 17, 2012
+        * debug the problem which caused project not being compiled under openSuse
+
+Version 2.0.8   Dec. 10, 2012
+        * delete --shouldermin options and calculate stable local minima using post-processing 
+
+Version 2.0.7   Dec. 03, 2012
+        * correct --minh for yielding real stable local minima
+
+Version 2.0.6   Dec. 01, 2012
+        * add option --minh
+
+Version 2.0.5   Nov. 26, 2012
+        * merge HiKinetics into package
+
+Version 2.0.4   Nov. 26, 2012
+        * add option -o for including local minima with energy barrier equal to 0 (shoulder local minima)
+
+Version 2.0.3   Nov. 21, 2012
+        * only Locally Minimal Hishreps (option -l) in output set by using filter during dynamical programming calculation      
+  
+Version 2.0.2   Oct. 24, 2012
+        * in HiPath, add an option -r for using anchor secondary structures from specified file instead of generating them from sequence(s)
+
+Version 2.0.1   Aug. 14, 2012
+        * set Turner1999 as default energy parameters
+
+Version 2.0.0   Aug. 3, 2012
+        * start implementing HiKinetics 
+
+Version 1.1.4   July 30, 2012
+        * list all members of a specific hishape
+
+Version 1.1.3   July 26, 2012
+        * RapidHishapes
+
+Version 1.1.2   July 18, 2012
+        * a substructure B will be filtered out if its free energy is higher than another substructure (on the same subword) whose hishape is a subset or superset of hishape of B.	
+
+Version 1.1.1   June 25, 2012
+        * a substructure A will not be added in the external loop or multiloop if the free energy of A > 0 kcal/mol
+
+Version 1.1.0   June 22, 2012
+        * speed up the computation of accumulated hishape probabilities
+
+Version 1.0.27   June 19, 2012
+        * add probability calculation
+
+Version 1.0.26   June 16, 2012
+        * add microstate grammar in gap in order to generate more efficient c++ code
+
+Version 1.0.25   June 14, 2012
+        * set default value of ratio(\lambda) as 5
+
+Version 1.0.24   June 01, 2012
+        * update cpp files with new version of gapc compiler: bellmansgapc-2012.05.07
+
+Version 1.0.23   May 29. 2012
+        * remedy k-best behavior
+
+Version 1.0.22   May 24. 2012
+        * get rid of all ruby scripts
+        * reconstruct the c++ code into 3 programs: RNAHeliCes, HiPath and HiTed
+
+Version 1.0.21   Mar. 08. 2012
+        * revise the discription of -m option in RNAHeliCes
+
+Version 1.0.20   Mar. 05. 2012
+        * merge functions of RNAHiTed.rb into RNAHeliCes
+
+Version 1.0.19   Mar. 04. 2012
+        * debug multiple hishape alignment with hishape type h+
+
+Version 1.0.18   Mar. 02. 2012
+        * fit in with the new version of gapc compiler (2012-02-14) 
+
+Version 1.0.17   Mar. 01. 2012
+        * get rid of hishape type limitation during aligning multiple hishapes
+
+Version 1.0.16   Feb. 15. 2012
+        * add an option for all-to-all hishrep calculation
+
+Version 1.0.15   Jan. 12. 2012
+        * fix a bug that caused reading empty lines during loading file
+
+Version 1.0.14   Jan. 10. 2012
+        * optimize the branch-and-bound strategy during calculating the minimum Sum-Of-Pairs (SP) score
+
+Version 1.0.13   Jan. 09. 2012
+        * remedy a logical mistake on calculating the minimum Sum-Of-Pairs (SP) score
+
+Version 1.0.12   Jan. 05. 2012
+        * detect the file ScoreScheme.ini automatically within project
+        * restore the option -a for aligning hishapes pairwise that was commented in last version
+
+Version 1.0.11   Jan. 03. 2012
+        * add option -u for calculating the minimum Sum-Of-Pairs (SP) score of a multiple hishape alignment
+
+Version 1.0.10   Dec. 19. 2011
+        * extend the energy parameters and add a new option T for setting temperature for these energy parameters (fit the new features of gapc)
+
+Version 1.0.9   Dec. 14. 2011
+        * reconstruct project so that it links the rnalib and rtlib parts in linkage phase
+
+Version 1.0.8   Nov. 28. 2011
+        * add probability calculation as option -p
+        * add a coefficient to scale the score calculated from helix index distance 
+
+Version 1.0.7   Nov. 15. 2011
+        * add hishape comparison and hishape transformation from secondary strcuture
+
+Version 1.0.6
+        * add new hishape abstract level h_plus and redefine the other level meanings:
+            hishape h  => helix indices from hairpin loops are considered
+            hishape h+ => helix indices from hairpin loops and nested information are considered
+            hishape m  => helix indices from hairpin- and multiloops in nested form
+            hishape b  => all helix indices in nested form. 
+
+Version 1.0.5
+        * delete filter option; add brackets to restrict relationship between multiloops and their children; update the README and pf_filter.hh, old version in 1.0.4 package
+
+Version 1.0.4
+        * add filter option
+
+Version 1.0.3   Aug. 28. 2011
+        * add match option: hishrep is computed according to a predefined hishape
+
+Version 1.0.2   Aug. 7. 2011
+        * minors
+
+Version 1.0.1   Aug. 1. 2011
+        * minors
+
+Version 1.0     Jul. 28. 2011
+        * initial version
