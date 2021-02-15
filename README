@@ -18,6 +18,7 @@ Quickstart
      sudo make install
    to configure, make and install RNAliHeliCes and RNAliHiPath
    Notes:
+     - If automake-1.14 not found in your computer, please replace the automake-1.14 with the version you have with sed. For example: sed -i -e 's/1.14/1.15/g'
      - If there are any linking problems after installing, please check if /usr/local/lib is contained in the environmental variable LD_LIBRARY_PATH. 
      - src/libs/libRNA.a contains all Vienna package routines, this may be system dependent. If so, please reload this from Vienna RNA Package.
 3. Type "RNAliHeliCes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0" and
