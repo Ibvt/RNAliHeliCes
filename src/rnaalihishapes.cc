@@ -9,64 +9,7 @@
  * 
  * valgrind --leak-check=full --show-reachable=yes check,
  *     step 1: modify std::ios_base::sync_with_stdio(_false); ==> std::ios_base::sync_with_stdio(_true);
- *
-valgrind --leak-check=full --show-reachable=yes ./RNAalihishapes -f ../../examples/test4.aln -k 10
-==27661== 61 bytes in 1 blocks are still reachable in loss record 1 of 2
-==27661==    at 0x4C28F9F: malloc (vg_replace_malloc.c:236)
-==27661==    by 0x442189: void append_consensus<rope::Ref_Count>(rope::Ref<rope::Ref_Count>&, Basic_Subsequence<M_Char, unsigned int> const&) (alignment.hh:132)
-==27661==    by 0x4393B2: rep_consensus::sadd(Basic_Subsequence<M_Char, unsigned int> const&, rope::Ref<rope::Ref_Count> const&) (ali_nodangle.gap:316)
-==27661==    by 0x43F6A3: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:890)
-==27661==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27661==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27661==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27661==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27661==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27661==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27661==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27661==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27661== 
-==27661== 210,328 bytes in 1 blocks are still reachable in loss record 2 of 2
-==27661==    at 0x4C279F2: calloc (vg_replace_malloc.c:467)
-==27661==    by 0x501B7B: space (utils.c:40)
-==27661==    by 0x4FD3D1: get_scaled_parameters (params.c:50)
-==27661==    by 0x5097DE5: librna_read_param_file (rnalib.c:56)
-==27661==    by 0x40CE03: main (rnaalihishapes.cc:338)
-==27661== 
-==27661== LEAK SUMMARY:
-==27661==    definitely lost: 0 bytes in 0 blocks
-==27661==    indirectly lost: 0 bytes in 0 blocks
-==27661==      possibly lost: 0 bytes in 0 blocks
-==27661==    still reachable: 210,389 bytes in 2 blocks
-==27661==         suppressed: 0 bytes in 0 blocks
-
-valgrind --leak-check=full --show-reachable=yes ./RNAalihishapes -s GAGGGCUG_UCUGACCCAGCCCG_____AUGAG___CUGAACCUGCCCUGUGACCUACCGCGUGGCAUUUC#GUGGUCUUUAC_GCCCAAGGGAGGGGUAAUGGGCCUGAGACCGGGCCC_UCGGGC______GUUGAUAACC#GAGGGUAGCUCUGACUCUGCCCG_____AUGAC___ACCAACCUGCCCUGUGACCUAUCGUGUUGAAUUCC# -k 10
-==27486== 72 bytes in 1 blocks are still reachable in loss record 1 of 2
-==27486==    at 0x4C28F9F: malloc (vg_replace_malloc.c:236)
-==27486==    by 0x442189: void append_consensus<rope::Ref_Count>(rope::Ref<rope::Ref_Count>&, Basic_Subsequence<M_Char, unsigned int> const&) (alignment.hh:132)
-==27486==    by 0x4393B2: rep_consensus::sadd(Basic_Subsequence<M_Char, unsigned int> const&, rope::Ref<rope::Ref_Count> const&) (ali_nodangle.gap:316)
-==27486==    by 0x43F6A3: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:890)
-==27486==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27486==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27486==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27486==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27486==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27486==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27486==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27486==    by 0x43EF35: rep_consensus::nt_struct(unsigned int) (rep_consensus.cc:884)
-==27486== 
-==27486== 210,328 bytes in 1 blocks are still reachable in loss record 2 of 2
-==27486==    at 0x4C279F2: calloc (vg_replace_malloc.c:467)
-==27486==    by 0x501B7B: space (utils.c:40)
-==27486==    by 0x4FD3D1: get_scaled_parameters (params.c:50)
-==27486==    by 0x5097DE5: librna_read_param_file (rnalib.c:56)
-==27486==    by 0x40CE03: main (rnaalihishapes.cc:338)
-==27486== 
-==27486== LEAK SUMMARY:
-==27486==    definitely lost: 0 bytes in 0 blocks
-==27486==    indirectly lost: 0 bytes in 0 blocks
-==27486==      possibly lost: 0 bytes in 0 blocks
-==27486==    still reachable: 210,400 bytes in 2 blocks
-==27486==         suppressed: 0 bytes in 0 blocks
+ * valgrind --leak-check=full --show-reachable=yes ./RNAalihishapes -f ../../examples/test4.aln -k 10
  */
 
 #include <map>
