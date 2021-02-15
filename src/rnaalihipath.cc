@@ -365,7 +365,8 @@ int main(int argc, char *argv[]) {
 		if (false == ssFileStream.is_open())
 		{       
 		      ssFileStream.open(ss_filename.c_str(), std::ios::in);
-		      if ((false == ssFileStream) || (false == ssFileStream.is_open()))
+		      //if ((false == ssFileStream) || (false == ssFileStream.is_open()))
+		      if ( (ssFileStream.rdstate() & std::ifstream::failbit ) != 0 )
 		      {
 			      throw "ERROR: loading input file (\"" + ss_filename + "\")!";
 		      }
