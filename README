@@ -6,7 +6,7 @@ Updates: https://github.com/Ibvt/RNAliHeliCes
 
 Quickstart
 ------------
-1. (Optional) if without SUPER privilege, install libboost local
+1. (Optional) if without SUPER privilege, install libboost locally
      tar xzf boost_1_58_0.tar.gz
      #under python2
      ./bootstrap.sh --prefix=/home/jhuang/Tools/boost_1_58_installed/
