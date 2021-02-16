@@ -9,7 +9,7 @@ Quickstart
 1. (Optional) if without SUPER privilege, install libboost locally
      tar xzf boost_1_58_0.tar.gz
      #under python2
-     ./bootstrap.sh --prefix=/home/jhuang/Tools/boost_1_58_installed/
+     ./bootstrap.sh --prefix=/your_path/boost_1_58_installed/
      ./b2 install
 2. Type
      ./configure CFLAGS="-fno-stack-protector" CPPFLAGS="-std=c++98" CXXFLAGS="-std=c++98 -fno-stack-protector"
@@ -21,7 +21,7 @@ Quickstart
      - If there are any linking problems after installing, please check if /usr/local/lib is contained in the environmental variable LD_LIBRARY_PATH. 
      - src/libs/libRNA.a contains all Vienna package routines, this may be system dependent. If so, please reload this from Vienna RNA Package.
      - If without SUPER privilege, use 
-       ./configure --with-boost-include-path=/home/jhuang/Tools/boost_1_58_installed/include --with-boost-lib-path=/home/jhuang/Tools/boost_1_58_installed/lib CFLAGS="-g -O2 -fno-stack-protector" CPPFLAGS="-std=c++98 -I/home/jhuang/Tools/boost_1_58_installed/include -DNDEBUG -D_FORTIFY_SOURCE=2 -O2" CXXFLAGS="-std=c++98 -g -O2 -w -fno-stack-protector"
+       ./configure --with-boost-include-path=/your_path/boost_1_58_installed/include --with-boost-lib-path=/your_path/boost_1_58_installed/lib CFLAGS="-g -O2 -fno-stack-protector" CPPFLAGS="-std=c++98 -I/home/jhuang/Tools/boost_1_58_installed/include -DNDEBUG -D_FORTIFY_SOURCE=2 -O2" CXXFLAGS="-std=c++98 -g -O2 -w -fno-stack-protector"
 3. Type "RNAliHeliCes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0" and
         "RNAliHiPath -f ../examples/test2.aln -k 10 -F ../examples/test2.ss" to run examples
 
