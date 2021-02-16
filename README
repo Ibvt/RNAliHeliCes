@@ -6,15 +6,15 @@ Updates: https://github.com/Ibvt/RNAliHeliCes
 
 Quickstart
 ------------
-1. Read deps and install the dependent compilers and packages including libboost
-    tar xzf boost_1_58_0.tar.gz
-    #under python2
-    ./bootstrap.sh --prefix=/home/jhuang/Tools/boost_1_58_installed/
-    ./b2 install
+1. (Optional) if without SUPER privilege, install libboost local
+     tar xzf boost_1_58_0.tar.gz
+     #under python2
+     ./bootstrap.sh --prefix=/home/jhuang/Tools/boost_1_58_installed/
+     ./b2 install
 
 2. Type
-     ./configure --with-boost-include-path=/home/jhuang/Tools/boost_1_58_installed/include --with-boost-lib-path=/home/jhuang/Tools/boost_1_58_installed/lib CFLAGS="-g -O2 -fno-stack-protector" CPPFLAGS="-std=c++98 -I/home/jhuang/Tools/boost_1_58_installed/include -DNDEBUG -D_FORTIFY_SOURCE=2 -O2" CXXFLAGS="-std=c++98 -g -O2 -w -fno-stack-protector"
-     make
+     ./configure CFLAGS="-fno-stack-protector" CPPFLAGS="-std=c++98" CXXFLAGS="-std=c++98 -fno-stack-protector"
+     make (Please replace automake-1.14 with your version (e.g. 1.15) by typing "sed -i -e 's/1.14/1.15/g' Makefile" if necessary.)
      sudo make install
    to configure, make and install RNAliHeliCes and RNAliHiPath
    Notes:
@@ -23,6 +23,8 @@ Quickstart
      - src/libs/libRNA.a contains all Vienna package routines, this may be system dependent. If so, please reload this from Vienna RNA Package.
 3. Type "RNAliHeliCes -f ../examples/test2.aln -k 10 -R 36.5m,41.5,27 -e -t 2 -x0" and
         "RNAliHiPath -f ../examples/test2.aln -k 10 -F ../examples/test2.ss" to run examples
+     - If without SUPER privilege, use 
+       ./configure --with-boost-include-path=/home/jhuang/Tools/boost_1_58_installed/include --with-boost-lib-path=/home/jhuang/Tools/boost_1_58_installed/lib CFLAGS="-g -O2 -fno-stack-protector" CPPFLAGS="-std=c++98 -I/home/jhuang/Tools/boost_1_58_installed/include -DNDEBUG -D_FORTIFY_SOURCE=2 -O2" CXXFLAGS="-std=c++98 -g -O2 -w -fno-stack-protector"
 
 
 See 
