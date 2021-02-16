@@ -13,7 +13,7 @@ Quickstart
      ./b2 install
 2. Type
      ./configure CFLAGS="-fno-stack-protector" CPPFLAGS="-std=c++98" CXXFLAGS="-std=c++98 -fno-stack-protector"
-     make (Please replace automake-1.14 with your version (e.g. 1.15) by typing "sed -i -e 's/1.14/1.15/g' Makefile" if necessary.)
+     make
      sudo make install
    to configure, make and install RNAliHeliCes and RNAliHiPath
    Notes:
