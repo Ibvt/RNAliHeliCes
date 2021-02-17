@@ -1,9 +1,9 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([RNAalihishapes], [1.2],
-        [Jiabin Huang and Bjoern Voss <j.huang@uke.de, bjoern.voss@biologie.uni-freiburg.de>],
-        [RNAalihishapes])
+AC_INIT([RNAliHeliCes], [1.2],
+        [Jiabin Huang and Bjoern Voss <j.huang@uke.de, bjoern.voss@ibvt.uni-stuttgart.de>],
+        [RNAliHeliCes])
 AC_PREREQ([2.59])
 AC_DEFINE(RELEASE_DATE, ["June 04, 2020"], [Release date of current version])
 
