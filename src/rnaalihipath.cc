@@ -494,6 +494,7 @@ int main(int argc, char *argv[]) {
 	std::string consensus_seq_str(consensus_seq);
 	
 	//std::cout << consensus_seq_str << "," << startStruc << "," << targetStruc << "," << hishape_type << "," << kbest << std::endl;
+    //std::cout << startStruc << "," << targetStruc << kbest << std::endl;
 	hipathPairwise("", consensus_seq_str, startStruc, targetStruc, hishape_type, inputs, kbest, true);
     } catch (std::exception &e) {
         std::cerr << "Exception1: " << e.what() << '\n';
@@ -714,7 +715,7 @@ int dijkstra_single_target(const std::string& sequence, const std::vector<std::s
 	//d[s] = 0;
 
 
-        // ## first round calculation ##
+    // ## first round calculation ##
 	d[s] = -INFINITY;
 	prev[s] = -1;
 	for (i = 0; i < n_node; i++) {
@@ -729,7 +730,7 @@ int dijkstra_single_target(const std::string& sequence, const std::vector<std::s
 
             //d[i] = distances[0][i];
 	    prev[i] = s;
-	    //$$ printf("Path to %f[0][%d]: ", distances[0][i], i);
+	    //DEBUG_k0 printf("Path to %f[0][%d]: ", distances[0][i], i);
 	}
 	visited[s] = 1;
 	
@@ -745,7 +746,7 @@ int dijkstra_single_target(const std::string& sequence, const std::vector<std::s
 				mini = i;
   
 		visited[mini] = 1;
-		//printf("%d\t",mini);
+		//DEBUG_k0 printf("mini=%d\t",mini);
 		
 		
 		for (i = 0; i < n_node; ++i)
@@ -1344,6 +1345,24 @@ void calculateHishapes(int hishape_type, std::vector<std::pair<const char *, uns
 
 float hipathPairwise(const std::string &header, const std::string &seq, const std::string &ss1, const std::string &ss2, 
 		    int hishape_type, std::vector<std::pair<const char *, unsigned> > &inputs, uint32_t kbest, bool printDetails = true) {  // int n_seq, char *AS[MAX_NUM_NAMES]
+
+    std::vector<std::string> related_hishreps;    
+    //s = 0;
+    //t = 1;
+    int s = -1;
+    int t = -1;
+    int i=0;  // for iterator
+    if (kbest==0)
+    {
+      // fake related hishapes if kbest == 0
+      related_hishreps.push_back(ss1);
+      s = related_hishreps.size()-1;
+      related_hishreps.push_back(ss2);
+      t = related_hishreps.size()-1;
+      //DEBUG_k0 std::cout << "fake related_hishreps" << std::endl;
+    }
+    else
+    {
     // calculate related hishape
     std::set<std::string> related_hishape;
     //$$ std::cout << sS2Hishapeh(ss1) << "|" << sS2Hishapeh(ss2) << std::endl;
@@ -1380,17 +1399,9 @@ float hipathPairwise(const std::string &header, const std::string &seq, const st
     std::string match_str = match_oss.str();
     //std::cout << "match_str=" << match_str << std::endl;
     
-    std::vector<std::string> related_hishreps;
     // calculate related hishapes
     calculateHishapes(hishape_type, inputs, kbest, match_str, &related_hishreps, printDetails);
-	  
     
-    //s = 0;
-    //t = 1;
-    
-    int s = -1;
-    int t = -1;
-    int i=0;
     for (i=0; i<related_hishreps.size(); i++ )
     {
 	if (related_hishreps[i] == ss1)  s=i;
@@ -1422,6 +1433,9 @@ float hipathPairwise(const std::string &header, const std::string &seq, const st
     // with the swap above now s=0 and t=1
     s = 0;
     t = 1;
+    }
+    
+    
     
     int maxkeep, dist;
     path_t *route;
@@ -1429,21 +1443,24 @@ float hipathPairwise(const std::string &header, const std::string &seq, const st
     int k;
     // update n_node, because n_node used in dijkstra_single_target(...)
     n_node = related_hishreps.size();
+    //DEBUG_k0 printf("n_node=%d\n", n_node);
     
     // given: n_node  
     // return: anchor_no and anchors[]
     int anchor_no = dijkstra_single_target(seq,related_hishreps,s,t,maxkeep);
-    //$$ printf("anchor_no=%d\n", anchor_no);
-    //$$ std::cout << "================================" << std::endl;
-    //$$ std::cout << seq << std::endl;
-    //$$ for (i = 0; i < n_node; ++i) {
-    //$$     std::cout << related_hishreps[i] << std::endl;
-    //$$ }
-// 					    
+    //DEBUG_k0 printf("anchor_no=%d\n", anchor_no);
+    //DEBUG_k0 std::cout << "================================" << std::endl;
+    //DEBUG_k0 std::cout << seq << std::endl;
+    //DEBUG_k0 for (i = 0; i < n_node; ++i) {
+    //DEBUG_k0     std::cout << related_hishreps[i] << std::endl;
+    //DEBUG_k0 }
+
     int k_max_saddle=0;
-    float en_max_saddle=-INFINITY, en_max_0=-INFINITY;
+    float en_max_saddle=-INFINITY, en_max_0=-INFINITY, en_max_last=-INFINITY;
     char struc_max_saddle[HISHREPLENGTH];
+    
     for (i = anchor_no-1; i >= 1; i--) {
+    //DEBUG_k0 printf("xxxxxxxxxxxxxxx_i(in_loop)=%d\n", i);
 	route=get_path(const_cast<char*>(seq.c_str()), const_cast<char*>(related_hishreps[anchors[i]].c_str()), const_cast<char*>(related_hishreps[anchors[i-1]].c_str()), maxkeep);
 	dist=getBasePairDistance(const_cast<char*>(related_hishreps[anchors[i]].c_str()), const_cast<char*>(related_hishreps[anchors[i-1]].c_str()));
 	if (i==anchor_no-1) {
@@ -1459,6 +1476,7 @@ float hipathPairwise(const std::string &header, const std::string &seq, const st
 		{
 		    en_max_0 = route[k].en;
 		}
+		en_max_last = route[k].en;
 	    }
 	} else {
 	    for (k=1;k<dist+1;k++){
@@ -1473,6 +1491,7 @@ float hipathPairwise(const std::string &header, const std::string &seq, const st
 		{
 		    en_max_0 = route[k].en;
 		}
+        en_max_last = route[k].en;
 	    }
 	}
 	for (k=0;k<dist+1;k++){
@@ -1484,6 +1503,7 @@ float hipathPairwise(const std::string &header, const std::string &seq, const st
     if (printDetails)  printf("Saddle structure: %s\n", struc_max_saddle);
     //printf("%g %g kcal/mol\n", en_max_saddle, en_max_0);
     if (printDetails)  printf("Saddle energy regarding start structure: %g kcal/mol\n", (en_max_saddle-en_max_0));
+    if (printDetails)  printf("Saddle energy regarding target structure: %g kcal/mol\n", (en_max_saddle-en_max_last));
     return en_max_saddle;
 }
 
