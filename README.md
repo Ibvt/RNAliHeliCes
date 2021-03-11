@@ -37,3 +37,6 @@ RNAliHiPath -f examples/test2.aln -k 10 -F examples/test2.ss
 ## INSTALL and COPYING
 See "INSTALL"        for detailed installation instructions, and
     "COPYING"        for disclaimer and copyright.
+    
+## Citations
+  [1] Huang J, Voß B. Simulation of Folding Kinetics for Aligned RNAs. Genes (Basel). 2021 Feb 26;12(3):347. doi: 10.3390/genes12030347. PMID: 33652983.
