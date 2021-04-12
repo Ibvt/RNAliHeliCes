@@ -17,7 +17,7 @@ tar xzf boost_1_58_0.tar.gz
 
 ## Installation
 ```sh
-git clone https://github.com/huang/RNAHeliCes
+git clone https://github.com/Ibvt/RNAliHeliCes
 ./configure CFLAGS="-fno-stack-protector" CPPFLAGS="-std=c++98" CXXFLAGS="-std=c++98 -fno-stack-protector"
 make
 sudo make install
